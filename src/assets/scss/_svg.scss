@@ -1,0 +1,55 @@
+svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: none;
+}
+
+.sandwich-svg, 
+.chevron-svg, 
+.search-svg {
+    line {
+        stroke: $black-5;
+        stroke-width: .6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+}
+
+.search-svg, 
+.settings-svg {
+    circle {
+        stroke: $black-5;
+        stroke-width: .6;
+        fill: none;
+    }
+}
+
+.settings-svg {
+    path {
+        fill: $black-5;
+    }
+}
+
+.dots-svg {
+    rect {
+        fill: $black-5;
+    }
+}
+
+.gallery-svg, .link-svg {
+    path {
+        stroke: $black;
+        stroke-width: 2;
+    }
+}
+
+.repo-svg {
+    width: 1.6rem;
+    height: auto;
+}
+
+.github-repo-svg {
+    path {
+        fill: $black;
+    }
+}

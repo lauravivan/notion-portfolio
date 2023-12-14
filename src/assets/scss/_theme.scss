@@ -1,0 +1,271 @@
+.dark-theme {
+    background-color: $dark;
+    color: $white;
+
+    li, 
+    span { color: $white !important; }
+
+    .header-content, 
+    .modal,
+    .nav-hover .nav-list { background-color: $dark !important; }
+
+    .aside-click { background-color: $gray-2 !important; }
+
+    .header-menu-visible { background-color: $black !important; }
+
+    .github {
+        &__gallery-menu, &__gallery-menu-item:nth-child(1) {
+            border-color: $white;
+        }
+
+        button {
+            color: $white !important;
+        }
+
+        &__repo-wrapper {
+            border-color: $white;
+            color: $white;
+        }
+    }
+
+    .pref-style {
+        border-color: $white !important;
+
+        &__font-wrapper {
+            &--active {
+                .pref-style__font { color: $active !important; }
+            }
+        }
+    }
+
+    .pref {
+        &__btn-toggle {
+            background-color: $gray-2 !important;
+            
+            > input {
+                &:checked::before { background-color: $active !important; }
+            }
+        }
+    }
+
+    .footer { background-color: $black !important; }
+
+    .modal span { border-color: $white; }
+
+    .language {
+        @include language($baby-purple, $dark, $white);
+    }
+
+    .themes:nth-child(1) .themes__theme-wrapper span {
+        color: $black !important;
+    }
+
+    .themes:nth-child(2) .themes__theme-wrapper div {
+        border: 1px solid $white;
+    }
+
+    .sandwich-svg, 
+    .chevron-svg, 
+    .search-svg {
+        line { stroke: $white; }
+    }
+
+    .search-svg, 
+    .settings-svg {
+        circle { stroke: $white; }
+    }
+
+    .settings-svg, .github-repo-svg {
+        path { fill: $white; }
+    }
+
+    .dots-svg {
+        rect { fill: $white; }
+    }
+
+    .gallery-svg, .link-svg {
+        path { stroke: $white; }
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: $dark;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: $white;
+    }
+
+    :-webkit-any-link {
+        color: $gray;
+        transition: color .3s;
+      
+        &:hover {
+            color: $white !important;
+        }
+    }
+}
+
+.cat-latte {
+    background-color: $latte-base;
+    color: $latte-text;
+
+    li, 
+    span { color: $latte-text !important; }
+
+    .heading { 
+        background-color: $latte-rosewater;
+        color: $latte-mantle;
+    }
+
+    .header-content, 
+    .modal,
+    .nav-hover .nav-list { background-color: $latte-base !important; }
+
+    .aside-click, 
+    .header-menu-visible { background-color: $latte-mantle !important;}
+
+    .pref-style {
+        &__font-wrapper {
+            &--active {
+                .pref-style__font { color: $latte-mauve !important; }
+            }
+        }
+    }
+
+    .pref {
+        &__btn-toggle {
+            > input {
+                &:checked::before { background-color: $latte-mauve !important; }
+            }
+        }
+    }
+
+    .language {
+        @include language($bg-color: $latte-yellow, $color: $latte-mantle);
+    }
+
+    .modal span { border-color: $latte-text; }
+
+    .themes:nth-child(2) .themes__theme-wrapper span {
+        color: $latte-mantle !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: $latte-mantle;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: $dark;
+    }
+}
+
+.cat-mocha {
+    background-color: $mocha-base;
+    color: $mocha-text;
+
+    li, 
+    span { color: $mocha-text !important; }
+
+    .heading { 
+        background-color: $mocha-rosewater;
+        color: $mocha-base;
+    }
+
+    .header-content, 
+    .modal,
+    .nav-hover .nav-list { background-color: $mocha-base !important; }
+
+    .header-menu-visible { background-color: $mocha-crust !important; }
+
+    .github {
+        &__gallery-menu, &__gallery-menu-item:nth-child(1) {
+            border-color: $mocha-text;
+        }
+
+        button {
+            color: $mocha-text !important;
+        }
+
+        &__repo-wrapper {
+            border-color: $mocha-text;
+            color: $mocha-text;
+        }
+    }
+
+    .pref-style {
+        border-color: $white !important;
+        
+        &__font-wrapper {
+            &--active {
+                .pref-style__font { color: $mocha-mauve !important; }
+            }
+        }
+    }
+
+    .pref {
+        &__btn-toggle {
+            background-color: $gray-1 !important;
+
+            > input {
+                &:checked::before { background-color: $mocha-mauve !important; }
+            }
+        }
+    }
+
+    .footer { background-color: $mocha-crust !important; }
+
+    .modal span { border-color: $mocha-text; }
+
+    .language {
+        @include language($mocha-green, $dark, $white);
+    }
+
+    .themes:nth-child(1) .themes__theme-wrapper span {
+        color: $mocha-base !important;
+    }
+
+    .themes:nth-child(2) .themes__theme-wrapper div {
+        border: 1px solid $mocha-text;
+    }
+
+    .sandwich-svg, 
+    .chevron-svg, 
+    .search-svg {
+        line { stroke: $mocha-text; }
+    }
+
+    .search-svg, 
+    .settings-svg {
+        circle { stroke: $mocha-text; }
+    }
+
+    .settings-svg, .github-repo-svg {
+        path { fill: $mocha-text; }
+    }
+
+    .dots-svg {
+        rect { fill: $mocha-text; }
+    }
+
+    .gallery-svg, .link-svg {
+        path { stroke: $mocha-text; }
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: $mocha-base;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: $mocha-text;
+    }
+
+    :-webkit-any-link {
+        color: $mocha-overlay0;
+        transition: color .3s;
+      
+        &:hover {
+            color: $mocha-text !important;
+        }
+    }
+}
+

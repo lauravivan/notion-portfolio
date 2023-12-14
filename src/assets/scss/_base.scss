@@ -1,0 +1,73 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $default; -webkit-font-smoothing: auto;
+  @include sizing(100%, 100%);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: $white;
+  color: $black;
+  font-size: $fs-medium;
+}
+
+::selection {
+  background-color: $gray-2;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 11px;
+  padding: 50px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $black;
+  border-radius: 20px;
+}
+
+:-webkit-any-link {
+  color: $black-5;
+  transition: color .3s;
+
+  &:hover {
+      color: $black-9 !important;
+  }
+}
+
+.heading {
+  padding: 8px;
+  font-weight: $fw-500;
+  background-color: $gray-5;
+}
+
+/*buttons*/
+.navbar-btn {
+  text-align: center;
+  width: 1.5rem;
+  cursor: pointer;
+  padding: .1rem;
+
+  &:hover {
+      border-radius: 10%;
+      background-color: $gray-4;
+  }
+}
+
+.toggle-btn {
+  content: "";
+  border-radius: 50%;
+  height: 18px;
+  width: 19px;
+  position: absolute;
+  cursor: pointer;
+  margin: 1px;
+  background-color: $white;
+}

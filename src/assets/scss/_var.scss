@@ -1,0 +1,114 @@
+/* colors default */
+$white: rgba(255, 255, 255, 1);
+$black: rgba(0, 0, 0, 1);
+$black-1: rgba(0, 0, 0, .1);
+$black-2: rgba(0, 0, 0, .2);
+$black-3: rgba(0, 0, 0, .3);
+$black-4: rgba(0, 0, 0, .4);
+$black-5: rgba(0, 0, 0, .5);
+$black-6: rgba(0, 0, 0, .6);
+$black-7: rgba(0, 0, 0, .7);
+$black-8: rgba(0, 0, 0, .8);
+$black-9: rgba(0, 0, 0, .9);
+$gray: rgba(237, 236, 233, 1);
+$gray-stroke: rgba(0,0,0,.15);
+$gray-1: rgba(237, 236, 233, .1);
+$gray-2: rgba(237, 236, 233, .2);
+$gray-3: rgba(237, 236, 233, .3);
+$gray-4: rgba(237, 236, 233, .4);
+$gray-5: rgba(237, 236, 233, .5);
+$gray-6: rgba(237, 236, 233, .6);
+$gray-7: rgba(237, 236, 233, .7);
+$gray-8: rgba(237, 236, 233, .8);
+$gray-9: rgba(237, 236, 233, .9);
+$active: rgb(35, 131, 226);
+$baby-purple: #cdb4db;
+$baby-blue: #bde0fe;
+
+/*dark theme default*/
+$dark: #212529;
+
+/*colors catppuccin latte*/
+$latte-rosewater: #dc8a78;
+$latte-flamingo: #dd7878;
+$latte-pink: #ea76cb;
+$latte-mauve: #8839ef;
+$latte-red: #d20f39;
+$latte-maroon: #e64553;
+$latte-peach: #fe640b;
+$latte-yellow: #df8e1d;
+$latte-green: #40a02b;
+$latte-teal: #179299;
+$latte-sky: #04a5e5;
+$latte-sapphire: #209fb5;
+$latte-blue: #1e66f5;
+$latte-lavender: #7287fd;
+$latte-text: #4c4f69;
+$latte-subtext1: #5c5f77;
+$latte-subtext0: #6c6f85;
+$latte-overlay2: #7c7f93;
+$latte-overlay1: #8c8fa1;
+$latte-overlay0: #9ca0b0;
+$latte-surface2: #acb0be;
+$latte-surface1: #bcc0cc;
+$latte-surface0: #ccd0da;
+$latte-mantle: #e6e9ef;
+$latte-base: #eff1f5;
+
+/*colors catppuccin mocha*/
+$mocha-rosewater: #f5e0dc;
+$mocha-flamingo: #f2cdcd;
+$mocha-pink: #f5c2e7;
+$mocha-mauve: #cba6f7;
+$mocha-red: #f38ba8;
+$mocha-maroon: #eba0ac;
+$mocha-peach: #fab387;
+$mocha-yellow: #f9e2af;
+$mocha-green: #a6e3a1;
+$mocha-teal: #94e2d5;
+$mocha-sky: #89dceb;
+$mocha-sapphire: #74c7ec;
+$mocha-blue: #89b4fa;
+$mocha-lavender: #b4befe;
+$mocha-text: #cdd6f4;
+$mocha-subtext1: #bac2de;
+$mocha-subtext0: #a6adc8;
+$mocha-overlay2: #9399b2;
+$mocha-overlay1: #7f849c;
+$mocha-overlay0: #6c7086;
+$mocha-surface2: #585b70;
+$mocha-surface1: #45475a;
+$mocha-surface0: #313244;
+$mocha-base: #1e1e2e;
+$mocha-mantle: #181825;
+$mocha-crust: #11111b;
+
+/*font*/
+$default: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+$mono: iawriter-mono, Nitti, Menlo, Courier, monospace;
+$serif: Lyon-Text, Georgia, ui-serif, serif; 
+
+/*font weight*/
+$fw-100: 100;
+$fw-200: 200;
+$fw-300: 300;
+$fw-400: 400;
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;
+$fw-800: 800;
+$fw-900: 900;
+
+/*box shadow*/
+$box-shadow-1: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, 
+rgba(15, 15, 15, 0.1) 0px 3px 6px, 
+rgba(15, 15, 15, 0.2) 0px 9px 24px;
+
+$box-shadow-2: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
+
+/* font size dinamic */
+$fs-x-small: .74rem;
+$fs-small: .9rem;
+$fs-medium: 1rem;
+$fs-large: 1.3rem;
+$fs-x-large: 1.8rem;
