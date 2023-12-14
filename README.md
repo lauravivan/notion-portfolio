@@ -6,7 +6,9 @@
 This project is designed to showcase my frontend projects and more, with a Notion-inspired theme and built using Vue.js. You can preview it below.
 
 <div align="center">
-![Banner with images of the portfolio](./public/portfolio-banner.gif)
+  
+  ![Banner with images of the portfolio](./public/portfolio-banner.gif)
+  
 </div>
 
 ## Features
