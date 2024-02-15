@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "watch-sass": "sass src/assets/scss/main.scss:src/assets/css/main.css --watch"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",

@@ -1,7 +1,15 @@
 /* default responsiveness */
 @media(max-width: 480px) {
     .page-wrapper .page-content {
-        width: 70%;
+        width: 100%;
+
+        .page-title {
+            margin-left: 20px;
+        }
+
+        .page-slot {
+            margin: auto 20px;
+        }
     }
 
     .page-full-width {

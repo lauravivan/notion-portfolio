@@ -469,7 +469,13 @@ svg {
 /* default responsiveness */
 @media (max-width: 480px) {
   .page-wrapper .page-content {
-    width: 70%;
+    width: 100%;
+  }
+  .page-wrapper .page-content .page-title {
+    margin-left: 20px;
+  }
+  .page-wrapper .page-content .page-slot {
+    margin: auto 20px;
   }
   .page-full-width .about {
     grid-template-columns: 1fr !important;
