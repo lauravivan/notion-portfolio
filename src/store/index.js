@@ -97,7 +97,7 @@ const pagesInfo = {
     pageWidth: pagesInfoLocalStore["trendTide"]
       ? pagesInfoLocalStore["trendTide"].pageWidth || ""
       : "",
-    projectUrl: "https://notion-portfolio.onrender.com/",
+    projectUrl: "https://trend-tide.onrender.com",
   },
 };
 
