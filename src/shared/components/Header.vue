@@ -25,7 +25,7 @@
               @click="setFontStyle('font-roboto')"
               :class="{
                 'pref-style__font-wrapper--active':
-                  globalState.fontStyle === 'font-roboto',
+                  activeFontStyle === 'font-roboto',
               }"
             >
               <span class="pref-style__font">Ag</span>
@@ -36,7 +36,7 @@
               @click="setFontStyle('font-roboto-serif')"
               :class="{
                 'pref-style__font-wrapper--active':
-                  globalState.fontStyle === 'font-roboto-serif',
+                  activeFontStyle === 'font-roboto-serif',
               }"
             >
               <span class="pref-style__font">Ag</span>
@@ -47,7 +47,7 @@
               @click="setFontStyle('font-roboto-mono')"
               :class="{
                 'pref-style__font-wrapper--active':
-                  globalState.fontStyle === 'font-roboto-mono',
+                  activeFontStyle === 'font-roboto-mono',
               }"
             >
               <span class="pref-style__font">Ag</span>
@@ -93,7 +93,7 @@ import {
   updatePageWidth,
   globalState,
 } from "@/globalState.js";
-import { ref, provide } from "vue";
+import { ref, provide, onMounted } from "vue";
 import { computedVariables } from "util/variable";
 import { useStore } from "vuex";
 
@@ -105,6 +105,7 @@ const fontSizeSmall = ref("font-size-small");
 const pageFullWidth = ref("page-full-width");
 const isFontSizeActive = ref(false);
 const isPageWidthActive = ref(false);
+const activeFontStyle = ref("");
 
 provide(provideName, modal);
 
@@ -117,6 +118,7 @@ const updateUserPref = (pageName, prefToUpdate, valueToUpdate) => {
 };
 
 const setFontStyle = (font) => {
+  activeFontStyle.value = font;
   updateFontStyle(font);
   updateUserPref(activePage._value.pageName, "fontStyle", font);
 };
@@ -148,6 +150,24 @@ const togglePageWidth = () => {
     globalState.pageWidth
   );
 };
+
+const setConfigs = () => {
+  if (globalState.pageWidth.length > 0) {
+    isPageWidthActive.value = true;
+  }
+
+  if (globalState.fontSize.length > 0) {
+    isFontSizeActive.value = true;
+  }
+
+  activeFontStyle.value = globalState.fontStyle;
+};
+
+onMounted(() => {
+  setTimeout(() => {
+    setConfigs();
+  }, 1000);
+});
 </script>
 
 <style lang="scss">
