@@ -22,8 +22,7 @@
 </template>
 
 <script setup>
-import { useStore } from "vuex";
-import { onMounted, ref, computed } from "vue";
+import { onMounted } from "vue";
 import { computedVariables } from "util/variable";
 import {
   updateFontSize,
@@ -36,7 +35,12 @@ const { activePage } = computedVariables;
 
 const setConfigs = () => {
   if (activePage) {
-    updateFontStyle(activePage._value.fontStyle);
+    if (activePage._value.fontStyle.length === 0) {
+      updateFontStyle("font-roboto");
+    } else {
+      updateFontStyle(activePage._value.fontStyle);
+    }
+
     updateFontSize(activePage._value.fontSize);
     updatePageWidth(activePage._value.pageWidth);
   }
