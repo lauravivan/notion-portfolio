@@ -1,13 +1,14 @@
 import "@/assets/css/main.css";
-import router from "@/router/index.js";
-import store from "@/store/index.js";
-
+import store from "store";
+import router from "@/router/router.js";
+import App from "@/App.vue";
 import { createApp } from "vue";
-import App from "@/pages/App.vue";
 import { globalState } from "@/globalState.js";
 
 const app = createApp(App);
 
+app.use(router).use(store);
+
 app.config.globalProperties.globalState = globalState;
 
-app.use(router).use(store).mount("#app");
+app.mount("#app");
