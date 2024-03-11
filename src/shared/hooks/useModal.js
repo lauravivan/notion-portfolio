@@ -49,7 +49,6 @@ export default function useModal(modalRef) {
       right: "0",
       left: "50%",
       bottom: "0",
-      width: "90%",
       transform: "translate(-50%, -60%)",
       padding: "2rem 1.9rem",
     },
