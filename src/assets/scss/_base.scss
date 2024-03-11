@@ -5,8 +5,9 @@
 }
 
 body {
-  font-family: $default; -webkit-font-smoothing: auto;
-  @include sizing(100%, 100%);
+  font-family: $default;
+  -webkit-font-smoothing: auto;
+  @include sizing(100vw, 100vh);
   overflow-x: hidden;
   overflow-y: hidden;
   background-color: $white;
@@ -35,10 +36,10 @@ body {
 
 :-webkit-any-link {
   color: $black-5;
-  transition: color .3s;
+  transition: color 0.3s;
 
   &:hover {
-      color: $black-9 !important;
+    color: $black-9 !important;
   }
 }
 
@@ -53,11 +54,11 @@ body {
   text-align: center;
   width: 1.5rem;
   cursor: pointer;
-  padding: .1rem;
+  padding: 0.1rem;
 
   &:hover {
-      border-radius: 10%;
-      background-color: $gray-4;
+    border-radius: 10%;
+    background-color: $gray-4;
   }
 }
 
