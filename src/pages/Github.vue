@@ -1,83 +1,83 @@
 <template>
-    <PageLayout>
-      <template v-slot:pageSlot>
-        <div class="github page-slot">    
-          <div class="github__gallery-navbar">
-            <ul class="github__gallery-menu">
-              <li class="github__gallery-menu-item">
-                <Gallery></Gallery>
-                <span>Gallery</span>
-              </li>
-              <li class="github__gallery-menu-item">
-                <button class="github__gallery-btn">Filter</button>
-                <button class="github__gallery-btn">Sort</button>
-              </li>
-            </ul>
-  
+  <div class="github">
+    <div class="github__gallery-navbar">
+      <ul class="github__gallery-menu">
+        <li class="github__gallery-menu-item">
+          <Gallery></Gallery>
+          <span>Gallery</span>
+        </li>
+        <li class="github__gallery-menu-item">
+          <button class="github__gallery-btn">Filter</button>
+          <button class="github__gallery-btn">Sort</button>
+        </li>
+      </ul>
+
+      <div>
+        <h3 class="github__gallery-title">Repos</h3>
+        <div class="github__gallery-filter"></div>
+      </div>
+    </div>
+
+    <div class="github__repos-wrapper" v-if="data">
+      <div
+        class="github__repo-wrapper"
+        v-for="repoInfo in data"
+        :key="repoInfo.id"
+      >
+        <div class="github__repo-wrapper-header">
+          <h4 class="github__repo-name">{{ repoInfo.name }}</h4>
+          <p class="github__repo-desc">{{ repoInfo.description }}</p>
+        </div>
+        <div class="github__repo-wrapper-footer">
+          <div class="github__repo-activities">
             <div>
-              <h3 class="github__gallery-title">Repos</h3>
-              <div class="github__gallery-filter"></div>
+              <Eye></Eye>
+              <span>{{ repoInfo.watchers_count }}</span>
+            </div>
+            <div>
+              <Fork></Fork>
+              <span>{{ repoInfo.forks_count }}</span>
+            </div>
+            <div>
+              <Star></Star>
+              <span>{{ repoInfo.stargazers_count }}</span>
             </div>
           </div>
 
-          <div class="github__repos-wrapper" v-if="data">
-            <div class="github__repo-wrapper" v-for="repoInfo in data" :key="repoInfo.id">
-              <div class="github__repo-wrapper-header">
-                <h4 class="github__repo-name">{{ repoInfo.name }}</h4>
-                <p class="github__repo-desc"> {{ repoInfo.description }}</p>
-              </div>
-              <div class="github__repo-wrapper-footer">
-                <div class="github__repo-activities">
-                  <div>
-                    <Eye></Eye>
-                    <span>{{ repoInfo.watchers_count }}</span>
-                  </div>
-                  <div>
-                    <Fork></Fork>
-                    <span>{{ repoInfo.forks_count }}</span>
-                  </div>
-                  <div>
-                    <Star></Star>
-                    <span>{{ repoInfo.stargazers_count }}</span>
-                  </div>
-                </div>
-
-                <div class="github__repo-access">
-                  <a :href="repoInfo.html_url"><GithubRepo></GithubRepo></a>
-                  <a :href="repoInfo.homepage"><Link></Link></a>
-                </div>
-              </div>
-            </div>
+          <div class="github__repo-access">
+            <a :href="repoInfo.html_url"><GithubRepo></GithubRepo></a>
+            <a :href="repoInfo.homepage"><Link></Link></a>
           </div>
         </div>
-      </template>
-    </PageLayout>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import PageLayout from '@/components/PageLayout.vue'
-import Gallery from '@/components/icons/Gallery.vue'
-import Eye from '@/components/icons/Eye.vue'
-import Fork from '@/components/icons/Fork.vue'
-import Star from '@/components/icons/Star.vue'
-import GithubRepo from '@/components/icons/GithubRepo.vue'
-import Link from '@/components/icons/Link.vue'
-import { ref } from 'vue'
-import axios from 'axios'
+import Gallery from "components/icons/Gallery.vue";
+import Eye from "components/icons/Eye.vue";
+import Fork from "components/icons/Fork.vue";
+import Star from "components/icons/Star.vue";
+import GithubRepo from "components/icons/GithubRepo.vue";
+import Link from "components/icons/Link.vue";
+import { ref } from "vue";
+import axios from "axios";
 
-const data = ref(null)
+const data = ref(null);
 
-axios.get('https://api.github.com/users/lauravivan/repos')
-    .then((response) => {
-        data.value = response.data
-    })
-    .catch((error) => {
-        console.error(error)
-    })
+axios
+  .get("https://api.github.com/users/lauravivan/repos")
+  .then((response) => {
+    data.value = response.data;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/scss/main.scss';
+@import "@/assets/scss/main.scss";
 
 .github {
   overflow-x: auto;
@@ -132,20 +132,19 @@ axios.get('https://api.github.com/users/lauravivan/repos')
   }
 
   &__repos-wrapper {
-    @include flex-layout($flex-direction: row, $row-gap: 10px, $column-gap: 10px);
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
   }
 
   &__repo-wrapper {
     border: 1px solid $black-2;
-    width: 250px;
-    height: 180px;
+    height: 200px;
     border-radius: 5px;
     box-shadow: $box-shadow-2;
     cursor: pointer;
     font-size: $fs-small;
     color: $black-6;
-    flex-grow: 1;
 
     &:hover {
       background-color: $gray-2;
@@ -156,7 +155,7 @@ axios.get('https://api.github.com/users/lauravivan/repos')
     @include flex-layout($row-gap: 15px);
     background-color: $gray-2;
     padding: 15px 13px;
-    height: 130px;
+    height: 150px;
   }
 
   &__repo-wrapper-footer {
@@ -166,8 +165,9 @@ axios.get('https://api.github.com/users/lauravivan/repos')
     align-items: center;
   }
 
-  &__repo-activities, &__repo-access {
+  &__repo-activities,
+  &__repo-access {
     @include flex-layout($flex-direction: row, $column-gap: 10px);
   }
 }
-</style>   
+</style>
