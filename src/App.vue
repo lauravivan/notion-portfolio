@@ -122,8 +122,11 @@ const { mainContainerClasses, mainContentClasses } = computedVariables;
 
 .page-full-width {
   .page-content {
+    @include spacing-2($px: 50px);
     width: 100%;
     place-items: unset;
   }
 }
+
+@import "@/assets/scss/_responsive.scss";
 </style>

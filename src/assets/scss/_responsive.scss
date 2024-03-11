@@ -2,14 +2,7 @@
 @media (max-width: 480px) {
   .page-wrapper .page-content {
     width: 100%;
-
-    .page-title {
-      margin-left: 20px;
-    }
-
-    .page-slot {
-      margin: auto 20px;
-    }
+    padding: 0 8px;
   }
 
   .page-full-width {
@@ -17,15 +10,15 @@
       grid-template-columns: 1fr !important;
       row-gap: 20px !important;
     }
-
-    .page-content {
-      width: 100%;
-    }
   }
 
   .main-content-wrapper {
     padding-left: 50px !important;
     padding-right: 50px !important;
+  }
+
+  .nav-wrapper .nav-hover {
+    display: none;
   }
 }
 
