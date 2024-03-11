@@ -42,6 +42,7 @@ dialog {
   user-select: none;
   height: max-content;
   outline: none;
+  width: max-content;
 }
 
 .modal-content {

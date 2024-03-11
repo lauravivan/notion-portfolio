@@ -322,6 +322,7 @@ onMounted(() => {
       $column-gap: 4rem
     );
   }
+
   .themes {
     @include flex-layout($row-gap: 2rem);
 
@@ -333,11 +334,14 @@ onMounted(() => {
     }
 
     &__theme-wrapper {
-      @include grid-layout($grid-template-columns: repeat(2, 1fr));
+      @include grid-layout(
+        $grid-template-columns: repeat(2, 1fr),
+        $column-gap: 10px
+      );
     }
 
     &__theme {
-      @include flex-layout($row-gap: 6px);
+      @include flex-layout($row-gap: 8px);
       border-radius: 10px;
       @include sizing(6rem, 5rem);
       cursor: pointer;
