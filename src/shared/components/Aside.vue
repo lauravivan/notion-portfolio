@@ -139,42 +139,44 @@ const navClasses = computed(() => {
   };
 });
 
-const toggleNav = (isNavHover, isNavDefault, isNavClick) => {
+const toggleNav = (isNavHover, isNavDefault, isNavClick, isDefault = true) => {
   navHover.value = isNavHover;
   navDefault.value = isNavDefault;
   navClick.value = isNavClick;
+  asideDefault.value = isDefault;
+  mainContainerDefault.value = isDefault;
+  mainContentDefault.value = isDefault;
 };
 
 const showNavHover = () => {
   if (isTouchDevice()) {
     toggleNav(false, true, false);
-  } else if (!navClick.value) {
-    toggleNav(true, false, false);
+  } else {
+    if (!navClick.value) {
+      toggleNav(true, false, false);
+    }
   }
 };
 
 const hideNavHover = () => {
-  if (!navClick.value) {
+  if (!isTouchDevice() && !navClick.value) {
     toggleNav(false, true, false);
   }
 };
 
 const toggleState = () => {
-  if (navClick.value) {
-    asideDefault.value = true;
-    mainContainerDefault.value = true;
-    mainContentDefault.value = true;
-
-    if (isTouchDevice()) {
+  if (isTouchDevice()) {
+    if (navClick.value) {
       toggleNav(false, true, false);
     } else {
-      toggleNav(true, true, false);
+      toggleNav(false, false, true, false);
     }
   } else {
-    asideDefault.value = false;
-    mainContainerDefault.value = false;
-    mainContentDefault.value = false;
-    toggleNav(false, false, true);
+    if (navClick.value) {
+      toggleNav(true, true, false);
+    } else {
+      toggleNav(false, false, true, false);
+    }
   }
 };
 
