@@ -8,6 +8,7 @@
           id="nav-btn"
           @click="navBtnClicked"
           @mouseenter="showNavList"
+          @touchstart="navBtnTouched"
         >
           <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
         </div>
@@ -163,7 +164,7 @@ watch(navClasses, (currentClass) => {
 });
 
 const navBtnClicked = () => {
-  if (navHover.value === true) {
+  if (navHover.value) {
     navDefault.value = false;
     navHover.value = false;
     navClick.value = true;
@@ -178,6 +179,23 @@ const navBtnClicked = () => {
     mainContainerDefault.value = true;
     mainContentDefault.value = true;
   }
+};
+
+const navBtnTouched = () => {
+  if (navDefault.value) {
+    navDefault.value = false;
+    navClick.value = true;
+    asideDefault.value = false;
+    mainContainerDefault.value = false;
+    mainContentDefault.value = false;
+  } else {
+    navDefault.value = true;
+    asideDefault.value = true;
+    mainContainerDefault.value = true;
+    mainContentDefault.value = true;
+  }
+
+  navHover.value = false;
 };
 
 const lightClicked = () => {
