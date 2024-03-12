@@ -6,9 +6,9 @@
           class="nav-btn"
           role="button"
           id="nav-btn"
-          @click="navBtnClicked"
+          @click.prevent="navBtnClicked"
           @mouseenter="showNavList"
-          @touchstart="navBtnTouched"
+          @touchstart.prevent="navBtnTouched"
         >
           <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
         </div>
