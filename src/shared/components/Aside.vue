@@ -6,7 +6,7 @@
           class="nav-btn"
           role="button"
           id="nav-btn"
-          @click="toggleState"
+          @click.stop="toggleState"
           @mouseenter="showNavHover"
         >
           <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
