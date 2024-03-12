@@ -5,3 +5,7 @@ export const isClickedElOnRefEl = (refValue, clickedEle) => {
     );
   }
 };
+
+export const isTouchDevice = () => {
+  return navigator.maxTouchPoints > 1;
+};
