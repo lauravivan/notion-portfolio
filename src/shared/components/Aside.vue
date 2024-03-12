@@ -1,18 +1,17 @@
 <template>
   <aside :class="asideClasses">
-    <div class="nav-wrapper" @mouseleave.prevent="hideNavList">
+    <div class="nav-wrapper" @mouseleave="hideNavHover">
       <nav :class="navClasses">
         <div
           class="nav-btn"
           role="button"
           id="nav-btn"
-          @click.prevent="navBtnClicked"
-          @mouseenter.prevent="showNavList"
-          @touchstart.prevent="navBtnTouched"
+          @click="toggleState"
+          @mouseenter="showNavHover"
         >
           <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
         </div>
-        <div class="nav-list-wrapper" @mouseover.prevent="showNavList">
+        <div class="nav-list-wrapper" @mouseover="showNavHover">
           <ul class="nav-list">
             <li class="nav-list__nav-item">
               <span>{{ store.getters.getProjectAuthor }}</span>
@@ -42,10 +41,7 @@
         </div>
       </nav>
     </div>
-    <div
-      style="width: 25px; height: 100%"
-      @mouseleave.prevent="hideNavList"
-    ></div>
+    <div style="width: 25px; height: 100%" @mouseleave="hideNavHover"></div>
   </aside>
   <Teleport to="body">
     <Modal ref="modalRef" :modalStyles="modalStyles">
@@ -111,7 +107,8 @@ import LinksContainer from "components/LinksContainer.vue";
 import DChevronRightSvg from "components/icons/DChevronRight.vue";
 import DChevronLeftSvg from "components/icons/DChevronLeft.vue";
 import SandwichSvg from "components/icons/Sandwich.vue";
-import { computedVariables, sharedVariables } from "util/variable";
+import { sharedVariables } from "util/variable";
+import { isTouchDevice } from "util/util";
 
 const store = useStore();
 const modal = ref(null);
@@ -142,17 +139,42 @@ const navClasses = computed(() => {
   };
 });
 
-const showNavList = () => {
-  if (navClick.value === false) {
-    navDefault.value = false;
-    navHover.value = true;
+const toggleNav = (isNavHover, isNavDefault, isNavClick) => {
+  navHover.value = isNavHover;
+  navDefault.value = isNavDefault;
+  navClick.value = isNavClick;
+};
+
+const showNavHover = () => {
+  if (isTouchDevice()) {
+    toggleNav(false, true, false);
+  } else if (!navClick.value) {
+    toggleNav(true, false, false);
   }
 };
 
-const hideNavList = () => {
-  if (navClick.value === false) {
-    navDefault.value = true;
-    navHover.value = false;
+const hideNavHover = () => {
+  if (!navClick.value) {
+    toggleNav(false, true, false);
+  }
+};
+
+const toggleState = () => {
+  if (navClick.value) {
+    asideDefault.value = true;
+    mainContainerDefault.value = true;
+    mainContentDefault.value = true;
+
+    if (isTouchDevice()) {
+      toggleNav(false, true, false);
+    } else {
+      toggleNav(true, true, false);
+    }
+  } else {
+    asideDefault.value = false;
+    mainContainerDefault.value = false;
+    mainContentDefault.value = false;
+    toggleNav(false, false, true);
   }
 };
 
@@ -165,43 +187,6 @@ watch(navClasses, (currentClass) => {
     navBtnIcon.value = DChevronLeftSvg;
   }
 });
-
-const navBtnClicked = () => {
-  if (navHover.value) {
-    navDefault.value = false;
-    navHover.value = false;
-    navClick.value = true;
-    asideDefault.value = false;
-    mainContainerDefault.value = false;
-    mainContentDefault.value = false;
-  } else {
-    navDefault.value = false;
-    navHover.value = true;
-    navClick.value = false;
-    asideDefault.value = true;
-    mainContainerDefault.value = true;
-    mainContentDefault.value = true;
-  }
-};
-
-const navBtnTouched = () => {
-  navHover.value = false;
-
-  if (navDefault.value) {
-    navDefault.value = false;
-    navClick.value = true;
-    asideDefault.value = false;
-    mainContainerDefault.value = false;
-    mainContentDefault.value = false;
-  }
-
-  if (navClick.value) {
-    navDefault.value = true;
-    asideDefault.value = true;
-    mainContainerDefault.value = true;
-    mainContentDefault.value = true;
-  }
-};
 
 const lightClicked = () => {
   body.className = "default-theme";
