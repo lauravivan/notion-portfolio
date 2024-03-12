@@ -1,6 +1,6 @@
 <template>
   <aside :class="asideClasses">
-    <div class="nav-wrapper" @mouseleave="hideNavList">
+    <div class="nav-wrapper" @mouseleave.prevent="hideNavList">
       <nav :class="navClasses">
         <div
           class="nav-btn"
@@ -42,7 +42,10 @@
         </div>
       </nav>
     </div>
-    <div style="width: 25px; height: 100%" @mouseleave="hideNavList"></div>
+    <div
+      style="width: 25px; height: 100%"
+      @mouseleave.prevent="hideNavList"
+    ></div>
   </aside>
   <Teleport to="body">
     <Modal ref="modalRef" :modalStyles="modalStyles">
@@ -182,20 +185,22 @@ const navBtnClicked = () => {
 };
 
 const navBtnTouched = () => {
+  navHover.value = false;
+
   if (navDefault.value) {
     navDefault.value = false;
     navClick.value = true;
     asideDefault.value = false;
     mainContainerDefault.value = false;
     mainContentDefault.value = false;
-  } else {
+  }
+
+  if (navClick.value) {
     navDefault.value = true;
     asideDefault.value = true;
     mainContainerDefault.value = true;
     mainContentDefault.value = true;
   }
-
-  navHover.value = false;
 };
 
 const lightClicked = () => {
