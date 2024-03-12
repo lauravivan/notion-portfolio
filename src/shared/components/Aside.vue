@@ -7,12 +7,12 @@
           role="button"
           id="nav-btn"
           @click.prevent="navBtnClicked"
-          @mouseenter="showNavList"
+          @mouseenter.prevent="showNavList"
           @touchstart.prevent="navBtnTouched"
         >
           <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
         </div>
-        <div class="nav-list-wrapper" @mouseover="showNavList">
+        <div class="nav-list-wrapper" @mouseover.prevent="showNavList">
           <ul class="nav-list">
             <li class="nav-list__nav-item">
               <span>{{ store.getters.getProjectAuthor }}</span>
