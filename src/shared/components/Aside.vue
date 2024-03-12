@@ -6,7 +6,7 @@
           class="nav-btn"
           role="button"
           id="nav-btn"
-          @click.stop="toggleState"
+          @click.stop.prevent="toggleState"
           @mouseenter="showNavHover"
           @touchstart="toggleState"
         >
