@@ -8,7 +8,7 @@
           id="nav-btn"
           @click.stop.prevent="toggleState"
           @mouseenter="showNavHover"
-          @touchstart="toggleState"
+          @touchstart.stop.prevent="toggleState"
         >
           <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
         </div>
