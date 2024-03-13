@@ -1,18 +1,18 @@
 <template>
   <aside :class="asideClasses">
-    <div class="nav-wrapper" @mouseleave="hideNavHover">
+    <div class="nav-wrapper" @mouseleave.prevent="hideNavHover">
       <nav :class="navClasses">
         <div
           class="nav-btn"
           role="button"
           id="nav-btn"
-          @click.stop.prevent="toggleState"
-          @mouseenter="showNavHover"
-          @touchstart.stop.prevent="toggleState"
+          @click.prevent="toggleNavClick"
+          @mouseover.prevent="showNavHover"
+          @touchstart.prevent="toggleNavClick"
         >
           <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
         </div>
-        <div class="nav-list-wrapper" @mouseover="showNavHover">
+        <div class="nav-list-wrapper" @mouseover.prevent="showNavHover">
           <ul class="nav-list">
             <li class="nav-list__nav-item">
               <span>{{ store.getters.getProjectAuthor }}</span>
@@ -42,7 +42,10 @@
         </div>
       </nav>
     </div>
-    <div style="width: 25px; height: 100%" @mouseleave="hideNavHover"></div>
+    <div
+      style="width: 25px; height: 100%"
+      @mouseleave.prevent="hideNavHover"
+    ></div>
   </aside>
   <Teleport to="body">
     <Modal ref="modalRef" :modalStyles="modalStyles">
@@ -150,12 +153,8 @@ const toggleNav = (isNavHover, isNavDefault, isNavClick, isDefault = true) => {
 };
 
 const showNavHover = () => {
-  if (isTouchDevice()) {
-    toggleNav(false, true, false);
-  } else {
-    if (!navClick.value) {
-      toggleNav(true, false, false);
-    }
+  if (!isTouchDevice() && !navClick.value) {
+    toggleNav(true, false, false);
   }
 };
 
@@ -165,7 +164,7 @@ const hideNavHover = () => {
   }
 };
 
-const toggleState = () => {
+const toggleNavClick = () => {
   if (isTouchDevice()) {
     if (navClick.value) {
       toggleNav(false, true, false);
@@ -182,10 +181,10 @@ const toggleState = () => {
 };
 
 watch(navClasses, (currentClass) => {
-  if (currentClass["nav-default"]) {
-    navBtnIcon.value = SandwichSvg;
-  } else if (currentClass["nav-hover"]) {
+  if (currentClass["nav-hover"]) {
     navBtnIcon.value = DChevronRightSvg;
+  } else if (currentClass["nav-default"]) {
+    navBtnIcon.value = SandwichSvg;
   } else if (currentClass["nav-click"]) {
     navBtnIcon.value = DChevronLeftSvg;
   }
