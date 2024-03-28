@@ -14,7 +14,6 @@
           class="nav-links__toggle-list"
           :iconToOpen="icons.arrowRight"
           :iconToClose="icons.arrowDown"
-          :detailsContent="detailsContent"
         >
           <template #summaryContent>
             <router-link :to="page.pagePath">
@@ -36,17 +35,15 @@
 </template>
 
 <script setup>
-import { computed, toRaw } from "vue";
+import { computed } from "vue";
 import ToggleList from "components/ToggleList.vue";
 import { activePage, icons } from "global";
 
 const props = defineProps(["categoryName", "categoryItems"]);
 
 const activePageId = computed(() => {
-  const activePageObj = toRaw(activePage);
-
-  if (activePageObj) {
-    return activePageObj.pageId;
+  if (activePage.value) {
+    return activePage.value.pageId;
   } else {
     return "";
   }
