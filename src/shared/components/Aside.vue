@@ -45,12 +45,13 @@
     <div
       style="
         position: absolute;
-        width: 30px;
+        width: 500px;
         height: 100vh;
         top: -11px;
         left: 190px;
       "
       @mouseleave="toggleNavHover()"
+      @mouseout="toggleNavHover()"
     ></div>
   </aside>
   <Teleport to="body">
