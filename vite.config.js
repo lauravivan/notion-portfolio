@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import VitePages from "vite-plugin-pages";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,6 +12,7 @@ export default defineConfig({
       store: "/src/shared/store/store.js",
       UIElements: "/src/shared/UIElements",
       util: "/src/shared/util",
+      global: "/src/shared/global/globalProperties.js",
     },
   },
 });
