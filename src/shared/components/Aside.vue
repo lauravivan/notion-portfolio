@@ -1,41 +1,41 @@
 <template>
   <aside :class="asideClasses">
-    <div class="nav-wrapper" @mouseleave.prevent="hideNavHover">
+    <div class="nav-wrapper" @mouseenter="toggleNavHover(true)">
       <nav :class="navClasses">
         <div
           class="nav-btn"
           role="button"
           id="nav-btn"
-          @click.prevent="toggleNavClick"
-          @mouseover.prevent="showNavHover"
-          @touchstart.prevent="toggleNavClick"
+          @click="toggleNavState"
+          @mouseenter="toggleNavHover(true)"
+          @touchstart="toggleNavState"
         >
-          <nav-btn-icon :is="navBtnIcon"></nav-btn-icon>
+          <Icon :icon="navBtnIcon" />
         </div>
-        <div class="nav-list-wrapper" @mouseover.prevent="showNavHover">
+        <div class="nav-list-wrapper">
           <ul class="nav-list">
             <li class="nav-list__nav-item">
               <span>{{ store.getters.getProjectAuthor }}</span>
               {{ store.getters.getAuthorSocialMedia }}
             </li>
             <li class="nav-list__nav-item">
-              <div role="button">
-                <SearchSvg />
+              <div role="button" @click="showSearchModal">
+                <Icon :icon="icons.search" />
                 <span>Search</span>
               </div>
-              <div role="button" id="settings-btn" @click="showModal">
-                <SettingsSvg />
+              <div role="button" id="settings-btn" @click="showSettingsModal">
+                <Icon :icon="icons.settings" />
                 <span>Settings</span>
               </div>
             </li>
             <li class="nav-list__nav-item">
-              <LinksContainer
+              <NavLinks
                 :categoryName="'Favorites'"
-                :categoryPages="store.getters.getPagesInfo.favorites"
+                :categoryItems="pagesInfo.favorites"
               />
-              <LinksContainer
+              <NavLinks
                 :categoryName="'Projects'"
-                :categoryPages="store.getters.getPagesInfo.projects"
+                :categoryItems="pagesInfo.projects"
               />
             </li>
           </ul>
@@ -43,59 +43,41 @@
       </nav>
     </div>
     <div
-      style="width: 25px; height: 100%"
-      @mouseleave.prevent="hideNavHover"
+      style="
+        position: absolute;
+        width: 30px;
+        height: 100vh;
+        top: -11px;
+        left: 190px;
+      "
+      @mouseleave="toggleNavHover()"
     ></div>
   </aside>
   <Teleport to="body">
-    <Modal ref="modalRef" :modalStyles="modalStyles">
-      <span class="modal-title">Choose your theme</span>
-      <div class="themes-wrapper">
-        <div class="themes">
-          <span class="themes__title">Light</span>
-          <div class="themes__theme-wrapper">
-            <div
-              class="themes__theme themes__theme--light"
-              @click="lightClicked"
-            >
-              <span class="themes__theme-name themes__theme-name--light"
-                >Default</span
-              >
-            </div>
-            <div
-              class="themes__theme themes__theme--catppuccin-latte"
-              @click="setBodyTheme('cat-latte')"
-            >
-              <span
-                class="themes__theme-name themes__theme-name--catppuccin-latte"
-                >Catppuccin Latte</span
-              >
-            </div>
+    <Modal :provideName="'settingsModal'">
+      <div class="modal__settings">
+        <h2 class="modal__settings-title">My settings</h2>
+        <Divider />
+        <div class="modal__appearance">
+          <div>
+            <h3>Appearance</h3>
+            <h4>Customize how Notion Portfolio looks on your device</h4>
           </div>
-        </div>
-        <div class="themes">
-          <span class="themes__title">Dark</span>
-          <div class="themes__theme-wrapper">
-            <div
-              class="themes__theme themes__theme--dark"
-              @click="setBodyTheme('dark-theme')"
-            >
-              <span class="themes__theme-name themes__theme-name--dark"
-                >Default</span
-              >
-            </div>
-            <div
-              class="themes__theme themes__theme--catppuccin-mocha"
-              @click="setBodyTheme('cat-mocha')"
-            >
-              <span
-                class="themes__theme-name themes__theme-name--catppuccin-mocha"
-                >Catppuccin Mocha</span
-              >
-            </div>
+          <div>
+            <SelectBtn
+              :options="store.getters.getThemesOptions.map((obj) => obj.name)"
+              :menuProvideName="'themesMenu'"
+              :optionSelected="getThemeIndex"
+              @click="showThemesMenu"
+              @toSelect="toggleTheme"
+            />
           </div>
         </div>
       </div>
+    </Modal>
+
+    <Modal :provideName="'searchModal'">
+      <div>Not build yet</div>
     </Modal>
   </Teleport>
 </template>
@@ -105,28 +87,76 @@ import Modal from "components/Modal.vue";
 import { provide, ref, computed, watch, onMounted } from "vue";
 import useModal from "hooks/useModal";
 import { useStore } from "vuex";
-import SearchSvg from "components/icons/Search.vue";
-import SettingsSvg from "components/icons/Settings.vue";
-import LinksContainer from "components/LinksContainer.vue";
-import DChevronRightSvg from "components/icons/DChevronRight.vue";
-import DChevronLeftSvg from "components/icons/DChevronLeft.vue";
-import SandwichSvg from "components/icons/Sandwich.vue";
-import { sharedVariables } from "util/variable";
+import { mainContainerDefault, mainContentDefault, icons } from "global";
 import { isTouchDevice } from "util/util";
+import Divider from "UIElements/Divider.vue";
+import Icon from "UIElements/Icon.vue";
+import NavLinks from "components/NavLinks.vue";
+import SelectBtn from "components/SelectBtn.vue";
 
 const store = useStore();
-const modal = ref(null);
-const { showModal, modalStyles, provideName } = useModal(modal);
-const { mainContainerDefault, mainContentDefault } = sharedVariables;
-const theme = localStorage.getItem("pageTheme");
+
+const settingsModalRef = ref(null);
+const searchModalRef = ref(null);
+const themesMenuRef = ref(null);
+const themesListRef = ref(null);
+const { showModal, hideModal } = useModal();
+
+provide("settingsModal", settingsModalRef);
+provide("searchModal", searchModalRef);
+provide("themesMenu", themesMenuRef);
+provide("themesList", themesListRef);
+
 const navDefault = ref(true);
 const navHover = ref(false);
 const navClick = ref(false);
 const asideDefault = ref(true);
-const navBtnIcon = ref(SandwichSvg);
+const navBtnIcon = ref(icons.value.sandwich);
 const body = document.body;
 
-provide(provideName, modal);
+const getThemeIndex = computed(() => {
+  const themesOptions = store.getters.getThemesOptions;
+  const themeChosen = localStorage.getItem("pageTheme") || "";
+
+  for (const index in themesOptions) {
+    if (themeChosen.includes(themesOptions[index].name.toLowerCase())) {
+      return index;
+    }
+  }
+});
+
+function toggleTheme(index) {
+  const themesOptions = store.getters.getThemesOptions;
+
+  for (const i in themesOptions) {
+    if (i == index) {
+      setBodyTheme(themesOptions[i].id);
+    }
+  }
+}
+
+function showSettingsModal() {
+  showModal(settingsModalRef);
+}
+
+function showSearchModal() {
+  showModal(searchModalRef);
+}
+
+function showThemesMenu() {
+  showModal(themesMenuRef);
+}
+
+function setBodyTheme(theme) {
+  body.className = "";
+  body.classList.add(theme);
+  localStorage.setItem("pageTheme", theme);
+  hideModal(themesMenuRef);
+}
+
+const pagesInfo = computed(() => {
+  return store.getters.getPagesInfo;
+});
 
 const asideClasses = computed(() => {
   return {
@@ -143,70 +173,48 @@ const navClasses = computed(() => {
   };
 });
 
-const toggleNav = (isNavHover, isNavDefault, isNavClick, isDefault = true) => {
-  navHover.value = isNavHover;
-  navDefault.value = isNavDefault;
-  navClick.value = isNavClick;
+function togglePageState(isDefault = true) {
   asideDefault.value = isDefault;
   mainContainerDefault.value = isDefault;
   mainContentDefault.value = isDefault;
-};
+}
 
-const showNavHover = () => {
-  if (!isTouchDevice() && !navClick.value) {
-    toggleNav(true, false, false);
-  }
-};
+function toggleNavState() {
+  navClick.value ? togglePageState() : togglePageState(false);
 
-const hideNavHover = () => {
-  if (!isTouchDevice() && !navClick.value) {
-    toggleNav(false, true, false);
-  }
-};
+  if (navClick.value) {
+    navDefault.value = true;
+    navClick.value = false;
 
-const toggleNavClick = () => {
-  if (isTouchDevice()) {
-    if (navClick.value) {
-      toggleNav(false, true, false);
-    } else {
-      toggleNav(false, false, true, false);
+    if (!isTouchDevice()) {
+      navHover.value = true;
     }
   } else {
-    if (navClick.value) {
-      toggleNav(true, true, false);
-    } else {
-      toggleNav(false, false, true, false);
-    }
+    navDefault.value = false;
+    navHover.value = false;
+    navClick.value = true;
   }
-};
+}
+
+function toggleNavHover(toShow = false) {
+  if (asideDefault.value) {
+    isTouchDevice() ? (navHover.value = false) : (navHover.value = toShow);
+  }
+}
 
 watch(navClasses, (currentClass) => {
   if (currentClass["nav-hover"]) {
-    navBtnIcon.value = DChevronRightSvg;
+    navBtnIcon.value = icons.value.doubleArrowRight;
   } else if (currentClass["nav-default"]) {
-    navBtnIcon.value = SandwichSvg;
+    navBtnIcon.value = icons.value.sandwich;
   } else if (currentClass["nav-click"]) {
-    navBtnIcon.value = DChevronLeftSvg;
+    navBtnIcon.value = icons.value.doubleArrowLeft;
   }
 });
 
-const lightClicked = () => {
-  body.className = "default-theme";
-  if (theme) {
-    localStorage.removeItem("pageTheme");
-  }
-};
-
-const setBodyTheme = (theme) => {
-  body.className = "";
-  body.classList.add(theme);
-  localStorage.setItem("pageTheme", theme);
-};
-
 onMounted(() => {
-  body.className = "";
-  body.classList.add(theme);
-  localStorage.setItem("pageTheme", theme);
+  const theme = localStorage.getItem("pageTheme");
+  setBodyTheme(theme);
 });
 </script>
 
@@ -224,8 +232,9 @@ onMounted(() => {
 .nav-wrapper {
   color: $black-6;
   user-select: none;
+
   .nav-btn {
-    @extend .navbar-btn;
+    @extend .button;
   }
 
   .nav-default .nav-list {
@@ -234,6 +243,7 @@ onMounted(() => {
 
   .nav-hover {
     @include flex-layout($row-gap: 2rem);
+    border-radius: 3px;
 
     .nav-list {
       box-shadow: $box-shadow-1;
@@ -243,6 +253,7 @@ onMounted(() => {
       animation-fill-mode: forwards;
       padding-right: 1rem;
       background-color: $white;
+      border-radius: 3px;
 
       &__nav-item {
         width: 100%;
@@ -266,6 +277,7 @@ onMounted(() => {
       z-index: 2;
       margin: 0.7rem 0.9rem 0;
     }
+
     .nav-list {
       box-sizing: border-box;
       position: absolute;
@@ -282,7 +294,7 @@ onMounted(() => {
 
       &__nav-item:nth-child(1) {
         @include flex-layout($row-gap: 0.3rem);
-        font-size: $fs-x-small;
+        font-size: $fs-xs;
         @include spacing($ml: 0.8rem, $pt: 0.9rem);
 
         span {
@@ -293,104 +305,56 @@ onMounted(() => {
 
       &__nav-item:nth-child(2) {
         @include flex-layout($row-gap: 0.2rem);
-        @include spacing-2($my: 10px, $mx: 0.6rem);
+        margin: 10px 0.6rem;
 
         & > div {
           @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
           align-items: center;
-          cursor: pointer;
-          border-radius: 3%;
-          padding: 0.28rem;
-          transition: background-color 0.1s;
-
-          &:hover {
-            background-color: $gray-4;
-          }
-
-          &:active {
-            background-color: $gray;
-          }
+          @extend .hover-default;
         }
       }
 
       &__nav-item:nth-child(3) {
         @include flex-layout($row-gap: 1.7rem);
-        @include spacing-2($my: 10px, $mx: 0.7rem);
+        margin: 10px 0.7rem;
       }
     }
   }
 }
 
-.modal-content {
-  .modal-title {
-    font-size: $fs-small;
+.modal {
+  width: 70%;
+
+  &__settings {
+    @include flex-layout($row-gap: 20px);
   }
 
-  .themes-wrapper {
-    @include grid-layout(
-      $grid-template-columns: repeat(2, 1fr),
-      $column-gap: 4rem
-    );
+  &__settings-title {
+    font-weight: $fw-600;
   }
 
-  .themes {
-    @include flex-layout($row-gap: 2rem);
+  &__appearance {
+    @include flex-layout($flex-direction: row);
+    justify-content: space-between;
 
-    &__title {
-      padding-bottom: 3px;
-      border-bottom: 1px solid $black;
-      width: 2rem;
-      font-size: $fs-x-small;
-    }
-
-    &__theme-wrapper {
-      @include grid-layout(
-        $grid-template-columns: repeat(2, 1fr),
-        $column-gap: 10px
-      );
-    }
-
-    &__theme {
-      @include flex-layout($row-gap: 8px);
-      border-radius: 10px;
-      @include sizing(6rem, 5rem);
-      cursor: pointer;
-      transition: opacity 0.5s;
-      border: none;
-      outline: none;
-      justify-content: center;
-      color: $white;
-
-      &--dark {
-        background-color: $dark;
+    div:nth-child(1) {
+      @media (max-width: $screen-xs) {
+        width: max-content;
       }
 
-      &--catppuccin-mocha {
-        background-color: $mocha-base;
-      }
-
-      &--light {
-        background-color: $white;
-      }
-
-      &--catppuccin-latte {
-        background-color: $latte-mantle;
-      }
-
-      &--light,
-      &--catppuccin-latte {
-        border: 1px solid $dark;
-        color: $black;
-      }
-
-      &:hover {
-        opacity: 0.81;
+      h3,
+      h4 {
+        word-break: break-all;
       }
     }
 
-    &__theme-name {
-      text-align: center;
-      font-size: $fs-x-small;
+    h3 {
+      margin-bottom: 6px;
+    }
+
+    h4 {
+      font-size: $fs-small;
+      color: $black-6;
     }
   }
 }

@@ -3,12 +3,12 @@ import store from "store";
 import router from "@/router/router.js";
 import App from "@/App.vue";
 import { createApp } from "vue";
-import { globalState } from "@/globalState.js";
+import { globalProperties } from "global";
 
 const app = createApp(App);
 
-app.use(router).use(store);
+app.config.globalProperties.globalProperties = globalProperties;
 
-app.config.globalProperties.globalState = globalState;
+app.use(router).use(store);
 
 app.mount("#app");

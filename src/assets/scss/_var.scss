@@ -1,26 +1,26 @@
 /* colors default */
 $white: rgba(255, 255, 255, 1);
 $black: rgba(0, 0, 0, 1);
-$black-1: rgba(0, 0, 0, .1);
-$black-2: rgba(0, 0, 0, .2);
-$black-3: rgba(0, 0, 0, .3);
-$black-4: rgba(0, 0, 0, .4);
-$black-5: rgba(0, 0, 0, .5);
-$black-6: rgba(0, 0, 0, .6);
-$black-7: rgba(0, 0, 0, .7);
-$black-8: rgba(0, 0, 0, .8);
-$black-9: rgba(0, 0, 0, .9);
+$black-1: rgba(0, 0, 0, 0.1);
+$black-2: rgba(0, 0, 0, 0.2);
+$black-3: rgba(0, 0, 0, 0.3);
+$black-4: rgba(0, 0, 0, 0.4);
+$black-5: rgba(0, 0, 0, 0.5);
+$black-6: rgba(0, 0, 0, 0.6);
+$black-7: rgba(0, 0, 0, 0.7);
+$black-8: rgba(0, 0, 0, 0.8);
+$black-9: rgba(0, 0, 0, 0.9);
 $gray: rgba(237, 236, 233, 1);
-$gray-stroke: rgba(0,0,0,.15);
-$gray-1: rgba(237, 236, 233, .1);
-$gray-2: rgba(237, 236, 233, .2);
-$gray-3: rgba(237, 236, 233, .3);
-$gray-4: rgba(237, 236, 233, .4);
-$gray-5: rgba(237, 236, 233, .5);
-$gray-6: rgba(237, 236, 233, .6);
-$gray-7: rgba(237, 236, 233, .7);
-$gray-8: rgba(237, 236, 233, .8);
-$gray-9: rgba(237, 236, 233, .9);
+$gray-stroke: rgba(0, 0, 0, 0.15);
+$gray-1: rgba(237, 236, 233, 0.1);
+$gray-2: rgba(237, 236, 233, 0.2);
+$gray-3: rgba(237, 236, 233, 0.3);
+$gray-4: rgba(237, 236, 233, 0.4);
+$gray-5: rgba(237, 236, 233, 0.5);
+$gray-6: rgba(237, 236, 233, 0.6);
+$gray-7: rgba(237, 236, 233, 0.7);
+$gray-8: rgba(237, 236, 233, 0.8);
+$gray-9: rgba(237, 236, 233, 0.9);
 $active: rgb(35, 131, 226);
 $baby-purple: #cdb4db;
 $baby-blue: #bde0fe;
@@ -84,9 +84,9 @@ $mocha-mantle: #181825;
 $mocha-crust: #11111b;
 
 /*font*/
-$default: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+$default: "Hanken Grotesk", sans-serif;
 $mono: iawriter-mono, Nitti, Menlo, Courier, monospace;
-$serif: Lyon-Text, Georgia, ui-serif, serif; 
+$serif: Lyon-Text, Georgia, ui-serif, serif;
 
 /*font weight*/
 $fw-100: 100;
@@ -100,15 +100,29 @@ $fw-800: 800;
 $fw-900: 900;
 
 /*box shadow*/
-$box-shadow-1: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, 
-rgba(15, 15, 15, 0.1) 0px 3px 6px, 
-rgba(15, 15, 15, 0.2) 0px 9px 24px;
+$box-shadow-1: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px,
+  rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
 
 $box-shadow-2: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
 
+$box-shadow-3: rgba(15, 15, 15, 0.05) 0px 0px 0px 0px,
+  rgba(15, 15, 15, 0.1) 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 0px 6px;
+
 /* font size dinamic */
-$fs-x-small: .74rem;
-$fs-small: .9rem;
+$fs-xs: 0.74rem;
+$fs-small: 0.9rem;
 $fs-medium: 1rem;
 $fs-large: 1.3rem;
-$fs-x-large: 1.8rem;
+$fs-xl: 1.8rem;
+
+/* screen size */
+$screen-xs: 480px;
+$screen-small: 767px;
+$screen-medium: 991px;
+$screen-large: 1199px;
+$screen-xl: 1919px;
+$screen-2xl: 1919.1px;
+
+$ASIDE_CLICK_SIZE: 240px;
+$DEFAULT_SPACING: 10px;
+$HEADER_HEIGHT: 50px;

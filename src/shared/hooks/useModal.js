@@ -1,56 +1,46 @@
-import { onMounted } from "vue";
 import { isClickedElOnRefEl } from "util/util";
 
-export default function useModal(modalRef) {
+export default function useModal() {
   const body = document.body;
 
-  function hideModal() {
-    if (modalRef.value) {
-      modalRef.value.style.display = "none";
-      modalRef.value.style.pointerEvents = "";
+  function hideModal(ref) {
+    if (ref && ref.value) {
+      ref.value.style.display = "none";
+      ref.value.style.pointerEvents = "";
       body.style.pointerEvents = "auto";
-    }
 
-    body.removeEventListener("click", handleGlobalClick);
-    body.removeEventListener("touchstart", handleGlobalClick);
+      body.removeEventListener("click", handleGlobalClick.bind(null, ref));
+      body.removeEventListener("touchstart", handleGlobalClick.bind(null, ref));
+    }
   }
 
-  function showModal() {
-    if (modalRef.value) {
-      modalRef.value.style.display = "block";
-      body.style.pointerEvents = "none";
-      modalRef.value.style.pointerEvents = "auto";
-
+  function showModal(ref) {
+    if (ref && ref.value) {
       setTimeout(() => {
-        body.addEventListener("click", handleGlobalClick);
-        body.addEventListener("touchstart", handleGlobalClick);
-      }, 100);
+        ref.value.style.display = "block";
+        body.style.pointerEvents = "none";
+        ref.value.style.pointerEvents = "auto";
+      }, 250);
     }
   }
 
-  function handleGlobalClick(e) {
-    const res = isClickedElOnRefEl(modalRef.value, e.target);
+  function handleGlobalClick(ref, e) {
+    const res = isClickedElOnRefEl(ref.value, e.target);
+    const refDisplay = ref.value.style.display;
 
-    if (!res) {
-      hideModal();
+    if (refDisplay == "block" && !res) {
+      hideModal(ref);
     }
   }
 
-  onMounted(() => {
-    hideModal();
-  });
+  function addModaListener(ref) {
+    body.addEventListener("click", handleGlobalClick.bind(null, ref));
+    body.addEventListener("touchstart", handleGlobalClick.bind(null, ref));
+  }
 
   return {
-    provideName: "modalRef",
     showModal,
-    modalStyles: {
-      position: "absolute",
-      top: "50%",
-      right: "0",
-      left: "50%",
-      bottom: "0",
-      transform: "translate(-50%, -60%)",
-      padding: "2rem 1.9rem",
-    },
+    hideModal,
+    addModaListener,
   };
 }

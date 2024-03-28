@@ -2,9 +2,9 @@
   <main
     class="page-wrapper"
     :class="[
-      globalState.fontStyle,
-      globalState.fontSize,
-      globalState.pageWidth,
+      globalProperties.fontSize,
+      globalProperties.fontStyle,
+      globalProperties.pageWidth,
     ]"
   >
     <div v-if="activePage.pageBanner" class="page-banner">
@@ -22,46 +22,22 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import { computedVariables } from "util/variable";
-import {
-  updateFontSize,
-  updateFontStyle,
-  updatePageWidth,
-  globalState,
-} from "@/globalState.js";
-
-const { activePage } = computedVariables;
-
-const setConfigs = () => {
-  if (activePage) {
-    if (activePage._value.fontStyle.length === 0) {
-      updateFontStyle("font-roboto");
-    } else {
-      updateFontStyle(activePage._value.fontStyle);
-    }
-
-    updateFontSize(activePage._value.fontSize);
-    updatePageWidth(activePage._value.pageWidth);
-  }
-};
-
-onMounted(() => {
-  setConfigs();
-});
+import { activePage } from "global";
 </script>
 
 <style lang="scss">
 @import "@/assets/scss/main";
 
 .page-wrapper {
-  @include sizing(100%, 100vh);
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
+  @include sizing(100%, 100vh);
 
   .page-banner {
     width: 100%;
     height: 210px;
+    margin: $HEADER_HEIGHT 0px !important;
 
     img {
       width: 100%;
@@ -71,24 +47,72 @@ onMounted(() => {
   }
 
   .page-content {
-    @include grid-layout($row-gap: 30px);
+    @include grid-layout($row-gap: 20px);
     position: absolute;
-    top: 135px;
+    top: 160px;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 1;
     width: 50%;
+    margin: $HEADER_HEIGHT 0px !important;
 
     .page-title {
-      @include flex-layout($row-gap: 25px);
+      @include flex-layout($row-gap: 80px);
 
       img {
         max-width: 5.8rem;
       }
 
       span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: $fw-700;
+      }
+    }
+  }
+}
+
+/*configs*/
+.font-roboto-mono {
+  font-family: $mono;
+}
+
+.font-roboto-serif {
+  font-family: $serif;
+}
+
+.font-size-small {
+  p,
+  span,
+  div,
+  h5 {
+    font-size: $fs-small;
+  }
+
+  .page-content .page-title {
+    span {
+      font-size: $fs-large + 0.7rem;
+    }
+  }
+}
+
+.page-full-width {
+  .page-content {
+    padding: 0 100px;
+    width: 100%;
+    place-items: unset;
+  }
+}
+
+@media (max-width: $screen-xs) {
+  .page-wrapper {
+    .page-content {
+      width: 100%;
+      padding: 0 20px;
+
+      .page-title {
+        span {
+          font-size: $fs-xl;
+        }
       }
     }
   }

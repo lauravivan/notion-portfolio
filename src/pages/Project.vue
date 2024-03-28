@@ -25,10 +25,9 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { computedVariables } from "util/variable";
+import { activePage } from "global";
 import axios from "axios";
 
-const { activePage } = computedVariables;
 const languages = ref(null);
 
 onMounted(async () => {
@@ -54,12 +53,12 @@ onMounted(async () => {
   }
 }
 .iframe-title {
-  font-size: $fs-x-large;
+  font-size: $fs-xl;
   font-weight: $fw-500;
 }
 .iframe-wrapper {
   @include flex-layout($row-gap: 10px);
-  @include spacing-2($my: 60px);
+  margin: 60px 0;
 }
 .iframe {
   width: 100%;

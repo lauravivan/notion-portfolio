@@ -17,9 +17,7 @@
 <script setup>
 import Aside from "components/Aside.vue";
 import Header from "components/Header.vue";
-import { computedVariables } from "util/variable";
-
-const { mainContainerClasses, mainContentClasses } = computedVariables;
+import { mainContainerClasses, mainContentClasses } from "global";
 </script>
 
 <style lang="scss">
@@ -40,6 +38,7 @@ const { mainContainerClasses, mainContentClasses } = computedVariables;
     left: 0;
     z-index: 2;
     width: 100%;
+    height: $HEADER_HEIGHT !important;
   }
 }
 
@@ -53,7 +52,7 @@ const { mainContainerClasses, mainContentClasses } = computedVariables;
   }
 
   .header {
-    .header-content {
+    &__content {
       @include spacing($pt: 11px, $pl: 40px, $pr: 10px, $pb: 8px);
     }
   }
@@ -61,11 +60,11 @@ const { mainContainerClasses, mainContentClasses } = computedVariables;
 
 .main-container-click {
   position: relative;
-  margin-left: 210px;
+  margin-left: $ASIDE_CLICK_SIZE;
 
   .aside-click {
     position: fixed;
-    width: 210px;
+    width: $ASIDE_CLICK_SIZE;
     inset: 0;
     box-shadow: $box-shadow-2;
     background-color: $gray-2;
@@ -73,60 +72,34 @@ const { mainContainerClasses, mainContentClasses } = computedVariables;
   }
 
   .header {
-    .header-content {
-      @include spacing($pt: 11px, $pl: 10px, $pr: 10px, $pb: 8px, $ml: 210px);
-    }
-  }
-
-  .footer {
-    span {
-      margin-right: 210px;
+    &__content {
+      @include spacing(
+        $pt: 11px,
+        $pl: 10px,
+        $pr: 10px,
+        $pb: 8px,
+        $ml: $ASIDE_CLICK_SIZE
+      );
     }
   }
 }
 
 .footer {
-  text-align: center;
-  font-size: $fs-small;
-  @include spacing-2($py: 20px);
-  background-color: $gray;
-  position: fixed;
+  font-size: $fs-xs;
+  position: absolute;
+  right: 0;
   bottom: 0;
-  width: 100%;
-  z-index: 2;
-}
+  z-index: 10;
+  background-color: $white;
+  height: $HEADER_HEIGHT;
+  margin-right: 10px;
 
-/*configs*/
-.font-roboto-mono {
-  font-family: $mono;
-}
-
-.font-roboto-serif {
-  font-family: $serif;
-}
-
-.font-size-small {
-  p,
-  span,
-  div,
-  h5 {
-    font-size: $fs-small;
-  }
-
-  .page-content .page-title {
-    span {
-      font-size: 2.5rem;
-    }
+  > span {
+    border: 1px solid $gray-5;
+    box-shadow: $box-shadow-1;
+    border-radius: 40px;
+    padding: 11px 14px;
+    background-color: $white;
   }
 }
-
-.page-full-width {
-  .page-content {
-    @include spacing-2($px: 50px);
-    width: 100%;
-    place-items: unset;
-  }
-}
-
-@import "@/assets/scss/_responsive.scss";
 </style>

@@ -1,22 +1,26 @@
 <template>
-  <div class="overlay" ref="modal">
-    <dialog class="modal" id="modal" :style="modalStyles.modalStyles">
-      <div class="modal-content">
-        <slot></slot>
-      </div>
+  <div class="overlay" ref="modalRef">
+    <dialog class="modal">
+      <slot></slot>
     </dialog>
   </div>
 </template>
 
 <script setup>
-import { inject } from "vue";
+import { inject, onMounted } from "vue";
+import useModal from "hooks/useModal";
 
-const modal = inject("modalRef");
+const props = defineProps(["provideName"]);
+const modalRef = inject(props.provideName);
+const { hideModal, addModaListener } = useModal();
 
-const modalStyles = defineProps(["modalStyles"]);
+onMounted(() => {
+  hideModal(modalRef);
+  addModaListener(modalRef);
+});
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "@/assets/scss/main";
 
 dialog {
@@ -43,11 +47,12 @@ dialog {
   height: max-content;
   outline: none;
   width: max-content;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, -60%);
+  padding: 2rem 1.9rem;
 }
-
-.modal-content {
-  @include flex-layout($row-gap: 3rem);
-}
-
-@import "@/assets/scss/_responsive.scss";
 </style>

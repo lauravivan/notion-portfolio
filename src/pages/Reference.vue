@@ -1,104 +1,94 @@
 <template>
   <div class="reference">
-    <div class="reference__collapsibles-wrapper" v-if="referenceInfo">
-      <div class="reference__collapsible-wrapper" v-for="info in referenceInfo">
-        <details class="reference__details">
-          <summary class="reference__summary">
-            {{ info.name }}
-          </summary>
-
-          <ul class="reference__collapsible-list">
-            <li class="reference__collapsible-list-item">
-              <span class="reference__collapsible-category">BANNER:</span>
-              <div
-                class="reference__collapsible-category-desc"
-                v-html="info.banner"
-              ></div>
-            </li>
-
-            <li class="reference__collapsible-list-item">
-              <span class="reference__collapsible-category">ICON: </span>
-              <div
-                class="reference__collapsible-category-desc"
-                v-html="info.icon"
-              ></div>
-            </li>
-          </ul>
-        </details>
-      </div>
-
-      <div class="reference__collapsible-wrapper">
-        <details class="reference__details">
-          <summary class="reference__summary">Project</summary>
-
-          <ul class="reference__collapsible-list">
-            <li class="reference__collapsible-list-item">
-              <span class="reference__collapsible-category">ICONS:</span>
-              <a href="https://www.flaticon.com/stickers-pack/coffee-shop-348"
-                >Coffee shop stickers pack</a
+    <div v-for="(ref, index) in referenceToggles" :key="index">
+      <toggleList
+        :iconToOpen="icons.arrowRightFilled"
+        :iconToClose="icons.arrowDownFilled"
+        :detailsContent="ref.detailsContent"
+        class="reference__toggle-list"
+      >
+        <template #summaryContent>
+          <div>{{ ref.summary }}</div>
+        </template>
+        <template #detailsContent>
+          <li v-for="(item, key) in ref.detailsContent" :key="index++">
+            <div v-if="key === 'banner'" class="details__item">
+              <span>BANNER: </span>
+              <a target="_blank" :href="item.link">
+                photo by {{ item.author }}</a
               >
-            </li>
-          </ul>
-        </details>
-      </div>
+            </div>
+            <div v-if="key === 'icon'" class="details__item">
+              <span>ICON: </span>
+              <a target="_blank" :href="item.link">by {{ item.author }}</a>
+            </div>
+          </li>
+        </template>
+      </toggleList>
     </div>
   </div>
 </template>
 
 <script setup>
-import store from "store";
+import { icons } from "global";
+import toggleList from "components/ToggleList.vue";
 
-const referenceInfo = store.getters.getReferenceInfo;
+const referenceToggles = [
+  {
+    summary: "About page",
+    detailsContent: {
+      banner: {
+        link: "https://unsplash.com/photos/japanese-lantern-over-city-bike-at-nighttime-oCZHIa1D4EU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+        author: "Jase Bloor",
+      },
+      icon: {
+        link: "https://www.svgrepo.com/vectors/info/",
+        author: "Svgrepo",
+      },
+    },
+  },
+  {
+    summary: "Contact page",
+    detailsContent: {
+      banner: {
+        link: "https://www.pexels.com/photo/crowd-surrounded-by-buildings-during-night-time-2070033/",
+        author: "Satoshi Hirayama",
+      },
+      icon: {
+        link: "https://www.svgrepo.com/svg/464447/contact-book",
+        author: "Mary Akveo",
+      },
+    },
+  },
+  {
+    summary: "Github page",
+    detailsContent: {
+      banner: {
+        link: "https://unsplash.com/photos/pink-flowers-McsNra2VRQQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+        author: "AJ",
+      },
+      icon: {
+        link: "https://www.svgrepo.com/svg/506654/github",
+        author: "blivesta",
+      },
+    },
+  },
+  {
+    summary: "Reference page",
+    detailsContent: {
+      banner: {
+        link: "https://unsplash.com/photos/empty-pathway-in-between-stores-wfwUpfVqrKU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+        author: "Alex Knight",
+      },
+      icon: {
+        link: "https://www.flaticon.com/free-icons/reference",
+        author: "Flaticon",
+      },
+    },
+  },
+  {
+    summary: "General",
+    detailsContent: [],
+  },
+];
 </script>
-
-<style scoped lang="scss">
-@import "@/assets/scss/main.scss";
-
-.reference {
-  &__collapsibles-wrapper {
-    @include flex-layout($row-gap: 20px);
-  }
-
-  &__details[open] {
-    .reference__summary::before {
-      content: url('data:image/svg+xml,<svg viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" width="33px" height="28px"><polygon points="3,5 7,10 11,5"></polygon></svg>');
-    }
-  }
-
-  &__summary {
-    user-select: none;
-    cursor: pointer;
-    margin-bottom: 10px;
-    @include flex-layout($flex-direction: row);
-    align-items: center;
-
-    &::before {
-      content: url('data:image/svg+xml,<svg viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" width="33px" height="28px"><polygon points="5,3 10,7 5,11"></polygon></svg>');
-    }
-
-    &:hover::before {
-      border-radius: 7%;
-      background-color: $gray-4;
-    }
-  }
-
-  &__collapsible-desc {
-    @include flex-layout($flex-direction: row);
-    align-items: center;
-  }
-
-  &__collapsible-category {
-    font-weight: $fw-500;
-    text-decoration: underline;
-  }
-
-  &__collapsible-list {
-    @include flex-layout($row-gap: 20px);
-    margin-left: 30px;
-  }
-
-  &__collapsible-list-item {
-    @include flex-layout($flex-direction: row, $column-gap: 10px);
-  }
-}
-</style>
