@@ -256,6 +256,10 @@ onMounted(() => {
     @include flex-layout($row-gap: 1.2rem);
     padding: 1rem 0.2rem 0.5rem;
 
+    @media (max-width: $screen-xs) {
+      display: none;
+    }
+
     & > div {
       display: flex;
       align-items: center;
