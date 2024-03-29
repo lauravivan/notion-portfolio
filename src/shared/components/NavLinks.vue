@@ -72,6 +72,7 @@ const activePageId = computed(() => {
 
           > div {
             font-size: $fs-medium;
+            color: $black-3;
           }
         }
 
