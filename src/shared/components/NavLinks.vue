@@ -16,10 +16,7 @@
           :iconToClose="icons.arrowDown"
         >
           <template #summaryContent>
-            <router-link
-              :to="page.pagePath"
-              style="display: block; width: 100%"
-            >
+            <router-link :to="page.pagePath" style="display: block">
               <div>
                 <div style="max-width: 1.1rem">
                   <img :src="page.pageIcon" style="width: 100%; height: auto" />
