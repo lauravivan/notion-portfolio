@@ -7,9 +7,7 @@
 
       <router-view></router-view>
 
-      <footer class="footer">
-        <span>Developed by Laura (^.^)</span>
-      </footer>
+      <footer class="footer">Developed by Laura (^.^)</footer>
     </div>
   </div>
 </template>
@@ -88,19 +86,13 @@ import { mainContainerClasses, mainContentClasses } from "global";
 .footer {
   font-size: $fs-xs;
   position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
+  right: 30px;
+  bottom: 20px;
+  z-index: 999;
   background-color: $white;
-  height: $HEADER_HEIGHT;
-  margin-right: 10px;
-
-  > span {
-    border: 1px solid $gray-5;
-    box-shadow: $box-shadow-1;
-    border-radius: 40px;
-    padding: 11px 14px;
-    background-color: $white;
-  }
+  border: 1px solid $gray-5;
+  box-shadow: $box-shadow-1;
+  border-radius: 40px;
+  padding: 15px 14px;
 }
 </style>
