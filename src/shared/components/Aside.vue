@@ -121,11 +121,15 @@ const getThemeIndex = computed(() => {
   const themesOptions = store.getters.getThemesOptions;
   const themeChosen = localStorage.getItem("pageTheme") || "";
 
-  for (const index in themesOptions) {
-    if (themeChosen.includes(themesOptions[index].name.toLowerCase())) {
-      return index;
+  if (themeChosen) {
+    for (const index in themesOptions) {
+      if (themesOptions[index].id == themeChosen) {
+        return index;
+      }
     }
   }
+
+  return 0;
 });
 
 function toggleTheme(index) {
