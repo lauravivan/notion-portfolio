@@ -16,7 +16,7 @@
         <span>{{ activePage.pageName }}</span>
       </div>
       <router-view></router-view>
-      <div style="width: auto; height: 170px"></div>
+      <div style="width: auto; height: 100px"></div>
     </div>
   </main>
 </template>
