@@ -1,6 +1,14 @@
-.dark-theme {
-  background-color: $dark;
-  color: $white;
+@mixin defineTheme(
+  $text,
+  $bg,
+  $bgOverlap,
+  $bgGap,
+  $bgHover,
+  $activeColor,
+  $link
+) {
+  background-color: $bg;
+  color: $text;
 
   li,
   span,
@@ -11,300 +19,92 @@
   h5,
   h6,
   div,
-  button {
-    color: $white !important;
+  button,
+  .gallery__card-footer-icon.icon {
+    color: $text !important;
   }
 
-  .menu {
-    background-color: $dark;
+  .menu,
+  .header,
+  ::-webkit-scrollbar-track {
+    background-color: $bg;
   }
 
   .modal,
-  .header-menu .menu {
-    background-color: $black;
-  }
-
-  .main-container-click .aside-click,
+  .header-menu .menu,
+  .footer,
+  .gallery__card-footer,
   .nav-hover .nav-list {
-    background-color: $black-4;
+    background-color: $bgOverlap !important;
   }
 
-  .header-menu {
-    &__font-wrapper {
-      &--active {
-        .header-menu__ag {
-          color: $active !important;
-        }
-      }
-    }
+  .main-container-click .aside-click {
+    background-color: $bgGap;
   }
 
-  .toggle-btn.unchecked {
-    background-color: $gray-4 !important;
+  .hover-default:hover,
+  .toggle-btn.unchecked,
+  .callout {
+    background-color: $bgHover !important;
+  }
+
+  .header-menu__font-wrapper--active .header-menu__ag {
+    color: $activeColor !important;
   }
 
   .toggle-btn.checked {
-    background-color: $active !important;
-  }
-
-  .github {
-    &__gallery-menu,
-    &__gallery-menu-item:nth-child(1) {
-      border-color: $white;
-    }
-
-    button {
-      color: $white !important;
-    }
-
-    &__repo-wrapper {
-      border-color: $white;
-      color: $white;
-    }
-  }
-
-  .footer span {
-    background-color: $black !important;
+    background-color: $activeColor !important;
   }
 
   .language {
-    @include language($baby-purple, $dark, $white);
-  }
-
-  .hover-default {
-    &:hover {
-      background-color: $gray-5 !important;
-    }
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: $dark;
+    @include language($baby-purple, $bg, $text);
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: $white;
+    background-color: $text;
   }
 
   :-webkit-any-link {
-    color: $gray;
-    transition: color 0.3s;
+    color: $text;
 
     &:hover {
-      color: $white !important;
+      color: $link !important;
     }
   }
+}
+
+.dark-theme {
+  @include defineTheme(
+    $white,
+    $dark,
+    $black,
+    $black-4,
+    $gray-3,
+    $active,
+    $gray
+  );
 }
 
 .cat-latte {
-  background-color: $latte-base;
-  color: $latte-text;
-
-  li,
-  span,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  div,
-  button {
-    color: $latte-text !important;
-  }
-
-  .modal,
-  .header-menu .menu {
-    background-color: $latte-surface1;
-  }
-
-  .menu,
-  .main-container-click .aside-click,
-  .nav-hover .nav-list {
-    background-color: $latte-surface0;
-  }
-
-  .header-menu {
-    &__font-wrapper {
-      &--active {
-        .header-menu__ag {
-          color: $latte-mauve !important;
-        }
-      }
-    }
-  }
-
-  .toggle-btn.unchecked {
-    background-color: $latte-overlay0 !important;
-  }
-
-  .toggle-btn.checked {
-    background-color: $latte-mauve !important;
-  }
-
-  .language {
-    @include language($bg-color: $latte-yellow, $color: $latte-mantle);
-  }
-
-  .modal span {
-    border-color: $latte-text;
-  }
-
-  .themes:nth-child(2) .themes__theme-wrapper span {
-    color: $latte-mantle !important;
-  }
-
-  .hover-default {
-    &:hover {
-      background-color: $latte-surface2 !important;
-    }
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: $latte-mantle;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: $dark;
-  }
+  @include defineTheme(
+    $latte-text,
+    $latte-base,
+    $latte-surface0,
+    $latte-mantle,
+    $latte-surface1,
+    $latte-sky,
+    $latte-overlay2
+  );
 }
 
 .cat-mocha {
-  background-color: $mocha-base;
-  color: $mocha-text;
-
-  li,
-  span,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  div,
-  button {
-    color: $mocha-text !important;
-  }
-
-  .modal,
-  .header-menu .menu {
-    background-color: $mocha-surface2;
-  }
-
-  .menu,
-  .main-container-click .aside-click,
-  .nav-hover .nav-list {
-    background-color: $mocha-surface1;
-  }
-
-  .github {
-    &__gallery-menu,
-    &__gallery-menu-item:nth-child(1) {
-      border-color: $mocha-text;
-    }
-
-    button {
-      color: $mocha-text !important;
-    }
-
-    &__repo-wrapper {
-      border-color: $mocha-text;
-      color: $mocha-text;
-    }
-  }
-
-  .header-menu {
-    &__font-wrapper {
-      &--active {
-        .header-menu__ag {
-          color: $mocha-mauve !important;
-        }
-      }
-    }
-  }
-
-  .toggle-btn.unchecked {
-    background-color: $gray-4 !important;
-  }
-
-  .toggle-btn.checked {
-    background-color: $mocha-mauve !important;
-  }
-
-  .footer span {
-    background-color: $mocha-crust !important;
-  }
-
-  .modal span {
-    border-color: $mocha-text;
-  }
-
-  .language {
-    @include language($mocha-green, $dark, $white);
-  }
-
-  .hover-default {
-    &:hover {
-      background-color: $mocha-overlay2 !important;
-    }
-  }
-
-  .themes:nth-child(1) .themes__theme-wrapper span {
-    color: $mocha-base !important;
-  }
-
-  .themes:nth-child(2) .themes__theme-wrapper div {
-    border: 1px solid $mocha-text;
-  }
-
-  .sandwich-svg,
-  .chevron-svg,
-  .search-svg {
-    line {
-      stroke: $mocha-text;
-    }
-  }
-
-  .search-svg,
-  .settings-svg {
-    circle {
-      stroke: $mocha-text;
-    }
-  }
-
-  .settings-svg,
-  .github-repo-svg {
-    path {
-      fill: $mocha-text;
-    }
-  }
-
-  .dots-svg {
-    rect {
-      fill: $mocha-text;
-    }
-  }
-
-  .gallery-svg,
-  .link-svg {
-    path {
-      stroke: $mocha-text;
-    }
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: $mocha-base;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: $mocha-text;
-  }
-
-  :-webkit-any-link {
-    color: $mocha-overlay0;
-    transition: color 0.3s;
-
-    &:hover {
-      color: $mocha-text !important;
-    }
-  }
+  @include defineTheme(
+    $mocha-text,
+    $mocha-base,
+    $mocha-mantle,
+    $mocha-surface0,
+    $mocha-overlay0,
+    $mocha-sapphire,
+    $mocha-subtext0
+  );
 }

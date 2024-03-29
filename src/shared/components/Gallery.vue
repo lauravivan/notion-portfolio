@@ -121,7 +121,7 @@ const props = defineProps(["galleryTitle", "data"]);
 
   &__card-wrapper {
     border: 1px solid $black-1;
-    height: 200px;
+    border-bottom: none;
     border-radius: 5px;
     box-shadow: $box-shadow-2;
     cursor: pointer;
@@ -134,10 +134,9 @@ const props = defineProps(["galleryTitle", "data"]);
   }
 
   &__card-content {
-    border-bottom: 1px solid $black-1;
     @include flex-layout($row-gap: 15px);
     background-color: $gray-2;
-    padding: 15px 13px;
+    padding: 15px 13px 0px;
     height: 160px;
   }
 
