@@ -71,11 +71,13 @@ function showMenuModal() {
   }
 }
 
-.select-btn-menu .menu {
-  min-width: 280px !important;
+.select-btn-menu {
+  .menu {
+    min-width: 280px !important;
 
-  @media (max-width: $screen-small) {
-    min-width: 150px !important;
+    @media (max-width: $screen-small) {
+      min-width: 150px !important;
+    }
   }
 }
 </style>

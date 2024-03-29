@@ -345,10 +345,6 @@ onMounted(() => {
     justify-content: space-between;
 
     div:nth-child(1) {
-      @media (max-width: $screen-xs) {
-        width: max-content;
-      }
-
       h3,
       h4 {
         word-break: break-all;
