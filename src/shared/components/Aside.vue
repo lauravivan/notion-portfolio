@@ -50,6 +50,7 @@
         top: -11px;
         left: 190px;
       "
+      :style="{ display: displayNavHoverOut }"
       @mouseleave="toggleNavHover()"
       @mouseout="toggleNavHover()"
     ></div>
@@ -102,6 +103,7 @@ const searchModalRef = ref(null);
 const themesMenuRef = ref(null);
 const themesListRef = ref(null);
 const { showModal, hideModal } = useModal();
+const displayNavHoverOut = ref("none");
 
 provide("settingsModal", settingsModalRef);
 provide("searchModal", searchModalRef);
@@ -201,6 +203,10 @@ function toggleNavHover(toShow = false) {
   if (asideDefault.value) {
     isTouchDevice() ? (navHover.value = false) : (navHover.value = toShow);
   }
+
+  navHover.value
+    ? (displayNavHoverOut.value = "block")
+    : (displayNavHoverOut.value = "none");
 }
 
 watch(navClasses, (currentClass) => {
