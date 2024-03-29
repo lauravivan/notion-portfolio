@@ -72,34 +72,36 @@ import { activePage } from "global";
 }
 
 /*configs*/
-.font-roboto-mono {
-  font-family: $mono;
-}
-
-.font-roboto-serif {
-  font-family: $serif;
-}
-
-.font-size-small {
-  p,
-  span,
-  div,
-  h5 {
-    font-size: $fs-small;
+@media (min-width: $screen-small) {
+  .font-roboto-mono {
+    font-family: $mono;
   }
 
-  .page-content .page-title {
-    span {
-      font-size: $fs-large + 0.7rem;
+  .font-roboto-serif {
+    font-family: $serif;
+  }
+
+  .font-size-small {
+    p,
+    span,
+    div,
+    h5 {
+      font-size: $fs-small;
+    }
+
+    .page-content .page-title {
+      span {
+        font-size: $fs-large + 0.7rem;
+      }
     }
   }
-}
 
-.page-full-width {
-  .page-content {
-    padding: 0 100px;
-    width: 100%;
-    place-items: unset;
+  .page-full-width {
+    .page-content {
+      padding: 0 100px;
+      width: 100%;
+      place-items: unset;
+    }
   }
 }
 
