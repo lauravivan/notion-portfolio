@@ -88,12 +88,12 @@ body {
   color: rgba(0, 0, 0, 0.8);
   font-weight: 400;
 }
-
 @media (max-width: 480px) {
   body {
-    font-size: 0.74rem;
+    font-size: 0.9rem;
   }
 }
+
 ::selection {
   background-color: rgba(237, 236, 233, 0.2);
 }

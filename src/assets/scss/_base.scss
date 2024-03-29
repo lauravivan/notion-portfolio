@@ -19,11 +19,9 @@ body {
   font-size: $fs-medium;
   color: $black-8;
   font-weight: $fw-400;
-}
 
-@media (max-width: $screen-xs) {
-  body {
-    font-size: $fs-xs;
+  @media (max-width: $screen-xs) {
+    font-size: $fs-small;
   }
 }
 
