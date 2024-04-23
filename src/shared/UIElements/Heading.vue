@@ -15,31 +15,31 @@ const props = defineProps(["headingNumber"]);
 @import "@/assets/scss/main.scss";
 
 .heading {
-  font-weight: $fw-900;
+  font-weight: $fw-800;
   margin: $DEFAULT_SPACING 0;
 }
 
 .h1 {
-  font-size: $fs-xl + 0.6rem;
-}
-
-.h2 {
   font-size: $fs-xl + 0.4rem;
 }
 
-.h3 {
+.h2 {
   font-size: $fs-xl + 0.2rem;
 }
 
-.h4 {
+.h3 {
   font-size: $fs-xl;
 }
 
-.h5 {
+.h4 {
   font-size: $fs-xl - 0.2rem;
 }
 
-.h6 {
+.h5 {
   font-size: $fs-xl - 0.4rem;
+}
+
+.h6 {
+  font-size: $fs-xl - 0.6rem;
 }
 </style>
