@@ -1,10 +1,32 @@
-import { reactive, ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 import store from "store";
 
 export const globalProperties = reactive({
-  fontSize: "",
   fontStyle: "",
+  fontSize: "",
   pageWidth: "",
+});
+
+export function setGlobalProperties(page) {
+  setGlobalProperty("fontStyle", page.pageSettings.fontStyle);
+  setGlobalProperty("fontSize", page.pageSettings.fontSize);
+  setGlobalProperty("pageWidth", page.pageSettings.pageWidth);
+}
+
+export function setGlobalProperty(setts, settsValue) {
+  globalProperties[setts] = settsValue;
+}
+
+export const globalFontStyle = computed(() => {
+  return globalProperties.fontStyle;
+});
+
+export const globalFontSize = computed(() => {
+  return globalProperties.fontSize;
+});
+
+export const globalPageWidth = computed(() => {
+  return globalProperties.pageWidth;
 });
 
 export const mainContainerDefault = ref(true);
