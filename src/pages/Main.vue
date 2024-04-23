@@ -1,28 +1,32 @@
 <template>
   <main
     class="page-wrapper"
-    :class="[
-      globalProperties.fontSize,
-      globalProperties.fontStyle,
-      globalProperties.pageWidth,
-    ]"
+    :class="[globalFontSize, globalFontStyle, globalPageWidth]"
   >
     <div v-if="activePage.pageBanner" class="page-banner">
       <img :src="activePage.pageBanner" />
     </div>
-    <div class="page-content">
+    <div
+      class="page-content"
+      :class="activePage.pageBanner ? 'page-content--banner' : ''"
+    >
       <div class="page-title">
         <img :src="activePage.pageIcon" />
         <span>{{ activePage.pageName }}</span>
       </div>
-      <router-view></router-view>
+      <router-view />
       <div style="width: auto; height: 100px"></div>
     </div>
   </main>
 </template>
 
 <script setup>
-import { activePage } from "global";
+import {
+  activePage,
+  globalFontSize,
+  globalFontStyle,
+  globalPageWidth,
+} from "global";
 </script>
 
 <style lang="scss">
@@ -39,6 +43,10 @@ import { activePage } from "global";
     height: 210px;
     margin: $HEADER_HEIGHT 0px !important;
 
+    @media (max-width: $screen-small) {
+      margin: $HEADER_HEIGHT_SM_SCREEN 0px !important;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -49,12 +57,11 @@ import { activePage } from "global";
   .page-content {
     @include grid-layout($row-gap: 20px);
     position: absolute;
-    top: 160px;
+    top: 140px;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 1;
     width: 50%;
-    margin: $HEADER_HEIGHT 0px !important;
 
     .page-title {
       @include flex-layout($row-gap: 80px);
@@ -65,27 +72,35 @@ import { activePage } from "global";
 
       span {
         font-size: 2.5rem;
-        font-weight: $fw-700;
+        font-weight: $fw-900;
+      }
+    }
+
+    &--banner {
+      margin: $HEADER_HEIGHT 0px !important;
+      top: 160px;
+
+      @media (max-width: $screen-small) {
+        margin: $HEADER_HEIGHT_SM_SCREEN 0px !important;
       }
     }
   }
 }
 
+.font-roboto-mono {
+  font-family: $mono;
+}
+
+.font-roboto-serif {
+  font-family: $serif;
+}
+
 /*configs*/
 @media (min-width: $screen-small) {
-  .font-roboto-mono {
-    font-family: $mono;
-  }
-
-  .font-roboto-serif {
-    font-family: $serif;
-  }
-
   .font-size-small {
     p,
     span,
-    div,
-    h5 {
+    div {
       font-size: $fs-small;
     }
 
@@ -93,6 +108,30 @@ import { activePage } from "global";
       span {
         font-size: $fs-large + 0.7rem;
       }
+    }
+
+    .h1 {
+      font-size: $fs-large + 0.6rem;
+    }
+
+    .h2 {
+      font-size: $fs-large + 0.4rem;
+    }
+
+    .h3 {
+      font-size: $fs-large + 0.2rem;
+    }
+
+    .h4 {
+      font-size: $fs-large;
+    }
+
+    .h5 {
+      font-size: $fs-large - 0.2rem;
+    }
+
+    .h6 {
+      font-size: $fs-large - 0.4rem;
     }
   }
 

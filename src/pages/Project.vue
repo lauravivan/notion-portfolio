@@ -1,48 +1,43 @@
 <template>
-  <div class="project">
-    <p class="project__link">
-      Access here:
-      <a target="_blank" :href="activePage.projectUrl">Link to project</a>
-    </p>
+  <div class="project" v-if="page">
+    <Text
+      >Access here:
+      <a target="_blank" :href="page.pageData.homepage"
+        >Link to project</a
+      ></Text
+    >
 
     <div class="iframe-wrapper">
-      <h3 class="iframe-title">Preview:</h3>
-      <iframe class="iframe" :src="activePage.projectUrl"></iframe>
+      <Heading headingNumber="3"> Preview: </Heading>
+      <iframe class="iframe" :src="page.pageData.homepage"></iframe>
     </div>
 
-    <div v-if="languages">
-      <div class="languages-wrapper">
-        <span>Languages used: </span>
-        <div class="languages">
-          <div v-for="(value, language) in languages">
-            <span class="language">{{ language }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Text>Languages used:</Text>
+    <BulletList :items="page.pageData.languages" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
 import { activePage } from "global";
-import axios from "axios";
+import Database from "components/Database.vue";
+import Text from "UIElements/Text.vue";
+import Heading from "UIElements/Heading.vue";
+import BulletList from "components/BulletList.vue";
+import { ref, onMounted } from "vue";
 
-const languages = ref(null);
+const props = defineProps(["page"]);
+const page = ref(null);
 
-onMounted(async () => {
-  const url = activePage._value.githubUrl + "languages";
-
-  try {
-    const response = await axios.get(url);
-    languages.value = response.data;
-  } catch (error) {
-    console.error(error);
+onMounted(() => {
+  if (props.page) {
+    page.value = props.page;
+  } else {
+    page.value = activePage.value;
   }
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "@/assets/scss/main.scss";
 
 .project {
@@ -62,7 +57,7 @@ onMounted(async () => {
 }
 .iframe {
   width: 100%;
-  height: 500px;
+  height: 330px;
 }
 
 .languages-wrapper {
