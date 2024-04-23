@@ -1,17 +1,11 @@
 <template>
   <header class="header">
+    <div class="header__tabs">
+      <div class="header__tab">Aba</div>
+      <div><Icon :icon="icons.add" /></div>
+    </div>
     <div class="header__content">
-      <div class="header__page" v-if="activePage">
-        <router-link :to="activePage.pagePath">
-          <div>
-            <img
-              :src="activePage.pageIcon"
-              style="max-width: 1.1rem; height: auto"
-            />
-            <div>{{ activePage.pageName }}</div>
-          </div>
-        </router-link>
-      </div>
+      <Breadcrumb />
       <div
         class="header__btn"
         role="button"
@@ -26,7 +20,7 @@
   <Menu
     class="header-menu"
     :provideName="'headerMenu'"
-    :menuStyles="{ top: '38px', right: '10px' }"
+    :menuStyles="{ top: '77px', right: '10px' }"
   >
     <div class="header-menu__style">
       <span>Style</span>
@@ -36,7 +30,7 @@
           class="header-menu__font-wrapper"
           @click="setFontStyle(font.id)"
           :class="{
-            'header-menu__font-wrapper--active': activeFontStyle === font.id,
+            'header-menu__font-wrapper--active': globalFontStyle === font.id,
           }"
         >
           <span class="header-menu__ag">Ag</span>
@@ -46,45 +40,38 @@
     </div>
 
     <div class="header-menu__size-and-width">
-      <div>
-        <div>Small Text</div>
-        <ToggleBtn
-          :provideName="'toggleSize'"
-          :isActive="isFontSizeActive"
-          @click="toToggleSize"
-        />
-      </div>
-      <div>
-        <div>Full width</div>
-        <ToggleBtn
-          :provideName="'toggleWidth'"
-          :isActive="isPageWidthActive"
-          @click="toToggleWidth"
-        />
-      </div>
+      <ToggleOption @click="toToggleSize" :provideName="'toggleSize'"
+        >Small Text</ToggleOption
+      >
+      <ToggleOption @click="toToggleWidth" :provideName="'toggleWidth'"
+        >Full width</ToggleOption
+      >
     </div>
   </Menu>
 </template>
 
 <script setup>
 import Icon from "UIElements/Icon.vue";
-import { ref, provide, onMounted } from "vue";
+import { ref, provide, watch } from "vue";
 import { useStore } from "vuex";
 import Menu from "components/Menu.vue";
 import useModal from "hooks/useModal";
-import ToggleBtn from "UIElements/ToggleBtn.vue";
-import { globalProperties, activePage, icons } from "global";
+import {
+  activePage,
+  icons,
+  setGlobalProperty,
+  globalFontSize,
+  globalPageWidth,
+  globalFontStyle,
+} from "global";
+import Breadcrumb from "UIElements/Breadcrumb.vue";
+import ToggleOption from "components/ToggleOption.vue";
 
 const store = useStore();
 const headerMenuRef = ref(null);
 const toggleSizeRef = ref(null);
 const toggleWidthRef = ref(null);
 const { showModal } = useModal();
-const isFontSizeActive = ref(false);
-const isPageWidthActive = ref(false);
-const activeFontStyle = ref("");
-const fontSizeSmall = ref(store.getters.getFontSizeOptions[0]);
-const pageFullWidth = ref(store.getters.getPageWidthOptions[0]);
 
 provide("headerMenu", headerMenuRef);
 provide("toggleSize", toggleSizeRef);
@@ -94,71 +81,61 @@ function showHeaderMenu() {
   showModal(headerMenuRef);
 }
 
-function updateUserPref(handle, prefToUpdate, valueToUpdate) {
+function updateUserPref(pageKey, prefToUpdate, valueToUpdate) {
   store.commit("storeUserPreference", {
-    handle: handle,
+    pageKey: pageKey,
     prefToUpdate: prefToUpdate,
     valueToUpdate: valueToUpdate,
   });
 }
 
 function setFontStyle(font) {
-  activeFontStyle.value = font;
   updateUserPref(activePage.value.key, "fontStyle", font);
-  globalProperties.fontStyle = font;
+  setGlobalProperty("fontStyle", font);
+}
+
+function toToggleUserPref(toggleRef, pref, prefValue) {
+  const isActive = toggleRef.value.classList.contains("toggle-btn--active");
+
+  if (isActive) {
+    updateUserPref(activePage.value.key, pref, prefValue);
+    setGlobalProperty(pref, prefValue);
+  } else {
+    updateUserPref(activePage.value.key, pref, "");
+    setGlobalProperty(pref, "");
+  }
 }
 
 function toToggleSize() {
-  const hasUnchecked = toggleSizeRef.value.classList.contains("unchecked");
-
-  if (hasUnchecked) {
-    updateUserPref(activePage.value.key, "fontSize", fontSizeSmall.value);
-    isFontSizeActive.value = true;
-    globalProperties.fontSize = fontSizeSmall.value;
-  } else {
-    updateUserPref(activePage.value.key, "fontSize", "");
-    isFontSizeActive.value = false;
-    globalProperties.fontSize = "";
-  }
+  toToggleUserPref(
+    toggleSizeRef,
+    "fontSize",
+    store.getters.getFontSizeOptions[0]
+  );
 }
 
 function toToggleWidth() {
-  const hasUnchecked = toggleWidthRef.value.classList.contains("unchecked");
-
-  if (hasUnchecked) {
-    updateUserPref(activePage.value.key, "pageWidth", pageFullWidth.value);
-    isFontSizeActive.value = true;
-    globalProperties.pageWidth = pageFullWidth.value;
-  } else {
-    updateUserPref(activePage.value.key, "pageWidth", "");
-    isFontSizeActive.value = false;
-    globalProperties.pageWidth = "";
-  }
+  toToggleUserPref(
+    toggleWidthRef,
+    "pageWidth",
+    store.getters.getPageWidthOptions[0]
+  );
 }
 
-function setConfigs() {
-  if (activePage.value.pageWidth.length > 0) {
-    isPageWidthActive.value = true;
-    globalProperties.pageWidth = pageFullWidth.value;
+watch(activePage, (currentValue) => {
+  const active = "toggle-btn--active";
+
+  if (currentValue.pageSettings.fontSize) {
+    toggleSizeRef.value.classList.add(active);
   } else {
-    globalProperties.pageWidth = "";
+    toggleSizeRef.value.classList.remove(active);
   }
 
-  if (activePage.value.fontSize.length > 0) {
-    isFontSizeActive.value = true;
-    globalProperties.fontSize = fontSizeSmall.value;
+  if (currentValue.pageSettings.pageWidth) {
+    toggleWidthRef.value.classList.add(active);
   } else {
-    globalProperties.fontSize = "";
+    toggleWidthRef.value.classList.remove(active);
   }
-
-  activeFontStyle.value = activePage.value.fontStyle;
-  globalProperties.fontStyle = activePage.value.fontStyle;
-}
-
-onMounted(() => {
-  setTimeout(() => {
-    setConfigs();
-  }, 100);
 });
 </script>
 
@@ -168,21 +145,34 @@ onMounted(() => {
 .header {
   background-color: $white;
 
+  &__tabs {
+    display: flex;
+    background-color: $gray-4;
+
+    > div:nth-child(2) {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+    }
+
+    @media (max-width: $screen-small) {
+      display: none;
+    }
+  }
+
+  &__tab {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    width: max-content;
+    font-size: $fs-small;
+  }
+
   &__content {
     display: flex;
     user-select: none;
     justify-content: space-between;
-  }
-
-  &__page {
-    a {
-      all: unset;
-      > div {
-        @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
-        align-items: center;
-        @extend .hover-default;
-      }
-    }
   }
 
   &__btn {
@@ -253,22 +243,11 @@ onMounted(() => {
   }
 
   &__size-and-width {
-    @include flex-layout($row-gap: 1.2rem);
+    @include flex-layout($row-gap: 0.5rem);
     padding: 1rem 0.2rem 0.5rem;
 
     @media (max-width: $screen-xs) {
       display: none;
-    }
-
-    & > div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: $fs-xs;
-
-      & > div {
-        color: $black-7;
-      }
     }
   }
 }
