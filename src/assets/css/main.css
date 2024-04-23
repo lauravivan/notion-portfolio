@@ -217,12 +217,14 @@ body {
 .dark-theme .nav-hover .nav-list {
   background-color: rgb(0, 0, 0) !important;
 }
-.dark-theme .main-container-click .aside-click {
+.dark-theme .main-container-click .aside-click,
+.dark-theme .header__tabs {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .dark-theme .hover-default:hover,
 .dark-theme .toggle-btn.unchecked,
-.dark-theme .callout {
+.dark-theme .callout,
+.dark-theme .header__tab {
   background-color: rgba(237, 236, 233, 0.3) !important;
 }
 .dark-theme .header-menu__font-wrapper--active .header-menu__ag {
@@ -284,12 +286,14 @@ body {
 .cat-latte .nav-hover .nav-list {
   background-color: #ccd0da !important;
 }
-.cat-latte .main-container-click .aside-click {
+.cat-latte .main-container-click .aside-click,
+.cat-latte .header__tabs {
   background-color: #e6e9ef;
 }
 .cat-latte .hover-default:hover,
 .cat-latte .toggle-btn.unchecked,
-.cat-latte .callout {
+.cat-latte .callout,
+.cat-latte .header__tab {
   background-color: #bcc0cc !important;
 }
 .cat-latte .header-menu__font-wrapper--active .header-menu__ag {
@@ -351,12 +355,14 @@ body {
 .cat-mocha .nav-hover .nav-list {
   background-color: #181825 !important;
 }
-.cat-mocha .main-container-click .aside-click {
+.cat-mocha .main-container-click .aside-click,
+.cat-mocha .header__tabs {
   background-color: #313244;
 }
 .cat-mocha .hover-default:hover,
 .cat-mocha .toggle-btn.unchecked,
-.cat-mocha .callout {
+.cat-mocha .callout,
+.cat-mocha .header__tab {
   background-color: #6c7086 !important;
 }
 .cat-mocha .header-menu__font-wrapper--active .header-menu__ag {

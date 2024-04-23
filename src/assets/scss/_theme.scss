@@ -38,13 +38,15 @@
     background-color: $bgOverlap !important;
   }
 
-  .main-container-click .aside-click {
+  .main-container-click .aside-click,
+  .header__tabs {
     background-color: $bgGap;
   }
 
   .hover-default:hover,
   .toggle-btn.unchecked,
-  .callout {
+  .callout,
+  .header__tab {
     background-color: $bgHover !important;
   }
 
