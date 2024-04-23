@@ -1,13 +1,18 @@
 <template>
-  <div :class="mainContainerClasses">
-    <Aside />
+  <div v-if="routeName === 'NotFound'">
+    <router-view></router-view>
+  </div>
+  <div v-else>
+    <div :class="mainContainerClasses">
+      <Aside />
 
-    <div :class="mainContentClasses">
-      <Header />
+      <div :class="mainContentClasses">
+        <Header />
 
-      <router-view></router-view>
+        <router-view></router-view>
 
-      <footer class="footer">Developed by Laura (^.^)</footer>
+        <footer class="footer">Developed by Laura (^.^)</footer>
+      </div>
     </div>
   </div>
 </template>
@@ -15,12 +20,25 @@
 <script setup>
 import Aside from "components/Aside.vue";
 import Header from "components/Header.vue";
+import router from "@/router/router";
+import { computed } from "vue";
 
 import { mainContainerClasses, mainContentClasses } from "global";
+
+const routeName = computed(() => {
+  return router.currentRoute.value.name;
+});
 </script>
 
 <style lang="scss">
 @import "@/assets/scss/main";
+
+.aside-click,
+.aside-default {
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+}
 
 .main-content-default,
 .main-content-click,
@@ -36,8 +54,11 @@ import { mainContainerClasses, mainContentClasses } from "global";
     top: 0;
     left: 0;
     z-index: 2;
-    width: 100%;
     height: $HEADER_HEIGHT !important;
+
+    @media (max-width: $screen-small) {
+      height: $HEADER_HEIGHT_SM_SCREEN !important;
+    }
   }
 }
 
@@ -45,12 +66,18 @@ import { mainContainerClasses, mainContentClasses } from "global";
   .aside-default {
     display: flex;
     position: fixed;
-    top: 11px;
+    top: 49px;
     left: 13px;
     z-index: 3;
+
+    @media (max-width: $screen-small) {
+      top: 13px;
+    }
   }
 
   .header {
+    width: 100%;
+
     &__content {
       @include spacing($pt: 11px, $pl: 40px, $pr: 10px, $pb: 8px);
     }
@@ -71,14 +98,11 @@ import { mainContainerClasses, mainContentClasses } from "global";
   }
 
   .header {
+    margin-left: $ASIDE_CLICK_SIZE;
+    width: calc(100% - $ASIDE_CLICK_SIZE);
+
     &__content {
-      @include spacing(
-        $pt: 11px,
-        $pl: 10px,
-        $pr: 10px,
-        $pb: 8px,
-        $ml: $ASIDE_CLICK_SIZE
-      );
+      @include spacing($pt: 11px, $pl: 10px, $pr: 10px, $pb: 8px);
     }
   }
 }
