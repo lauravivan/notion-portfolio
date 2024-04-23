@@ -1,82 +1,74 @@
 import { createStore } from "vuex";
+import createPage from "util/createPage";
+import { setPagesInfo, pagesInfo } from "util/util";
+import createGhPages from "util/createGhPage";
 
-const pagesInfo = JSON.parse(localStorage.getItem("pagesInfo")) || {};
+const ghPages =
+  pagesInfo && pagesInfo.github && pagesInfo.github.pages
+    ? pagesInfo.github.pages
+    : {};
 
-const getFavs = () => {
-  return pagesInfo ? pagesInfo.favorites : "";
-};
+pagesInfo["about"] = createPage({
+  key: "about",
+  name: "About (me)",
+  icon: "about.png",
+  banner: "about.jpg",
+});
 
-const getProjs = () => {
-  return pagesInfo ? pagesInfo.projects : "";
-};
+pagesInfo["contact"] = createPage({
+  key: "contact",
+  name: "Contact (me)",
+  icon: "contact.png",
+  banner: "contact.jpg",
+  path: "contact",
+});
 
-const pagesInfoObj = {
-  favorites: {
-    about: {
-      key: "about",
-      pagePath: "/",
-      pageName: "About (me)",
-      pageIcon: "/about.png",
-      pageBanner: "/banner/about.jpg",
-      pageId: "about-page",
-      fontStyle: getFavs() ? getFavs().about.fontStyle : "",
-      fontSize: getFavs() ? getFavs().about.fontSize : "",
-      pageWidth: getFavs() ? getFavs().about.pageWidth : "",
-    },
-    contact: {
-      key: "contact",
-      pagePath: "/contact",
-      pageName: "Contact",
-      pageIcon: "/contact.png",
-      pageBanner: "/banner/contact.jpg",
-      pageContentID: "contact-page",
-      pageId: "contact-page",
-      fontStyle: getFavs() ? getFavs().contact.fontStyle : "",
-      fontSize: getFavs() ? getFavs().contact.fontSize : "",
-      pageWidth: getFavs() ? getFavs().contact.pageWidth : "",
-    },
-    github: {
-      key: "github",
-      pagePath: "/github",
-      pageName: "Github",
-      pageIcon: "/github.png",
-      pageBanner: "/banner/github.jpg",
-      pageContentID: "github-page",
-      pageId: "github-page",
-      fontStyle: getFavs() ? getFavs().github.fontStyle : "",
-      fontSize: getFavs() ? getFavs().github.fontSize : "",
-      pageWidth: getFavs() ? getFavs().github.pageWidth : "",
-    },
-    reference: {
-      key: "reference",
-      pagePath: "/reference",
-      pageName: "Reference",
-      pageIcon: "/reference.png",
-      pageBanner: "/banner/reference.jpg",
-      pageContentID: "reference-page",
-      pageId: "reference-page",
-      fontStyle: getFavs() ? getFavs().reference.fontStyle : "",
-      fontSize: getFavs() ? getFavs().reference.fontSize : "",
-      pageWidth: getFavs() ? getFavs().reference.pageWidth : "",
-    },
-  },
-  projects: {
-    trendTide: {
-      key: "trendTide",
-      pagePath: "/trend-tide",
-      pageName: "TrendTide",
-      pageIcon: "/trend-tide.png",
-      pageId: "trend-tide-page",
-      projectUrl: "https://trend-tide.onrender.com",
-      githubUrl: "https://api.github.com/repos/lauravivan/trend-tide/",
-      fontStyle: getProjs() ? getProjs().trendTide.fontStyle : "",
-      fontSize: getProjs() ? getProjs().trendTide.fontSize : "",
-      pageWidth: getProjs() ? getProjs().trendTide.pageWidth : "",
-    },
-  },
-};
+pagesInfo["github"] = createPage({
+  key: "github",
+  name: "Github",
+  icon: "github.png",
+  banner: "github.jpg",
+  path: "github",
+});
 
-localStorage.setItem("pagesInfo", JSON.stringify(pagesInfoObj));
+pagesInfo["reference"] = createPage({
+  key: "reference",
+  name: "Reference",
+  icon: "reference.png",
+  banner: "reference.jpg",
+  path: "reference",
+});
+
+pagesInfo["projects"] = createPage({
+  key: "projects",
+  name: "Projects",
+  icon: "projects.png",
+  path: "projects",
+});
+
+pagesInfo["github"].pages = ghPages;
+
+setPagesInfo(pagesInfo);
+
+try {
+  await createGhPages();
+} catch (err) {
+  console.error(err);
+}
+
+if (pagesInfo["github"].pages[756993173]) {
+  pagesInfo["projects"].pages["trendTide"] = {
+    ...pagesInfo["github"].pages[756993173],
+  };
+  const trendTide = pagesInfo["projects"].pages["trendTide"];
+  trendTide.key = "trendTide";
+  trendTide.pageBanner = "/banner/trendTide.png";
+  trendTide.pageIcon = "/trendTide.png";
+  trendTide.pagePath = "/projects/trendTide";
+  trendTide.pageId = "trendTide-page";
+}
+
+setPagesInfo(pagesInfo);
 
 const store = createStore({
   state: {
@@ -191,15 +183,34 @@ const store = createStore({
         matIcons: false,
         name: "link-outline",
       },
+      add: {
+        matIcons: false,
+        name: "add-outline",
+      },
+      expand: {
+        matIcons: false,
+        name: "expand-outline",
+      },
     },
   },
   mutations: {
-    storeUserPreference(state, { handle, prefToUpdate, valueToUpdate }) {
-      if (state.pagesInfo.projects[handle]) {
-        state.pagesInfo.projects[handle][prefToUpdate] = valueToUpdate;
-      } else {
-        state.pagesInfo.favorites[handle][prefToUpdate] = valueToUpdate;
+    storeUserPreference(state, { pageKey, prefToUpdate, valueToUpdate }) {
+      function updateUserPreference(pages) {
+        function search(pages) {
+          for (let page in pages) {
+            if (pages[page].key === pageKey) {
+              pages[page].pageSettings[prefToUpdate] = valueToUpdate;
+              return;
+            } else {
+              search(pages[page].pages);
+            }
+          }
+        }
+
+        return search(pages);
       }
+
+      updateUserPreference(state.pagesInfo);
 
       localStorage.setItem("pagesInfo", JSON.stringify(state.pagesInfo));
     },
