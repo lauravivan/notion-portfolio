@@ -18,7 +18,7 @@ import Empty from "UIElements/Empty.vue";
 const reachMeItems = ["E-mail: lauvivang@gmail.com"];
 
 const mediaItems = [
-  "LinkedIn: linkedin.com/in/laura-vivan-gonçalves-718409213",
+  "LinkedIn: linkedin.com/in/vivan-laura",
   "Instagram: @lauvivan_",
   "Github: @lauravivan",
   "Devto: @vivanlaura",
