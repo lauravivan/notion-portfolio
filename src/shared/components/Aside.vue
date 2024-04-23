@@ -29,14 +29,8 @@
               </div>
             </li>
             <li class="nav-list__nav-item">
-              <NavLinks
-                :categoryName="'Favorites'"
-                :categoryItems="pagesInfo.favorites"
-              />
-              <NavLinks
-                :categoryName="'Projects'"
-                :categoryItems="pagesInfo.projects"
-              />
+              <div class="nav-list__nav-item--category">Favorites</div>
+              <NestedLink :pages="pagesInfo" />
             </li>
           </ul>
         </div>
@@ -93,8 +87,8 @@ import { mainContainerDefault, mainContentDefault, icons } from "global";
 import { isTouchDevice } from "util/util";
 import Divider from "UIElements/Divider.vue";
 import Icon from "UIElements/Icon.vue";
-import NavLinks from "components/NavLinks.vue";
 import SelectBtn from "components/SelectBtn.vue";
+import NestedLink from "components/NestedLink.vue";
 
 const store = useStore();
 
@@ -265,6 +259,8 @@ onMounted(() => {
       padding-right: 1rem;
       background-color: $white;
       border-radius: 3px;
+      height: min-content;
+      max-height: 85%;
 
       &__nav-item {
         width: 100%;
@@ -290,7 +286,6 @@ onMounted(() => {
     }
 
     .nav-list {
-      box-sizing: border-box;
       position: absolute;
       inset: 0;
       z-index: 1;
@@ -326,8 +321,16 @@ onMounted(() => {
       }
 
       &__nav-item:nth-child(3) {
-        @include flex-layout($row-gap: 1.7rem);
         margin: 10px 0.7rem;
+        height: 60%;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      &__nav-item--category {
+        margin-bottom: 0.6rem;
+        font-weight: $fw-600;
+        font-size: $fs-xs + 0.1rem;
       }
     }
   }

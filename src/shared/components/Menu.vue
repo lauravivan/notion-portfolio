@@ -27,13 +27,15 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   @include sizing(100%, 100%);
-  z-index: 999;
+  z-index: 2000;
 }
 
 .menu {
   position: absolute;
-  z-index: 999;
+  z-index: 2500;
   min-width: 200px;
   background-color: $white;
   padding: 6px;

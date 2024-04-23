@@ -9,6 +9,6 @@ const app = createApp(App);
 
 app.config.globalProperties.globalProperties = globalProperties;
 
-app.use(router).use(store);
+app.use(store).use(router);
 
 app.mount("#app");

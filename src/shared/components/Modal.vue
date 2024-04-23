@@ -37,22 +37,20 @@ dialog {
 }
 
 .modal {
-  z-index: 2000;
+  z-index: 1000;
   box-shadow: $box-shadow-1;
   background-color: $white;
   border-radius: 5px;
   animation: fadeIn 1s;
   transition: width 0.3s;
   user-select: none;
-  height: max-content;
   outline: none;
   width: max-content;
   position: absolute;
   top: 50%;
-  right: 0;
   left: 50%;
-  bottom: 0;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, -50%);
   padding: 2rem 1.9rem;
+  overflow-y: auto;
 }
 </style>

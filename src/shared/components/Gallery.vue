@@ -18,44 +18,63 @@
     </div>
 
     <div class="gallery__cards-wrapper">
-      <div class="gallery__card-wrapper" v-for="dt in props.data" :key="dt.id">
+      <div
+        class="gallery__card-wrapper"
+        v-for="page in props.pages"
+        :key="page.pageId"
+        @click="showPageModal(page)"
+      >
         <div class="gallery__card-content">
-          <div v-for="cc in dt.cardContent">
-            {{ cc }}
+          <component
+            class="gallery__card-content--content"
+            v-if="!props.cardPreviewIsCover"
+            :is="props.component"
+            :page="page"
+          />
+          <div v-else class="gallery__card-content--banner">
+            <img :src="page.pageBanner" />
           </div>
         </div>
         <div class="gallery__card-footer">
-          <div v-for="cf in dt.cardFooter">
-            <div v-if="cf.text" style="display: flex; column-gap: 2px">
-              <Icon
-                class="gallery__card-footer-icon"
-                v-if="cf.icon"
-                :icon="cf.icon"
-              />
-              <span>{{ cf.text }}</span>
-            </div>
-
-            <div>
-              <a v-if="cf.link" :href="cf.link" target="_blank">
-                <Icon
-                  class="gallery__card-footer-icon"
-                  v-if="cf.icon"
-                  :icon="cf.icon"
-                />
-              </a>
-            </div>
-          </div>
+          <img class="gallery__page-icon" :src="page.pageIcon" />
+          <div>{{ page.pageName }}</div>
         </div>
       </div>
     </div>
   </div>
+  <MainModalView
+    :provideName="'pageModal'"
+    :pageClicked="pageClicked"
+    :component="props.component"
+  />
 </template>
 
 <script setup>
 import Icon from "UIElements/Icon.vue";
 import { icons } from "global";
+import useModal from "hooks/useModal";
+import { provide, ref } from "vue";
+import MainModalView from "components/MainModalView.vue";
 
-const props = defineProps(["galleryTitle", "data"]);
+const props = defineProps([
+  "galleryTitle",
+  "pages",
+  "cardPreviewIsCover",
+  "component",
+]);
+const { showModal } = useModal();
+const modalRef = ref(null);
+const pageClicked = ref(null);
+
+provide("pageModal", modalRef);
+
+function showPageModal(page) {
+  pageClicked.value = page;
+
+  setTimeout(() => {
+    showModal(modalRef);
+  }, 250);
+}
 </script>
 
 <style lang="scss">
@@ -121,7 +140,6 @@ const props = defineProps(["galleryTitle", "data"]);
 
   &__card-wrapper {
     border: 1px solid $black-1;
-    border-bottom: none;
     border-radius: 5px;
     box-shadow: $box-shadow-2;
     cursor: pointer;
@@ -136,20 +154,33 @@ const props = defineProps(["galleryTitle", "data"]);
   &__card-content {
     @include flex-layout($row-gap: 15px);
     background-color: $gray-2;
-    padding: 15px 13px 0px;
     height: 160px;
+    overflow: hidden;
+
+    &--content {
+      padding: 15px 13px 0px;
+    }
+
+    &--banner {
+      height: 100%;
+
+      > img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 
   &__card-footer {
     padding: 10px;
-    @include flex-layout($flex-direction: row);
-    justify-content: space-between;
+    @include flex-layout($flex-direction: row, $column-gap: 8px);
     align-items: center;
     font-weight: $fw-900;
   }
 
-  &__card-footer-icon.icon {
-    color: $black !important;
+  &__page-icon {
+    width: 20px;
   }
 }
 </style>

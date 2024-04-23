@@ -55,6 +55,7 @@ const toSelect = (index) => {
   &__item {
     @include flex-layout($flex-direction: row);
     justify-content: space-between;
+    align-items: center;
     @extend .hover-default;
   }
 }

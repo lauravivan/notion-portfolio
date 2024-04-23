@@ -1,13 +1,14 @@
 <template>
-  <div style="position: relative">
+  <div>
     <div class="select-btn" @click="showMenuModal">
       <button>{{ props.options[optionSelected] }}</button>
       <Icon :icon="icons.arrowDown" />
     </div>
+
     <Menu
       :provideName="props.menuProvideName"
-      :menuStyles="{ top: '-20px', right: '30px' }"
       class="select-btn-menu"
+      :menuStyles="{ top: '10px', right: '110px' }"
     >
       <div class="theme-options">
         <OptionList

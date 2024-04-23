@@ -6,7 +6,7 @@
           <Icon :icon="icon" @click.prevent.stop="toToggle" />
         </th>
         <th class="details__summary--content">
-          <slot name="summaryContent" />
+          <slot name="summaryContent" ref="summaryContentRef" />
         </th>
       </tr>
 
@@ -33,6 +33,7 @@ const detailsContentRef = ref(null);
 const props = defineProps(["iconToOpen", "iconToClose"]);
 const { toggleDisplay, setDisplayToNone } = useDisplay();
 const icon = ref(props.iconToOpen);
+const summaryContentRef = ref(null);
 
 const toToggle = () => {
   toggleDisplay(detailsContentRef);
@@ -84,7 +85,7 @@ th {
   }
 
   &__content {
-    @include spacing($mt: $DEFAULT_SPACING, $mb: $DEFAULT_SPACING);
+    margin: 5px 0;
   }
 
   &__item {
