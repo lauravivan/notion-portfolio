@@ -260,7 +260,7 @@ onMounted(() => {
       background-color: $white;
       border-radius: 3px;
       height: min-content;
-      max-height: 85%;
+      max-height: 75%;
 
       &__nav-item {
         width: 100%;
