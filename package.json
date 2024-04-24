@@ -10,6 +10,8 @@
     "watch-sass": "sass src/assets/scss/main.scss:src/assets/css/main.css --watch"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
     "@vitejs/plugin-vue": "^4.5.0",
     "axios": "^1.6.2",
     "mitt": "^3.0.1",
