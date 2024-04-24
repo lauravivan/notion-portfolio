@@ -3,6 +3,10 @@ import createPage from "util/createPage";
 import { setPagesInfo, pagesInfo } from "util/util";
 import createGhPages from "util/createGhPage";
 
+if (pagesInfo["favorites"]) {
+  delete pagesInfo["favorites"];
+}
+
 const ghPages =
   pagesInfo && pagesInfo.github && pagesInfo.github.pages
     ? pagesInfo.github.pages
