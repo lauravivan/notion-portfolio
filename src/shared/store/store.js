@@ -191,6 +191,14 @@ const store = createStore({
         matIcons: false,
         name: "expand-outline",
       },
+      clock: {
+        matIcons: false,
+        name: "time-outline",
+      },
+      list: {
+        matIcons: false,
+        name: "list-outline",
+      },
     },
   },
   mutations: {

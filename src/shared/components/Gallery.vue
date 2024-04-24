@@ -24,12 +24,16 @@
         :key="page.pageId"
         @click="showPageModal(page)"
       >
-        <div class="gallery__card-content">
+        <div
+          class="gallery__card-content"
+          :style="!props.cardPreviewIsCover ? { padding: '15px 13px 0px' } : ''"
+        >
           <component
             class="gallery__card-content--content"
             v-if="!props.cardPreviewIsCover"
             :is="props.component"
             :page="page"
+            :hideDatabase="true"
           />
           <div v-else class="gallery__card-content--banner">
             <img :src="page.pageBanner" />
@@ -156,10 +160,6 @@ function showPageModal(page) {
     background-color: $gray-2;
     height: 160px;
     overflow: hidden;
-
-    &--content {
-      padding: 15px 13px 0px;
-    }
 
     &--banner {
       height: 100%;

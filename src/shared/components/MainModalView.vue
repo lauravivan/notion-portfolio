@@ -12,12 +12,21 @@
         class="page-wrapper"
         :class="[globalFontSize, globalFontStyle, globalPageWidth]"
       >
-        <div v-if="props.pageClicked.pageBanner" class="page-banner">
+        <div
+          v-if="props.pageClicked.pageBanner"
+          class="page-banner"
+          :style="{
+            height: 'max-content',
+            margin: '0px !important',
+            'margin-top': '20px !important',
+          }"
+        >
           <img :src="props.pageClicked.pageBanner" />
         </div>
         <div
           class="page-content"
           :class="props.pageClicked.pageBanner ? 'page-content--banner' : ''"
+          :style="props.pageClicked.pageBanner ? { top: '40px' } : ''"
         >
           <div class="page-title">
             <img :src="props.pageClicked.pageIcon" />
@@ -50,6 +59,17 @@ const props = defineProps(["component", "provideName", "pageClicked"]);
 
   .page-wrapper {
     height: 80vh;
+
+    .page-banner {
+      margin: 5px;
+    }
+
+    .page-content {
+      top: 100px;
+      width: 100%;
+      left: 60%;
+      transform: translate(-50%, 0%);
+    }
   }
 
   &__expand {

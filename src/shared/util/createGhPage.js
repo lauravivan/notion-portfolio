@@ -4,11 +4,16 @@ import { pagesInfo, requestDateTime, setRequestDateTime } from "util/util";
 
 async function createGhPage(dt) {
   try {
-    const langRes = await axios.get(dt.languages_url);
     const languages = [];
 
-    for (let lang in langRes) {
-      languages.push(lang);
+    if (dt.languages_url) {
+      const langRes = await axios.get(dt.languages_url);
+
+      if (langRes) {
+        for (let lang in langRes.data) {
+          languages.push(lang);
+        }
+      }
     }
 
     pagesInfo.github.pages[dt.id] = createPage({
@@ -131,11 +136,16 @@ export default async function createGhPages() {
           for (let repo in reposLocal) {
             for (let dt in res.data) {
               if (reposLocal[repo].pageData.id == res.data[dt].id) {
-                const langRes = await axios.get(res.data[dt].languages_url);
                 const languages = [];
 
-                for (let lang in langRes) {
-                  languages.push(lang);
+                if (res.data[dt].languages_url) {
+                  const langRes = await axios.get(res.data[dt].languages_url);
+
+                  if (langRes) {
+                    for (let lang in langRes.data) {
+                      languages.push(lang);
+                    }
+                  }
                 }
 
                 reposLocal[repo].pageName = res.data[dt].name;
