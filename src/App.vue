@@ -8,18 +8,19 @@
 
       <div :class="mainContentClasses">
         <div class="tabs">
-          <div
+          <router-link
             v-for="(page, index) in globalTabs"
             class="tabs__tab"
             @click.stop="setPage(index)"
             :key="index"
             :class="globalActiveTab == index ? 'tabs__tab--active' : ''"
+            :to="page.pagePath"
           >
             {{ page.pageName }}
             <button class="tabs__tab--close" @click.stop="removeTab(index)">
               <Icon :icon="icons.close" />
             </button>
-          </div>
+          </router-link>
           <button
             class="tabs__add"
             @click.stop="addTab()"
@@ -141,6 +142,10 @@ onMounted(() => {
     &::-webkit-scrollbar-thumb {
       visibility: hidden;
     }
+  }
+
+  &__tab {
+    all: unset;
   }
 
   &__tab,
