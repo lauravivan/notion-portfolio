@@ -1,9 +1,5 @@
 <template>
   <header class="header">
-    <div class="header__tabs">
-      <div class="header__tab">Aba</div>
-      <div><Icon :icon="icons.add" /></div>
-    </div>
     <div class="header__content">
       <Breadcrumb />
       <div
@@ -56,14 +52,7 @@ import { ref, provide, watch } from "vue";
 import { useStore } from "vuex";
 import Menu from "components/Menu.vue";
 import useModal from "hooks/useModal";
-import {
-  activePage,
-  icons,
-  setGlobalProperty,
-  globalFontSize,
-  globalPageWidth,
-  globalFontStyle,
-} from "global";
+import { activePage, icons, setGlobalProperty, globalFontStyle } from "global";
 import Breadcrumb from "UIElements/Breadcrumb.vue";
 import ToggleOption from "components/ToggleOption.vue";
 
@@ -144,30 +133,7 @@ watch(activePage, (currentValue) => {
 
 .header {
   background-color: $white;
-
-  &__tabs {
-    display: flex;
-    background-color: $gray-4;
-
-    > div:nth-child(2) {
-      display: flex;
-      align-items: center;
-      margin-left: 10px;
-    }
-
-    @media (max-width: $screen-small) {
-      display: none;
-    }
-  }
-
-  &__tab {
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    background-color: $white;
-    width: max-content;
-    font-size: $fs-small;
-  }
+  height: $HEADER_HEIGHT;
 
   &__content {
     display: flex;

@@ -12,6 +12,21 @@ const ghPages =
     ? pagesInfo.github.pages
     : {};
 
+function createProjectSubPage(repoId, subPageKey) {
+  if (pagesInfo["github"].pages[repoId]) {
+    pagesInfo["projects"].pages[subPageKey] = {
+      ...pagesInfo["github"].pages[repoId],
+    };
+
+    const subPage = pagesInfo["projects"].pages[subPageKey];
+    subPage.key = subPageKey;
+    subPage.pageBanner = `/banner/${subPageKey}.png`;
+    subPage.pageIcon = `/${subPageKey}.png`;
+    subPage.pagePath = `/projects/${subPageKey}`;
+    subPage.pageId = `${subPageKey}-page`;
+  }
+}
+
 pagesInfo["about"] = createPage({
   key: "about",
   name: "About (me)",
@@ -60,18 +75,7 @@ try {
   console.error(err);
 }
 
-if (pagesInfo["github"].pages[756993173]) {
-  pagesInfo["projects"].pages["trendTide"] = {
-    ...pagesInfo["github"].pages[756993173],
-  };
-  const trendTide = pagesInfo["projects"].pages["trendTide"];
-  trendTide.key = "trendTide";
-  trendTide.pageBanner = "/banner/trendTide.png";
-  trendTide.pageIcon = "/trendTide.png";
-  trendTide.pagePath = "/projects/trendTide";
-  trendTide.pageId = "trendTide-page";
-}
-
+createProjectSubPage(756993173, "trendTide");
 setPagesInfo(pagesInfo);
 
 const store = createStore({
@@ -202,6 +206,10 @@ const store = createStore({
       list: {
         matIcons: false,
         name: "list-outline",
+      },
+      close: {
+        matIcons: false,
+        name: "close",
       },
     },
   },

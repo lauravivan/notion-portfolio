@@ -11,11 +11,7 @@
       "
     >
       <template #summaryContent>
-        <router-link
-          class="nav-link__link"
-          :to="props.page.pagePath"
-          @click.stop="togglePage(props.page)"
-        >
+        <router-link class="nav-link__link" :to="props.page.pagePath">
           <div>
             <div style="max-width: 1.1rem">
               <img
@@ -44,10 +40,8 @@ import { computed } from "vue";
 import ToggleList from "components/ToggleList.vue";
 import { icons, activePage } from "global";
 import NestedLink from "components/NestedLink.vue";
-import { useStore } from "vuex";
 
 const props = defineProps(["page"]);
-const store = useStore();
 
 const activePageId = computed(() => {
   if (activePage.value) {
@@ -56,10 +50,6 @@ const activePageId = computed(() => {
     return "";
   }
 });
-
-function togglePage(page) {
-  store.commit("storeActivePage", page);
-}
 </script>
 
 <style lang="scss">

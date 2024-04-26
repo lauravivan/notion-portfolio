@@ -7,6 +7,29 @@
       <Aside />
 
       <div :class="mainContentClasses">
+        <div class="tabs">
+          <router-link
+            v-for="(page, index) in globalTabs"
+            class="tabs__tab"
+            @click.stop="setPage(index)"
+            :key="index"
+            :to="page.pagePath"
+            :class="globalActiveTab == index ? 'tabs__tab--active' : ''"
+          >
+            {{ page.pageName }}
+            <button class="tabs__tab--close" @click.stop="removeTab(index)">
+              <Icon :icon="icons.close" />
+            </button>
+          </router-link>
+          <button
+            class="tabs__add"
+            @click.stop="addTab()"
+            v-if="globalTabs.length < 10"
+          >
+            <Icon :icon="icons.add" />
+          </button>
+        </div>
+
         <Header />
 
         <router-view></router-view>
@@ -21,13 +44,46 @@
 import Aside from "components/Aside.vue";
 import Header from "components/Header.vue";
 import router from "@/router/router";
+import Icon from "UIElements/Icon.vue";
 import { computed } from "vue";
-
+import { icons, globalTabs, setGlobalProperty, globalActiveTab } from "global";
+import { setTabs, pagesInfo, setActiveTab, tabs } from "util/util";
 import { mainContainerClasses, mainContentClasses } from "global";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const routeName = computed(() => {
   return router.currentRoute.value.name;
 });
+
+function updateIndex(tabsUpdated, indexUpdated) {
+  setTabs(tabsUpdated);
+  setActiveTab(indexUpdated);
+  setGlobalProperty("tabs", tabsUpdated);
+  setGlobalProperty("activeTab", indexUpdated);
+}
+
+function setPage(index) {
+  setActiveTab(index);
+  setGlobalProperty("activeTab", index);
+  store.commit("storeActivePage", tabs[index]);
+}
+
+function addTab() {
+  tabs.push(pagesInfo.about);
+  const index = tabs.length - 1;
+  updateIndex(tabs, index);
+  store.commit("storeActivePage", pagesInfo.about);
+}
+
+function removeTab(index) {
+  if (index != 0) {
+    const indexBefore = index - 1;
+    tabs.splice(index, 1);
+    updateIndex(tabs, indexBefore);
+  }
+}
 </script>
 
 <style lang="scss">
@@ -47,18 +103,98 @@ const routeName = computed(() => {
   height: 100%;
 }
 
-.main-container-default,
-.main-container-click {
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    height: $HEADER_HEIGHT !important;
+.header,
+.tabs {
+  position: fixed;
+  left: 0;
+}
+
+.tabs {
+  display: flex;
+  background-color: $gray-4;
+  top: 0;
+  height: $TABS_HEIGHT;
+
+  @media (max-width: $screen-small) {
+    top: auto;
+    bottom: 0;
+    background-color: $gray;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      visibility: hidden;
+    }
+  }
+
+  &__tab {
+    all: unset;
+  }
+
+  &__tab,
+  &__add,
+  &__tab--close {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  &__tab {
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: calc($fs-small - 1px);
+    border-right: 1px solid $black-1;
+    color: $black-6;
 
     @media (max-width: $screen-small) {
-      height: $HEADER_HEIGHT_SM_SCREEN !important;
+      min-width: 150px;
     }
+
+    &:hover {
+      background-color: $gray-6;
+    }
+
+    &--active {
+      background-color: $white;
+
+      &:hover {
+        background-color: $white;
+      }
+    }
+
+    &--close {
+      visibility: hidden;
+    }
+  }
+
+  &__tab:hover {
+    .tabs__tab--close {
+      visibility: visible;
+    }
+  }
+
+  &__add {
+    @include spacing($mt: auto, $mb: auto, $ml: 7px);
+  }
+
+  &__add,
+  &__tab--close {
+    @extend .button;
+  }
+}
+
+.header {
+  top: $TABS_HEIGHT;
+
+  @media (max-width: $screen-small) {
+    top: 0;
   }
 }
 
@@ -66,7 +202,7 @@ const routeName = computed(() => {
   .aside-default {
     display: flex;
     position: fixed;
-    top: 49px;
+    top: calc($TABS_HEIGHT + 13px);
     left: 13px;
     z-index: 3;
 
@@ -75,9 +211,12 @@ const routeName = computed(() => {
     }
   }
 
-  .header {
+  .header,
+  .tabs {
     width: 100%;
+  }
 
+  .header {
     &__content {
       @include spacing($pt: 11px, $pl: 40px, $pr: 10px, $pb: 8px);
     }
@@ -97,10 +236,13 @@ const routeName = computed(() => {
     z-index: 3;
   }
 
-  .header {
+  .header,
+  .tabs {
     margin-left: $ASIDE_CLICK_SIZE;
     width: calc(100% - $ASIDE_CLICK_SIZE);
+  }
 
+  .header {
     &__content {
       @include spacing($pt: 11px, $pl: 10px, $pr: 10px, $pb: 8px);
     }
@@ -110,13 +252,17 @@ const routeName = computed(() => {
 .footer {
   font-size: $fs-xs;
   position: absolute;
-  right: 30px;
-  bottom: 20px;
-  z-index: 999;
+  right: 20px;
+  bottom: 15px;
+  z-index: 1;
   background-color: $white;
   border: 1px solid $gray-5;
   box-shadow: $box-shadow-1;
   border-radius: 40px;
   padding: 15px 14px;
+
+  @media (max-width: $screen-small) {
+    bottom: calc($TABS_HEIGHT + 0.9rem);
+  }
 }
 </style>

@@ -53,12 +53,16 @@ const props = defineProps(["component", "provideName", "pageClicked"]);
 @import "@/assets/scss/main";
 
 .page-modal {
+  .modal,
+  .page-wrapper {
+    height: 80vh !important;
+  }
   .modal {
     overflow-y: hidden;
   }
 
   .page-wrapper {
-    height: 80vh;
+    margin-top: 0 !important;
 
     .page-banner {
       margin: 5px;

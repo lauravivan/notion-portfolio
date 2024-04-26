@@ -10,13 +10,13 @@
         <slot name="dateTimeDesc"></slot>
       </td>
       <td class="database__property--val">
-        <slot name="dateTimeValue"></slot>
+        <slot name="dateTimeValue"> </slot>
       </td>
     </tr>
     <tr>
       <td class="database__property">
         <Icon :icon="icons.list" />
-        <slot name="multiSelectDesc"></slot>
+        <slot name="multiSelectDesc"> </slot>
       </td>
 
       <td class="database__property--val" style="vertical-align: top">

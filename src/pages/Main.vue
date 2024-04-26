@@ -15,7 +15,7 @@
         <span>{{ activePage.pageName }}</span>
       </div>
       <router-view />
-      <div style="width: auto; height: 100px"></div>
+      <div style="width: auto; height: 200px"></div>
     </div>
   </main>
 </template>
@@ -36,16 +36,17 @@ import {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
-  @include sizing(100%, 100vh);
+  width: 100%;
+  margin-top: calc($HEADER_HEIGHT + $TABS_HEIGHT) !important;
+  height: calc(100vh - ($HEADER_HEIGHT + $TABS_HEIGHT)) !important;
+
+  @media (max-width: $screen-small) {
+    margin-top: $HEADER_HEIGHT !important;
+  }
 
   .page-banner {
     width: 100%;
     height: 210px;
-    margin: $HEADER_HEIGHT 0px !important;
-
-    @media (max-width: $screen-small) {
-      margin: $HEADER_HEIGHT_SM_SCREEN 0px !important;
-    }
 
     img {
       width: 100%;
@@ -77,12 +78,7 @@ import {
     }
 
     &--banner {
-      margin: $HEADER_HEIGHT 0px !important;
       top: 160px;
-
-      @media (max-width: $screen-small) {
-        margin: $HEADER_HEIGHT_SM_SCREEN 0px !important;
-      }
     }
   }
 }

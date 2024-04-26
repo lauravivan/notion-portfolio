@@ -5,6 +5,8 @@ export const globalProperties = reactive({
   fontStyle: "",
   fontSize: "",
   pageWidth: "",
+  tabs: [],
+  activeTab: 0,
 });
 
 export function setGlobalProperties(page) {
@@ -29,8 +31,13 @@ export const globalPageWidth = computed(() => {
   return globalProperties.pageWidth;
 });
 
-export const mainContainerDefault = ref(true);
-export const mainContentDefault = ref(true);
+export const globalTabs = computed(() => {
+  return globalProperties.tabs;
+});
+
+export const globalActiveTab = computed(() => {
+  return globalProperties.activeTab;
+});
 
 export const activePage = computed(() => {
   return store.getters.getActivePage;
@@ -39,6 +46,9 @@ export const activePage = computed(() => {
 export const icons = computed(() => {
   return store.getters.getIcons;
 });
+
+export const mainContainerDefault = ref(true);
+export const mainContentDefault = ref(true);
 
 export const mainContainerClasses = computed(() => {
   return {

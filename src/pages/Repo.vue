@@ -1,13 +1,11 @@
 <template>
-  <div v-if="page">
-    <Database
-      v-if="!props.hideDatabase"
-      :multiSelectItems="page.pageData.languages"
-    >
-      <template #dateTimeDesc>Created</template>
-      <template #multiSelectDesc>Used languages</template>
-    </Database>
-  </div>
+  <Database
+    v-if="!props.hideDatabase && page"
+    :multiSelectItems="page.pageData.languages"
+  >
+    <template #dateTimeDesc>Created</template>
+    <template #multiSelectDesc>Used languages</template>
+  </Database>
   <div class="repo" v-if="page">
     <div class="repo__metrics">
       <div class="repo__metric">
