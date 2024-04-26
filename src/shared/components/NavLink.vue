@@ -12,7 +12,7 @@
     >
       <template #summaryContent>
         <router-link class="nav-link__link" :to="props.page.pagePath">
-          <div>
+          <div @click.stop="updateTabPage()">
             <div style="max-width: 1.1rem">
               <img
                 :src="props.page.pageIcon"
@@ -38,8 +38,9 @@
 <script setup>
 import { computed } from "vue";
 import ToggleList from "components/ToggleList.vue";
-import { icons, activePage } from "global";
+import { icons, activePage, setGlobalProperty, globalActiveTab } from "global";
 import NestedLink from "components/NestedLink.vue";
+import { tabs, setTabs } from "util/util";
 
 const props = defineProps(["page"]);
 
@@ -50,6 +51,12 @@ const activePageId = computed(() => {
     return "";
   }
 });
+
+function updateTabPage() {
+  tabs[globalActiveTab.value] = props.page;
+  setGlobalProperty("tabs", tabs);
+  setTabs(tabs);
+}
 </script>
 
 <style lang="scss">

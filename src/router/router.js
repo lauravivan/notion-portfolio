@@ -9,21 +9,12 @@ import Repo from "@/pages/Repo.vue";
 import Main from "@/pages/Main.vue";
 import NotFound from "@/pages/NotFound.vue";
 import store from "store";
-import { pagesInfo, tabs, activeTab, setTabs, setActiveTab } from "util/util";
-import { setGlobalProperties, setGlobalProperty } from "global";
+import { pagesInfo } from "util/util";
+import { setGlobalProperties } from "global";
 
 function storeInfo(page) {
-  let index = activeTab ? activeTab : 0;
-
-  tabs[index] = page;
-
   store.commit("storeActivePage", page);
   setGlobalProperties(page);
-
-  setGlobalProperty("tabs", tabs);
-  setGlobalProperty("activeTab", index);
-  setTabs(tabs);
-  setActiveTab(index);
 }
 
 const router = createRouter({

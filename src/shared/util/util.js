@@ -28,7 +28,7 @@ export function setTabs(tabs) {
   localStorage.setItem("tabs", JSON.stringify(tabs));
 }
 
-export const activeTab = localStorage.getItem("activeTab");
+export const activeTab = localStorage.getItem("activeTab") || 0;
 
 export function setActiveTab(index) {
   localStorage.setItem("activeTab", index);

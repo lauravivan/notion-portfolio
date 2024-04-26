@@ -8,19 +8,18 @@
 
       <div :class="mainContentClasses">
         <div class="tabs">
-          <router-link
+          <div
             v-for="(page, index) in globalTabs"
             class="tabs__tab"
             @click.stop="setPage(index)"
             :key="index"
-            :to="page.pagePath"
             :class="globalActiveTab == index ? 'tabs__tab--active' : ''"
           >
             {{ page.pageName }}
             <button class="tabs__tab--close" @click.stop="removeTab(index)">
               <Icon :icon="icons.close" />
             </button>
-          </router-link>
+          </div>
           <button
             class="tabs__add"
             @click.stop="addTab()"
@@ -45,9 +44,15 @@ import Aside from "components/Aside.vue";
 import Header from "components/Header.vue";
 import router from "@/router/router";
 import Icon from "UIElements/Icon.vue";
-import { computed } from "vue";
-import { icons, globalTabs, setGlobalProperty, globalActiveTab } from "global";
-import { setTabs, pagesInfo, setActiveTab, tabs } from "util/util";
+import { computed, onMounted } from "vue";
+import {
+  icons,
+  globalTabs,
+  setGlobalProperty,
+  globalActiveTab,
+  activePage,
+} from "global";
+import { setTabs, pagesInfo, setActiveTab, tabs, activeTab } from "util/util";
 import { mainContainerClasses, mainContentClasses } from "global";
 import { useStore } from "vuex";
 
@@ -84,6 +89,16 @@ function removeTab(index) {
     updateIndex(tabs, indexBefore);
   }
 }
+
+onMounted(() => {
+  setGlobalProperty("activeTab", activeTab);
+
+  if (tabs.length === 0) {
+    tabs[0] = activePage;
+  }
+
+  setGlobalProperty("tabs", tabs);
+});
 </script>
 
 <style lang="scss">
@@ -126,10 +141,6 @@ function removeTab(index) {
     &::-webkit-scrollbar-thumb {
       visibility: hidden;
     }
-  }
-
-  &__tab {
-    all: unset;
   }
 
   &__tab,
