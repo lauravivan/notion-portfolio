@@ -9,7 +9,7 @@ You can preview it below:
 
 <div align="center">
   
-  ![Banner with images of the project](./public/portfolio-banner.gif)
+  ![Banner with images of the project](./public/portfolio/banner.gif)
   
 </div>
 
