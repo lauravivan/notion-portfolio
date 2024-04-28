@@ -135,7 +135,6 @@ import {
     .page-content {
       padding: 0 100px;
       width: 100%;
-      place-items: unset;
     }
   }
 }
@@ -144,7 +143,7 @@ import {
   .page-wrapper {
     .page-content {
       width: 100%;
-      padding: 0 20px;
+      padding: 0 20px !important;
 
       .page-title {
         span {

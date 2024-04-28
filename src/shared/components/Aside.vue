@@ -39,14 +39,13 @@
     <div
       style="
         position: absolute;
-        width: 500px;
+        top: -47px;
+        left: 230px;
+        width: 600px;
         height: 100vh;
-        top: -11px;
-        left: 190px;
       "
       :style="{ display: displayNavHoverOut }"
-      @mouseleave="toggleNavHover()"
-      @mouseout="toggleNavHover()"
+      @mouseenter="toggleNavHover()"
     ></div>
   </aside>
   <Teleport to="body">
@@ -240,6 +239,7 @@ onMounted(() => {
 
   .nav-btn {
     @extend .button;
+    margin-left: 13px;
   }
 
   .nav-default .nav-list {
@@ -258,7 +258,7 @@ onMounted(() => {
       animation-fill-mode: forwards;
       padding-right: 1rem;
       background-color: $white;
-      border-radius: 3px;
+      border-radius: 5px;
       height: min-content;
       max-height: 75%;
 

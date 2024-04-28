@@ -8,19 +8,18 @@
 
       <div :class="mainContentClasses">
         <div class="tabs">
-          <router-link
+          <div
             v-for="(page, index) in globalTabs"
             class="tabs__tab"
             @click.stop="setPage(index)"
             :key="index"
             :class="globalActiveTab == index ? 'tabs__tab--active' : ''"
-            :to="page.pagePath"
           >
             {{ page.pageName }}
             <button class="tabs__tab--close" @click.stop="removeTab(index)">
               <Icon :icon="icons.close" />
             </button>
-          </router-link>
+          </div>
           <button
             class="tabs__add"
             @click.stop="addTab()"
@@ -52,9 +51,10 @@ import {
   setGlobalProperty,
   globalActiveTab,
   activePage,
+  mainContainerClasses,
+  mainContentClasses,
 } from "global";
-import { setTabs, pagesInfo, setActiveTab, tabs, activeTab } from "util/util";
-import { mainContainerClasses, mainContentClasses } from "global";
+import { setTabs, setActiveTab, tabs, activeTab } from "util/util";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -63,42 +63,49 @@ const routeName = computed(() => {
   return router.currentRoute.value.name;
 });
 
-function updateIndex(tabsUpdated, indexUpdated) {
+function updateIndex(tabsUpdated, indexUpdated, activePageUpdated) {
   setTabs(tabsUpdated);
   setActiveTab(indexUpdated);
   setGlobalProperty("tabs", tabsUpdated);
   setGlobalProperty("activeTab", indexUpdated);
+  store.commit("storeActivePage", activePageUpdated);
+  router.push(tabsUpdated[indexUpdated].pagePath);
 }
 
 function setPage(index) {
-  setActiveTab(index);
-  setGlobalProperty("activeTab", index);
-  store.commit("storeActivePage", tabs[index]);
+  updateIndex(tabs, index, tabs[index]);
 }
 
 function addTab() {
-  tabs.push(pagesInfo.about);
+  //redirects to active page
+  tabs.push(activePage.value);
   const index = tabs.length - 1;
-  updateIndex(tabs, index);
-  store.commit("storeActivePage", pagesInfo.about);
+
+  setTimeout(() => {
+    updateIndex(tabs, index, activePage.value);
+  }, 1000);
 }
 
 function removeTab(index) {
+  // redirects to page in tab before
   if (index != 0) {
     const indexBefore = index - 1;
     tabs.splice(index, 1);
-    updateIndex(tabs, indexBefore);
+    updateIndex(tabs, indexBefore, tabs[indexBefore]);
   }
 }
 
 onMounted(() => {
-  setGlobalProperty("activeTab", activeTab);
+  setTimeout(() => {
+    if (tabs.length === 0 && activePage.value) {
+      tabs[0] = activePage.value;
+    }
 
-  if (tabs.length === 0) {
-    tabs[0] = activePage;
-  }
-
-  setGlobalProperty("tabs", tabs);
+    setTabs(tabs);
+    setActiveTab(activeTab);
+    setGlobalProperty("tabs", tabs);
+    setGlobalProperty("activeTab", activeTab);
+  }, 500);
 });
 </script>
 
@@ -107,9 +114,7 @@ onMounted(() => {
 
 .aside-click,
 .aside-default {
-  ::-webkit-scrollbar {
-    width: 3px;
-  }
+  @extend .webkit;
 }
 
 .main-content-default,
@@ -219,7 +224,6 @@ onMounted(() => {
     display: flex;
     position: fixed;
     top: calc($TABS_HEIGHT + 13px);
-    left: 13px;
     z-index: 3;
 
     @media (max-width: $screen-small) {

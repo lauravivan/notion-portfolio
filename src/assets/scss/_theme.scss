@@ -20,34 +20,45 @@
   h6,
   div,
   button,
+  table,
+  td,
+  tr,
+  th,
   .gallery__card-footer-icon.icon {
     color: $text !important;
-  }
-
-  .menu,
-  .header,
-  ::-webkit-scrollbar-track {
-    background-color: $bg;
   }
 
   .modal,
   .header-menu .menu,
   .footer,
   .gallery__card-footer,
-  .nav-hover .nav-list {
+  .nav-hover .nav-list,
+  .tabs__tab:hover {
     background-color: $bgOverlap !important;
   }
 
   .main-container-click .aside-click,
-  .header__tabs {
-    background-color: $bgGap;
+  .tabs {
+    background-color: $bgGap !important;
+  }
+
+  .menu,
+  .header,
+  .webkit::-webkit-scrollbar-track,
+  .tabs__tab--active,
+  .tabs__tab--active:hover {
+    background-color: $bg !important;
   }
 
   .hover-default:hover,
   .toggle-btn.unchecked,
   .callout,
-  .header__tab {
+  .tabs__tab:hover {
     background-color: $bgHover !important;
+  }
+
+  .tabs__tab {
+    border-right-color: $bgHover !important;
   }
 
   .header-menu__font-wrapper--active .header-menu__ag {
@@ -62,7 +73,7 @@
     @include language($baby-purple, $bg, $text);
   }
 
-  ::-webkit-scrollbar-thumb {
+  .webkit::-webkit-scrollbar-thumb {
     background-color: $text;
   }
 

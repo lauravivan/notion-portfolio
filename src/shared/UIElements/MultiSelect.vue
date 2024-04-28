@@ -33,9 +33,9 @@ function getColor() {
 @import "@/assets/scss/main.scss";
 
 .multi-select {
-  display: flex;
+  @include flex-layout($flex-direction: row, $row-gap: 5px, $column-gap: 5px);
   align-items: center;
-  column-gap: 5px;
+  flex-wrap: wrap;
 
   div {
     padding: 0.3rem 0.5rem;

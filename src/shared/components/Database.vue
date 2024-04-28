@@ -10,7 +10,7 @@
         <slot name="dateTimeDesc"></slot>
       </td>
       <td class="database__property--val">
-        <slot name="dateTimeValue"> </slot>
+        <slot name="dateTimeValue">Empty</slot>
       </td>
     </tr>
     <tr>
@@ -19,8 +19,12 @@
         <slot name="multiSelectDesc"> </slot>
       </td>
 
-      <td class="database__property--val" style="vertical-align: top">
-        <MultiSelect :items="multiSelectItems" />
+      <td class="database__property--val">
+        <MultiSelect
+          v-if="multiSelectItems.length > 0"
+          :items="multiSelectItems"
+        />
+        <div v-else>Empty</div>
       </td>
     </tr>
   </table>
@@ -61,6 +65,15 @@ onMounted(() => {
     @include flex-layout($flex-direction: row, $column-gap: 5px);
     align-items: center;
     width: 160px !important;
+    flex-wrap: wrap;
+
+    @media (max-width: $screen-xs) {
+      width: auto !important;
+    }
+
+    &--val {
+      vertical-align: middle;
+    }
   }
 }
 </style>

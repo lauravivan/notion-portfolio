@@ -22,14 +22,19 @@
       </div>
     </div>
     <Empty />
-    <Text><span>Description: </span>{{ page.pageData.description }}</Text>
+    <Text v-if="page.pageData.description"
+      >Description: {{ page.pageData.description }}</Text
+    >
     <Empty />
-    <Text style="display: flex; column-gap: 10px">
+    <Text style="display: flex; flex-wrap: wrap; column-gap: 10px">
       <Icon :icon="icons.code" />
       <span class="highlight">Link github: </span
       ><a :href="page.pageData.gitUrl">{{ page.pageData.gitUrl }}</a>
     </Text>
-    <Text v-if="page.pageData.homepage" style="display: flex; column-gap: 10px">
+    <Text
+      v-if="page.pageData.homepage"
+      style="display: flex; flex-wrap: wrap; column-gap: 10px"
+    >
       <Icon :icon="icons.link" />
       <span class="highlight">Link page: </span
       ><a :href="page.pageData.gitUrl">{{ page.pageData.homepage }}</a>

@@ -17,6 +17,8 @@ const props = defineProps(["icon"]);
 .icon {
   color: $black-3;
   font-size: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .material-icons {

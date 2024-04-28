@@ -14,6 +14,8 @@
       ></Text
     >
 
+    <Empty />
+
     <Heading headingNumber="3"> Preview: </Heading>
 
     <iframe class="iframe" :src="page.pageData.homepage"></iframe>
@@ -25,6 +27,7 @@ import { activePage } from "global";
 import Database from "components/Database.vue";
 import Text from "UIElements/Text.vue";
 import Heading from "UIElements/Heading.vue";
+import Empty from "UIElements/Empty.vue";
 import { ref, onMounted } from "vue";
 
 const props = defineProps(["page", "hideDatabase"]);
