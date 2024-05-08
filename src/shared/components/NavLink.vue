@@ -5,9 +5,7 @@
       :iconToOpen="icons.arrowRight"
       :iconToClose="icons.arrowDown"
       :class="
-        activePageId === props.page.pageId
-          ? 'nav-link__toggle-list--active'
-          : ''
+        activePageId == props.page.pageId ? 'nav-link__toggle-list--active' : ''
       "
     >
       <template #summaryContent>
@@ -97,7 +95,7 @@ const activePageId = computed(() => {
 .nav-link__toggle-list {
   &--active {
     .details > .details__summary {
-      background-color: $gray-4 !important;
+      background-color: $black-1 !important;
     }
 
     .details__content .details .details__summary {
