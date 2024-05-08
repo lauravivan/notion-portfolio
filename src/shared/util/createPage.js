@@ -3,7 +3,7 @@ import { pagesInfo } from "util/util";
 function getSettings(pageKey) {
   function search(pages) {
     for (let page in pages) {
-      if (pageKey === pages[page].key) {
+      if (pageKey == pages[page].key) {
         return pages[page];
       }
 

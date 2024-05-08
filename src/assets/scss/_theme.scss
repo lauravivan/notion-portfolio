@@ -28,37 +28,39 @@
     color: $text !important;
   }
 
+  .multi-select > div {
+    color: $dark !important;
+  }
+
   .modal,
   .header-menu .menu,
   .footer,
   .gallery__card-footer,
+  .tabs__tab:hover,
   .nav-hover .nav-list,
-  .tabs__tab:hover {
+  .toggle-btn.unchecked,
+  .callout {
     background-color: $bgOverlap !important;
   }
 
   .main-container-click .aside-click,
-  .tabs {
-    background-color: $bgGap !important;
+  .tabs,
+  .hover-default:hover,
+  .button:hover {
+    background-color: $bgHover !important;
   }
 
   .menu,
   .header,
   .webkit::-webkit-scrollbar-track,
   .tabs__tab--active,
-  .tabs__tab--active:hover {
+  .tabs__tab--active:hover,
+  .tabs__add:hover {
     background-color: $bg !important;
   }
 
-  .hover-default:hover,
-  .toggle-btn.unchecked,
-  .callout,
-  .tabs__tab:hover {
-    background-color: $bgHover !important;
-  }
-
   .tabs__tab {
-    border-right-color: $bgHover !important;
+    border-right-color: $bgGap !important;
   }
 
   .header-menu__font-wrapper--active .header-menu__ag {
@@ -67,10 +69,6 @@
 
   .toggle-btn.checked {
     background-color: $activeColor !important;
-  }
-
-  .language {
-    @include language($baby-purple, $bg, $text);
   }
 
   .webkit::-webkit-scrollbar-thumb {

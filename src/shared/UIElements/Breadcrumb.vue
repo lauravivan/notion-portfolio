@@ -1,11 +1,15 @@
 <template>
   <div class="breadcrumb">
     <div
-      class="page-link"
+      class="breadcrumb__crumb"
       v-for="(page, index) in getBreadcrumbs()[0]"
       :key="page"
     >
-      <router-link :to="page.pagePath">
+      <router-link
+        class="breadcrumb__page"
+        :to="page.pagePath"
+        @click.stop="updateRoute(page)"
+      >
         <div>
           <img :src="page.pageIcon" style="max-width: 1.1rem; height: auto" />
           <div>{{ page.pageName }}</div>
@@ -17,7 +21,7 @@
 </template>
 
 <script setup>
-import { activePage } from "global";
+import { activePage, updateRoute } from "global";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -68,14 +72,15 @@ function getPages(breadcrumbs) {
 .breadcrumb {
   @include flex-layout($flex-direction: row);
   align-items: center;
-}
 
-.page-link {
-  @include flex-layout($flex-direction: row);
-  align-items: center;
+  &__crumb {
+    @include flex-layout($flex-direction: row);
+    align-items: center;
+  }
 
-  a {
+  &__page {
     all: unset;
+
     > div {
       @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
       align-items: center;

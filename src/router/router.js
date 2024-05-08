@@ -9,12 +9,11 @@ import Repo from "@/pages/Repo.vue";
 import Main from "@/pages/Main.vue";
 import NotFound from "@/pages/NotFound.vue";
 import store from "store";
-import { pagesInfo } from "util/util";
-import { setGlobalProperties } from "global";
+import { setGlobalSettings } from "global";
 
 function storeInfo(page) {
   store.commit("storeActivePage", page);
-  setGlobalProperties(page);
+  setGlobalSettings(page);
 }
 
 const router = createRouter({
@@ -32,58 +31,72 @@ const router = createRouter({
         {
           path: "",
           component: Home,
+          name: "about",
           beforeEnter: (to, from, next) => {
-            storeInfo(pagesInfo.about);
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+            storeInfo(pages.about);
             next();
           },
         },
         {
           path: "contact",
           component: Contact,
+          name: "contact",
           beforeEnter: (to, from, next) => {
-            storeInfo(pagesInfo.contact);
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+            storeInfo(pages.contact);
             next();
           },
         },
         {
           path: "github",
           component: Github,
+          name: "github",
           beforeEnter: (to, from, next) => {
-            storeInfo(pagesInfo.github);
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+            storeInfo(pages.github);
             next();
           },
         },
         {
           path: "reference",
           component: Reference,
+          name: "reference",
           beforeEnter: (to, from, next) => {
-            storeInfo(pagesInfo.reference);
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+            storeInfo(pages.reference);
             next();
           },
         },
         {
           path: "projects",
           component: Projects,
+          name: "projects",
           beforeEnter: (to, from, next) => {
-            storeInfo(pagesInfo.projects);
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+            storeInfo(pages.projects);
             next();
           },
         },
         {
           path: "/projects/:id",
           component: Project,
+          name: "project",
           beforeEnter: (to, from, next) => {
             const id = to.params.id;
-            storeInfo(pagesInfo.projects.pages[id]);
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+            storeInfo(pages.projects.pages[id]);
             next();
           },
         },
         {
           path: "/github/:id",
           component: Repo,
+          name: "repo",
           beforeEnter: (to, from, next) => {
             const id = to.params.id;
-            storeInfo(pagesInfo.github.pages[id]);
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+            storeInfo(pages.github.pages[id]);
             next();
           },
         },

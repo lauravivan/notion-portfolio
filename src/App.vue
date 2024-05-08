@@ -1,5 +1,5 @@
 <template>
-  <div v-if="routeName === 'NotFound'">
+  <div v-if="route.name === 'NotFound'">
     <router-view></router-view>
   </div>
   <div v-else>
@@ -9,11 +9,13 @@
       <div :class="mainContentClasses">
         <div class="tabs">
           <div
-            v-for="(page, index) in globalTabs"
+            v-for="(page, index) in getGlobalProperties.tabs"
             class="tabs__tab"
-            @click.stop="setPage(index)"
             :key="index"
-            :class="globalActiveTab == index ? 'tabs__tab--active' : ''"
+            :class="
+              getGlobalProperties.activeTab == index ? 'tabs__tab--active' : ''
+            "
+            @click.stop="updateActiveTab(index)"
           >
             {{ page.pageName }}
             <button class="tabs__tab--close" @click.stop="removeTab(index)">
@@ -23,7 +25,7 @@
           <button
             class="tabs__add"
             @click.stop="addTab()"
-            v-if="globalTabs.length < 10"
+            v-if="getGlobalProperties.tabs.length < 10"
           >
             <Icon :icon="icons.add" />
           </button>
@@ -47,9 +49,8 @@ import Icon from "UIElements/Icon.vue";
 import { computed, onMounted } from "vue";
 import {
   icons,
-  globalTabs,
   setGlobalProperty,
-  globalActiveTab,
+  getGlobalProperties,
   activePage,
   mainContainerClasses,
   mainContentClasses,
@@ -59,39 +60,39 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
-const routeName = computed(() => {
-  return router.currentRoute.value.name;
+const route = computed(() => {
+  return router.currentRoute.value;
 });
 
-function updateIndex(tabsUpdated, indexUpdated, activePageUpdated) {
+function updateTabs(tabsUpdated, activeTabUpdated) {
   setTabs(tabsUpdated);
-  setActiveTab(indexUpdated);
+  setActiveTab(activeTabUpdated);
   setGlobalProperty("tabs", tabsUpdated);
-  setGlobalProperty("activeTab", indexUpdated);
-  store.commit("storeActivePage", activePageUpdated);
-  router.push(tabsUpdated[indexUpdated].pagePath);
+  setGlobalProperty("activeTab", activeTabUpdated);
 }
 
-function setPage(index) {
-  updateIndex(tabs, index, tabs[index]);
+function updateActiveTab(index) {
+  setActiveTab(index);
+  setGlobalProperty("activeTab", index);
+  router.push(tabs[index].pagePath);
 }
 
 function addTab() {
   //redirects to active page
   tabs.push(activePage.value);
   const index = tabs.length - 1;
-
-  setTimeout(() => {
-    updateIndex(tabs, index, activePage.value);
-  }, 1000);
+  updateTabs(tabs, index);
+  store.commit("storeActivePage", tabs[index]);
+  router.push(activePage.value.pagePath);
 }
 
 function removeTab(index) {
   // redirects to page in tab before
-  if (index != 0) {
-    const indexBefore = index - 1;
+  if (tabs.length > 1) {
     tabs.splice(index, 1);
-    updateIndex(tabs, indexBefore, tabs[indexBefore]);
+    updateTabs(tabs, 0);
+    store.commit("storeActivePage", tabs[0]);
+    router.push(tabs[0].pagePath);
   }
 }
 
@@ -101,10 +102,7 @@ onMounted(() => {
       tabs[0] = activePage.value;
     }
 
-    setTabs(tabs);
-    setActiveTab(activeTab);
-    setGlobalProperty("tabs", tabs);
-    setGlobalProperty("activeTab", activeTab);
+    updateTabs(tabs, activeTab);
   }, 500);
 });
 </script>

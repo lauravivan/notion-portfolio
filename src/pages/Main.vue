@@ -1,7 +1,11 @@
 <template>
   <main
     class="page-wrapper"
-    :class="[globalFontSize, globalFontStyle, globalPageWidth]"
+    :class="[
+      getGlobalProperties.fontSize,
+      getGlobalProperties.fontStyle,
+      getGlobalProperties.pageWidth,
+    ]"
   >
     <div v-if="activePage.pageBanner" class="page-banner">
       <img :src="activePage.pageBanner" />
@@ -21,12 +25,7 @@
 </template>
 
 <script setup>
-import {
-  activePage,
-  globalFontSize,
-  globalFontStyle,
-  globalPageWidth,
-} from "global";
+import { activePage, getGlobalProperties } from "global";
 </script>
 
 <style lang="scss">

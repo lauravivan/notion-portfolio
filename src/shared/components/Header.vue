@@ -26,7 +26,8 @@
           class="header-menu__font-wrapper"
           @click="setFontStyle(font.id)"
           :class="{
-            'header-menu__font-wrapper--active': globalFontStyle === font.id,
+            'header-menu__font-wrapper--active':
+              getGlobalProperties.fontStyle === font.id,
           }"
         >
           <span class="header-menu__ag">Ag</span>
@@ -52,7 +53,12 @@ import { ref, provide, watch } from "vue";
 import { useStore } from "vuex";
 import Menu from "components/Menu.vue";
 import useModal from "hooks/useModal";
-import { activePage, icons, setGlobalProperty, globalFontStyle } from "global";
+import {
+  activePage,
+  icons,
+  setGlobalProperty,
+  getGlobalProperties,
+} from "global";
 import Breadcrumb from "UIElements/Breadcrumb.vue";
 import ToggleOption from "components/ToggleOption.vue";
 

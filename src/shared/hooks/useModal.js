@@ -26,10 +26,13 @@ export default function useModal() {
 
   function handleGlobalClick(ref, e) {
     const res = isClickedElOnRefEl(ref.value, e.target);
-    const refDisplay = ref.value.style.display;
 
-    if (refDisplay == "block" && !res) {
-      hideModal(ref);
+    if (ref && ref.value) {
+      const refDisplay = ref.value.style.display;
+
+      if (refDisplay == "block" && !res) {
+        hideModal(ref);
+      }
     }
   }
 

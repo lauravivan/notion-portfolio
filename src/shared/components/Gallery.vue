@@ -20,9 +20,9 @@
     <div class="gallery__cards-wrapper">
       <div
         class="gallery__card-wrapper"
-        v-for="page in props.pages"
+        v-for="page in activePage.pages"
         :key="page.pageId"
-        @click="showPageModal(page)"
+        @click.stop="showPageModal(page)"
       >
         <div
           class="gallery__card-content"
@@ -46,34 +46,24 @@
       </div>
     </div>
   </div>
-  <MainModalView
-    :provideName="'pageModal'"
-    :pageClicked="pageClicked"
-    :component="props.component"
-  />
+  <MainModalView :provideName="'pageModal'" :component="props.component" />
 </template>
 
 <script setup>
 import Icon from "UIElements/Icon.vue";
-import { icons } from "global";
+import { icons, setGlobalProperty, activePage } from "global";
 import useModal from "hooks/useModal";
 import { provide, ref } from "vue";
 import MainModalView from "components/MainModalView.vue";
 
-const props = defineProps([
-  "galleryTitle",
-  "pages",
-  "cardPreviewIsCover",
-  "component",
-]);
+const props = defineProps(["galleryTitle", "cardPreviewIsCover", "component"]);
 const { showModal } = useModal();
 const modalRef = ref(null);
-const pageClicked = ref(null);
 
 provide("pageModal", modalRef);
 
 function showPageModal(page) {
-  pageClicked.value = page;
+  setGlobalProperty("activePageModal", page);
 
   setTimeout(() => {
     showModal(modalRef);

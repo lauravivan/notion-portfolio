@@ -1,5 +1,6 @@
 import { ref, computed, reactive } from "vue";
 import store from "store";
+import { tabs, setTabs } from "util/util";
 
 export const globalProperties = reactive({
   fontStyle: "",
@@ -7,36 +8,28 @@ export const globalProperties = reactive({
   pageWidth: "",
   tabs: [],
   activeTab: 0,
+  activePageModal: null,
 });
 
-export function setGlobalProperties(page) {
+export function setGlobalSettings(page) {
   setGlobalProperty("fontStyle", page.pageSettings.fontStyle);
   setGlobalProperty("fontSize", page.pageSettings.fontSize);
   setGlobalProperty("pageWidth", page.pageSettings.pageWidth);
 }
 
-export function setGlobalProperty(setts, settsValue) {
-  globalProperties[setts] = settsValue;
+export function setGlobalProperty(property, propertyValue) {
+  globalProperties[property] = propertyValue;
 }
 
-export const globalFontStyle = computed(() => {
-  return globalProperties.fontStyle;
-});
-
-export const globalFontSize = computed(() => {
-  return globalProperties.fontSize;
-});
-
-export const globalPageWidth = computed(() => {
-  return globalProperties.pageWidth;
-});
-
-export const globalTabs = computed(() => {
-  return globalProperties.tabs;
-});
-
-export const globalActiveTab = computed(() => {
-  return globalProperties.activeTab;
+export const getGlobalProperties = computed(() => {
+  return {
+    fontStyle: globalProperties.fontStyle,
+    fontSize: globalProperties.fontSize,
+    pageWidth: globalProperties.pageWidth,
+    tabs: globalProperties.tabs,
+    activeTab: globalProperties.activeTab,
+    activePageModal: globalProperties.activePageModal,
+  };
 });
 
 export const activePage = computed(() => {
@@ -63,3 +56,10 @@ export const mainContentClasses = computed(() => {
     "main-content-click": !mainContentDefault.value,
   };
 });
+
+export function updateRoute(page) {
+  tabs[getGlobalProperties.value.activeTab] = page;
+  setTabs(tabs);
+  setGlobalProperty("tabs", tabs);
+  document.body.style.pointerEvents = "auto";
+}

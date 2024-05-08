@@ -21,7 +21,7 @@
 
       <td class="database__property--val">
         <MultiSelect
-          v-if="multiSelectItems.length > 0"
+          v-if="multiSelectItems && multiSelectItems.length > 0"
           :items="multiSelectItems"
         />
         <div v-else>Empty</div>
