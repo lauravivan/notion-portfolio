@@ -1,4 +1,4 @@
-import { pagesInfo } from "util/util";
+import { getPagesInfo } from "util/util";
 
 function getSettings(pageKey) {
   function search(pages) {
@@ -15,6 +15,7 @@ function getSettings(pageKey) {
     }
   }
 
+  const pagesInfo = getPagesInfo();
   const result = search(pagesInfo);
 
   if (result) {

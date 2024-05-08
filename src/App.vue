@@ -2,34 +2,12 @@
   <div v-if="route.name === 'NotFound'">
     <router-view></router-view>
   </div>
-  <div v-else>
+  <div v-else class="app">
     <div :class="mainContainerClasses">
       <Aside />
 
       <div :class="mainContentClasses">
-        <div class="tabs">
-          <div
-            v-for="(page, index) in getGlobalProperties.tabs"
-            class="tabs__tab"
-            :key="index"
-            :class="
-              getGlobalProperties.activeTab == index ? 'tabs__tab--active' : ''
-            "
-            @click.stop="updateActiveTab(index)"
-          >
-            {{ page.pageName }}
-            <button class="tabs__tab--close" @click.stop="removeTab(index)">
-              <Icon :icon="icons.close" />
-            </button>
-          </div>
-          <button
-            class="tabs__add"
-            @click.stop="addTab()"
-            v-if="getGlobalProperties.tabs.length < 10"
-          >
-            <Icon :icon="icons.add" />
-          </button>
-        </div>
+        <Tabs />
 
         <Header />
 
@@ -44,249 +22,111 @@
 <script setup>
 import Aside from "components/Aside.vue";
 import Header from "components/Header.vue";
+import Tabs from "UIElements/Tabs.vue";
 import router from "@/router/router";
-import Icon from "UIElements/Icon.vue";
-import { computed, onMounted, watch } from "vue";
-import {
-  icons,
-  setGlobalProperty,
-  getGlobalProperties,
-  activePage,
-  mainContainerClasses,
-  mainContentClasses,
-} from "global";
-import { setTabs, setActiveTab, tabs, activeTab } from "util/util";
-import { useStore } from "vuex";
-
-const store = useStore();
+import { computed } from "vue";
+import { mainContainerClasses, mainContentClasses } from "global";
 
 const route = computed(() => {
   return router.currentRoute.value;
-});
-
-function updateTabs(tabsUpdated, activeTabUpdated) {
-  setTabs(tabsUpdated);
-  setActiveTab(activeTabUpdated);
-  setGlobalProperty("tabs", tabsUpdated);
-  setGlobalProperty("activeTab", activeTabUpdated);
-}
-
-function updateActiveTab(index) {
-  setActiveTab(index);
-  setGlobalProperty("activeTab", index);
-  router.push(tabs[index].pagePath);
-}
-
-function addTab() {
-  tabs.push(activePage.value);
-  const index = tabs.length - 1;
-  updateTabs(tabs, index);
-  store.commit("storeActivePage", tabs[index]);
-  router.push(activePage.value.pagePath);
-}
-
-function removeTab(index) {
-  if (tabs.length > 1) {
-    tabs.splice(index, 1);
-    updateTabs(tabs, 0);
-    store.commit("storeActivePage", tabs[0]);
-    router.push(tabs[0].pagePath);
-  }
-}
-
-onMounted(() => {
-  setTimeout(() => {
-    if (tabs.length === 0 && activePage.value) {
-      tabs[0] = activePage.value;
-    }
-
-    updateTabs(tabs, activeTab);
-  }, 500);
-});
-
-watch(route, () => {
-  const acTab = localStorage.getItem("activeTab");
-  tabs[acTab] = activePage.value;
-  setTabs(tabs);
-  setGlobalProperty("tabs", tabs);
-  document.body.style.pointerEvents = "auto";
 });
 </script>
 
 <style lang="scss">
 @import "@/assets/scss/main";
 
-.aside-click,
-.aside-default {
-  @extend .webkit;
-}
-
-.main-content-default,
-.main-content-click,
-.aside-default,
-.aside-click {
-  height: 100%;
-}
-
-.header,
-.tabs {
-  position: fixed;
-  left: 0;
-}
-
-.tabs {
-  display: flex;
-  background-color: $gray-4;
-  top: 0;
-  height: $TABS_HEIGHT;
-
-  @media (max-width: $screen-small) {
-    top: auto;
-    bottom: 0;
-    background-color: $gray;
-    overflow-x: auto;
-
-    &::-webkit-scrollbar,
-    &::-webkit-scrollbar-track,
-    &::-webkit-scrollbar-thumb {
-      visibility: hidden;
-    }
+.app {
+  .aside-click,
+  .aside-default {
+    @extend .webkit;
   }
 
-  &__tab {
-    all: unset;
+  .main-content-default,
+  .main-content-click,
+  .aside-default,
+  .aside-click {
+    height: 100%;
   }
 
-  &__tab,
-  &__add,
-  &__tab--close {
-    outline: none;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
+  .header,
+  .tabs {
+    position: fixed;
+    left: 0;
   }
 
-  &__tab {
-    padding: 10px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    font-size: calc($fs-small - 1px);
-    border-right: 1px solid $black-1;
-    color: $black-6;
+  .header {
+    top: $TABS_HEIGHT;
 
     @media (max-width: $screen-small) {
-      min-width: 150px;
+      top: 0;
     }
+  }
 
-    &:hover {
-      background-color: $gray-6;
-    }
+  .main-container-default {
+    .aside-default {
+      display: flex;
+      position: fixed;
+      top: calc($TABS_HEIGHT + 13px);
+      z-index: 3;
 
-    &--active {
-      background-color: $white;
-
-      &:hover {
-        background-color: $white;
+      @media (max-width: $screen-small) {
+        top: 13px;
       }
     }
 
-    &--close {
-      visibility: hidden;
+    .header,
+    .tabs {
+      width: 100%;
+    }
+
+    .header {
+      &__content {
+        @include spacing($pt: 11px, $pl: 40px, $pr: 10px, $pb: 8px);
+      }
     }
   }
 
-  &__tab:hover {
-    .tabs__tab--close {
-      visibility: visible;
+  .main-container-click {
+    position: relative;
+    margin-left: $ASIDE_CLICK_SIZE;
+
+    .aside-click {
+      position: fixed;
+      width: $ASIDE_CLICK_SIZE;
+      inset: 0;
+      box-shadow: $box-shadow-2;
+      background-color: $gray-2;
+      z-index: 3;
+    }
+
+    .header,
+    .tabs {
+      margin-left: $ASIDE_CLICK_SIZE;
+      width: calc(100% - $ASIDE_CLICK_SIZE);
+    }
+
+    .header {
+      &__content {
+        @include spacing($pt: 11px, $pl: 10px, $pr: 10px, $pb: 8px);
+      }
     }
   }
 
-  &__add {
-    @include spacing($mt: auto, $mb: auto, $ml: 7px);
-  }
-
-  &__add,
-  &__tab--close {
-    @extend .button;
-  }
-}
-
-.header {
-  top: $TABS_HEIGHT;
-
-  @media (max-width: $screen-small) {
-    top: 0;
-  }
-}
-
-.main-container-default {
-  .aside-default {
-    display: flex;
-    position: fixed;
-    top: calc($TABS_HEIGHT + 13px);
-    z-index: 3;
+  .footer {
+    font-size: $fs-xs;
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    z-index: 1;
+    background-color: $white;
+    border: 1px solid $gray-5;
+    box-shadow: $box-shadow-1;
+    border-radius: 40px;
+    padding: 15px 14px;
 
     @media (max-width: $screen-small) {
-      top: 13px;
+      bottom: calc($TABS_HEIGHT + 0.9rem);
     }
-  }
-
-  .header,
-  .tabs {
-    width: 100%;
-  }
-
-  .header {
-    &__content {
-      @include spacing($pt: 11px, $pl: 40px, $pr: 10px, $pb: 8px);
-    }
-  }
-}
-
-.main-container-click {
-  position: relative;
-  margin-left: $ASIDE_CLICK_SIZE;
-
-  .aside-click {
-    position: fixed;
-    width: $ASIDE_CLICK_SIZE;
-    inset: 0;
-    box-shadow: $box-shadow-2;
-    background-color: $gray-2;
-    z-index: 3;
-  }
-
-  .header,
-  .tabs {
-    margin-left: $ASIDE_CLICK_SIZE;
-    width: calc(100% - $ASIDE_CLICK_SIZE);
-  }
-
-  .header {
-    &__content {
-      @include spacing($pt: 11px, $pl: 10px, $pr: 10px, $pb: 8px);
-    }
-  }
-}
-
-.footer {
-  font-size: $fs-xs;
-  position: absolute;
-  right: 20px;
-  bottom: 15px;
-  z-index: 1;
-  background-color: $white;
-  border: 1px solid $gray-5;
-  box-shadow: $box-shadow-1;
-  border-radius: 40px;
-  padding: 15px 14px;
-
-  @media (max-width: $screen-small) {
-    bottom: calc($TABS_HEIGHT + 0.9rem);
   }
 }
 </style>

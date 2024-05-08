@@ -137,7 +137,7 @@ watch(activePage, (currentValue) => {
 <style lang="scss">
 @import "@/assets/scss/main";
 
-.header {
+.app .header {
   background-color: $white;
   height: $HEADER_HEIGHT;
 
@@ -152,7 +152,7 @@ watch(activePage, (currentValue) => {
   }
 }
 
-.header-menu {
+.app .header-menu {
   &__style {
     padding: 0.5rem 0;
     border-bottom: 1px solid $black-1;

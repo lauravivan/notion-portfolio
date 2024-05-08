@@ -1,7 +1,9 @@
 import { createStore } from "vuex";
 import createPage from "util/createPage";
-import { setPagesInfo, pagesInfo } from "util/util";
 import createGhPages from "util/createGhPage";
+import { getPagesInfo } from "util/util";
+
+const pagesInfo = getPagesInfo();
 
 if (pagesInfo["favorites"]) {
   delete pagesInfo["favorites"];
@@ -68,7 +70,7 @@ pagesInfo["projects"] = createPage({
 
 pagesInfo["github"].pages = ghPages;
 
-setPagesInfo(pagesInfo);
+localStorage.setItem("pagesInfo", JSON.stringify(pagesInfo));
 
 try {
   await createGhPages();
@@ -77,11 +79,11 @@ try {
 }
 
 createProjectSubPage(756993173, "trendTide", "trendTide.png", "trendTide.png");
-setPagesInfo(pagesInfo);
+localStorage.setItem("pagesInfo", JSON.stringify(pagesInfo));
 
 const store = createStore({
   state: {
-    pagesInfo: JSON.parse(localStorage.getItem("pagesInfo")),
+    pagesInfo: getPagesInfo(),
     activePage: null,
     projectAuthor: `Laura Vivan's Portfolio`,
     authorSocialMedia: "@lauravivan",

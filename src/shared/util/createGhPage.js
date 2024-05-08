@@ -1,6 +1,6 @@
 import createPage from "util/createPage";
 import axios from "axios";
-import { pagesInfo, requestDateTime, setRequestDateTime } from "util/util";
+import { getPagesInfo } from "util/util";
 
 async function createGhPage(dt) {
   try {
@@ -16,7 +16,7 @@ async function createGhPage(dt) {
       }
     }
 
-    pagesInfo.github.pages[dt.id] = createPage({
+    getPagesInfo().github.pages[dt.id] = createPage({
       key: dt.id,
       name: dt.name,
       path: `github/${dt.id}`,
@@ -50,7 +50,7 @@ function getGhReposId(repos) {
 
 function getReposId() {
   const reposId = [];
-  const repos = pagesInfo.github.pages;
+  const repos = getPagesInfo().github.pages;
 
   for (let repo in repos) {
     reposId.push(repos[repo].key);
@@ -84,7 +84,7 @@ function getDeletedRepos(repos) {
   const ghReposId = getGhReposId(repos);
   const reposId = getReposId();
   const deletedIds = [];
-  const reposLocal = pagesInfo.github.pages;
+  const reposLocal = getPagesInfo().github.pages;
   const deletedRepos = [];
 
   for (let id of reposId) {
@@ -102,25 +102,35 @@ function getDeletedRepos(repos) {
   return deletedRepos;
 }
 
+function getTimePassed(now, then) {
+  let minutesPassed;
+
+  if (now.getDate() == then.getDate()) {
+    if (now.getHours() > then.getHours()) {
+      return (minutesPassed = now.getMinutes() + then.getMinutes());
+    }
+
+    return (minutesPassed = now.getMinutes() - then.getMinutes());
+  }
+
+  return 30;
+}
+
 export default async function createGhPages() {
   try {
     let res;
     const now = new Date();
     const requestUrl = "https://api.github.com/users/lauravivan/repos";
+    const pagesInfo = getPagesInfo();
+    const requestDateTime = localStorage.getItem("requestDateTime") || "";
 
     if (requestDateTime && Object.keys(pagesInfo.github.pages).length > 0) {
-      const old = new Date(requestDateTime);
-      let minutesPassed;
-
-      if (now.getHours() > old.getHours()) {
-        minutesPassed = now.getMinutes() + old.getMinutes();
-      } else {
-        minutesPassed = now.getMinutes() - old.getMinutes();
-      }
+      const then = new Date(requestDateTime);
+      const minutesPassed = getTimePassed(now, then);
 
       if (minutesPassed >= 30) {
         res = await axios.get(requestUrl);
-        setRequestDateTime(now);
+        localStorage.setItem("requestDateTime", now);
 
         if (res) {
           const addedRepos = getAddedRepos(res.data);
@@ -172,7 +182,7 @@ export default async function createGhPages() {
         }
       }
     } else {
-      setRequestDateTime(now);
+      localStorage.setItem("requestDateTime", now);
 
       res = await axios.get(requestUrl);
 
