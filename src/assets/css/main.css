@@ -217,8 +217,12 @@ body {
 .dark-theme .tabs__tab:hover,
 .dark-theme .nav-hover .nav-list,
 .dark-theme .toggle-btn.unchecked,
-.dark-theme .callout {
+.dark-theme .callout,
+.dark-theme .nav-link__toggle-list--active .details > .details__summary {
   background-color: rgb(0, 0, 0) !important;
+}
+.dark-theme .aside-click .nav-wrapper {
+  background-color: rgba(0, 0, 0, 0.4) !important;
 }
 .dark-theme .main-container-click .aside-click,
 .dark-theme .tabs,
@@ -285,8 +289,12 @@ body {
 .cat-latte .tabs__tab:hover,
 .cat-latte .nav-hover .nav-list,
 .cat-latte .toggle-btn.unchecked,
-.cat-latte .callout {
+.cat-latte .callout,
+.cat-latte .nav-link__toggle-list--active .details > .details__summary {
   background-color: #ccd0da !important;
+}
+.cat-latte .aside-click .nav-wrapper {
+  background-color: #e6e9ef !important;
 }
 .cat-latte .main-container-click .aside-click,
 .cat-latte .tabs,
@@ -353,8 +361,12 @@ body {
 .cat-mocha .tabs__tab:hover,
 .cat-mocha .nav-hover .nav-list,
 .cat-mocha .toggle-btn.unchecked,
-.cat-mocha .callout {
+.cat-mocha .callout,
+.cat-mocha .nav-link__toggle-list--active .details > .details__summary {
   background-color: #181825 !important;
+}
+.cat-mocha .aside-click .nav-wrapper {
+  background-color: #313244 !important;
 }
 .cat-mocha .main-container-click .aside-click,
 .cat-mocha .tabs,

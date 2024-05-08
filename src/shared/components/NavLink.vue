@@ -10,7 +10,7 @@
     >
       <template #summaryContent>
         <router-link class="nav-link__link" :to="props.page.pagePath">
-          <div @click.stop="updateRoute(props.page)">
+          <div>
             <div style="max-width: 1.1rem">
               <img
                 :src="props.page.pageIcon"
@@ -36,7 +36,7 @@
 <script setup>
 import { computed } from "vue";
 import ToggleList from "components/ToggleList.vue";
-import { icons, activePage, updateRoute } from "global";
+import { icons, activePage } from "global";
 import NestedLink from "components/NestedLink.vue";
 
 const props = defineProps(["page"]);

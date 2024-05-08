@@ -5,10 +5,7 @@
       :provideName="props.provideName"
       v-if="getGlobalProperties.activePageModal"
     >
-      <router-link
-        :to="getGlobalProperties.activePageModal.pagePath"
-        @click.stop="updateRoute(getGlobalProperties.activePageModal)"
-      >
+      <router-link :to="getGlobalProperties.activePageModal.pagePath">
         <Icon class="page-modal__expand" :icon="icons.expand" />
       </router-link>
       <main
@@ -60,7 +57,7 @@
 <script setup>
 import Modal from "components/Modal.vue";
 import Icon from "UIElements/Icon.vue";
-import { icons, updateRoute, getGlobalProperties } from "global";
+import { icons, getGlobalProperties } from "global";
 
 const props = defineProps(["component", "provideName"]);
 </script>

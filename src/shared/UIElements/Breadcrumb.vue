@@ -5,11 +5,7 @@
       v-for="(page, index) in getBreadcrumbs()[0]"
       :key="page"
     >
-      <router-link
-        class="breadcrumb__page"
-        :to="page.pagePath"
-        @click.stop="updateRoute(page)"
-      >
+      <router-link class="breadcrumb__page" :to="page.pagePath">
         <div>
           <img :src="page.pageIcon" style="max-width: 1.1rem; height: auto" />
           <div>{{ page.pageName }}</div>
@@ -21,7 +17,7 @@
 </template>
 
 <script setup>
-import { activePage, updateRoute } from "global";
+import { activePage } from "global";
 import { useStore } from "vuex";
 
 const store = useStore();

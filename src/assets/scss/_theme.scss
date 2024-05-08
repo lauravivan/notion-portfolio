@@ -39,8 +39,13 @@
   .tabs__tab:hover,
   .nav-hover .nav-list,
   .toggle-btn.unchecked,
-  .callout {
+  .callout,
+  .nav-link__toggle-list--active .details > .details__summary {
     background-color: $bgOverlap !important;
+  }
+
+  .aside-click .nav-wrapper {
+    background-color: $bgGap !important;
   }
 
   .main-container-click .aside-click,

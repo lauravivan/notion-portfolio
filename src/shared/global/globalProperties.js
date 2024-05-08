@@ -1,6 +1,5 @@
 import { ref, computed, reactive } from "vue";
 import store from "store";
-import { tabs, setTabs } from "util/util";
 
 export const globalProperties = reactive({
   fontStyle: "",
@@ -56,10 +55,3 @@ export const mainContentClasses = computed(() => {
     "main-content-click": !mainContentDefault.value,
   };
 });
-
-export function updateRoute(page) {
-  tabs[getGlobalProperties.value.activeTab] = page;
-  setTabs(tabs);
-  setGlobalProperty("tabs", tabs);
-  document.body.style.pointerEvents = "auto";
-}

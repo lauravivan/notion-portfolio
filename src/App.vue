@@ -46,7 +46,7 @@ import Aside from "components/Aside.vue";
 import Header from "components/Header.vue";
 import router from "@/router/router";
 import Icon from "UIElements/Icon.vue";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, watch } from "vue";
 import {
   icons,
   setGlobalProperty,
@@ -78,7 +78,6 @@ function updateActiveTab(index) {
 }
 
 function addTab() {
-  //redirects to active page
   tabs.push(activePage.value);
   const index = tabs.length - 1;
   updateTabs(tabs, index);
@@ -87,7 +86,6 @@ function addTab() {
 }
 
 function removeTab(index) {
-  // redirects to page in tab before
   if (tabs.length > 1) {
     tabs.splice(index, 1);
     updateTabs(tabs, 0);
@@ -104,6 +102,14 @@ onMounted(() => {
 
     updateTabs(tabs, activeTab);
   }, 500);
+});
+
+watch(route, () => {
+  const acTab = localStorage.getItem("activeTab");
+  tabs[acTab] = activePage.value;
+  setTabs(tabs);
+  setGlobalProperty("tabs", tabs);
+  document.body.style.pointerEvents = "auto";
 });
 </script>
 
