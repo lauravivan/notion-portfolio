@@ -91,8 +91,7 @@ const props = defineProps(["component", "provideName"]);
 
       @media (max-width: $screen-xs) {
         left: 0%;
-        margin-right: 0;
-        transform: none;
+        padding-left: 50% !important;
       }
     }
   }

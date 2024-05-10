@@ -68,6 +68,7 @@ onMounted(() => {
     flex-wrap: wrap;
 
     @media (max-width: $screen-xs) {
+      min-width: 100px;
       width: auto !important;
     }
 

@@ -3,10 +3,6 @@
 *::after {
   box-sizing: border-box;
   word-break: break-word;
-
-  @media (max-width: $screen-xs) {
-    word-break: keep-all;
-  }
 }
 
 .webkit {

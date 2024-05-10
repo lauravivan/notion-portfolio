@@ -68,13 +68,6 @@ table {
   box-sizing: border-box;
   word-break: break-word;
 }
-@media (max-width: 480px) {
-  *,
-  *::before,
-  *::after {
-    word-break: keep-all;
-  }
-}
 
 .webkit ::-webkit-scrollbar, body ::-webkit-scrollbar {
   height: 8px;
@@ -187,7 +180,7 @@ body {
   }
 }
 .dark-theme {
-  background-color: #212529;
+  background-color: #171a1b;
   color: rgb(255, 255, 255);
 }
 .dark-theme li,
@@ -207,40 +200,49 @@ body {
 .dark-theme .gallery__card-footer-icon.icon {
   color: rgb(255, 255, 255) !important;
 }
-.dark-theme .multi-select > div {
-  color: #212529 !important;
+.dark-theme .main-container-click .aside-click span,
+.dark-theme .main-container-click .aside-click div,
+.dark-theme .main-container-click .aside-click li {
+  color: #a8a8a8 !important;
+}
+.dark-theme .main-container-click .aside-click {
+  background-color: #222222 !important;
+  box-shadow: rgba(237, 236, 233, 0.3) 0px 0px 3px -1px inset !important;
+}
+.dark-theme .tabs {
+  background-color: rgba(237, 236, 233, 0.1) !important;
+}
+.dark-theme .header,
+.dark-theme .tabs__tab--active,
+.dark-theme .tabs__tab--active:hover {
+  background-color: #171a1b !important;
 }
 .dark-theme .modal,
-.dark-theme .header-menu .menu,
 .dark-theme .footer,
 .dark-theme .gallery__card-footer,
-.dark-theme .tabs__tab:hover,
 .dark-theme .nav-hover .nav-list,
 .dark-theme .toggle-btn.unchecked,
-.dark-theme .callout,
-.dark-theme .nav-link__toggle-list--active .details > .details__summary {
+.dark-theme .header-menu .menu,
+.dark-theme .callout {
   background-color: rgb(0, 0, 0) !important;
 }
-.dark-theme .aside-click .nav-wrapper {
-  background-color: rgba(0, 0, 0, 0.4) !important;
+.dark-theme .multi-select > div {
+  color: #171a1b !important;
 }
-.dark-theme .main-container-click .aside-click,
-.dark-theme .tabs,
 .dark-theme .hover-default:hover,
-.dark-theme .button:hover {
+.dark-theme .button:hover,
+.dark-theme .tabs__tab:hover,
+.dark-theme .nav-link__toggle-list--active .details > .details__summary {
   background-color: rgba(237, 236, 233, 0.3) !important;
 }
 .dark-theme .menu,
-.dark-theme .header,
 .dark-theme .webkit::-webkit-scrollbar-track,
 .dark-theme body::-webkit-scrollbar-track,
-.dark-theme .tabs__tab--active,
-.dark-theme .tabs__tab--active:hover,
 .dark-theme .tabs__add:hover {
-  background-color: #212529 !important;
+  background-color: #171a1b !important;
 }
 .dark-theme .tabs__tab {
-  border-right-color: rgba(0, 0, 0, 0.4) !important;
+  border-right-color: rgba(237, 236, 233, 0.3) !important;
 }
 .dark-theme .header-menu__font-wrapper--active .header-menu__ag {
   color: rgb(35, 131, 226) !important;
@@ -257,9 +259,12 @@ body {
 .dark-theme :-webkit-any-link:hover {
   color: rgb(237, 236, 233) !important;
 }
+.dark-theme .main-container-click .aside-click .nav-link__toggle-list--active .nav-link__pagename {
+  color: rgb(255, 255, 255) !important;
+}
 
 .cat-latte {
-  background-color: #eff1f5;
+  background-color: #e6e9ef;
   color: #4c4f69;
 }
 .cat-latte li,
@@ -279,40 +284,49 @@ body {
 .cat-latte .gallery__card-footer-icon.icon {
   color: #4c4f69 !important;
 }
-.cat-latte .multi-select > div {
-  color: #212529 !important;
+.cat-latte .main-container-click .aside-click span,
+.cat-latte .main-container-click .aside-click div,
+.cat-latte .main-container-click .aside-click li {
+  color: #6c6f85 !important;
 }
-.cat-latte .modal,
-.cat-latte .header-menu .menu,
-.cat-latte .footer,
-.cat-latte .gallery__card-footer,
-.cat-latte .tabs__tab:hover,
-.cat-latte .nav-hover .nav-list,
-.cat-latte .toggle-btn.unchecked,
-.cat-latte .callout,
-.cat-latte .nav-link__toggle-list--active .details > .details__summary {
+.cat-latte .main-container-click .aside-click {
+  background-color: #eff1f5 !important;
+  box-shadow: #bcc0cc 0px 0px 3px -1px inset !important;
+}
+.cat-latte .tabs {
   background-color: #ccd0da !important;
 }
-.cat-latte .aside-click .nav-wrapper {
+.cat-latte .header,
+.cat-latte .tabs__tab--active,
+.cat-latte .tabs__tab--active:hover {
   background-color: #e6e9ef !important;
 }
-.cat-latte .main-container-click .aside-click,
-.cat-latte .tabs,
+.cat-latte .modal,
+.cat-latte .footer,
+.cat-latte .gallery__card-footer,
+.cat-latte .nav-hover .nav-list,
+.cat-latte .toggle-btn.unchecked,
+.cat-latte .header-menu .menu,
+.cat-latte .callout {
+  background-color: #ccd0da !important;
+}
+.cat-latte .multi-select > div {
+  color: #171a1b !important;
+}
 .cat-latte .hover-default:hover,
-.cat-latte .button:hover {
+.cat-latte .button:hover,
+.cat-latte .tabs__tab:hover,
+.cat-latte .nav-link__toggle-list--active .details > .details__summary {
   background-color: #bcc0cc !important;
 }
 .cat-latte .menu,
-.cat-latte .header,
 .cat-latte .webkit::-webkit-scrollbar-track,
 .cat-latte body::-webkit-scrollbar-track,
-.cat-latte .tabs__tab--active,
-.cat-latte .tabs__tab--active:hover,
 .cat-latte .tabs__add:hover {
-  background-color: #eff1f5 !important;
+  background-color: #e6e9ef !important;
 }
 .cat-latte .tabs__tab {
-  border-right-color: #e6e9ef !important;
+  border-right-color: #bcc0cc !important;
 }
 .cat-latte .header-menu__font-wrapper--active .header-menu__ag {
   color: #04a5e5 !important;
@@ -329,9 +343,12 @@ body {
 .cat-latte :-webkit-any-link:hover {
   color: #7c7f93 !important;
 }
+.cat-latte .main-container-click .aside-click .nav-link__toggle-list--active .nav-link__pagename {
+  color: #4c4f69 !important;
+}
 
 .cat-mocha {
-  background-color: #1e1e2e;
+  background-color: #11111b;
   color: #cdd6f4;
 }
 .cat-mocha li,
@@ -351,40 +368,49 @@ body {
 .cat-mocha .gallery__card-footer-icon.icon {
   color: #cdd6f4 !important;
 }
-.cat-mocha .multi-select > div {
-  color: #212529 !important;
+.cat-mocha .main-container-click .aside-click span,
+.cat-mocha .main-container-click .aside-click div,
+.cat-mocha .main-container-click .aside-click li {
+  color: #a6adc8 !important;
 }
-.cat-mocha .modal,
-.cat-mocha .header-menu .menu,
-.cat-mocha .footer,
-.cat-mocha .gallery__card-footer,
-.cat-mocha .tabs__tab:hover,
-.cat-mocha .nav-hover .nav-list,
-.cat-mocha .toggle-btn.unchecked,
-.cat-mocha .callout,
-.cat-mocha .nav-link__toggle-list--active .details > .details__summary {
-  background-color: #181825 !important;
+.cat-mocha .main-container-click .aside-click {
+  background-color: #1e1e2e !important;
+  box-shadow: #45475a 0px 0px 3px -1px inset !important;
 }
-.cat-mocha .aside-click .nav-wrapper {
-  background-color: #313244 !important;
-}
-.cat-mocha .main-container-click .aside-click,
-.cat-mocha .tabs,
-.cat-mocha .hover-default:hover,
-.cat-mocha .button:hover {
-  background-color: #6c7086 !important;
-}
-.cat-mocha .menu,
-.cat-mocha .header,
-.cat-mocha .webkit::-webkit-scrollbar-track,
-.cat-mocha body::-webkit-scrollbar-track,
-.cat-mocha .tabs__tab--active,
-.cat-mocha .tabs__tab--active:hover,
-.cat-mocha .tabs__add:hover {
+.cat-mocha .tabs {
   background-color: #1e1e2e !important;
 }
+.cat-mocha .header,
+.cat-mocha .tabs__tab--active,
+.cat-mocha .tabs__tab--active:hover {
+  background-color: #11111b !important;
+}
+.cat-mocha .modal,
+.cat-mocha .footer,
+.cat-mocha .gallery__card-footer,
+.cat-mocha .nav-hover .nav-list,
+.cat-mocha .toggle-btn.unchecked,
+.cat-mocha .header-menu .menu,
+.cat-mocha .callout {
+  background-color: #181825 !important;
+}
+.cat-mocha .multi-select > div {
+  color: #171a1b !important;
+}
+.cat-mocha .hover-default:hover,
+.cat-mocha .button:hover,
+.cat-mocha .tabs__tab:hover,
+.cat-mocha .nav-link__toggle-list--active .details > .details__summary {
+  background-color: #45475a !important;
+}
+.cat-mocha .menu,
+.cat-mocha .webkit::-webkit-scrollbar-track,
+.cat-mocha body::-webkit-scrollbar-track,
+.cat-mocha .tabs__add:hover {
+  background-color: #11111b !important;
+}
 .cat-mocha .tabs__tab {
-  border-right-color: #313244 !important;
+  border-right-color: #45475a !important;
 }
 .cat-mocha .header-menu__font-wrapper--active .header-menu__ag {
   color: #74c7ec !important;
@@ -400,6 +426,9 @@ body {
 }
 .cat-mocha :-webkit-any-link:hover {
   color: #a6adc8 !important;
+}
+.cat-mocha .main-container-click .aside-click .nav-link__toggle-list--active .nav-link__pagename {
+  color: #cdd6f4 !important;
 }
 
 /*# sourceMappingURL=main.css.map */

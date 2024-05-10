@@ -4,12 +4,17 @@
       <div>
         <p>This content does not exist</p>
         <div class="not-found__btn">
-          <router-link to="/">Back to my content</router-link>
+          <router-link :to="tab.pagePath">Back to my content</router-link>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+const activeTab = localStorage.getItem("activeTab");
+const tab = JSON.parse(localStorage.getItem("tabs"))[activeTab];
+</script>
 
 <style lang="scss">
 @import "@/assets/scss/main";

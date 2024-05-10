@@ -1,9 +1,11 @@
 @mixin defineTheme(
   $text,
+  $textLighter,
   $bg,
-  $bgOverlap,
-  $bgGap,
+  $bgAsideClick,
+  $bgAsideHover,
   $bgHover,
+  $bgTabs,
   $activeColor,
   $link
 ) {
@@ -28,44 +30,56 @@
     color: $text !important;
   }
 
+  .main-container-click .aside-click span,
+  .main-container-click .aside-click div,
+  .main-container-click .aside-click li {
+    color: $textLighter !important;
+  }
+
+  .main-container-click .aside-click {
+    background-color: $bgAsideClick !important;
+    box-shadow: $bgHover 0px 0px 3px -1px inset !important;
+  }
+
+  .tabs {
+    background-color: $bgTabs !important;
+  }
+
+  .header,
+  .tabs__tab--active,
+  .tabs__tab--active:hover {
+    background-color: $bg !important;
+  }
+
+  .modal,
+  .footer,
+  .gallery__card-footer,
+  .nav-hover .nav-list,
+  .toggle-btn.unchecked,
+  .header-menu .menu,
+  .callout {
+    background-color: $bgAsideHover !important;
+  }
+
   .multi-select > div {
     color: $dark !important;
   }
 
-  .modal,
-  .header-menu .menu,
-  .footer,
-  .gallery__card-footer,
-  .tabs__tab:hover,
-  .nav-hover .nav-list,
-  .toggle-btn.unchecked,
-  .callout,
-  .nav-link__toggle-list--active .details > .details__summary {
-    background-color: $bgOverlap !important;
-  }
-
-  .aside-click .nav-wrapper {
-    background-color: $bgGap !important;
-  }
-
-  .main-container-click .aside-click,
-  .tabs,
   .hover-default:hover,
-  .button:hover {
+  .button:hover,
+  .tabs__tab:hover,
+  .nav-link__toggle-list--active .details > .details__summary {
     background-color: $bgHover !important;
   }
 
   .menu,
-  .header,
   .webkit::-webkit-scrollbar-track,
-  .tabs__tab--active,
-  .tabs__tab--active:hover,
   .tabs__add:hover {
     background-color: $bg !important;
   }
 
   .tabs__tab {
-    border-right-color: $bgGap !important;
+    border-right-color: $bgHover !important;
   }
 
   .header-menu__font-wrapper--active .header-menu__ag {
@@ -87,15 +101,24 @@
       color: $link !important;
     }
   }
+
+  .main-container-click
+    .aside-click
+    .nav-link__toggle-list--active
+    .nav-link__pagename {
+    color: $text !important;
+  }
 }
 
 .dark-theme {
   @include defineTheme(
     $white,
+    #a8a8a8,
     $dark,
+    $dark-lighter,
     $black,
-    $black-4,
     $gray-3,
+    $gray-1,
     $active,
     $gray
   );
@@ -104,10 +127,12 @@
 .cat-latte {
   @include defineTheme(
     $latte-text,
+    $latte-subtext0,
+    $latte-mantle,
     $latte-base,
     $latte-surface0,
-    $latte-mantle,
     $latte-surface1,
+    $latte-surface0,
     $latte-sky,
     $latte-overlay2
   );
@@ -116,10 +141,12 @@
 .cat-mocha {
   @include defineTheme(
     $mocha-text,
+    $mocha-subtext0,
+    $mocha-crust,
     $mocha-base,
     $mocha-mantle,
-    $mocha-surface0,
-    $mocha-overlay0,
+    $mocha-surface1,
+    $mocha-base,
     $mocha-sapphire,
     $mocha-subtext0
   );

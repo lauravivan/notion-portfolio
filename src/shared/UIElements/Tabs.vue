@@ -6,15 +6,21 @@
       :key="index"
       :class="getGlobalProperties.activeTab == index ? 'tabs__tab--active' : ''"
       @click.stop="updateActiveTab(index)"
+      @touchstart="updateActiveTab(index)"
     >
       {{ page.pageName }}
-      <button class="tabs__tab--close" @click.stop="removeTab(index)">
+      <button
+        class="tabs__tab--close"
+        @click.stop="removeTab(index)"
+        @touchstart="removeTab(index)"
+      >
         <Icon :icon="icons.close" />
       </button>
     </div>
     <button
       class="tabs__add"
       @click.stop="addTab()"
+      @touchstart="addTab()"
       v-if="getGlobalProperties.tabs.length < 10"
     >
       <Icon :icon="icons.add" />
@@ -31,8 +37,6 @@ import {
   setGlobalProperty,
   getGlobalProperties,
   activePage,
-  mainContainerClasses,
-  mainContentClasses,
 } from "global";
 import { useStore } from "vuex";
 
