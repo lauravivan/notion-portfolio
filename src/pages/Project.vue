@@ -48,5 +48,9 @@ onMounted(() => {
 .iframe {
   width: 100%;
   height: 330px;
+
+  .h-screen {
+    height: auto !important;
+  }
 }
 </style>
