@@ -18,7 +18,7 @@
 
     <Heading headingNumber="3"> Preview: </Heading>
 
-    <iframe class="iframe" :src="page.pageData.homepage"></iframe>
+    <Iframe :src="page.pageData.homepage" />
   </div>
 </template>
 
@@ -29,6 +29,7 @@ import Text from "UIElements/Text.vue";
 import Heading from "UIElements/Heading.vue";
 import Empty from "UIElements/Empty.vue";
 import { ref, onMounted } from "vue";
+import Iframe from "UIElements/Iframe.vue";
 
 const props = defineProps(["page", "hideDatabase"]);
 const page = ref(null);
@@ -41,16 +42,3 @@ onMounted(() => {
   }
 });
 </script>
-
-<style lang="scss">
-@import "@/assets/scss/main.scss";
-
-.iframe {
-  width: 100%;
-  height: 330px;
-
-  .h-screen {
-    height: auto !important;
-  }
-}
-</style>
