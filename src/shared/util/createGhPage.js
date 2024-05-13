@@ -2,37 +2,39 @@ import createPage from "util/createPage";
 import axios from "axios";
 import { getPagesInfo } from "util/util";
 
-async function createGhPage(dt) {
+/**
+ * when a user first access => create all pages and save
+    on local storage the datetime request
+
+  when a user reloads it => checks if its passed from 30
+  minutes since last request and then, checks for updates
+  (changes as deletion or modification) and resaves.
+*/
+
+async function createGhPage(repo) {
   try {
-    const languages = [];
+    const languages = await getRepoLanguages(repo);
+    const pagesInfo = getPagesInfo();
 
-    if (dt.languages_url) {
-      const langRes = await axios.get(dt.languages_url);
-
-      if (langRes) {
-        for (let lang in langRes.data) {
-          languages.push(lang);
-        }
-      }
-    }
-
-    getPagesInfo().github.pages[dt.id] = createPage({
-      key: dt.id,
-      name: dt.name,
-      path: `github/${dt.id}`,
+    pagesInfo.github.pages[repo.id] = createPage({
+      key: repo.id,
+      name: repo.name,
+      path: `github/${repo.id}`,
       data: {
-        id: dt.id,
-        watchersCount: dt.watchers_count,
-        starsCount: dt.stargazers_count,
-        forksCount: dt.forks_count,
-        homepage: dt.homepage,
-        gitUrl: dt.html_url,
+        id: repo.id,
+        watchersCount: repo.watchers_count,
+        starsCount: repo.stargazers_count,
+        forksCount: repo.forks_count,
+        homepage: repo.homepage,
+        gitUrl: repo.html_url,
         languages: languages,
-        mainLanguage: dt.language,
-        description: dt.description,
+        mainLanguage: repo.language,
+        description: repo.description,
       },
       icon: "github.png",
     });
+
+    localStorage.setItem("pagesInfo", JSON.stringify(pagesInfo));
   } catch (err) {
     console.error(err);
   }
@@ -50,7 +52,8 @@ function getGhReposId(repos) {
 
 function getReposId() {
   const reposId = [];
-  const repos = getPagesInfo().github.pages;
+  const pagesInfo = getPagesInfo();
+  const repos = pagesInfo.github.pages;
 
   for (let repo in repos) {
     reposId.push(repos[repo].key);
@@ -84,7 +87,8 @@ function getDeletedRepos(repos) {
   const ghReposId = getGhReposId(repos);
   const reposId = getReposId();
   const deletedIds = [];
-  const reposLocal = getPagesInfo().github.pages;
+  const pagesInfo = getPagesInfo();
+  const reposLocal = pagesInfo.github.pages;
   const deletedRepos = [];
 
   for (let id of reposId) {
@@ -107,89 +111,149 @@ function getTimePassed(now, then) {
 
   if (now.getDate() == then.getDate()) {
     if (now.getHours() > then.getHours()) {
-      return (minutesPassed = now.getMinutes() + then.getMinutes());
+      minutesPassed = now.getMinutes() + then.getMinutes();
+      return minutesPassed;
     }
 
-    return (minutesPassed = now.getMinutes() - then.getMinutes());
+    minutesPassed = now.getMinutes() - then.getMinutes();
+
+    return minutesPassed;
   }
 
   return 30;
 }
 
+async function getGithubRepos() {
+  try {
+    const requestUrl = "https://api.github.com/users/lauravivan/repos";
+
+    const res = await axios.get(requestUrl);
+
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function getRepoLanguages(repo) {
+  const languages = [];
+
+  if (repo.languages_url) {
+    const langRes = await axios.get(repo.languages_url);
+
+    if (langRes) {
+      for (let lang in langRes.data) {
+        languages.push(lang);
+      }
+    }
+  }
+
+  return languages;
+}
+
+async function saveUpdates(ghRepos) {
+  try {
+    const pagesInfo = getPagesInfo();
+    const reposLocal = pagesInfo.github.pages;
+
+    for (let repo in reposLocal) {
+      for (let ghRepo in ghRepos) {
+        if (reposLocal[repo].pageData.id == ghRepos[ghRepo].id) {
+          const languages = await getRepoLanguages(ghRepos[ghRepo]);
+
+          reposLocal[repo].pageName = ghRepos[ghRepo].name;
+          reposLocal[repo].pageData = {
+            id: ghRepos[ghRepo].id,
+            watchersCount: ghRepos[ghRepo].watchers_count,
+            starsCount: ghRepos[ghRepo].stargazers_count,
+            forksCount: ghRepos[ghRepo].forks_count,
+            homepage: ghRepos[ghRepo].homepage,
+            gitUrl: ghRepos[ghRepo].html_url,
+            languages: languages,
+            mainLanguage: ghRepos[ghRepo].language,
+            description: ghRepos[ghRepo].description,
+          };
+        }
+      }
+    }
+
+    localStorage.setItem("pagesInfo", JSON.stringify(pagesInfo));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function isThereNewRepos(repos) {
+  const addedRepos = getAddedRepos(repos);
+
+  if (addedRepos.length > 0) {
+    return true;
+  }
+
+  return false;
+}
+
+function isThereDeletedRepos(repos) {
+  const deletedRepos = getDeletedRepos(repos);
+
+  if (deletedRepos.length > 0) {
+    return true;
+  }
+
+  return false;
+}
+
+function deleteDeletedRepos(repos) {
+  const deletedRepos = getDeletedRepos(repos);
+  const pagesInfo = getPagesInfo();
+
+  for (let repo of deletedRepos) {
+    delete pagesInfo.github.pages[repo];
+  }
+
+  localStorage.setItem("pagesInfo", JSON.stringify(pagesInfo));
+}
+
+async function saveAddedRepos(repos) {
+  const addedRepos = getAddedRepos(repos);
+
+  for (let repo of addedRepos) {
+    await createGhPage(repo);
+  }
+}
+
 export default async function createGhPages() {
   try {
-    let res;
     const now = new Date();
-    const requestUrl = "https://api.github.com/users/lauravivan/repos";
-    const pagesInfo = getPagesInfo();
+    const repos = await getGithubRepos();
     const requestDateTime = localStorage.getItem("requestDateTime") || "";
+    const pagesInfo = getPagesInfo();
 
     if (requestDateTime && Object.keys(pagesInfo.github.pages).length > 0) {
       const then = new Date(requestDateTime);
       const minutesPassed = getTimePassed(now, then);
 
       if (minutesPassed >= 30) {
-        res = await axios.get(requestUrl);
         localStorage.setItem("requestDateTime", now);
 
-        if (res) {
-          const addedRepos = getAddedRepos(res.data);
-          const deletedRepos = getDeletedRepos(res.data);
-          const reposLocal = pagesInfo.github.pages;
-
-          if (deletedRepos.length > 0) {
-            for (let repo of deletedRepos) {
-              delete pagesInfo.github.pages[repo];
-            }
+        if (repos) {
+          if (isThereNewRepos(repos)) {
+            await saveAddedRepos(repos);
           }
 
-          for (let repo in reposLocal) {
-            for (let dt in res.data) {
-              if (reposLocal[repo].pageData.id == res.data[dt].id) {
-                const languages = [];
-
-                if (res.data[dt].languages_url) {
-                  const langRes = await axios.get(res.data[dt].languages_url);
-
-                  if (langRes) {
-                    for (let lang in langRes.data) {
-                      languages.push(lang);
-                    }
-                  }
-                }
-
-                reposLocal[repo].pageName = res.data[dt].name;
-                reposLocal[repo].pageData = {
-                  id: res.data[dt].id,
-                  watchersCount: res.data[dt].watchers_count,
-                  starsCount: res.data[dt].stargazers_count,
-                  forksCount: res.data[dt].forks_count,
-                  homepage: res.data[dt].homepage,
-                  gitUrl: res.data[dt].html_url,
-                  languages: languages,
-                  mainLanguage: res.data[dt].language,
-                  description: res.data[dt].description,
-                };
-              }
-            }
+          if (isThereDeletedRepos(repos)) {
+            deleteDeletedRepos(repos);
           }
 
-          if (addedRepos.length > 0) {
-            for (let repo of addedRepos) {
-              await createGhPage(repo);
-            }
-          }
+          await saveUpdates(repos);
         }
       }
     } else {
       localStorage.setItem("requestDateTime", now);
 
-      res = await axios.get(requestUrl);
-
-      if (res) {
-        for (let data in res.data) {
-          let dt = res.data[data];
-          await createGhPage(dt);
+      if (repos) {
+        for (let repo in repos) {
+          await createGhPage(repos[repo]);
         }
       }
     }

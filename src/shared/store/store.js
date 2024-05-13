@@ -1,9 +1,9 @@
 import { createStore } from "vuex";
 import createPage from "util/createPage";
 import createGhPages from "util/createGhPage";
-import { getPagesInfo } from "util/util";
+import { getPagesInfo, createProjectSubPage } from "util/util";
 
-const pagesInfo = getPagesInfo();
+let pagesInfo = getPagesInfo();
 
 if (pagesInfo["favorites"]) {
   delete pagesInfo["favorites"];
@@ -13,21 +13,6 @@ const ghPages =
   pagesInfo && pagesInfo.github && pagesInfo.github.pages
     ? pagesInfo.github.pages
     : {};
-
-function createProjectSubPage(repoId, subPageKey, banner, icon) {
-  if (pagesInfo["github"].pages[repoId]) {
-    const subPage = { ...pagesInfo["github"].pages[repoId] };
-
-    pagesInfo["projects"].pages[subPageKey] = createPage({
-      key: subPageKey,
-      name: subPageKey,
-      icon: icon,
-      banner: banner,
-      path: `projects/${subPageKey}`,
-      data: subPage.pageData,
-    });
-  }
-}
 
 pagesInfo["about"] = createPage({
   key: "about",
@@ -69,7 +54,6 @@ pagesInfo["projects"] = createPage({
 });
 
 pagesInfo["github"].pages = ghPages;
-
 localStorage.setItem("pagesInfo", JSON.stringify(pagesInfo));
 
 try {
@@ -79,7 +63,6 @@ try {
 }
 
 createProjectSubPage(756993173, "trendTide", "trendTide.png", "trendTide.png");
-localStorage.setItem("pagesInfo", JSON.stringify(pagesInfo));
 
 const store = createStore({
   state: {
