@@ -2,6 +2,8 @@ import createPage from "util/createPage";
 import axios from "axios";
 import { getPagesInfo } from "util/util";
 
+const TIME_FROM_REQUEST = 10;
+
 /**
  * when a user first access => create all pages and save
     on local storage the datetime request
@@ -120,7 +122,7 @@ function getTimePassed(now, then) {
     return minutesPassed;
   }
 
-  return 30;
+  return TIME_FROM_REQUEST;
 }
 
 async function getGithubRepos() {
@@ -233,7 +235,7 @@ export default async function createGhPages() {
       const then = new Date(requestDateTime);
       const minutesPassed = getTimePassed(now, then);
 
-      if (minutesPassed >= 30) {
+      if (minutesPassed >= TIME_FROM_REQUEST) {
         localStorage.setItem("requestDateTime", now);
 
         if (repos) {
