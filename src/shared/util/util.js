@@ -33,7 +33,14 @@ export function getPagesInfo() {
   return JSON.parse(localStorage.getItem("pagesInfo")) || {};
 }
 
-export function createProjectSubPage(repoId, subPageKey, banner, icon) {
+export function createProjectSubPage(
+  repoId,
+  subPageKey,
+  name,
+  desc,
+  banner,
+  icon
+) {
   const pagesInfo = getPagesInfo();
 
   if (pagesInfo["github"].pages[repoId]) {
@@ -41,11 +48,12 @@ export function createProjectSubPage(repoId, subPageKey, banner, icon) {
 
     pagesInfo["projects"].pages[subPageKey] = createPage({
       key: subPageKey,
-      name: subPageKey,
+      name: name,
       icon: icon,
       banner: banner,
       path: `projects/${subPageKey}`,
       data: subPage.pageData,
+      desc: desc,
     });
   }
 

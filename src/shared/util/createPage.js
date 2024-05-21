@@ -39,6 +39,7 @@ export default function createPage({
   banner = "",
   props = "",
   data = "",
+  desc = "",
 }) {
   return {
     key: key,
@@ -51,5 +52,6 @@ export default function createPage({
     pageData: data,
     pageSettings: getSettings(key),
     pages: {},
+    pageDesc: desc,
   };
 }

@@ -62,7 +62,34 @@ try {
   console.error(err);
 }
 
-createProjectSubPage(756993173, "trendTide", "trendTide.png", "trendTide.png");
+createProjectSubPage(
+  757783415,
+  "notionPortfolio",
+  "Notion Portfolio",
+  `Inspired by Nitin Ranganath's idea of creating a portfolio based on VSCode, I've decided that my portfolio's theme would be based on Notion, that is a tool I really like and use in daily basis.
+  I chose Vue.js framework because at the time I was having more contact with it and noticed that it would be a good project to be used for future studies.
+  Also, I chose for SASS to styling because I enjoy its funcionalities and it makes easier to style larger projects.`,
+  "",
+  "portfolio/icon.png"
+);
+
+createProjectSubPage(
+  756993173,
+  "trendTide",
+  "Trend Tide",
+  `I was asked to build a Full-stack project using React.js, Express.js and other tools, so I've decided to build something that a could use a complete CRUD and to fullfill my desire to create a social media with my style, that it was something I wanted for a while.`,
+  "trendTide.png",
+  "trendTide.png"
+);
+
+createProjectSubPage(
+  799340314,
+  "countdown",
+  "Countdown",
+  `I was searching for an app to take track of the countdown of important events and despite I found a really good one, I needed to register more than it was possible. I thought it would be a good idea for resuming React.js studies and create something for my personal use that I was actually needing.`,
+  "",
+  "countdown.png"
+);
 
 const store = createStore({
   state: {
