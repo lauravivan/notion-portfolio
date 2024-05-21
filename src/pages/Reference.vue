@@ -106,6 +106,15 @@ const referenceToggles = [
     },
   },
   {
+    summary: "Countdown project",
+    detailsContent: {
+      mascot: {
+        link: "https://www.svgrepo.com/svg/49930/koala",
+        author: "SVG Repo",
+      },
+    },
+  },
+  {
     summary: "Notion portfolio",
     detailsContent: {
       mascot: {
