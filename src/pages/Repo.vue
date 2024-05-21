@@ -1,43 +1,47 @@
 <template>
   <Database
-    v-if="!props.hideDatabase && page"
-    :multiSelectItems="page.pageData.languages"
+    v-if="!props.hideDatabase && props.page"
+    :multiSelectItems="props.page.pageData.languages"
   >
     <template #dateTimeDesc>Created</template>
     <template #multiSelectDesc>Used languages</template>
   </Database>
-  <div class="repo" v-if="page">
+  <div class="repo" v-if="props.page">
     <div class="repo__metrics">
       <div class="repo__metric">
         <Icon :icon="icons.star" />
-        <div>{{ page.pageData.starsCount }}</div>
+        <div>{{ props.page.pageData.starsCount }}</div>
       </div>
       <div class="repo__metric">
         <Icon :icon="icons.eye" />
-        <div>{{ page.pageData.watchersCount }}</div>
+        <div>{{ props.page.pageData.watchersCount }}</div>
       </div>
       <div class="repo__metric">
         <Icon :icon="icons.forkCode" />
-        <div>{{ page.pageData.forksCount }}</div>
+        <div>{{ props.page.pageData.forksCount }}</div>
       </div>
     </div>
     <Empty />
-    <Text v-if="page.pageData.description"
-      >Description: {{ page.pageData.description }}</Text
+    <Text v-if="props.page.pageData.description"
+      >Description: {{ props.page.pageData.description }}</Text
     >
     <Empty />
     <Text style="display: flex; flex-wrap: wrap; column-gap: 10px">
       <Icon :icon="icons.code" />
       <span class="highlight">Link github: </span
-      ><a :href="page.pageData.gitUrl">{{ page.pageData.gitUrl }}</a>
+      ><a :href="props.page.pageData.gitUrl">{{
+        props.page.pageData.gitUrl
+      }}</a>
     </Text>
     <Text
-      v-if="page.pageData.homepage"
+      v-if="props.page.pageData.homepage"
       style="display: flex; flex-wrap: wrap; column-gap: 10px"
     >
       <Icon :icon="icons.link" />
       <span class="highlight">Link page: </span
-      ><a :href="page.pageData.gitUrl">{{ page.pageData.homepage }}</a>
+      ><a :href="props.page.pageData.gitUrl">{{
+        props.page.pageData.homepage
+      }}</a>
     </Text>
   </div>
 </template>
@@ -45,21 +49,11 @@
 <script setup>
 import Database from "components/Database.vue";
 import Icon from "UIElements/Icon.vue";
-import { icons, activePage } from "global";
+import { icons } from "global";
 import Text from "UIElements/Text.vue";
 import Empty from "UIElements/Empty.vue";
-import { ref, onMounted } from "vue";
 
 const props = defineProps(["page", "hideDatabase"]);
-const page = ref(null);
-
-onMounted(() => {
-  if (props.page) {
-    page.value = props.page;
-  } else {
-    page.value = activePage.value;
-  }
-});
 </script>
 
 <style lang="scss">

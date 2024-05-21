@@ -43,10 +43,7 @@
             <img :src="getGlobalProperties.activePageModal.pageIcon" />
             <span>{{ getGlobalProperties.activePageModal.pageName }}</span>
           </div>
-          <component
-            :is="props.component"
-            :page="getGlobalProperties.activePageModal"
-          />
+          <slot />
           <div style="width: auto; height: 100px"></div>
         </div>
       </main>
