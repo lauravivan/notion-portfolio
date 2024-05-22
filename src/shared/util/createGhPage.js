@@ -2,7 +2,7 @@ import createPage from "util/createPage";
 import axios from "axios";
 import { getPagesInfo } from "util/util";
 
-const TIME_FROM_REQUEST = 10;
+const TIME_FROM_REQUEST = 40;
 
 /**
  * when a user first access => create all pages and save
