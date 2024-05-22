@@ -3,20 +3,20 @@
     <Modal
       class="page-modal"
       :provideName="props.provideName"
-      v-if="getGlobalProperties.activePageModal"
+      v-if="props.page"
     >
-      <router-link :to="getGlobalProperties.activePageModal.pagePath">
+      <router-link :to="props.page.pagePath">
         <Icon class="page-modal__expand" :icon="icons.expand" />
       </router-link>
       <main
         class="page-wrapper"
         :class="[
-          getGlobalProperties.activePageModal.pageSettings.fontStyle,
-          getGlobalProperties.activePageModal.pageSettings.fontSize,
+          props.page.pageSettings.fontStyle,
+          props.page.pageSettings.fontSize,
         ]"
       >
         <div
-          v-if="getGlobalProperties.activePageModal.pageBanner"
+          v-if="props.page.pageBanner"
           class="page-banner"
           :style="{
             height: 'max-content',
@@ -24,26 +24,18 @@
             'margin-top': '20px !important',
           }"
         >
-          <img :src="getGlobalProperties.activePageModal.pageBanner" />
+          <img :src="props.page.pageBanner" />
         </div>
         <div
           class="page-content"
-          :class="
-            getGlobalProperties.activePageModal.pageBanner
-              ? 'page-content--banner'
-              : ''
-          "
-          :style="
-            getGlobalProperties.activePageModal.pageBanner
-              ? { top: '150px' }
-              : ''
-          "
+          :class="props.page.pageBanner ? 'page-content--banner' : ''"
+          :style="props.page.pageBanner ? { top: '150px' } : ''"
         >
           <div class="page-title">
-            <img :src="getGlobalProperties.activePageModal.pageIcon" />
-            <span>{{ getGlobalProperties.activePageModal.pageName }}</span>
+            <img :src="props.page.pageIcon" />
+            <span>{{ props.page.pageName }}</span>
           </div>
-          <slot />
+          <component :is="props.component" :page="props.page" />
           <div style="width: auto; height: 100px"></div>
         </div>
       </main>
@@ -54,9 +46,11 @@
 <script setup>
 import Modal from "components/Modal.vue";
 import Icon from "UIElements/Icon.vue";
-import { icons, getGlobalProperties } from "global";
+import { icons } from "global";
 
-const props = defineProps(["component", "provideName"]);
+const props = defineProps(["component", "provideName", "page"]);
+
+console.log(props.page);
 </script>
 
 <style lang="scss">

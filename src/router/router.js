@@ -82,6 +82,16 @@ const router = createRouter({
           path: "/projects/:id",
           component: Project,
           name: "project",
+          props: function (to) {
+            const id = to.params.id;
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+
+            to.meta.params = {
+              page: pages.projects.pages[id],
+            };
+
+            return to.meta.params;
+          },
           beforeEnter: (to, from, next) => {
             const id = to.params.id;
             const pages = JSON.parse(localStorage.getItem("pagesInfo"));
@@ -93,6 +103,16 @@ const router = createRouter({
           path: "/github/:id",
           component: Repo,
           name: "repo",
+          props: function (to) {
+            const id = to.params.id;
+            const pages = JSON.parse(localStorage.getItem("pagesInfo"));
+
+            to.meta.params = {
+              page: pages.github.pages[id],
+            };
+
+            return to.meta.params;
+          },
           beforeEnter: (to, from, next) => {
             const id = to.params.id;
             const pages = JSON.parse(localStorage.getItem("pagesInfo"));

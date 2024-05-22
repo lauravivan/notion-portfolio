@@ -46,21 +46,20 @@
       </div>
     </div>
   </div>
-  <MainModalView :provideName="'pageModal'">
-    <component
-      :is="props.component"
-      :page="getGlobalProperties.activePageModal"
-    />
-  </MainModalView>
+  <MainModalView
+    :provideName="'pageModal'"
+    :component="props.component"
+    :page="getGlobalProperties.activePageModal"
+  />
 </template>
 
 <script setup>
 import Icon from "UIElements/Icon.vue";
 import {
   icons,
-  setGlobalProperty,
   activePage,
   getGlobalProperties,
+  setGlobalProperty,
 } from "global";
 import useModal from "hooks/useModal";
 import { provide, ref } from "vue";

@@ -15,6 +15,7 @@ export default function useModal() {
   }
 
   function showModal(ref) {
+    console.log(ref);
     if (ref && ref.value) {
       setTimeout(() => {
         ref.value.style.display = "block";
