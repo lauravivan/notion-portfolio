@@ -97,11 +97,20 @@ const referenceToggles = [
     },
   },
   {
-    summary: "TrendTide project",
+    summary: "WeeklyPlanner project",
     detailsContent: {
       mascot: {
-        link: "https://www.svgrepo.com/svg/395885/black-cat",
-        author: "googlefonts",
+        link: "https://www.svgrepo.com/svg/481299/panda-face-2",
+        author: "Icooon Mono",
+      },
+    },
+  },
+  {
+    summary: "My reference project",
+    detailsContent: {
+      mascot: {
+        link: "https://www.svgrepo.com/svg/401214/books",
+        author: "joypixels",
       },
     },
   },
@@ -115,11 +124,11 @@ const referenceToggles = [
     },
   },
   {
-    summary: "Notion portfolio",
+    summary: "TrendTide project",
     detailsContent: {
       mascot: {
-        link: "https://www.flaticon.com/stickers-pack/coffee-shop-348",
-        author: "paulalee",
+        link: "https://www.svgrepo.com/svg/395885/black-cat",
+        author: "googlefonts",
       },
     },
   },
