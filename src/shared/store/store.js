@@ -63,14 +63,30 @@ try {
 }
 
 createProjectSubPage(
-  757783415,
-  "notionPortfolio",
-  "Notion Portfolio",
-  `Inspired by Nitin Ranganath's idea of creating a portfolio based on VSCode, I've decided that my portfolio's theme would be based on Notion, that is a tool I really like and use in daily basis.
-  I chose Vue.js framework because at the time I was having more contact with it and noticed that it would be a good project to be used for future studies.
-  Also, I chose for SASS to styling because I enjoy its funcionalities and it makes easier to style larger projects.`,
-  "",
-  "portfolio/icon.png"
+  806592860,
+  "weeklyPlanner",
+  "WeeklyPlanner",
+  `As I needed a fast way to plan things to do during the week, without being tied to specific calendar days, I decided to create an online weekly planner to organize my study routine and other tasks.`,
+  "weeklyplanner.png",
+  "weeklyplanner.png"
+);
+
+createProjectSubPage(
+  756993173,
+  "myReference",
+  "My Reference",
+  `I had a bunch of saved links in different places, which started to get a little bit messy. In a Vako Shvili's design class in his course, he showed the website created to organize the class material, which got me more excited about my already idea to create a place to keep all of my links. So I could first search in it for something I even didn't remember I saved, which happended a lot.`,
+  "myreference.png",
+  "myreference.png"
+);
+
+createProjectSubPage(
+  799340314,
+  "countdown",
+  "Countdown",
+  `I was searching for an app to take track of the countdown of important events and despite I found a really good one, I needed to register more than it was possible. I thought it would be a good idea for resuming React.js studies and create something for my personal use that I was actually needing.`,
+  "countdown.png",
+  "countdown.png"
 );
 
 createProjectSubPage(
@@ -80,15 +96,6 @@ createProjectSubPage(
   `I was asked to build a Full-stack project using React.js, Express.js and other tools, so I've decided to build something that a could use a complete CRUD and to fullfill my desire to create a social media with my style, that it was something I wanted for a while.`,
   "trendTide.png",
   "trendTide.png"
-);
-
-createProjectSubPage(
-  799340314,
-  "countdown",
-  "Countdown",
-  `I was searching for an app to take track of the countdown of important events and despite I found a really good one, I needed to register more than it was possible. I thought it would be a good idea for resuming React.js studies and create something for my personal use that I was actually needing.`,
-  "",
-  "countdown.png"
 );
 
 const store = createStore({
