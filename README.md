@@ -2,11 +2,10 @@
 
 🐋A work in progress
 
-## Description
+## Description 
+This is a portfolio project, so basically is inteended to showcase my web development projects. It's Notion-inspired theme and built using Vue.js3. 
 
-This is a portfolio project, so basically is inteended to showcase my web development projects. It's Notion-inspired theme and built using Vue.js3. Also, it has a SPA (Single-page-application) approach, which means that this frontend project is being fully controlled by Vue.js.
-You can preview it below:
-
+## Preview
 <div align="center">
   
   ![Banner with images of the project](./public/portfolio/banner.gif)
