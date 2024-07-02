@@ -95,8 +95,13 @@ const router = createRouter({
           beforeEnter: (to, from, next) => {
             const id = to.params.id;
             const pages = JSON.parse(localStorage.getItem("pagesInfo"));
-            storeInfo(pages.projects.pages[id]);
-            next();
+
+            if (pages.projects.pages[id]) {
+              storeInfo(pages.projects.pages[id]);
+              next();
+            } else {
+              next("/not-found");
+            }
           },
         },
         {
@@ -116,8 +121,13 @@ const router = createRouter({
           beforeEnter: (to, from, next) => {
             const id = to.params.id;
             const pages = JSON.parse(localStorage.getItem("pagesInfo"));
-            storeInfo(pages.github.pages[id]);
-            next();
+
+            if (pages.github.pages[id]) {
+              storeInfo(pages.github.pages[id]);
+              next();
+            } else {
+              next("/not-found");
+            }
           },
         },
       ],
