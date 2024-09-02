@@ -24,7 +24,7 @@
 <script setup>
 import Menu from "components/Menu.vue";
 import OptionList from "components/OptionList.vue";
-import Icon from "UIElements/Icon.vue";
+import Icon from "components/Icon.vue";
 import { provide, ref } from "vue";
 import useModal from "hooks/useModal";
 import { icons } from "global";

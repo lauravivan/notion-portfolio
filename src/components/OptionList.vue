@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import Icon from "UIElements/Icon.vue";
+import Icon from "components/Icon.vue";
 import { ref } from "vue";
 import { icons } from "global";
 

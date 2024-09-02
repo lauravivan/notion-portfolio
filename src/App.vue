@@ -22,8 +22,8 @@
 <script setup>
 import Aside from "components/Aside.vue";
 import Header from "components/Header.vue";
-import Tabs from "UIElements/Tabs.vue";
-import router from "@/router/router";
+import Tabs from "components/Tabs.vue";
+import router from "router";
 import { computed } from "vue";
 import { mainContainerClasses, mainContentClasses } from "global";
 

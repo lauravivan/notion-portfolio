@@ -34,10 +34,10 @@
 <script setup>
 import { activePage } from "global";
 import { onMounted, ref } from "vue";
-import Empty from "UIElements/Empty.vue";
-import Icon from "UIElements/Icon.vue";
+import Empty from "components/Empty.vue";
+import Icon from "components/Icon.vue";
 import { icons } from "global";
-import MultiSelect from "UIElements/MultiSelect.vue";
+import MultiSelect from "components/MultiSelect.vue";
 
 const props = defineProps(["page", "multiSelectItems"]);
 const page = ref(null);

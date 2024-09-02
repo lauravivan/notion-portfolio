@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Contact from "@/pages/Contact.vue";
-import Github from "@/pages/Github.vue";
-import Project from "@/pages/Project.vue";
-import Reference from "@/pages/Reference.vue";
-import Projects from "@/pages/Projects.vue";
-import Home from "@/pages/Home.vue";
-import Repo from "@/pages/Repo.vue";
-import Main from "@/pages/Main.vue";
-import NotFound from "@/pages/NotFound.vue";
+import Contact from "pages/Contact.vue";
+import Github from "pages/Github.vue";
+import Project from "pages/Project.vue";
+import Reference from "pages/Reference.vue";
+import Projects from "pages/Projects.vue";
+import Home from "pages/Home.vue";
+import Repo from "pages/Repo.vue";
+import Main from "pages/Main.vue";
+import NotFound from "pages/NotFound.vue";
 import store from "store";
 import { setGlobalSettings } from "global";
 

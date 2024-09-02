@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import Text from "UIElements/Text.vue";
+import Text from "components/Text.vue";
 
 const props = defineProps(["items"]);
 </script>

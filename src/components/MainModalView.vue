@@ -45,7 +45,7 @@
 
 <script setup>
 import Modal from "components/Modal.vue";
-import Icon from "UIElements/Icon.vue";
+import Icon from "components/Icon.vue";
 import { icons } from "global";
 
 const props = defineProps(["component", "provideName", "page"]);

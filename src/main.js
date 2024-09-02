@@ -1,6 +1,6 @@
 import "@/assets/css/main.css";
 import store from "store";
-import router from "@/router/router.js";
+import router from "router";
 import App from "@/App.vue";
 import { createApp } from "vue";
 import { globalProperties } from "global";

@@ -28,7 +28,7 @@
 <script setup>
 import { icons } from "global";
 import toggleList from "components/ToggleList.vue";
-import Text from "UIElements/Text.vue";
+import Text from "components/Text.vue";
 
 const referenceToggles = [
   {

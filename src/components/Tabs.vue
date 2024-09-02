@@ -29,8 +29,8 @@
 </template>
 
 <script setup>
-import router from "@/router/router";
-import Icon from "UIElements/Icon.vue";
+import router from "router";
+import Icon from "components/Icon.vue";
 import { computed, onMounted, watch } from "vue";
 import {
   icons,

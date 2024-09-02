@@ -52,14 +52,14 @@
 </template>
 
 <script setup>
-import Callout from "UIElements/Callout.vue";
+import Callout from "components/Callout.vue";
 import Column from "components/Column.vue";
 import BulletList from "components/BulletList.vue";
-import Divider from "UIElements/Divider.vue";
-import Text from "UIElements/Text.vue";
+import Divider from "components/Divider.vue";
+import Text from "components/Text.vue";
 import ToDoList from "components/ToDoList.vue";
-import Empty from "UIElements/Empty.vue";
-import Heading from "UIElements/Heading.vue";
+import Empty from "components/Empty.vue";
+import Heading from "components/Heading.vue";
 
 const educationTopics = [
   `System Information by IFSC (in progress). Set up to end july 2025.`,

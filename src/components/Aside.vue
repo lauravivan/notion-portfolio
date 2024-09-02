@@ -84,8 +84,8 @@ import useModal from "hooks/useModal";
 import { useStore } from "vuex";
 import { mainContainerDefault, mainContentDefault, icons } from "global";
 import { isTouchDevice } from "util/util";
-import Divider from "UIElements/Divider.vue";
-import Icon from "UIElements/Icon.vue";
+import Divider from "components/Divider.vue";
+import Icon from "components/Icon.vue";
 import SelectBtn from "components/SelectBtn.vue";
 import NestedLink from "components/NestedLink.vue";
 

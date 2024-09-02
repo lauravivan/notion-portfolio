@@ -48,10 +48,10 @@
 
 <script setup>
 import Database from "components/Database.vue";
-import Icon from "UIElements/Icon.vue";
+import Icon from "components/Icon.vue";
 import { icons } from "global";
-import Text from "UIElements/Text.vue";
-import Empty from "UIElements/Empty.vue";
+import Text from "components/Text.vue";
+import Empty from "components/Empty.vue";
 
 const props = defineProps(["page", "hideDatabase"]);
 </script>

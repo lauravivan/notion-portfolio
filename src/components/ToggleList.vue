@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import Icon from "UIElements/Icon.vue";
+import Icon from "components/Icon.vue";
 import useDisplay from "hooks/useDisplay";
 
 const detailsContentRef = ref(null);

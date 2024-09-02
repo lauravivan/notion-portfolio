@@ -11,9 +11,9 @@
 </template>
 
 <script setup>
-import Callout from "UIElements/Callout.vue";
+import Callout from "components/Callout.vue";
 import BulletList from "components/BulletList.vue";
-import Empty from "UIElements/Empty.vue";
+import Empty from "components/Empty.vue";
 
 const reachMeItems = ["E-mail: lauvivang@gmail.com"];
 

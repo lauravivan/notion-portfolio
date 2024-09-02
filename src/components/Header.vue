@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import Icon from "UIElements/Icon.vue";
+import Icon from "components/Icon.vue";
 import { ref, provide, watch } from "vue";
 import { useStore } from "vuex";
 import Menu from "components/Menu.vue";
@@ -59,7 +59,7 @@ import {
   setGlobalProperty,
   getGlobalProperties,
 } from "global";
-import Breadcrumb from "UIElements/Breadcrumb.vue";
+import Breadcrumb from "components/Breadcrumb.vue";
 import ToggleOption from "components/ToggleOption.vue";
 
 const store = useStore();

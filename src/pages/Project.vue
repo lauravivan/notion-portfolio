@@ -30,10 +30,10 @@
 
 <script setup>
 import Database from "components/Database.vue";
-import Text from "UIElements/Text.vue";
-import Heading from "UIElements/Heading.vue";
-import Empty from "UIElements/Empty.vue";
-import Iframe from "UIElements/Iframe.vue";
+import Text from "components/Text.vue";
+import Heading from "components/Heading.vue";
+import Empty from "components/Empty.vue";
+import Iframe from "components/Iframe.vue";
 
 const props = defineProps(["page", "hideDatabase"]);
 </script>

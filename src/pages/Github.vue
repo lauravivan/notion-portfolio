@@ -9,6 +9,6 @@
 
 <script setup>
 import Gallery from "components/Gallery.vue";
-import Empty from "UIElements/Empty.vue";
+import Empty from "components/Empty.vue";
 import Repo from "@/pages/Repo.vue";
 </script>

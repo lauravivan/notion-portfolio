@@ -16,12 +16,13 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
-      components: "/src/shared/components",
-      hooks: "/src/shared/hooks",
-      store: "/src/shared/store/store.js",
-      UIElements: "/src/shared/UIElements",
-      util: "/src/shared/util",
-      global: "/src/shared/global/globalProperties.js",
+      components: "/src/components",
+      hooks: "/src/hooks",
+      pages: "/src/pages",
+      store: "/src/store.js",
+      router: "/src/router.js",
+      global: "/src/globalProperties.js",
+      util: "/src/util"
     },
   },
 });

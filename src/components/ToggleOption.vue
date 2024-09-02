@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import ToggleBtn from "UIElements/ToggleBtn.vue";
+import ToggleBtn from "components/ToggleBtn.vue";
 import useToggle from "hooks/useToggle";
 
 const props = defineProps(["provideName"]);

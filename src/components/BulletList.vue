@@ -8,9 +8,9 @@
 </template>
 
 <script setup>
-import Text from "UIElements/Text.vue";
+import Text from "components/Text.vue";
 import { icons } from "global";
-import Icon from "UIElements/Icon.vue";
+import Icon from "components/Icon.vue";
 
 const props = defineProps(["items"]);
 </script>
