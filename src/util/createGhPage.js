@@ -131,6 +131,8 @@ async function getGithubRepos() {
 
     const res = await axios.get(requestUrl);
 
+    console.log(res);
+
     return res.data;
   } catch (err) {
     console.error(err);

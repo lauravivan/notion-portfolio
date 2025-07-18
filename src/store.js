@@ -63,24 +63,6 @@ try {
 }
 
 createProjectSubPage(
-  806592860,
-  "weeklyPlanner",
-  "WeeklyPlanner",
-  `As I needed a fast way to plan things to do during the week, without being tied to specific calendar days, I decided to create an online weekly planner to organize my study routine and other tasks.`,
-  "weeklyplanner.png",
-  "weeklyplanner.png"
-);
-
-createProjectSubPage(
-  756993173,
-  "myReference",
-  "My Reference",
-  `I had a bunch of saved links in different places, which started to get a little bit messy. In a Vako Shvili's design class in his course, he showed the website created to organize the class material, which got me more excited about my already idea to create a place to keep all of my links. So I could first search in it for something I even didn't remember I saved, which happended a lot.`,
-  "myreference.png",
-  "myreference.png"
-);
-
-createProjectSubPage(
   799340314,
   "countdown",
   "Countdown",
@@ -97,6 +79,24 @@ createProjectSubPage(
   "trendTide.png",
   "trendTide.png"
 );
+
+createProjectSubPage(
+  957074597,
+  "acessiweb",
+  "AcessiWeb",
+  `In 2024 I was invited to participate in another College project, and after that this project was extended to what it would become my Bachelor's thesis.`,
+  "acessiweb.png",
+  "acessiweb.png"
+);
+
+// createProjectSubPage(
+//   756993173,
+//   "checkGhFollowers",
+//   "Check Gh Followers",
+//   `For a while I wanted a fast way of searching for profiles that don't follow me on github, so I wouldn't waste my time looking for each one`,
+//   "",
+//   ""
+// );
 
 const store = createStore({
   state: {
