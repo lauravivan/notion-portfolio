@@ -1,25 +1,29 @@
 {
   "name": "portfolio",
-  "homepage": "https://lauravivan.github.io/portfolio",
+  "homepage": "arualvivan.com",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "watch-sass": "sass src/assets/scss/main.scss:src/assets/css/main.css --watch"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.4",
-    "@babel/preset-env": "^7.24.4",
-    "@vitejs/plugin-vue": "^4.5.0",
-    "axios": "^1.6.2",
+    "@iconify/vue": "^5.0.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.8.1",
     "mitt": "^3.0.1",
-    "sass": "^1.69.2",
-    "vite": "^4.0.0",
-    "vite-plugin-pages": "^0.31.0",
-    "vue": "^3.3.8",
-    "vue-router": "^4.2.5",
-    "vuex": "^4.0.2"
+    "sass": "^1.91.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4",
+    "vite-plugin-pages": "^0.33.1",
+    "vue": "^3.5.20",
+    "vue-router": "^4.5.1",
+    "vue-tsc": "^3.0.6",
+    "vuex": "^4.1.0"
+  },
+  "dependencies": {
+    "@vueuse/core": "^13.9.0"
   }
 }

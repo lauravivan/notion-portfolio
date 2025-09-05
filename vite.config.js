@@ -1,28 +1,12 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import { resolve } from "path";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  esbuild: false,
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => ["ion-icon"].includes(tag),
-        },
-      },
-    }),
-  ],
+  plugins: [vue()],
   resolve: {
     alias: {
-      "@": "/src",
-      components: "/src/components",
-      hooks: "/src/hooks",
-      pages: "/src/pages",
-      store: "/src/store.js",
-      router: "/src/router.js",
-      global: "/src/globalProperties.js",
-      util: "/src/util"
+      "@": resolve(__dirname, "src"),
     },
   },
 });
