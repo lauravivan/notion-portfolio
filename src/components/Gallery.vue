@@ -20,8 +20,8 @@
     <div class="gallery__cards-wrapper">
       <div
         class="gallery__card-wrapper"
-        v-for="page in activePage.pages"
-        :key="page.pageId"
+        v-for="page in pages"
+        :key="page.id"
         @click.stop="showPageModal(page)"
       >
         <div
@@ -36,52 +36,58 @@
             :hideDatabase="true"
           />
           <div v-else class="gallery__card-content--banner">
-            <img :src="page.pageBanner" />
+            <img :src="page.bannerPath" />
           </div>
         </div>
         <div class="gallery__card-footer">
-          <img class="gallery__page-icon" :src="page.pageIcon" />
-          <div>{{ page.pageName }}</div>
+          <img class="gallery__page-icon" :src="page.iconPath" />
+          <div>{{ page.name }}</div>
         </div>
       </div>
     </div>
   </div>
-  <MainModalView
+  <!-- <MainModalView
     :provideName="'pageModal'"
     :component="props.component"
     :page="getGlobalProperties.activePageModal"
-  />
+  /> -->
 </template>
 
-<script setup>
-import Icon from "components/Icon.vue";
-import {
-  icons,
-  activePage,
-  getGlobalProperties,
-  setGlobalProperty,
-} from "global";
-import useModal from "hooks/useModal";
-import { provide, ref } from "vue";
-import MainModalView from "components/MainModalView.vue";
+<script setup lang="ts">
+import Icon from "@/components/Icon.vue";
+import useModal from "@/hooks/useModal";
+import { computed, provide, ref } from "vue";
+import MainModalView from "@/components/MainModalView.vue";
+import { useStore } from "vuex";
 
-const props = defineProps(["galleryTitle", "cardPreviewIsCover", "component"]);
-const { showModal } = useModal();
+const store = useStore();
+
+const icons = computed(() => store.getters.getIcons);
+const activePage = computed(() => store.getters.getActivePage);
+
+const props = defineProps([
+  "galleryTitle",
+  "cardPreviewIsCover",
+  "component",
+  "pages",
+]);
+// const { showModal } = useModal();
 const modalRef = ref(null);
 
 provide("pageModal", modalRef);
 
-function showPageModal(page) {
-  setGlobalProperty("activePageModal", page);
-
-  setTimeout(() => {
-    showModal(modalRef);
-  }, 250);
+function showPageModal(page: any) {
+  // setGlobalProperty("activePageModal", page);
+  // setTimeout(() => {
+  //   showModal(modalRef);
+  // }, 250);
 }
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 .gallery {
   overflow-x: auto;
@@ -93,31 +99,31 @@ function showPageModal(page) {
   }
 
   &__navbar {
-    @include flex-layout($row-gap: 15px);
+    @include mixin.flex-layout($row-gap: 15px);
     margin-bottom: 30px;
   }
 
   &__menu {
-    @include flex-layout($flex-direction: row);
+    @include mixin.flex-layout($flex-direction: row);
     justify-content: space-between;
-    border-bottom: 1px solid $black-2;
+    border-bottom: 1px solid var.$black-2;
   }
 
   &__menu-item:nth-child(1) {
-    @include flex-layout($flex-direction: row, $column-gap: 3px);
+    @include mixin.flex-layout($flex-direction: row, $column-gap: 3px);
     align-items: center;
-    font-weight: $fw-700;
-    border-bottom: 2px solid $black;
+    font-weight: var.$fw-700;
+    border-bottom: 2px solid var.$black;
     padding-bottom: 15px;
   }
 
   &__menu-item:nth-child(2) {
-    @include flex-layout($flex-direction: row, $column-gap: 10px);
+    @include mixin.flex-layout($flex-direction: row, $column-gap: 10px);
     visibility: hidden;
 
     button {
       all: unset;
-      color: $black-8;
+      color: var.$black-8;
       cursor: pointer;
       box-sizing: border-box;
       padding: 7px 5px;
@@ -125,14 +131,14 @@ function showPageModal(page) {
 
       &:hover {
         border-radius: 10%;
-        background-color: $gray-4;
+        background-color: var.$gray-4;
       }
     }
   }
 
   &__title {
-    font-weight: $fw-700;
-    font-size: $fs-large;
+    font-weight: var.$fw-700;
+    font-size: var.$fs-large;
   }
 
   &__cards-wrapper {
@@ -142,21 +148,21 @@ function showPageModal(page) {
   }
 
   &__card-wrapper {
-    border: 1px solid $black-1;
+    border: 1px solid var.$black-1;
     border-radius: 5px;
-    box-shadow: $box-shadow-2;
+    box-shadow: var.$box-shadow-2;
     cursor: pointer;
-    font-size: $fs-small;
-    color: $black-6;
+    font-size: var.$fs-small;
+    color: var.$black-6;
 
     &:hover {
-      background-color: $gray-2;
+      background-color: var.$gray-2;
     }
   }
 
   &__card-content {
-    @include flex-layout($row-gap: 15px);
-    background-color: $gray-2;
+    @include mixin.flex-layout($row-gap: 15px);
+    background-color: var.$gray-2;
     height: 160px;
     overflow: hidden;
 
@@ -173,9 +179,9 @@ function showPageModal(page) {
 
   &__card-footer {
     padding: 10px;
-    @include flex-layout($flex-direction: row, $column-gap: 8px);
+    @include mixin.flex-layout($flex-direction: row, $column-gap: 8px);
     align-items: center;
-    font-weight: $fw-900;
+    font-weight: var.$fw-900;
   }
 
   &__page-icon {

@@ -2,32 +2,35 @@
   <header class="header">
     <div class="header__content">
       <Breadcrumb />
+      <div></div>
       <div
         class="header__btn"
         role="button"
         id="header-btn"
-        @click="showHeaderMenu"
+        @click="showMenuModal"
       >
         <Icon :icon="icons.dotsHoriz" />
       </div>
     </div>
   </header>
 
-  <Menu
+  <Modal
     class="header-menu"
-    :provideName="'headerMenu'"
-    :menuStyles="{ top: '77px', right: '10px' }"
+    :provideName="HEADER_MENU_PROVIDE_NAME"
+    :hideModal="hideMenuModal"
+    :addModalListener="addMenuModalListener"
+    :modalStyles="{ top: '77px', right: '10px' }"
   >
     <div class="header-menu__style">
       <span>Style</span>
       <div class="header-menu__fonts">
         <div
-          v-for="font in store.getters.getFontsOptions"
+          v-for="font in fontsOptions"
           class="header-menu__font-wrapper"
-          @click="setFontStyle(font.id)"
+          @click="storeActiveSettings(FONT_STYLE_PROVIDE_NAME, font.id)"
           :class="{
             'header-menu__font-wrapper--active':
-              getGlobalProperties.fontStyle === font.id,
+              activeSettings.fontStyle === font.id,
           }"
         >
           <span class="header-menu__ag">Ag</span>
@@ -37,109 +40,107 @@
     </div>
 
     <div class="header-menu__size-and-width">
-      <ToggleOption @click="toToggleSize" :provideName="'toggleSize'"
-        >Small Text</ToggleOption
+      <Toggle
+        :provideName="FONT_SIZE_PROVIDE_NAME"
+        :active="activeFS"
+        :toToggle="toToggleFS"
+        :toggleRef="toggleRefFS"
+        @click="storeActiveSettings(FONT_SIZE_PROVIDE_NAME, activeFS)"
+        >Small Text</Toggle
       >
-      <ToggleOption @click="toToggleWidth" :provideName="'toggleWidth'"
-        >Full width</ToggleOption
+      <Toggle
+        :provideName="FULL_WIDTH_PROVIDE_NAME"
+        :active="activeFW"
+        :toToggle="toToggleFW"
+        :toggleRef="toggleRefFW"
+        @click="storeActiveSettings(FULL_WIDTH_PROVIDE_NAME, activeFW)"
+        >Full width</Toggle
       >
     </div>
-  </Menu>
+  </Modal>
 </template>
 
-<script setup>
-import Icon from "components/Icon.vue";
-import { ref, provide, watch } from "vue";
+<script setup lang="ts">
+import Icon from "@/components/Icon.vue";
+import { computed, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-import Menu from "components/Menu.vue";
-import useModal from "hooks/useModal";
-import {
-  activePage,
-  icons,
-  setGlobalProperty,
-  getGlobalProperties,
-} from "global";
-import Breadcrumb from "components/Breadcrumb.vue";
-import ToggleOption from "components/ToggleOption.vue";
+import useModal from "@/hooks/useModal";
+import Breadcrumb from "@/components/Breadcrumb.vue";
+import Toggle from "./Toggle.vue";
+import useToggle from "@/hooks/useToggle";
+import Modal from "./Modal.vue";
 
 const store = useStore();
-const headerMenuRef = ref(null);
-const toggleSizeRef = ref(null);
-const toggleWidthRef = ref(null);
-const { showModal } = useModal();
 
-provide("headerMenu", headerMenuRef);
-provide("toggleSize", toggleSizeRef);
-provide("toggleWidth", toggleWidthRef);
+const FONT_STYLE_PROVIDE_NAME = "fontStyle";
+const FULL_WIDTH_PROVIDE_NAME = "fullWidth";
+const FONT_SIZE_PROVIDE_NAME = "smallText";
+const HEADER_MENU_PROVIDE_NAME = "headerMenu";
 
-function showHeaderMenu() {
-  showModal(headerMenuRef);
-}
+const activePage = computed<Page>(() => store.getters.getActivePage);
+const fontsOptions = computed(() => store.getters.getFontsOptions);
+const activeSettings = computed<Settings>(
+  () => store.getters.getActiveSettings
+);
+const settings = computed<PagesSettings>(() => store.getters.getSettings);
+const icons = computed(() => store.getters.getIcons);
 
-function updateUserPref(pageKey, prefToUpdate, valueToUpdate) {
-  store.commit("storeUserPreference", {
-    pageKey: pageKey,
-    prefToUpdate: prefToUpdate,
-    valueToUpdate: valueToUpdate,
+const {
+  active: activeFS,
+  toToggle: toToggleFS,
+  toggleRef: toggleRefFS,
+  handleActive: handleActiveFS,
+} = useToggle({
+  provideName: FONT_SIZE_PROVIDE_NAME,
+});
+
+const {
+  active: activeFW,
+  toToggle: toToggleFW,
+  toggleRef: toggleRefFW,
+  handleActive: handleActiveFW,
+} = useToggle({
+  provideName: FULL_WIDTH_PROVIDE_NAME,
+});
+
+const {
+  showModal: showMenuModal,
+  hideModal: hideMenuModal,
+  addModalListener: addMenuModalListener,
+} = useModal({
+  provideName: HEADER_MENU_PROVIDE_NAME,
+});
+
+function storeActiveSettings(provideName: string, value: boolean | string) {
+  store.commit("storeActiveSettings", {
+    ...activeSettings.value,
+    [provideName]: value,
+  });
+  store.commit("storeSettings", {
+    key: activePage.value.id,
+    settings: activeSettings.value,
   });
 }
 
-function setFontStyle(font) {
-  updateUserPref(activePage.value.key, "fontStyle", font);
-  setGlobalProperty("fontStyle", font);
-}
+onBeforeMount(() => {
+  if (activePage && activePage.value && activePage.value.id) {
+    const actSetts = settings.value[activePage.value.id];
+    store.commit("storeActiveSettings", actSetts);
 
-function toToggleUserPref(toggleRef, pref, prefValue) {
-  const isActive = toggleRef.value.classList.contains("toggle-btn--active");
-
-  if (isActive) {
-    updateUserPref(activePage.value.key, pref, prefValue);
-    setGlobalProperty(pref, prefValue);
-  } else {
-    updateUserPref(activePage.value.key, pref, "");
-    setGlobalProperty(pref, "");
-  }
-}
-
-function toToggleSize() {
-  toToggleUserPref(
-    toggleSizeRef,
-    "fontSize",
-    store.getters.getFontSizeOptions[0]
-  );
-}
-
-function toToggleWidth() {
-  toToggleUserPref(
-    toggleWidthRef,
-    "pageWidth",
-    store.getters.getPageWidthOptions[0]
-  );
-}
-
-watch(activePage, (currentValue) => {
-  const active = "toggle-btn--active";
-
-  if (currentValue.pageSettings.fontSize) {
-    toggleSizeRef.value.classList.add(active);
-  } else {
-    toggleSizeRef.value.classList.remove(active);
-  }
-
-  if (currentValue.pageSettings.pageWidth) {
-    toggleWidthRef.value.classList.add(active);
-  } else {
-    toggleWidthRef.value.classList.remove(active);
+    handleActiveFS(actSetts[FONT_SIZE_PROVIDE_NAME]);
+    handleActiveFW(actSetts[FULL_WIDTH_PROVIDE_NAME]);
   }
 });
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 .app .header {
-  background-color: $white;
-  height: $HEADER_HEIGHT;
+  background-color: var.$white;
+  height: var.$HEADER_HEIGHT;
 
   &__content {
     display: flex;
@@ -155,34 +156,34 @@ watch(activePage, (currentValue) => {
 .app .header-menu {
   &__style {
     padding: 0.5rem 0;
-    border-bottom: 1px solid $black-1;
-    @include flex-layout($row-gap: 1rem);
+    border-bottom: 1px solid var.$black-1;
+    @include mixin.flex-layout($row-gap: 1rem);
 
     > span {
-      font-size: $fs-xs;
-      color: $black-6;
-      font-weight: $fw-600;
+      font-size: var.$fs-xs;
+      color: var.$black-6;
+      font-weight: var.$fw-600;
     }
   }
 
   &__ag {
-    color: $black-6;
+    color: var.$black-6;
     font-stretch: condensed;
-    font-size: $fs-large;
+    font-size: var.$fs-large;
   }
 
   &__font-name {
-    color: $black-4;
-    font-weight: $fw-600;
-    font-size: $fs-xs;
+    color: var.$black-4;
+    font-weight: var.$fw-600;
+    font-size: var.$fs-xs;
   }
 
   &__fonts {
-    @include grid-layout(repeat(3, 1fr));
+    @include mixin.grid-layout(repeat(3, 1fr));
   }
 
   &__font-wrapper {
-    @include flex-layout($row-gap: 0.5rem);
+    @include mixin.flex-layout($row-gap: 0.5rem);
     align-items: center;
     border-radius: 5%;
     cursor: pointer;
@@ -190,35 +191,35 @@ watch(activePage, (currentValue) => {
     padding: 5px 3px;
 
     &:nth-child(1) {
-      font-family: $default;
+      font-family: var.$default;
     }
 
     &:nth-child(2) {
-      font-family: $serif;
+      font-family: var.$serif;
     }
 
     &:nth-child(3) {
-      font-family: $mono;
+      font-family: var.$mono;
     }
 
     &:hover {
-      background-color: $gray-4;
+      background-color: var.$gray-4;
     }
 
     &--active {
       animation: blink 1s;
 
       .header-menu__ag {
-        color: $active;
+        color: var.$active;
       }
     }
   }
 
   &__size-and-width {
-    @include flex-layout($row-gap: 0.5rem);
+    @include mixin.flex-layout($row-gap: 0.5rem);
     padding: 1rem 0.2rem 0.5rem;
 
-    @media (max-width: $screen-xs) {
+    @media (max-width: var.$screen-xs) {
       display: none;
     }
   }

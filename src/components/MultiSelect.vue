@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps(["items"]);
 //purple, blue, yellow, brown, green, orange and gray
 const colors = [
@@ -30,10 +30,15 @@ function getColor() {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
+@use "@/assets/scss/_mixin.scss" as mixin;
 
 .multi-select {
-  @include flex-layout($flex-direction: row, $row-gap: 5px, $column-gap: 5px);
+  @include mixin.flex-layout(
+    $flex-direction: row,
+    $row-gap: 5px,
+    $column-gap: 5px
+  );
   align-items: center;
   flex-wrap: wrap;
 

@@ -4,24 +4,38 @@
       <div>
         <p>This content does not exist</p>
         <div class="not-found__btn">
-          <router-link :to="tab.pagePath">Back to my content</router-link>
+          <router-link :to="getPreviousRoute()!"
+            >Back to my content</router-link
+          >
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-const activeTab = localStorage.getItem("activeTab");
-const tab = JSON.parse(localStorage.getItem("tabs"))[activeTab];
+<script setup lang="ts">
+import router from "@/router";
+import { RouteLocationNormalized } from "vue-router";
+let previousRoute: RouteLocationNormalized | null = null;
+
+router.beforeEach((_to, from, next) => {
+  previousRoute = from;
+  next();
+});
+
+function getPreviousRoute() {
+  return previousRoute?.fullPath;
+}
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 .not-found {
   position: relative;
-  @include sizing(100%, 100vh);
+  @include mixin.sizing(100%, 100vh);
 
   > div {
     position: absolute;
@@ -30,7 +44,7 @@ const tab = JSON.parse(localStorage.getItem("tabs"))[activeTab];
     transform: translate(-50%, -50%);
 
     > div {
-      @include flex-layout($row-gap: 15px);
+      @include mixin.flex-layout($row-gap: 15px);
     }
   }
 
@@ -47,13 +61,13 @@ const tab = JSON.parse(localStorage.getItem("tabs"))[activeTab];
       all: unset;
       display: block;
       width: max-content;
-      background-color: $active;
-      color: $white !important;
+      background-color: var.$active;
+      color: var.$white !important;
       padding: 0.5rem;
       border-radius: 3px;
 
       &:hover {
-        color: $white !important;
+        color: var.$white !important;
       }
     }
   }

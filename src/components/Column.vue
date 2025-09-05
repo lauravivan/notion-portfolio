@@ -18,14 +18,15 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { toRaw } from "vue";
 const props = defineProps(["numberOfColumns"]);
 const numberOfColumns = toRaw(props.numberOfColumns);
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
+@use "@/assets/scss/_var" as var;
 
 .columns {
   display: flex;
@@ -35,7 +36,7 @@ const numberOfColumns = toRaw(props.numberOfColumns);
     flex: 1;
   }
 
-  @media (max-width: $screen-xs) {
+  @media (max-width: var.$screen-xs) {
     flex-direction: column;
   }
 }

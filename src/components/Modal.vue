@@ -1,27 +1,37 @@
 <template>
   <div class="overlay" ref="modalRef">
-    <dialog class="modal">
+    <dialog
+      :class="props.isStatic ? 'modal-static' : 'modal-dynamic'"
+      :style="props.modalStyles"
+    >
       <slot></slot>
     </dialog>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from "vue";
-import useModal from "hooks/useModal";
 
-const props = defineProps(["provideName"]);
+const props = defineProps([
+  "hideModal",
+  "addModalListener",
+  "modalStyles",
+  "provideName",
+  "isStatic",
+]);
+
 const modalRef = inject(props.provideName);
-const { hideModal, addModaListener } = useModal();
 
 onMounted(() => {
-  hideModal(modalRef);
-  addModaListener(modalRef);
+  props.hideModal();
+  props.addModalListener();
 });
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 dialog {
   all: unset;
@@ -31,15 +41,17 @@ dialog {
   position: fixed;
   top: 0;
   left: 0;
-  @include sizing(100%, 100%);
-  background-color: $black-5;
+  right: 0;
+  bottom: 0;
+  @include mixin.sizing(100%, 100%);
+  background-color: var.$black-5;
   z-index: 999;
 }
 
-.modal {
+.modal-static {
   z-index: 1000;
-  box-shadow: $box-shadow-1;
-  background-color: $white;
+  box-shadow: var.$box-shadow-1;
+  background-color: var.$white;
   border-radius: 5px;
   animation: fadeIn 1s;
   transition: width 0.3s;
@@ -53,5 +65,21 @@ dialog {
   padding: 2rem 1.9rem;
   overflow-y: auto;
   @extend .webkit;
+}
+
+.modal-dynamic {
+  position: absolute;
+  z-index: 2500;
+  min-width: 200px;
+  background-color: var.$white;
+  padding: 6px;
+  box-shadow: var.$box-shadow-3;
+  border-radius: 6px;
+  outline: none;
+  animation: fadeIn 0.4s ease-in-out;
+  animation-fill-mode: forwards;
+  left: unset;
+  transform: unset;
+  width: auto;
 }
 </style>

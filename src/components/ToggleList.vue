@@ -1,33 +1,37 @@
 <template>
   <div class="toggle-list">
     <table class="details">
-      <tr class="details__summary">
-        <th class="details__summary--icon">
-          <Icon :icon="icon" @click.prevent.stop="toToggle" />
-        </th>
-        <th class="details__summary--content">
-          <slot name="summaryContent" ref="summaryContentRef" />
-        </th>
-      </tr>
+      <thead>
+        <tr class="details__summary">
+          <th class="details__summary--icon">
+            <Icon :icon="icon" @click.prevent.stop="toToggle" />
+          </th>
+          <th class="details__summary--content">
+            <slot name="summaryContent" ref="summaryContentRef" />
+          </th>
+        </tr>
+      </thead>
 
-      <tr>
-        <td></td>
-        <td>
-          <div class="details__content" ref="detailsContentRef">
-            <ul>
-              <slot name="detailsContent"></slot>
-            </ul>
-          </div>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <div class="details__content" ref="detailsContentRef">
+              <ul>
+                <slot name="detailsContent"></slot>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Icon from "components/Icon.vue";
-import useDisplay from "hooks/useDisplay";
+import Icon from "@/components/Icon.vue";
+import useDisplay from "@/hooks/useDisplay";
 
 const detailsContentRef = ref(null);
 const props = defineProps(["iconToOpen", "iconToClose"]);
@@ -38,9 +42,11 @@ const summaryContentRef = ref(null);
 const toToggle = () => {
   toggleDisplay(detailsContentRef);
 
-  const displayState = detailsContentRef.value
-    ? detailsContentRef.value.style.display
-    : null;
+  // const displayState = detailsContentRef.value
+  //   ? detailsContentRef.value.style.display
+  //   : null;
+
+  const displayState = null;
 
   if (displayState === "block") {
     icon.value = props.iconToClose;
@@ -55,7 +61,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_var" as var;
 
 th {
   text-align: start;
@@ -64,7 +71,7 @@ th {
 }
 
 .toggle-list {
-  margin: $DEFAULT_SPACING 0;
+  margin: var.$DEFAULT_SPACING 0;
 }
 
 .details {
@@ -74,8 +81,8 @@ th {
 
       > div {
         @extend .button;
-        font-size: $fs-medium + 0.1rem;
-        color: $black;
+        font-size: var.$fs-medium + 0.1rem;
+        color: var.$black;
       }
     }
 
@@ -89,7 +96,7 @@ th {
   }
 
   &__item {
-    margin: $DEFAULT_SPACING 0;
+    margin: var.$DEFAULT_SPACING 0;
   }
 }
 </style>

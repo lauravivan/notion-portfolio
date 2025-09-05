@@ -5,24 +5,26 @@
       :iconToOpen="icons.arrowRight"
       :iconToClose="icons.arrowDown"
       :class="
-        activePageId == props.page.pageId ? 'nav-link__toggle-list--active' : ''
+        activePageId == props.page.id ? 'nav-link__toggle-list--active' : ''
       "
     >
       <template #summaryContent>
-        <router-link class="nav-link__link" :to="props.page.pagePath">
+        <router-link class="nav-link__link" :to="props.page.path">
           <div>
             <div style="max-width: 1.1rem">
               <img
-                :src="props.page.pageIcon"
+                :src="props.page.iconPath"
                 style="width: 100%; height: auto"
               />
             </div>
-            <div class="nav-link__pagename">{{ props.page.pageName }}</div>
+            <div class="nav-link__pagename">{{ props.page.name }}</div>
           </div>
         </router-link>
       </template>
       <template #detailsContent>
-        <div v-if="Object.keys(props.page.pages).length > 0">
+        <div
+          v-if="props.page.pages && Object.keys(props.page.pages).length > 0"
+        >
           <NestedLink :pages="props.page.pages" />
         </div>
         <div v-else>
@@ -33,13 +35,16 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
-import ToggleList from "components/ToggleList.vue";
-import { icons, activePage } from "global";
-import NestedLink from "components/NestedLink.vue";
+import ToggleList from "@/components/ToggleList.vue";
+import NestedLink from "@/components/NestedLink.vue";
+import { useStore } from "vuex";
 
+const store = useStore();
 const props = defineProps(["page"]);
+const activePage = computed(() => store.getters.getActivePage);
+const icons = computed(() => store.getters.getIcons);
 
 const activePageId = computed(() => {
   if (activePage.value) {
@@ -51,7 +56,9 @@ const activePageId = computed(() => {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 .nav-link {
   margin-bottom: 1px;
@@ -67,8 +74,8 @@ const activePageId = computed(() => {
           border-top-left-radius: 3px;
           border-bottom-left-radius: 3px;
           > div {
-            font-size: $fs-medium;
-            color: $black-3;
+            font-size: var.$fs-medium;
+            color: var.$black-3;
           }
         }
 
@@ -86,7 +93,7 @@ const activePageId = computed(() => {
     display: block;
 
     > div {
-      @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
+      @include mixin.flex-layout($flex-direction: row, $column-gap: 0.4rem);
       align-items: center;
     }
   }
@@ -95,7 +102,7 @@ const activePageId = computed(() => {
 .nav-link__toggle-list {
   &--active {
     .details > .details__summary {
-      background-color: $black-1 !important;
+      background-color: var.$black-1 !important;
     }
 
     .details__content .details .details__summary {
@@ -103,7 +110,7 @@ const activePageId = computed(() => {
     }
 
     .nav-link__pagename {
-      color: $black-9;
+      color: var.$black-9;
     }
   }
 }

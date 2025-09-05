@@ -2,13 +2,15 @@
 
 🐋A work in progress
 
-## Description 
-This is a portfolio project, so basically is inteended to showcase my web development projects. It's Notion-inspired theme and built using Vue.js3. 
+## Description
+
+This is a portfolio project, so basically is inteended to showcase my web development projects. It's Notion-inspired theme and built using Vue.js3.
 
 ## Preview
+
 <div align="center">
   
-  ![Banner with images of the project](./public/portfolio/banner.gif)
+  ![Banner with images of the project](./public/banner.gif)
   
 </div>
 

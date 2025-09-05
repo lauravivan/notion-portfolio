@@ -2,21 +2,21 @@
   <main
     class="page-wrapper"
     :class="[
-      getGlobalProperties.fontSize,
-      getGlobalProperties.fontStyle,
-      getGlobalProperties.pageWidth,
+      activeSettings.smallText ? 'font-size-small' : '',
+      activeSettings.fontStyle,
+      activeSettings.fullWidth ? 'page-full-width' : '',
     ]"
   >
-    <div v-if="activePage.pageBanner" class="page-banner">
-      <img :src="activePage.pageBanner" />
+    <div v-if="activePage.bannerPath" class="page-banner">
+      <img :src="activePage.bannerPath" />
     </div>
     <div
       class="page-content"
-      :class="activePage.pageBanner ? 'page-content--banner' : ''"
+      :class="activePage.bannerPath ? 'page-content--banner' : ''"
     >
       <div class="page-title">
-        <img :src="activePage.pageIcon" />
-        <span>{{ activePage.pageName }}</span>
+        <img :src="activePage.iconPath" />
+        <span>{{ activePage.name }}</span>
       </div>
       <router-view />
       <div style="width: auto; height: 200px"></div>
@@ -24,23 +24,32 @@
   </main>
 </template>
 
-<script setup>
-import { activePage, getGlobalProperties } from "global";
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const activePage = computed<Page>(() => store.getters.getActivePage);
+const activeSettings = computed<Settings>(
+  () => store.getters.getActiveSettings
+);
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 .page-wrapper {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
   width: 100%;
-  margin-top: calc($HEADER_HEIGHT + $TABS_HEIGHT) !important;
-  height: calc(100vh - ($HEADER_HEIGHT + $TABS_HEIGHT)) !important;
+  margin-top: calc(var.$HEADER_HEIGHT + var.$TABS_HEIGHT) !important;
+  height: calc(100vh - (var.$HEADER_HEIGHT + var.$TABS_HEIGHT)) !important;
 
-  @media (max-width: $screen-small) {
-    margin-top: $HEADER_HEIGHT !important;
+  @media (max-width: var.$screen-small) {
+    margin-top: var.$HEADER_HEIGHT !important;
   }
 
   .page-banner {
@@ -55,7 +64,7 @@ import { activePage, getGlobalProperties } from "global";
   }
 
   .page-content {
-    @include grid-layout($row-gap: 20px);
+    @include mixin.grid-layout($row-gap: 20px);
     position: absolute;
     top: 140px;
     left: 50%;
@@ -64,7 +73,7 @@ import { activePage, getGlobalProperties } from "global";
     width: 50%;
 
     .page-title {
-      @include flex-layout($row-gap: 80px);
+      @include mixin.flex-layout($row-gap: 80px);
 
       img {
         max-width: 5.8rem;
@@ -72,7 +81,7 @@ import { activePage, getGlobalProperties } from "global";
 
       span {
         font-size: 2.5rem;
-        font-weight: $fw-900;
+        font-weight: var.$fw-900;
       }
     }
 
@@ -83,50 +92,50 @@ import { activePage, getGlobalProperties } from "global";
 }
 
 .font-roboto-mono {
-  font-family: $mono;
+  font-family: var.$mono;
 }
 
 .font-roboto-serif {
-  font-family: $serif;
+  font-family: var.$serif;
 }
 
 /*configs*/
-@media (min-width: $screen-small) {
+@media (min-width: var.$screen-small) {
   .font-size-small {
     p,
     span,
     div {
-      font-size: $fs-small;
+      font-size: var.$fs-small;
     }
 
     .page-content .page-title {
       span {
-        font-size: $fs-large + 0.7rem;
+        font-size: var.$fs-large + 0.7rem;
       }
     }
 
     .h1 {
-      font-size: $fs-large + 0.6rem;
+      font-size: var.$fs-large + 0.6rem;
     }
 
     .h2 {
-      font-size: $fs-large + 0.4rem;
+      font-size: var.$fs-large + 0.4rem;
     }
 
     .h3 {
-      font-size: $fs-large + 0.2rem;
+      font-size: var.$fs-large + 0.2rem;
     }
 
     .h4 {
-      font-size: $fs-large;
+      font-size: var.$fs-large;
     }
 
     .h5 {
-      font-size: $fs-large - 0.2rem;
+      font-size: var.$fs-large - 0.2rem;
     }
 
     .h6 {
-      font-size: $fs-large - 0.4rem;
+      font-size: var.$fs-large - 0.4rem;
     }
   }
 
@@ -138,7 +147,7 @@ import { activePage, getGlobalProperties } from "global";
   }
 }
 
-@media (max-width: $screen-xs) {
+@media (max-width: var.$screen-xs) {
   .page-wrapper {
     .page-content {
       width: 100%;
@@ -146,7 +155,7 @@ import { activePage, getGlobalProperties } from "global";
 
       .page-title {
         span {
-          font-size: $fs-xl;
+          font-size: var.$fs-xl;
         }
       }
     }

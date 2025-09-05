@@ -43,18 +43,22 @@
   </Teleport>
 </template>
 
-<script setup>
-import Modal from "components/Modal.vue";
-import Icon from "components/Icon.vue";
-import { icons } from "global";
+<script setup lang="ts">
+import Modal from "@/components/Modal.vue";
+import Icon from "@/components/Icon.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
+
+const store = useStore();
+
+const icons = computed(() => store.getters.getIcons);
 
 const props = defineProps(["component", "provideName", "page"]);
-
-console.log(props.page);
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_var" as var;
 
 .page-modal {
   .modal,
@@ -80,7 +84,7 @@ console.log(props.page);
       padding-right: 15% !important;
       transform: translate(-50%, 0%);
 
-      @media (max-width: $screen-xs) {
+      @media (max-width: var.$screen-xs) {
         left: 0%;
         padding-left: 50% !important;
       }

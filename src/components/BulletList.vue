@@ -7,16 +7,20 @@
   </ul>
 </template>
 
-<script setup>
-import Text from "components/Text.vue";
-import { icons } from "global";
-import Icon from "components/Icon.vue";
+<script setup lang="ts">
+import Text from "@/components/Text.vue";
+import Icon from "@/components/Icon.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
 
+const store = useStore();
 const props = defineProps(["items"]);
+const icons = computed(() => store.getters.getIcons);
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
+@use "@/assets/scss/_var" as var;
 
 .bullet-list {
   > li {
@@ -26,9 +30,9 @@ const props = defineProps(["items"]);
   }
 
   &__icon {
-    font-size: $fs-xs - 0.1rem;
+    font-size: var.$fs-xs - 0.1rem;
     margin-top: 3px;
-    color: $black;
+    color: var.$black;
   }
 
   &__item {

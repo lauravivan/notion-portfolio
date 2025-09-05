@@ -1,3 +1,5 @@
+@use "var";
+
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
@@ -27,12 +29,12 @@
 
 @keyframes blink {
   0% {
-    background-color: $gray-3;
+    background-color: var.$gray-3;
   }
   50% {
     background-color: rgba(237, 236, 233, 0.9);
   }
   100% {
-    background-color: $gray-3;
+    background-color: var.$gray-3;
   }
 }

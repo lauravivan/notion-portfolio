@@ -10,17 +10,17 @@
   </div>
 </template>
 
-<script setup>
-import Callout from "components/Callout.vue";
-import BulletList from "components/BulletList.vue";
-import Empty from "components/Empty.vue";
+<script setup lang="ts">
+import Callout from "@/components/Callout.vue";
+import BulletList from "@/components/BulletList.vue";
+import Empty from "@/components/Empty.vue";
 
 const reachMeItems = ["E-mail: lauvivang@gmail.com"];
 
 const mediaItems = [
   "LinkedIn: linkedin.com/in/vivan-laura",
-  "Instagram: @lauvivan_",
   "Github: @lauravivan",
   "Devto: @vivanlaura",
+  "X: @arualvivan",
 ];
 </script>

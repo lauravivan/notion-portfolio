@@ -30,7 +30,21 @@
             </li>
             <li class="nav-list__nav-item">
               <div class="nav-list__nav-item--category">Favorites</div>
-              <NestedLink :pages="pagesInfo" />
+              <NestedLink
+                :pages="[pages.about, pages.contact, pages.projects]"
+              />
+            </li>
+            <li class="nav-list__nav-item">
+              <div class="nav-list__nav-item--category">Private</div>
+              <NestedLink
+                :pages="[
+                  pages.github,
+                  pages.certificates,
+                  pages.honors,
+                  pages.publications,
+                  pages.reference,
+                ]"
+              />
             </li>
           </ul>
         </div>
@@ -44,12 +58,17 @@
         width: 600px;
         height: 100vh;
       "
-      :style="{ display: displayNavHoverOut }"
+      :style="{ display: navHover ? 'block' : 'none' }"
       @mouseenter="toggleNavHover()"
     ></div>
   </aside>
   <Teleport to="body">
-    <Modal :provideName="'settingsModal'">
+    <Modal
+      :provideName="SETTINGS_MODAL_PROVIDE"
+      :addModalListener="addSettingsModalListener"
+      :hideModal="hideSettingsModal"
+      :isStatic="true"
+    >
       <div class="modal__settings">
         <h2 class="modal__settings-title">My settings</h2>
         <Divider />
@@ -60,10 +79,9 @@
           </div>
           <div>
             <SelectBtn
-              :options="store.getters.getThemesOptions.map((obj) => obj.name)"
-              :menuProvideName="'themesMenu'"
-              :optionSelected="getThemeIndex"
-              @click="showThemesMenu"
+              :options="themes"
+              :menuProvideName="THEME_OPTIONS_PROVIDE"
+              :optionSelected="theme"
               @toSelect="toggleTheme"
             />
           </div>
@@ -71,92 +89,50 @@
       </div>
     </Modal>
 
-    <Modal :provideName="'searchModal'">
+    <Modal
+      :provideName="SEARCH_MODAL_PROVIDE"
+      :addModalListener="addSearchModalListener"
+      :hideModal="hideSearchModal"
+    >
       <div>Not build yet</div>
     </Modal>
   </Teleport>
 </template>
 
-<script setup>
-import Modal from "components/Modal.vue";
-import { provide, ref, computed, watch, onMounted } from "vue";
-import useModal from "hooks/useModal";
+<script setup lang="ts">
+import Modal from "@/components/Modal.vue";
+import { ref, computed, watch, inject, Ref } from "vue";
+import useModal from "@/hooks/useModal";
 import { useStore } from "vuex";
-import { mainContainerDefault, mainContentDefault, icons } from "global";
-import { isTouchDevice } from "util/util";
-import Divider from "components/Divider.vue";
-import Icon from "components/Icon.vue";
-import SelectBtn from "components/SelectBtn.vue";
-import NestedLink from "components/NestedLink.vue";
+import { isTouchDevice } from "@/util/isTouchDevice";
+import Divider from "@/components/Divider.vue";
+import Icon from "@/components/Icon.vue";
+import SelectBtn from "@/components/SelectBtn.vue";
+import NestedLink from "@/components/NestedLink.vue";
+import { ASIDE_MAIN_CONTAINER, ASIDE_MAIN_CONTENT } from "@/util/constants";
+import { Theme } from "@/types/theme";
 
 const store = useStore();
-
-const settingsModalRef = ref(null);
-const searchModalRef = ref(null);
-const themesMenuRef = ref(null);
-const themesListRef = ref(null);
-const { showModal, hideModal } = useModal();
-const displayNavHoverOut = ref("none");
-
-provide("settingsModal", settingsModalRef);
-provide("searchModal", searchModalRef);
-provide("themesMenu", themesMenuRef);
-provide("themesList", themesListRef);
-
+const icons = computed(() => store.getters.getIcons);
+const themes = computed<string[]>(() =>
+  store.getters.getThemesOptions.map(
+    (theme: { id: string; name: string }) => theme.name
+  )
+);
+const theme = computed<Theme>(() => store.getters.getTheme);
+const pages = computed(() => {
+  return store.getters.getPages;
+});
+const SETTINGS_MODAL_PROVIDE = "settingsModal";
+const SEARCH_MODAL_PROVIDE = "searchModal";
+const THEME_OPTIONS_PROVIDE = "themesMenu";
 const navDefault = ref(true);
 const navHover = ref(false);
 const navClick = ref(false);
 const asideDefault = ref(true);
 const navBtnIcon = ref(icons.value.sandwich);
-const body = document.body;
-
-const getThemeIndex = computed(() => {
-  const themesOptions = store.getters.getThemesOptions;
-  const themeChosen = localStorage.getItem("pageTheme") || "";
-
-  if (themeChosen) {
-    for (const index in themesOptions) {
-      if (themesOptions[index].id == themeChosen) {
-        return index;
-      }
-    }
-  }
-
-  return 0;
-});
-
-function toggleTheme(index) {
-  const themesOptions = store.getters.getThemesOptions;
-
-  for (const i in themesOptions) {
-    if (i == index) {
-      setBodyTheme(themesOptions[i].id);
-    }
-  }
-}
-
-function showSettingsModal() {
-  showModal(settingsModalRef);
-}
-
-function showSearchModal() {
-  showModal(searchModalRef);
-}
-
-function showThemesMenu() {
-  showModal(themesMenuRef);
-}
-
-function setBodyTheme(theme) {
-  body.className = "";
-  body.classList.add(theme);
-  localStorage.setItem("pageTheme", theme);
-  hideModal(themesMenuRef);
-}
-
-const pagesInfo = computed(() => {
-  return store.getters.getPagesInfo;
-});
+const mainContainerDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTAINER);
+const mainContentDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTENT);
 
 const asideClasses = computed(() => {
   return {
@@ -173,10 +149,34 @@ const navClasses = computed(() => {
   };
 });
 
+const {
+  showModal: showSettingsModal,
+  hideModal: hideSettingsModal,
+  addModalListener: addSettingsModalListener,
+} = useModal({ provideName: SETTINGS_MODAL_PROVIDE });
+
+const {
+  showModal: showSearchModal,
+  hideModal: hideSearchModal,
+  addModalListener: addSearchModalListener,
+} = useModal({ provideName: SEARCH_MODAL_PROVIDE });
+
+function toggleTheme(name: string) {
+  const t = computed(() => store.getters.getThemesOptions);
+  store.commit(
+    "storeTheme",
+    t.value.find((theme: { id: string; name: string }) => theme.name === name)
+      .id
+  );
+}
+
 function togglePageState(isDefault = true) {
   asideDefault.value = isDefault;
-  mainContainerDefault.value = isDefault;
-  mainContentDefault.value = isDefault;
+
+  if (mainContainerDefault && mainContentDefault) {
+    mainContainerDefault.value = isDefault;
+    mainContentDefault.value = isDefault;
+  }
 }
 
 function toggleNavState() {
@@ -200,10 +200,6 @@ function toggleNavHover(toShow = false) {
   if (asideDefault.value) {
     isTouchDevice() ? (navHover.value = false) : (navHover.value = toShow);
   }
-
-  navHover.value
-    ? (displayNavHoverOut.value = "block")
-    : (displayNavHoverOut.value = "none");
 }
 
 watch(navClasses, (currentClass) => {
@@ -215,15 +211,12 @@ watch(navClasses, (currentClass) => {
     navBtnIcon.value = icons.value.doubleArrowLeft;
   }
 });
-
-onMounted(() => {
-  const theme = localStorage.getItem("pageTheme");
-  setBodyTheme(theme);
-});
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 .nav-wrapper,
 .nav-default,
@@ -234,7 +227,7 @@ onMounted(() => {
 }
 
 .nav-wrapper {
-  color: $black-6;
+  color: var.$black-6;
   user-select: none;
 
   .nav-btn {
@@ -247,17 +240,17 @@ onMounted(() => {
   }
 
   .nav-hover {
-    @include flex-layout($row-gap: 2rem);
+    @include mixin.flex-layout($row-gap: 2rem);
     border-radius: 3px;
 
     .nav-list {
-      box-shadow: $box-shadow-1;
-      @include spacing($mt: 0.1rem, $pb: 0.6rem);
+      box-shadow: var.$box-shadow-1;
+      @include mixin.spacing($mt: 0.1rem, $pb: 0.6rem);
       transform: translateX(-100%);
       animation: slideIn 0.4s ease-in-out;
       animation-fill-mode: forwards;
       padding-right: 1rem;
-      background-color: $white;
+      background-color: var.$white;
       border-radius: 5px;
       height: min-content;
       max-height: 75%;
@@ -269,7 +262,7 @@ onMounted(() => {
   }
 
   .nav-click {
-    @include flex-layout($flex-direction: row-reverse, $row-gap: 2rem);
+    @include mixin.flex-layout($flex-direction: row-reverse, $row-gap: 2rem);
 
     &:hover {
       .nav-btn {
@@ -295,42 +288,44 @@ onMounted(() => {
   .nav-hover,
   .nav-click {
     .nav-list {
-      @include flex-layout($row-gap: 1.5rem);
-      font-size: $fs-small;
+      @include mixin.flex-layout($row-gap: 1.5rem);
+      font-size: var.$fs-small;
 
       &__nav-item:nth-child(1) {
-        @include flex-layout($row-gap: 0.3rem);
-        font-size: $fs-xs;
-        @include spacing($ml: 0.8rem, $pt: 0.9rem);
+        @include mixin.flex-layout($row-gap: 0.3rem);
+        font-size: var.$fs-xs;
+        @include mixin.spacing($ml: 0.8rem, $pt: 0.9rem);
 
         span {
-          color: $black;
-          font-size: $fs-medium;
+          color: var.$black;
+          font-size: var.$fs-medium;
         }
       }
 
       &__nav-item:nth-child(2) {
-        @include flex-layout($row-gap: 0.2rem);
+        @include mixin.flex-layout($row-gap: 0.2rem);
         margin: 10px 0.6rem;
 
         & > div {
-          @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
+          @include mixin.flex-layout($flex-direction: row, $column-gap: 0.4rem);
           align-items: center;
           @extend .hover-default;
         }
       }
 
-      &__nav-item:nth-child(3) {
+      &__nav-item:nth-child(3),
+      &__nav-item:nth-child(4) {
         margin: 10px 0.7rem;
-        height: 60%;
+        min-height: 80px;
+        height: auto;
         overflow-y: auto;
         overflow-x: hidden;
       }
 
       &__nav-item--category {
         margin-bottom: 0.6rem;
-        font-weight: $fw-600;
-        font-size: $fs-xs + 0.1rem;
+        font-weight: var.$fw-600;
+        font-size: var.$fs-xs + 0.1rem;
       }
     }
   }
@@ -340,15 +335,15 @@ onMounted(() => {
   width: 70%;
 
   &__settings {
-    @include flex-layout($row-gap: 20px);
+    @include mixin.flex-layout($row-gap: 20px);
   }
 
   &__settings-title {
-    font-weight: $fw-600;
+    font-weight: var.$fw-600;
   }
 
   &__appearance {
-    @include flex-layout($flex-direction: row);
+    @include mixin.flex-layout($flex-direction: row);
     justify-content: space-between;
 
     div:nth-child(1) {
@@ -363,8 +358,8 @@ onMounted(() => {
     }
 
     h4 {
-      font-size: $fs-small;
-      color: $black-6;
+      font-size: var.$fs-small;
+      color: var.$black-6;
     }
   }
 }

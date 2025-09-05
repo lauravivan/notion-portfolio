@@ -1,27 +1,23 @@
 <template>
   <div class="icon" v-if="props.icon">
-    <ion-icon v-if="!props.icon.matIcons" :name="props.icon.name"></ion-icon>
-    <span class="material-icons" v-if="props.icon.matIcons">
-      {{ props.icon.name }}
-    </span>
+    <Icon :icon="props.icon" />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { Icon } from "@iconify/vue";
+
 const props = defineProps(["icon"]);
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_var" as var;
 
 .icon {
-  color: $black-3;
+  color: var.$black-3;
   font-size: 20px;
   display: flex;
   align-items: center;
-}
-
-.material-icons {
-  font-size: 20px;
 }
 </style>

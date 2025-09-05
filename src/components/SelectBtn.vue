@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div class="select-btn" @click="showMenuModal">
+    <div class="select-btn" @click="showModal">
       <button>{{ props.options[optionSelected] }}</button>
       <Icon :icon="icons.arrowDown" />
     </div>
 
-    <Menu
+    <Modal
       :provideName="props.menuProvideName"
       class="select-btn-menu"
-      :menuStyles="{ top: '10px', right: '110px' }"
+      :modalStyles="{ top: '10px', right: '110px' }"
+      :hideModal="hideModal"
+      :addModalListener="addModalListener"
     >
       <div class="theme-options">
         <OptionList
@@ -17,56 +19,58 @@
           :optionSelected="optionSelected"
         ></OptionList>
       </div>
-    </Menu>
+    </Modal>
   </div>
 </template>
 
-<script setup>
-import Menu from "components/Menu.vue";
-import OptionList from "components/OptionList.vue";
-import Icon from "components/Icon.vue";
-import { provide, ref } from "vue";
-import useModal from "hooks/useModal";
-import { icons } from "global";
+<script setup lang="ts">
+import OptionList from "@/components/OptionList.vue";
+import Icon from "@/components/Icon.vue";
+import { ref } from "vue";
+import useModal from "@/hooks/useModal";
+import { computed } from "vue";
+import { useStore } from "vuex";
+import Modal from "./Modal.vue";
+
+const store = useStore();
+const icons = computed(() => store.getters.getIcons);
 
 const props = defineProps(["options", "menuProvideName", "optionSelected"]);
-const { showModal } = useModal();
-const menuRef = ref(null);
 const optionSelected = ref(props.optionSelected);
 const emit = defineEmits(["toSelect"]);
 
-provide(props.menuProvideName, menuRef);
+const { showModal, hideModal, addModalListener } = useModal({
+  provideName: props.menuProvideName,
+});
 
-function optionClicked(index) {
-  optionSelected.value = index;
-
-  emit("toSelect", index);
-}
-
-function showMenuModal() {
-  showModal(menuRef);
+function optionClicked(option: string) {
+  optionSelected.value = option;
+  emit("toSelect", option);
+  hideModal();
 }
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
+@use "@/assets/scss/_var" as var;
 
 .select-btn {
-  @include flex-layout($flex-direction: row);
+  @include mixin.flex-layout($flex-direction: row);
   align-items: center;
   cursor: pointer;
   padding: 5px 10px;
 
   &:hover {
-    background-color: $gray-4;
+    background-color: var.$gray-4;
     border-radius: 5px;
   }
 
   > button {
     border: none;
     background-color: transparent;
-    font-family: $default;
-    font-size: $fs-small;
+    font-family: var.$default;
+    font-size: var.$fs-small;
     padding: 0;
     cursor: pointer;
   }
@@ -76,7 +80,7 @@ function showMenuModal() {
   .menu {
     min-width: 280px !important;
 
-    @media (max-width: $screen-small) {
+    @media (max-width: var.$screen-small) {
       min-width: 150px !important;
     }
   }

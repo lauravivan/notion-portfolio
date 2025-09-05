@@ -7,8 +7,29 @@
     <template #multiSelectDesc>Used languages</template>
   </Database>
   <div class="project" v-if="props.page">
+    <Heading headingNumber="3">About</Heading>
+
+    <Text>{{ props.page.pageAbout }}</Text>
+
+    <Empty />
+
     <Heading headingNumber="3">Reasons to creating this project</Heading>
     <Text>{{ props.page.pageDesc }}</Text>
+
+    <Empty />
+
+    <Heading
+      headingNumber="3"
+      v-if="props.page.pageMore && props.page.pageMore.tdd"
+      >TDD (Technical Design Document)</Heading
+    >
+
+    <a
+      target="_blank"
+      v-if="props.page.pageMore && props.page.pageMore.tdd"
+      :href="props.page.pageMore.tdd"
+      >Link to TDD</a
+    >
 
     <Empty />
 
@@ -19,21 +40,14 @@
         >Link to project</a
       ></Text
     >
-
-    <Empty />
-
-    <Heading headingNumber="3">Preview</Heading>
-
-    <Iframe :src="props.page.pageData.homepage" />
   </div>
 </template>
 
-<script setup>
-import Database from "components/Database.vue";
-import Text from "components/Text.vue";
-import Heading from "components/Heading.vue";
-import Empty from "components/Empty.vue";
-import Iframe from "components/Iframe.vue";
+<script setup lang="ts">
+import Database from "@/components/Database.vue";
+import Text from "@/components/Text.vue";
+import Heading from "@/components/Heading.vue";
+import Empty from "@/components/Empty.vue";
 
 const props = defineProps(["page", "hideDatabase"]);
 </script>

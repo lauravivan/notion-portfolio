@@ -13,18 +13,19 @@
   </ul>
 </template>
 
-<script setup>
-import Text from "components/Text.vue";
+<script setup lang="ts">
+import Textfrom from "@/components/Text.vue";
 
 const props = defineProps(["items"]);
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
+@use "@/assets/scss/_var" as var;
 
 .todo-list {
   > li {
-    margin: $DEFAULT_SPACING 0;
+    margin: var.$DEFAULT_SPACING 0;
   }
 
   &__checkbox {

@@ -5,13 +5,14 @@
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
+@use "@/assets/scss/_var" as var;
 
 .divider-wrapper {
-  margin: $DEFAULT_SPACING 0;
+  margin: var.$DEFAULT_SPACING 0;
 }
 
 .divider {
-  border-bottom: 1px solid $gray;
+  border-bottom: 1px solid var.$gray;
 }
 </style>

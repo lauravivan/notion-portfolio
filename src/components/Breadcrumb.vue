@@ -1,76 +1,51 @@
 <template>
   <div class="breadcrumb">
-    <div
-      class="breadcrumb__crumb"
-      v-for="(page, index) in getBreadcrumbs()[0]"
-      :key="page"
-    >
-      <router-link class="breadcrumb__page" :to="page.pagePath">
+    <div class="breadcrumb__crumb" v-for="page in breadcrumbs" :key="page.id">
+      <router-link class="breadcrumb__page" :to="page.path">
         <div>
-          <img :src="page.pageIcon" style="max-width: 1.1rem; height: auto" />
-          <div>{{ page.pageName }}</div>
+          <img :src="page.iconPath" style="max-width: 1.1rem; height: auto" />
+          <div>{{ page.name }}</div>
         </div>
       </router-link>
-      <div v-if="index < getBreadcrumbs()[1]">/</div>
+      <div v-if="breadcrumbs.length > 2" class="breadcrumb__dots">...</div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { activePage } from "global";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
+const activePage = computed<Page>(() => store.getters.getActivePage);
 
-function getBreadcrumbs() {
-  let breadcrumbs = [];
+const breadcrumbs = computed(() => {
+  if (activePage.value) {
+    const breadcrumbs = [] as Page[];
+    let newActivePage = activePage.value;
 
-  if (activePage && activePage.value) {
-    if (activePage.value.pagePath === "/") {
-      return [[activePage.value], 0];
+    while (newActivePage.parentPage) {
+      breadcrumbs.push(newActivePage);
+      newActivePage = newActivePage.parentPage;
     }
 
-    breadcrumbs = activePage.value.pagePath.split("/");
+    return breadcrumbs;
   }
 
-  const result = getPages(breadcrumbs);
-  const resultLength = result.length - 1;
-
-  return [result, resultLength];
-}
-
-function getPages(breadcrumbs) {
-  const pages = [];
-  const pagesInfo = store.getters.getPagesInfo;
-
-  function search(pgs) {
-    for (let page in pgs) {
-      breadcrumbs.map((breadcrumb) => {
-        if (breadcrumb == pgs[page].key) {
-          pages.push(pgs[page]);
-
-          if (Object.keys(pgs[page].pages).length > 0) {
-            search(pgs[page].pages);
-          }
-        }
-      });
-    }
-  }
-
-  search(pagesInfo);
-  return pages;
-}
+  return [];
+});
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
 
 .breadcrumb {
-  @include flex-layout($flex-direction: row);
+  @include mixin.flex-layout($flex-direction: row);
   align-items: center;
 
   &__crumb {
-    @include flex-layout($flex-direction: row);
+    @include mixin.flex-layout($flex-direction: row);
     align-items: center;
   }
 
@@ -78,7 +53,7 @@ function getPages(breadcrumbs) {
     all: unset;
 
     > div {
-      @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
+      @include mixin.flex-layout($flex-direction: row, $column-gap: 0.4rem);
       align-items: center;
       @extend .hover-default;
     }

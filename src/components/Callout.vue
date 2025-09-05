@@ -7,7 +7,7 @@
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
 
 .callout {
   margin: 10px 0;

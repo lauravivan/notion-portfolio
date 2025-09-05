@@ -2,7 +2,7 @@
   <div v-if="route.name === 'NotFound'">
     <router-view></router-view>
   </div>
-  <div v-else class="app">
+  <div v-else class="app" :class="theme">
     <div :class="mainContainerClasses">
       <Aside />
 
@@ -19,21 +19,30 @@
   </div>
 </template>
 
-<script setup>
-import Aside from "components/Aside.vue";
-import Header from "components/Header.vue";
-import Tabs from "components/Tabs.vue";
-import router from "router";
+<script setup lang="ts">
+import Aside from "@/components/Aside.vue";
+import Header from "@/components/Header.vue";
+import Tabs from "@/components/Tabs.vue";
+import router from "@/router";
 import { computed } from "vue";
-import { mainContainerClasses, mainContentClasses } from "global";
+import { useStore } from "vuex";
+import useAside from "./hooks/useAside";
+import { Theme } from "./types/theme";
+
+const { mainContainerClasses, mainContentClasses } = useAside();
+const store = useStore();
 
 const route = computed(() => {
   return router.currentRoute.value;
 });
+
+const theme = computed<Theme>(() => store.getters.getTheme);
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_var" as var;
+@use "@/assets/scss/_mixin.scss" as mixin;
 
 .app {
   .aside-click,
@@ -55,9 +64,9 @@ const route = computed(() => {
   }
 
   .header {
-    top: $TABS_HEIGHT;
+    top: var.$TABS_HEIGHT;
 
-    @media (max-width: $screen-small) {
+    @media (max-width: var.$screen-small) {
       top: 0;
     }
   }
@@ -66,10 +75,10 @@ const route = computed(() => {
     .aside-default {
       display: flex;
       position: fixed;
-      top: calc($TABS_HEIGHT + 13px);
+      top: calc(var.$TABS_HEIGHT + 13px);
       z-index: 3;
 
-      @media (max-width: $screen-small) {
+      @media (max-width: var.$screen-small) {
         top: 13px;
       }
     }
@@ -81,51 +90,51 @@ const route = computed(() => {
 
     .header {
       &__content {
-        @include spacing($pt: 11px, $pl: 40px, $pr: 10px, $pb: 8px);
+        @include mixin.spacing($pt: 11px, $pl: 40px, $pr: 10px, $pb: 8px);
       }
     }
   }
 
   .main-container-click {
     position: relative;
-    margin-left: $ASIDE_CLICK_SIZE;
+    margin-left: var.$ASIDE_CLICK_SIZE;
 
     .aside-click {
       position: fixed;
-      width: $ASIDE_CLICK_SIZE;
+      width: var.$ASIDE_CLICK_SIZE;
       inset: 0;
-      box-shadow: $box-shadow-2;
-      background-color: $gray-2;
+      box-shadow: var.$box-shadow-2;
+      background-color: var.$gray-2;
       z-index: 3;
     }
 
     .header,
     .tabs {
-      margin-left: $ASIDE_CLICK_SIZE;
-      width: calc(100% - $ASIDE_CLICK_SIZE);
+      margin-left: var.$ASIDE_CLICK_SIZE;
+      width: calc(100% - var.$ASIDE_CLICK_SIZE);
     }
 
     .header {
       &__content {
-        @include spacing($pt: 11px, $pl: 10px, $pr: 10px, $pb: 8px);
+        @include mixin.spacing($pt: 11px, $pl: 10px, $pr: 10px, $pb: 8px);
       }
     }
   }
 
   .footer {
-    font-size: $fs-xs;
+    font-size: var.$fs-xs;
     position: absolute;
     right: 20px;
     bottom: 15px;
     z-index: 1;
-    background-color: $white;
-    border: 1px solid $gray-5;
-    box-shadow: $box-shadow-1;
+    background-color: var.$white;
+    border: 1px solid var.$gray-5;
+    box-shadow: var.$box-shadow-1;
     border-radius: 40px;
     padding: 15px 14px;
 
-    @media (max-width: $screen-small) {
-      bottom: calc($TABS_HEIGHT + 0.9rem);
+    @media (max-width: var.$screen-small) {
+      bottom: calc(var.$TABS_HEIGHT + 0.9rem);
     }
   }
 }

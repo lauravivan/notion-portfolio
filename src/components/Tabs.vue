@@ -1,10 +1,10 @@
 <template>
   <div class="tabs">
     <div
-      v-for="(page, index) in getGlobalProperties.tabs"
+      v-for="[index, page] in tabs.entries()"
       class="tabs__tab"
       :key="index"
-      :class="getGlobalProperties.activeTab == index ? 'tabs__tab--active' : ''"
+      :class="activeTab == index ? 'tabs__tab--active' : ''"
       @click.stop="updateActiveTab(index)"
       @touchstart="updateActiveTab(index)"
     >
@@ -21,116 +21,74 @@
       class="tabs__add"
       @click.stop="addTab()"
       @touchstart="addTab()"
-      v-if="getGlobalProperties.tabs.length < 10"
+      v-if="tabs.length < 10"
     >
       <Icon :icon="icons.add" />
     </button>
   </div>
 </template>
 
-<script setup>
-import router from "router";
-import Icon from "components/Icon.vue";
-import { computed, onMounted, watch } from "vue";
-import {
-  icons,
-  setGlobalProperty,
-  getGlobalProperties,
-  activePage,
-} from "global";
+<script setup lang="ts">
+import router from "@/router";
+import Icon from "@/components/Icon.vue";
+import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
+const icons = computed(() => store.getters.getIcons);
+const activePage = computed(() => store.getters.getActivePage);
+const activeTab = computed<number>(() => store.getters.getActiveTab);
+const tabs = computed<TabLocalStorage[]>(() => store.getters.getTabs);
 
-const route = computed(() => {
-  return router.currentRoute.value;
-});
-
-function getActiveTab() {
-  return localStorage.getItem("activeTab") || 0;
-}
-
-function getTabs() {
-  return JSON.parse(localStorage.getItem("tabs")) || [];
-}
-
-function storeActiveTab(index) {
-  localStorage.setItem("activeTab", index);
-}
-
-function storeTabs(tabs) {
-  localStorage.setItem("tabs", JSON.stringify(tabs));
-}
-
-function updateTabs(tabsUpdated, activeTabUpdated) {
-  storeActiveTab(activeTabUpdated);
-  storeTabs(tabsUpdated);
-  setGlobalProperty("tabs", tabsUpdated);
-  setGlobalProperty("activeTab", activeTabUpdated);
-}
-
-function updateActiveTab(index) {
-  storeActiveTab(index);
-  setGlobalProperty("activeTab", index);
-  router.push(getTabs()[index].pagePath);
+function updateActiveTab(index: any) {
+  store.commit("storeActiveTab", index);
+  router.push(tabs.value[index].pagePath);
 }
 
 function addTab() {
-  const tabs = getTabs();
-
-  tabs.push(activePage.value);
-  const index = tabs.length - 1;
-  updateTabs(tabs, index);
-  store.commit("storeActivePage", tabs[index]);
-  router.push(activePage.value.pagePath);
+  store.commit("storeTab", {
+    pageName: activePage.value.name,
+    pagePath: activePage.value.path,
+  });
+  const index = tabs.value.length - 1;
+  store.commit("storeActiveTab", index);
+  store.commit("storeActivePage", tabs.value[index]);
+  router.push(activePage.value.path);
 }
 
-function removeTab(index) {
-  const tabs = getTabs();
-
-  if (tabs.length > 1) {
-    tabs.splice(index, 1);
-    updateTabs(tabs, 0);
-    store.commit("storeActivePage", tabs[0]);
-    router.push(tabs[0].pagePath);
+function removeTab(index: number) {
+  if (tabs.value.length > 1) {
+    store.commit("removeTab", index);
+    store.commit("storeActivePage", tabs.value[0]);
+    router.push(tabs.value[0].pagePath);
   }
 }
 
 onMounted(() => {
-  const tabs = getTabs();
-  const activeTab = getActiveTab();
-
-  if (tabs.length === 0 && activePage.value) {
-    tabs[0] = activePage.value;
+  if (tabs.value.length === 0 && activePage.value) {
+    store.commit("storeTab", {
+      pageName: activePage.value.name,
+      pagePath: activePage.value.path,
+    });
   }
-
-  updateTabs(tabs, activeTab);
-});
-
-watch(route, () => {
-  const tabs = getTabs();
-  const activeTab = getActiveTab();
-
-  tabs[activeTab] = activePage.value;
-  storeTabs(tabs);
-  setGlobalProperty("tabs", tabs);
-  document.body.style.pointerEvents = "auto";
 });
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_var" as var;
+@use "@/assets/scss/_mixin.scss" as mixin;
 
 .app .tabs {
   display: flex;
-  background-color: $gray-4;
+  background-color: var.$gray-4;
   top: 0;
-  height: $TABS_HEIGHT;
+  height: var.$TABS_HEIGHT;
 
-  @media (max-width: $screen-small) {
+  @media (max-width: var.$screen-small) {
     top: auto;
     bottom: 0;
-    background-color: $gray;
+    background-color: var.$gray;
     overflow-x: auto;
 
     &::-webkit-scrollbar,
@@ -161,23 +119,23 @@ watch(route, () => {
     width: 200px;
     white-space: nowrap;
     overflow: hidden;
-    font-size: calc($fs-small - 1px);
-    border-right: 1px solid $black-1;
-    color: $black-6;
+    font-size: calc(var.$fs-small - 1px);
+    border-right: 1px solid var.$black-1;
+    color: var.$black-6;
 
-    @media (max-width: $screen-small) {
+    @media (max-width: var.$screen-small) {
       min-width: 150px;
     }
 
     &:hover {
-      background-color: $gray-6;
+      background-color: var.$gray-6;
     }
 
     &--active {
-      background-color: $white;
+      background-color: var.$white;
 
       &:hover {
-        background-color: $white;
+        background-color: var.$white;
       }
     }
 
@@ -193,7 +151,7 @@ watch(route, () => {
   }
 
   &__add {
-    @include spacing($mt: auto, $mb: auto, $ml: 7px);
+    @include mixin.spacing($mt: auto, $mb: auto, $ml: 7px);
   }
 
   &__add,

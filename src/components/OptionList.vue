@@ -3,14 +3,14 @@
     <ul class="option__list">
       <li
         class="option__item"
-        v-for="(item, index) in props.items"
-        :key="index"
-        @click="toSelect(index)"
+        v-for="item of props.items"
+        :key="item"
+        @click="toSelect(item)"
       >
         <div>{{ item }}</div>
         <div
           :class="
-            optionSelected == index ? 'option__active' : 'option__not-active'
+            optionSelected == item ? 'option__active' : 'option__not-active'
           "
         >
           <Icon :icon="icons.check" class="option__icon" />
@@ -20,24 +20,27 @@
   </div>
 </template>
 
-<script setup>
-import Icon from "components/Icon.vue";
+<script setup lang="ts">
+import Icon from "@/components/Icon.vue";
 import { ref } from "vue";
-import { icons } from "global";
+import { computed } from "vue";
+import { useStore } from "vuex";
 
+const store = useStore();
+const icons = computed(() => store.getters.getIcons);
 const props = defineProps(["items", "optionSelected"]);
 const optionSelected = ref(props.optionSelected);
 const emit = defineEmits(["toSelect"]);
 
-const toSelect = (index) => {
-  optionSelected.value = index;
-
-  emit("toSelect", index);
+const toSelect = (item: string) => {
+  optionSelected.value = item;
+  emit("toSelect", item);
 };
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/main";
+@use "@/assets/scss/main";
+@use "@/assets/scss/_mixin.scss" as mixin;
 
 .option {
   &__not-active {
@@ -49,11 +52,11 @@ const toSelect = (index) => {
   }
 
   &__list {
-    @include flex-layout;
+    @include mixin.flex-layout;
   }
 
   &__item {
-    @include flex-layout($flex-direction: row);
+    @include mixin.flex-layout($flex-direction: row);
     justify-content: space-between;
     align-items: center;
     @extend .hover-default;

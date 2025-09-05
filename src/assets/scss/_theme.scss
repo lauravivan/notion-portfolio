@@ -1,3 +1,5 @@
+@use "var";
+
 @mixin defineTheme(
   $text,
   $textLighter,
@@ -62,7 +64,7 @@
   }
 
   .multi-select > div {
-    color: $dark !important;
+    color: var.$dark !important;
   }
 
   .hover-default:hover,
@@ -112,42 +114,42 @@
 
 .dark-theme {
   @include defineTheme(
-    $white,
+    var.$white,
     #a8a8a8,
-    $dark,
-    $dark-lighter,
-    $black,
-    $gray-3,
-    $gray-1,
-    $active,
-    $gray
+    var.$dark,
+    var.$dark-lighter,
+    var.$black,
+    var.$gray-3,
+    var.$gray-1,
+    var.$active,
+    var.$gray
   );
 }
 
 .cat-latte {
   @include defineTheme(
-    $latte-text,
-    $latte-subtext0,
-    $latte-mantle,
-    $latte-base,
-    $latte-surface0,
-    $latte-surface1,
-    $latte-surface0,
-    $latte-sky,
-    $latte-overlay2
+    var.$latte-text,
+    var.$latte-subtext0,
+    var.$latte-mantle,
+    var.$latte-base,
+    var.$latte-surface0,
+    var.$latte-surface1,
+    var.$latte-surface0,
+    var.$latte-sky,
+    var.$latte-overlay2
   );
 }
 
 .cat-mocha {
   @include defineTheme(
-    $mocha-text,
-    $mocha-subtext0,
-    $mocha-crust,
-    $mocha-base,
-    $mocha-mantle,
-    $mocha-surface1,
-    $mocha-base,
-    $mocha-sapphire,
-    $mocha-subtext0
+    var.$mocha-text,
+    var.$mocha-subtext0,
+    var.$mocha-crust,
+    var.$mocha-base,
+    var.$mocha-mantle,
+    var.$mocha-surface1,
+    var.$mocha-base,
+    var.$mocha-sapphire,
+    var.$mocha-subtext0
   );
 }

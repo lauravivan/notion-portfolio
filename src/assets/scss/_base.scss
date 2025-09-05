@@ -1,3 +1,6 @@
+@use "var";
+@use "mixin";
+
 *,
 *::before,
 *::after {
@@ -13,42 +16,42 @@
   }
 
   ::-webkit-scrollbar-track {
-    background-color: $white;
+    background-color: var.$white;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: $black;
+    background-color: var.$black;
     border-radius: 4px;
   }
 }
 
 body {
-  font-family: $default;
+  font-family: var.$default;
   -webkit-font-smoothing: auto;
-  @include sizing(100vw, 100vh);
+  @include mixin.sizing(100vw, 100vh);
   overflow-x: hidden;
   overflow-y: hidden;
-  background-color: $white;
-  font-size: $fs-medium;
-  color: $black-8;
-  font-weight: $fw-400;
+  background-color: var.$white;
+  font-size: var.$fs-medium;
+  color: var.$black-8;
+  font-weight: var.$fw-400;
   @extend .webkit;
 
-  @media (max-width: $screen-xs) {
-    font-size: $fs-small;
+  @media (max-width: var.$screen-xs) {
+    font-size: var.$fs-small;
   }
 }
 
 ::selection {
-  background-color: $gray-2;
+  background-color: var.$gray-2;
 }
 
 :-webkit-any-link {
-  color: $black-5;
+  color: var.$black-5;
   transition: color 0.3s;
 
   &:hover {
-    color: $black-9 !important;
+    color: var.$black-9 !important;
   }
 }
 
@@ -58,12 +61,12 @@ body {
   border-radius: 3px;
   transition: background-color 0.1s;
   font-size: 0.85rem;
-  font-weight: $fw-600;
+  font-weight: var.$fw-600;
   width: 100%;
-  color: $black-5;
+  color: var.$black-5;
 
   &:hover {
-    background-color: $gray;
+    background-color: var.$gray;
   }
 }
 
@@ -77,11 +80,11 @@ body {
 
   &:hover {
     border-radius: 10%;
-    background-color: $black-1;
+    background-color: var.$black-1;
   }
 }
 
 .highlight {
-  font-weight: $fw-900;
+  font-weight: var.$fw-900;
   text-decoration: underline;
 }

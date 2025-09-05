@@ -7,39 +7,40 @@
   <h6 class="h6 heading" v-if="props.headingNumber == 6"><slot></slot></h6>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps(["headingNumber"]);
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/scss/main.scss";
+@use "@/assets/scss/main.scss";
+@use "@/assets/scss/_var" as var;
 
 .heading {
-  font-weight: $fw-800;
-  margin: $DEFAULT_SPACING 0;
+  font-weight: var.$fw-800;
+  margin: var.$DEFAULT_SPACING 0;
 }
 
 .h1 {
-  font-size: $fs-xl + 0.4rem;
+  font-size: var.$fs-xl + 0.4rem;
 }
 
 .h2 {
-  font-size: $fs-xl + 0.2rem;
+  font-size: var.$fs-xl + 0.2rem;
 }
 
 .h3 {
-  font-size: $fs-xl;
+  font-size: var.$fs-xl;
 }
 
 .h4 {
-  font-size: $fs-xl - 0.2rem;
+  font-size: var.$fs-xl - 0.2rem;
 }
 
 .h5 {
-  font-size: $fs-xl - 0.4rem;
+  font-size: var.$fs-xl - 0.4rem;
 }
 
 .h6 {
-  font-size: $fs-xl - 0.6rem;
+  font-size: var.$fs-xl - 0.6rem;
 }
 </style>
