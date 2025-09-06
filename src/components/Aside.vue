@@ -316,7 +316,7 @@ watch(navClasses, (currentClass) => {
       &__nav-item:nth-child(3),
       &__nav-item:nth-child(4) {
         margin: 10px 0.7rem;
-        min-height: 80px;
+        min-height: 110px;
         height: auto;
         overflow-y: auto;
         overflow-x: hidden;

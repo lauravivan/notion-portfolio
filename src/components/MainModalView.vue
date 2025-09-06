@@ -50,9 +50,7 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 
 const store = useStore();
-
 const icons = computed(() => store.getters.getIcons);
-
 const props = defineProps(["component", "provideName", "page"]);
 </script>
 

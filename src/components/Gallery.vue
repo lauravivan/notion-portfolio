@@ -22,7 +22,7 @@
         class="gallery__card-wrapper"
         v-for="page in pages"
         :key="page.id"
-        @click.stop="showPageModal(page)"
+        @click.stop="showPageModal"
       >
         <div
           class="gallery__card-content"
@@ -46,19 +46,19 @@
       </div>
     </div>
   </div>
-  <!-- <MainModalView
-    :provideName="'pageModal'"
+  <MainModalView
+    provideName="pageModal"
     :component="props.component"
-    :page="getGlobalProperties.activePageModal"
-  /> -->
+    :page="activePage"
+  />
 </template>
 
 <script setup lang="ts">
 import Icon from "@/components/Icon.vue";
-import useModal from "@/hooks/useModal";
-import { computed, provide, ref } from "vue";
+import { computed } from "vue";
 import MainModalView from "@/components/MainModalView.vue";
 import { useStore } from "vuex";
+import useModal from "@/hooks/useModal";
 
 const store = useStore();
 
@@ -71,16 +71,13 @@ const props = defineProps([
   "component",
   "pages",
 ]);
-// const { showModal } = useModal();
-const modalRef = ref(null);
 
-provide("pageModal", modalRef);
+const { showModal } = useModal({ provideName: "pageModal" });
 
-function showPageModal(page: any) {
-  // setGlobalProperty("activePageModal", page);
-  // setTimeout(() => {
-  //   showModal(modalRef);
-  // }, 250);
+function showPageModal() {
+  setTimeout(() => {
+    showModal();
+  }, 250);
 }
 </script>
 

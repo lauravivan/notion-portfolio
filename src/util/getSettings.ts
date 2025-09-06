@@ -9,7 +9,7 @@ export function getSettings(pageId: string): Settings {
 
   return {
     fontStyle: "font-roboto",
-    fontSize: "",
-    pageWidth: "",
+    fullWidth: false,
+    smallText: false,
   };
 }

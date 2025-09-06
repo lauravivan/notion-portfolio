@@ -1,10 +1,11 @@
 <template>
   <Empty />
   <Gallery
-    :galleryTitle="'My Projects'"
+    galleryTitle="My Projects"
     :cardPreviewIsCover="true"
     :component="Project"
     :pages="pages"
+    v-if="pages"
   />
 </template>
 
@@ -15,7 +16,7 @@ import Project from "@/pages/Project.vue";
 import createProjectPages from "@/util/createProjectPages";
 import { computedAsync } from "@vueuse/core";
 
-const pages = computedAsync(() => {
-  return createProjectPages();
+const pages = computedAsync(async () => {
+  return await createProjectPages();
 });
 </script>

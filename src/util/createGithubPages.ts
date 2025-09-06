@@ -32,6 +32,8 @@ export default async function createGhPages(): Promise<Page[]> {
       });
     });
 
+    console.log(pages);
+
     return pages;
   } catch {
     return [];

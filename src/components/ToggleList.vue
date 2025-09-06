@@ -37,7 +37,6 @@ const detailsContentRef = ref(null);
 const props = defineProps(["iconToOpen", "iconToClose"]);
 const { toggleDisplay, setDisplayToNone } = useDisplay();
 const icon = ref(props.iconToOpen);
-const summaryContentRef = ref(null);
 
 const toToggle = () => {
   toggleDisplay(detailsContentRef);

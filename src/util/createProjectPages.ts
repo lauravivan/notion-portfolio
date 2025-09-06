@@ -1,8 +1,8 @@
-import { getGithubRepos } from "./getGhRepos";
+// import { getGithubRepos } from "./getGhRepos";
 
 export default async function createProjectPages(): Promise<Page[]> {
   try {
-    const repos = await getGithubRepos();
+    // const repos = await getGithubRepos();
 
     return [
       {

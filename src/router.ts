@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Contact from "@/pages/Contact.vue";
 import Github from "@/pages/Github.vue";
-import Project from "@/pages/Project.vue";
+// import Project from "@/pages/Project.vue";
 import Reference from "@/pages/Reference.vue";
 import Projects from "@/pages/Projects.vue";
 import About from "@/pages/About.vue";
-import Repo from "@/pages/Repo.vue";
+// import Repo from "@/pages/Repo.vue";
 import Main from "@/pages/Main.vue";
 import NotFound from "@/pages/NotFound.vue";
 import store from "@/store";
@@ -90,58 +90,58 @@ const router = createRouter({
             next();
           },
         },
-        {
-          path: "/projects/:id",
-          component: Project,
-          name: "project",
-          props: function (to) {
-            const id = to.params.id;
-            const pages = computed(() => store.getters.getPages);
+        // {
+        //   path: "/projects/:id",
+        //   component: Project,
+        //   name: "project",
+        //   props: function (to) {
+        //     const id = to.params.id;
+        //     const pages = computed(() => store.getters.getPages);
 
-            // to.meta.params = {
-            //   page: pages.projects.pages[id],
-            // };
+        //     // to.meta.params = {
+        //     //   page: pages.projects.pages[id],
+        //     // };
 
-            return to.meta.params;
-          },
-          beforeEnter: (to, _from) => {
-            const id = to.params.id;
-            const pages = computed(() => store.getters.getPages);
+        //     return to.meta.params;
+        //   },
+        //   beforeEnter: (to, _from) => {
+        //     const id = to.params.id;
+        //     const pages = computed(() => store.getters.getPages);
 
-            // if (pages.value.projects.pages[id]) {
-            //   storeActivePage(pages.value.projects.pages[id]);
-            //   next();
-            // } else {
-            //   next("/not-found");
-            // }
-          },
-        },
-        {
-          path: "/github/:id",
-          component: Repo,
-          name: "repo",
-          props: function (to) {
-            const id = to.params.id;
-            const pages = computed(() => store.getters.getPages);
+        //     // if (pages.value.projects.pages[id]) {
+        //     //   storeActivePage(pages.value.projects.pages[id]);
+        //     //   next();
+        //     // } else {
+        //     //   next("/not-found");
+        //     // }
+        //   },
+        // },
+        // {
+        //   path: "/github/:id",
+        //   component: Repo,
+        //   name: "repo",
+        //   props: function (to) {
+        //     const id = to.params.id;
+        //     const pages = computed(() => store.getters.getPages);
 
-            // to.meta.params = {
-            //   page: pages.value.github.pages[id],
-            // };
+        //     // to.meta.params = {
+        //     //   page: pages.value.github.pages[id],
+        //     // };
 
-            return to.meta.params;
-          },
-          beforeEnter: (to, _from) => {
-            const id = to.params.id;
-            const pages = computed(() => store.getters.getPages);
+        //     return to.meta.params;
+        //   },
+        //   beforeEnter: (to, _from) => {
+        //     const id = to.params.id;
+        //     const pages = computed(() => store.getters.getPages);
 
-            // if (pages.value.github.pages[id]) {
-            //   storeActivePage(pages.value.github.pages[id]);
-            //   next();
-            // } else {
-            //   next("/not-found");
-            // }
-          },
-        },
+        //     // if (pages.value.github.pages[id]) {
+        //     //   storeActivePage(pages.value.github.pages[id]);
+        //     //   next();
+        //     // } else {
+        //     //   next("/not-found");
+        //     // }
+        //   },
+        // },
         {
           path: "certificates",
           component: Certificates,
