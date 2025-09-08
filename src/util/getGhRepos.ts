@@ -2,7 +2,7 @@ export async function getGithubRepos(): Promise<ResponseOK | ResponseFail> {
   try {
     const res = await fetch("https://api.github.com/users/lauravivan/repos", {
       headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${import.meta.env.GITHUB_ACCESS_TOKEN}`,
         Accept: "application/vnd.github.v3+json",
       },
     });

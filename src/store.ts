@@ -11,7 +11,6 @@ import {
   setThemeLS,
 } from "./util/localStorage";
 import { Theme } from "./types/theme";
-import createAsyncPage from "./util/createAsyncPage";
 
 type StoreState = {
   pages: { [x: string]: Page };
