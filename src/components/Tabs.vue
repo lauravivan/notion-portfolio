@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import router from "@/router";
 import Icon from "@/components/Icon.vue";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -39,6 +39,9 @@ const icons = computed(() => store.getters.getIcons);
 const activePage = computed(() => store.getters.getActivePage);
 const activeTab = computed<number>(() => store.getters.getActiveTab);
 const tabs = computed<TabLocalStorage[]>(() => store.getters.getTabs);
+const route = computed(() => {
+  return router.currentRoute.value;
+});
 
 function updateActiveTab(index: any) {
   store.commit("storeActiveTab", index);
@@ -72,6 +75,10 @@ onMounted(() => {
     });
   }
 });
+
+watch(route, () => {
+  document.body.style.pointerEvents = "auto";
+});
 </script>
 
 <style lang="scss">
@@ -84,6 +91,7 @@ onMounted(() => {
   background-color: var.$gray-4;
   top: 0;
   height: var.$TABS_HEIGHT;
+  z-index: 10000;
 
   @media (max-width: var.$screen-small) {
     top: auto;

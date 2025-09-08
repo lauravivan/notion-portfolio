@@ -1,6 +1,7 @@
 <template>
   <div class="overlay" ref="modalRef">
     <dialog
+      class="modal"
       :class="props.isStatic ? 'modal-static' : 'modal-dynamic'"
       :style="props.modalStyles"
     >
@@ -49,10 +50,10 @@ dialog {
 }
 
 .modal-static {
-  z-index: 1000;
+  z-index: 2000;
   box-shadow: var.$box-shadow-1;
-  background-color: var.$white;
   border-radius: 5px;
+  background-color: var.$white;
   animation: fadeIn 1s;
   transition: width 0.3s;
   user-select: none;
@@ -71,9 +72,9 @@ dialog {
   position: absolute;
   z-index: 2500;
   min-width: 200px;
-  background-color: var.$white;
   padding: 6px;
   box-shadow: var.$box-shadow-3;
+  background-color: var.$white;
   border-radius: 6px;
   outline: none;
   animation: fadeIn 0.4s ease-in-out;

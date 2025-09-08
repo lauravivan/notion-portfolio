@@ -3,14 +3,14 @@
     <ul class="option__list">
       <li
         class="option__item"
-        v-for="item of props.items"
+        v-for="(item, index) of props.items"
         :key="item"
-        @click="toSelect(item)"
+        @click="toSelect(index)"
       >
-        <div>{{ item }}</div>
+        <div>{{ item.name }}</div>
         <div
           :class="
-            optionSelected == item ? 'option__active' : 'option__not-active'
+            optionSelected == index ? 'option__active' : 'option__not-active'
           "
         >
           <Icon :icon="icons.check" class="option__icon" />
@@ -32,7 +32,7 @@ const props = defineProps(["items", "optionSelected"]);
 const optionSelected = ref(props.optionSelected);
 const emit = defineEmits(["toSelect"]);
 
-const toSelect = (item: string) => {
+const toSelect = (item: number) => {
   optionSelected.value = item;
   emit("toSelect", item);
 };

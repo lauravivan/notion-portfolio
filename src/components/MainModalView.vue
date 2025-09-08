@@ -3,20 +3,16 @@
     <Modal
       class="page-modal"
       :provideName="props.provideName"
-      v-if="props.page"
+      :isStatic="true"
+      :hideModal="props.hideModal"
+      :addModalListener="props.addModalListener"
     >
-      <router-link :to="props.page.pagePath">
+      <router-link :to="props.page.path">
         <Icon class="page-modal__expand" :icon="icons.expand" />
       </router-link>
-      <main
-        class="page-wrapper"
-        :class="[
-          props.page.pageSettings.fontStyle,
-          props.page.pageSettings.fontSize,
-        ]"
-      >
+      <main class="page-wrapper">
         <div
-          v-if="props.page.pageBanner"
+          v-if="props.page.bannerPath"
           class="page-banner"
           :style="{
             height: 'max-content',
@@ -24,16 +20,16 @@
             'margin-top': '20px !important',
           }"
         >
-          <img :src="props.page.pageBanner" />
+          <img :src="props.page.bannerPath" />
         </div>
         <div
           class="page-content"
-          :class="props.page.pageBanner ? 'page-content--banner' : ''"
-          :style="props.page.pageBanner ? { top: '150px' } : ''"
+          :class="props.page.bannerPath ? 'page-content--banner' : ''"
+          :style="props.page.bannerPath ? { top: '150px' } : ''"
         >
           <div class="page-title">
-            <img :src="props.page.pageIcon" />
-            <span>{{ props.page.pageName }}</span>
+            <img :src="props.page.iconPath" />
+            <span>{{ props.page.name }}</span>
           </div>
           <component :is="props.component" :page="props.page" />
           <div style="width: auto; height: 100px"></div>
@@ -51,7 +47,13 @@ import { computed } from "vue";
 
 const store = useStore();
 const icons = computed(() => store.getters.getIcons);
-const props = defineProps(["component", "provideName", "page"]);
+const props = defineProps([
+  "component",
+  "provideName",
+  "page",
+  "hideModal",
+  "addModalListener",
+]);
 </script>
 
 <style lang="scss">

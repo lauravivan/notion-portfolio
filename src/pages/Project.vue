@@ -1,7 +1,7 @@
 <template>
   <Database
     v-if="!props.hideDatabase && props.page"
-    :multiSelectItems="props.page.pageData.languages"
+    :multiSelectItems="props.page.ghData.languages"
   >
     <template #dateTimeDesc>Created</template>
     <template #multiSelectDesc>Used languages</template>
@@ -9,25 +9,23 @@
   <div class="project" v-if="props.page">
     <Heading headingNumber="3">About</Heading>
 
-    <Text>{{ props.page.pageAbout }}</Text>
+    <Text>{{ props.page.about }}</Text>
 
     <Empty />
 
     <Heading headingNumber="3">Reasons to creating this project</Heading>
-    <Text>{{ props.page.pageDesc }}</Text>
+    <Text>{{ props.page.desc }}</Text>
 
     <Empty />
 
-    <Heading
-      headingNumber="3"
-      v-if="props.page.pageMore && props.page.pageMore.tdd"
+    <Heading headingNumber="3" v-if="props.page.more && props.page.more.tdd"
       >TDD (Technical Design Document)</Heading
     >
 
     <a
       target="_blank"
-      v-if="props.page.pageMore && props.page.pageMore.tdd"
-      :href="props.page.pageMore.tdd"
+      v-if="props.page.more && props.page.more.tdd"
+      :href="props.page.more.tdd"
       >Link to TDD</a
     >
 
@@ -36,9 +34,7 @@
     <Heading headingNumber="3">Where you can access</Heading>
 
     <Text>
-      <a target="_blank" :href="props.page.pageData.homepage"
-        >Link to project</a
-      ></Text
+      <a target="_blank" :href="props.page.ghData.url">Link to project</a></Text
     >
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div v-if="route.name === 'NotFound'">
     <router-view></router-view>
   </div>
-  <div v-else class="app" :class="theme">
+  <div v-else class="app">
     <div :class="mainContainerClasses">
       <Aside />
 
@@ -24,7 +24,7 @@ import Aside from "@/components/Aside.vue";
 import Header from "@/components/Header.vue";
 import Tabs from "@/components/Tabs.vue";
 import router from "@/router";
-import { computed } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import useAside from "./hooks/useAside";
 import { Theme } from "./types/theme";
@@ -37,6 +37,16 @@ const route = computed(() => {
 });
 
 const theme = computed<Theme>(() => store.getters.getTheme);
+
+watch(theme, () => {
+  document.body.className = "";
+  document.body.classList.add(theme.value);
+});
+
+onMounted(() => {
+  document.body.className = "";
+  document.body.classList.add(theme.value);
+});
 </script>
 
 <style lang="scss">

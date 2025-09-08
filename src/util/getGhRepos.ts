@@ -1,9 +1,29 @@
-export async function getGithubRepos(): Promise<GhRepo[]> {
-  const res = await fetch("https://api.github.com/users/lauravivan/repos");
+export async function getGithubRepos(): Promise<ResponseOK | ResponseFail> {
+  try {
+    const res = await fetch("https://api.github.com/users/lauravivan/repos", {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_ACCESS_TOKEN}`,
+        Accept: "application/vnd.github.v3+json",
+      },
+    });
 
-  if (res.ok) {
-    return await res.json();
-  }
+    if (res.ok) {
+      const resJSON = await res.json();
 
-  throw Error("Ocorreu um erro ao tentar buscar os repositórios");
+      return {
+        ok: res.ok,
+        res: resJSON,
+      };
+    }
+
+    return {
+      ok: res.ok,
+      error: "Erro ao buscar repositórios do github",
+    };
+  } catch {}
+
+  return {
+    ok: false,
+    error: "Erro ao buscar repositórios do github",
+  };
 }

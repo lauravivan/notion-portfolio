@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="select-btn" @click="showModal">
-      <button>{{ props.options[optionSelected] }}</button>
+      <button>{{ props.options[optionSelected].name }}</button>
       <Icon :icon="icons.arrowDown" />
     </div>
 
@@ -36,6 +36,7 @@ const store = useStore();
 const icons = computed(() => store.getters.getIcons);
 
 const props = defineProps(["options", "menuProvideName", "optionSelected"]);
+
 const optionSelected = ref(props.optionSelected);
 const emit = defineEmits(["toSelect"]);
 

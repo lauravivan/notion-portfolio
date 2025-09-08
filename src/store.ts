@@ -11,6 +11,7 @@ import {
   setThemeLS,
 } from "./util/localStorage";
 import { Theme } from "./types/theme";
+import createAsyncPage from "./util/createAsyncPage";
 
 type StoreState = {
   pages: { [x: string]: Page };
@@ -299,6 +300,12 @@ const store = createStore({
     storeTheme(state: StoreState, theme: Theme) {
       state.theme = theme;
       setThemeLS(theme);
+    },
+    updatePages(state: StoreState, payload: { id: string; page: Page }) {
+      state.pages = {
+        ...state.pages,
+        [payload.id]: payload.page,
+      };
     },
   },
   getters: {

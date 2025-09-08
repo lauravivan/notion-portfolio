@@ -1,12 +1,17 @@
 <template>
   <div class="breadcrumb">
-    <div class="breadcrumb__crumb" v-for="page in breadcrumbs" :key="page.id">
+    <div
+      class="breadcrumb__crumb"
+      v-for="(page, index) in breadcrumbs"
+      :key="page.id"
+    >
       <router-link class="breadcrumb__page" :to="page.path">
         <div>
           <img :src="page.iconPath" style="max-width: 1.1rem; height: auto" />
           <div>{{ page.name }}</div>
         </div>
       </router-link>
+      <div v-if="index !== breadcrumbs.length - 1">/</div>
       <div v-if="breadcrumbs.length > 2" class="breadcrumb__dots">...</div>
     </div>
   </div>
@@ -25,7 +30,7 @@ const breadcrumbs = computed(() => {
     let newActivePage = activePage.value;
 
     while (newActivePage.parentPage) {
-      breadcrumbs.push(newActivePage);
+      breadcrumbs.unshift(newActivePage);
       newActivePage = newActivePage.parentPage;
     }
 

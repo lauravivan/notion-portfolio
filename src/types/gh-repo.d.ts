@@ -11,13 +11,13 @@ interface GhRepo {
 }
 
 interface GhPortfolioRepo {
-  id: number;
-  name: string;
-  watchCount: number;
-  starCount: number;
-  forkCount: number;
-  url: string;
-  ghUrl: string;
-  languages: string[];
-  desc: string;
+  id?: number;
+  name?: string;
+  watchCount?: number;
+  starCount?: number;
+  forkCount?: number;
+  url?: string;
+  ghUrl?: string;
+  languages?: string[];
+  desc?: string;
 }

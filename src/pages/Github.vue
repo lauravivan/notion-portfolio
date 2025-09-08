@@ -13,9 +13,12 @@ import Gallery from "@/components/Gallery.vue";
 import Empty from "@/components/Empty.vue";
 import Repo from "@/pages/Repo.vue";
 import { computedAsync } from "@vueuse/core";
-import createGhPages from "@/util/createGithubPages";
+import { useStore } from "vuex";
 
-const pages = computedAsync(() => {
-  return createGhPages();
+const store = useStore();
+
+const pages = computedAsync(async () => {
+  const pages = store.getters.getPages;
+  return await pages.github.pages;
 });
 </script>

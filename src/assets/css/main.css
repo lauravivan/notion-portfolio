@@ -256,6 +256,8 @@ body {
 }
 
 .dark-theme .modal,
+.dark-theme .modal-static,
+.dark-theme .modal-dynamic,
 .dark-theme .footer,
 .dark-theme .gallery__card-footer,
 .dark-theme .nav-hover .nav-list,
@@ -355,6 +357,8 @@ body {
 }
 
 .cat-latte .modal,
+.cat-latte .modal-static,
+.cat-latte .modal-dynamic,
 .cat-latte .footer,
 .cat-latte .gallery__card-footer,
 .cat-latte .nav-hover .nav-list,
@@ -454,6 +458,8 @@ body {
 }
 
 .cat-mocha .modal,
+.cat-mocha .modal-static,
+.cat-mocha .modal-dynamic,
 .cat-mocha .footer,
 .cat-mocha .gallery__card-footer,
 .cat-mocha .nav-hover .nav-list,

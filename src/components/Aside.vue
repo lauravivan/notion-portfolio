@@ -81,7 +81,7 @@
             <SelectBtn
               :options="themes"
               :menuProvideName="THEME_OPTIONS_PROVIDE"
-              :optionSelected="theme"
+              :optionSelected="optionSelected"
               @toSelect="toggleTheme"
             />
           </div>
@@ -114,11 +114,7 @@ import { Theme } from "@/types/theme";
 
 const store = useStore();
 const icons = computed(() => store.getters.getIcons);
-const themes = computed<string[]>(() =>
-  store.getters.getThemesOptions.map(
-    (theme: { id: string; name: string }) => theme.name
-  )
-);
+const themes = computed(() => store.getters.getThemesOptions);
 const theme = computed<Theme>(() => store.getters.getTheme);
 const pages = computed(() => {
   return store.getters.getPages;
@@ -133,6 +129,12 @@ const asideDefault = ref(true);
 const navBtnIcon = ref(icons.value.sandwich);
 const mainContainerDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTAINER);
 const mainContentDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTENT);
+
+const optionSelected = computed(() =>
+  themes.value.findIndex(
+    (th: { id: string; name: string }) => th.id === theme.value
+  )
+);
 
 const asideClasses = computed(() => {
   return {
@@ -161,13 +163,8 @@ const {
   addModalListener: addSearchModalListener,
 } = useModal({ provideName: SEARCH_MODAL_PROVIDE });
 
-function toggleTheme(name: string) {
-  const t = computed(() => store.getters.getThemesOptions);
-  store.commit(
-    "storeTheme",
-    t.value.find((theme: { id: string; name: string }) => theme.name === name)
-      .id
-  );
+function toggleTheme(i: number) {
+  store.commit("storeTheme", themes.value[i].id);
 }
 
 function togglePageState(isDefault = true) {
@@ -253,7 +250,7 @@ watch(navClasses, (currentClass) => {
       background-color: var.$white;
       border-radius: 5px;
       height: min-content;
-      max-height: 75%;
+      max-height: 75vh;
 
       &__nav-item {
         width: 100%;

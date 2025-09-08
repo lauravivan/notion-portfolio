@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Contact from "@/pages/Contact.vue";
 import Github from "@/pages/Github.vue";
-// import Project from "@/pages/Project.vue";
+import Project from "@/pages/Project.vue";
 import Reference from "@/pages/Reference.vue";
 import Projects from "@/pages/Projects.vue";
 import About from "@/pages/About.vue";
@@ -13,10 +13,15 @@ import Certificates from "@/pages/Certificates.vue";
 import Honors from "@/pages/Honors.vue";
 import Publications from "@/pages/Publications.vue";
 import { computed } from "vue";
+import createAsyncPage from "./util/createAsyncPage";
+import createPage from "./util/createPage";
 
 function storeActivePage(page: Page) {
   store.commit("storeActivePage", page);
 }
+
+const pages = computed(() => store.getters.getPages);
+const theme = computed(() => store.getters.getTheme);
 
 const router = createRouter({
   history: createWebHistory(),
@@ -35,7 +40,6 @@ const router = createRouter({
           component: About,
           name: "about",
           beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
             storeActivePage(pages.value.about);
             next();
           },
@@ -45,7 +49,6 @@ const router = createRouter({
           component: About,
           name: "homepage",
           beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
             storeActivePage(pages.value.about);
             next();
           },
@@ -55,7 +58,6 @@ const router = createRouter({
           component: Contact,
           name: "contact",
           beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
             storeActivePage(pages.value.contact);
             next();
           },
@@ -64,9 +66,23 @@ const router = createRouter({
           path: "github",
           component: Github,
           name: "github",
-          beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
-            storeActivePage(pages.value.github);
+          beforeEnter: async (_to, _from, next) => {
+            const page = pages.value.github;
+
+            const newPage = await createAsyncPage(
+              {
+                id: page.id,
+                name: page.name,
+              },
+              theme.value
+            );
+
+            store.commit("updatePages", {
+              id: "github",
+              page: newPage,
+            });
+
+            storeActivePage(newPage);
             next();
           },
         },
@@ -75,7 +91,6 @@ const router = createRouter({
           component: Reference,
           name: "reference",
           beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
             storeActivePage(pages.value.reference);
             next();
           },
@@ -84,38 +99,58 @@ const router = createRouter({
           path: "projects",
           component: Projects,
           name: "projects",
-          beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
-            storeActivePage(pages.value.projects);
+          beforeEnter: async (_to, _from, next) => {
+            const page = pages.value.projects;
+
+            const newPage = createPage(
+              {
+                id: page.id,
+                name: page.name,
+              },
+              theme.value
+            );
+
+            store.commit("updatePages", {
+              id: "projects",
+              page: newPage,
+            });
+
+            storeActivePage(newPage);
             next();
           },
         },
-        // {
-        //   path: "/projects/:id",
-        //   component: Project,
-        //   name: "project",
-        //   props: function (to) {
-        //     const id = to.params.id;
-        //     const pages = computed(() => store.getters.getPages);
+        {
+          path: "/projects/:id",
+          component: Project,
+          name: "project",
+          props: function (to) {
+            const id = to.params.id;
 
-        //     // to.meta.params = {
-        //     //   page: pages.projects.pages[id],
-        //     // };
+            const proj = pages.value.projects.pages.find(
+              (proj: any) => proj.id === id
+            );
 
-        //     return to.meta.params;
-        //   },
-        //   beforeEnter: (to, _from) => {
-        //     const id = to.params.id;
-        //     const pages = computed(() => store.getters.getPages);
+            to.meta.params = {
+              page: proj,
+            };
 
-        //     // if (pages.value.projects.pages[id]) {
-        //     //   storeActivePage(pages.value.projects.pages[id]);
-        //     //   next();
-        //     // } else {
-        //     //   next("/not-found");
-        //     // }
-        //   },
-        // },
+            return to.meta.params;
+          },
+          beforeEnter: (to, _from, next) => {
+            const id = to.params.id;
+
+            const proj = pages.value.projects.pages.find(
+              (proj: any) => proj.id === id
+            );
+
+            if (proj) {
+              storeActivePage(proj);
+              next();
+            }
+
+            next("/not-found");
+          },
+        },
         // {
         //   path: "/github/:id",
         //   component: Repo,
@@ -147,7 +182,6 @@ const router = createRouter({
           component: Certificates,
           name: "certificates",
           beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
             storeActivePage(pages.value.certificates);
             next();
           },
@@ -157,7 +191,6 @@ const router = createRouter({
           component: Honors,
           name: "honors",
           beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
             storeActivePage(pages.value.honors);
             next();
           },
@@ -167,7 +200,6 @@ const router = createRouter({
           component: Publications,
           name: "publications",
           beforeEnter: (_to, _from, next) => {
-            const pages = computed(() => store.getters.getPages);
             storeActivePage(pages.value.publications);
             next();
           },

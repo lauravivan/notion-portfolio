@@ -23,5 +23,16 @@ import Link from "@/components/Link.vue";
     <br></br>
 
     <Link href="https://proceedings.sbmac.org.br/sbmac/article/view/4826" emoji="🎓">Access publication</Link>
+
+    <Empty/>
+
+    <Heading heading-number="3">
+Interdisciplinaridade na Ciência: Relato de Experiência sobre o Trabalho em Conjunto na Área da Saúde e da Computação</Heading>
+<p>Editora Udesc. May 26, 2022</p>
+
+<Empty/>
+
+<br></br>
+<Link href="https://sistemabu.udesc.br/pergamumweb/vinculos/00009f/00009f95.pdf" emoji="🎓">Access publication</Link>
   </div>
 </template>

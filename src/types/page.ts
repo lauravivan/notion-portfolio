@@ -7,7 +7,6 @@ interface Page {
   iconPath: string;
   bannerPath: string;
   ghData?: GhPortfolioRepo;
-  settings: Settings;
   pages?: Page[];
   more?: {
     tddLink: string;
