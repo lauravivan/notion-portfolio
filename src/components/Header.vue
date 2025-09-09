@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import Icon from "@/components/Icon.vue";
-import { computed, onBeforeMount } from "vue";
+import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import useModal from "@/hooks/useModal";
 import Breadcrumb from "@/components/Breadcrumb.vue";
@@ -126,11 +126,12 @@ function storeActiveSettings<K extends keyof Settings>(
   });
 }
 
-onBeforeMount(() => {
+onMounted(() => {
   if (activePage && activePage.value && activePage.value.id) {
     const actSetts = settings.value[activePage.value.id];
-    // setActiveSettings(actSetts);
-
+    setGlobalProperty("fontStyle", actSetts.fontStyle);
+    setGlobalProperty("fullWidth", actSetts.fullWidth);
+    setGlobalProperty("smallText", actSetts.smallText);
     handleActiveFS(actSetts[FONT_SIZE_PROVIDE_NAME]);
     handleActiveFW(actSetts[FULL_WIDTH_PROVIDE_NAME]);
   }
