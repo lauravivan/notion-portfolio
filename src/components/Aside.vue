@@ -93,6 +93,7 @@
       :provideName="SEARCH_MODAL_PROVIDE"
       :addModalListener="addSearchModalListener"
       :hideModal="hideSearchModal"
+      :isStatic="true"
     >
       <div>Not build yet</div>
     </Modal>
