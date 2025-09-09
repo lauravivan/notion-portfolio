@@ -134,6 +134,10 @@ function loadFirstSettings() {
       setGlobalProperty("smallText", actSetts.smallText);
       handleActiveFS(actSetts[FONT_SIZE_PROVIDE_NAME]);
       handleActiveFW(actSetts[FULL_WIDTH_PROVIDE_NAME]);
+    } else {
+      setGlobalProperty("fontStyle", "font-roboto");
+      setGlobalProperty("fullWidth", false);
+      setGlobalProperty("smallText", false);
     }
   }
 }
