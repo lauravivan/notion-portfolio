@@ -58,7 +58,7 @@ dialog {
   transition: width 0.3s;
   user-select: none;
   outline: none;
-  width: max-content;
+  width: 70%;
   position: absolute;
   top: 50%;
   left: 50%;

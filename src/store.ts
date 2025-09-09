@@ -25,7 +25,6 @@ type StoreState = {
     [x: string]: string;
   };
   settings: PagesSettings;
-  activeSettings: Settings;
   activeTab: number;
   tabs: TabLocalStorage[];
   references: ReferenceToggle[];
@@ -63,11 +62,6 @@ const store = createStore({
       reference: createPage({ id: "reference", name: "Reference" }),
     },
     activePage: null,
-    activeSettings: {
-      fontStyle: "font-roboto",
-      smallText: false,
-      fullWidth: false,
-    },
     projectAuthor: `Laura Vivan's Portfolio`,
     authorSocialMedia: "@lauravivan",
     themesOptions: [
@@ -260,9 +254,6 @@ const store = createStore({
     theme: getThemeLS(),
   },
   mutations: {
-    storeActiveSettings(state: StoreState, settings: Settings) {
-      state.activeSettings = settings;
-    },
     storeSettings(
       state: StoreState,
       payload: { key: string; settings: Settings }
@@ -318,7 +309,6 @@ const store = createStore({
     getPageWidthOptions: (state) => state.pageWidthOptions,
     getIcons: (state) => state.icons,
     getSettings: (state) => state.settings,
-    getActiveSettings: (state) => state.activeSettings,
     getActiveTab: (state) => state.activeTab,
     getTabs: (state) => state.tabs,
     getReferences: (state) => state.references,

@@ -328,36 +328,36 @@ watch(navClasses, (currentClass) => {
   }
 }
 
-.modal {
-  width: 70%;
+// .modal {
+//   width: 70%;
 
-  &__settings {
-    @include mixin.flex-layout($row-gap: 20px);
-  }
+//   &__settings {
+//     @include mixin.flex-layout($row-gap: 20px);
+//   }
 
-  &__settings-title {
-    font-weight: var.$fw-600;
-  }
+//   &__settings-title {
+//     font-weight: var.$fw-600;
+//   }
 
-  &__appearance {
-    @include mixin.flex-layout($flex-direction: row);
-    justify-content: space-between;
+//   &__appearance {
+//     @include mixin.flex-layout($flex-direction: row);
+//     justify-content: space-between;
 
-    div:nth-child(1) {
-      h3,
-      h4 {
-        word-break: break-all;
-      }
-    }
+//     div:nth-child(1) {
+//       h3,
+//       h4 {
+//         word-break: break-all;
+//       }
+//     }
 
-    h3 {
-      margin-bottom: 6px;
-    }
+//     h3 {
+//       margin-bottom: 6px;
+//     }
 
-    h4 {
-      font-size: var.$fs-small;
-      color: var.$black-6;
-    }
-  }
-}
+//     h4 {
+//       font-size: var.$fs-small;
+//       color: var.$black-6;
+//     }
+//   }
+// }
 </style>

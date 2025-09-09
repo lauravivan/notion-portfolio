@@ -7,34 +7,34 @@
     <template #multiSelectDesc>Used languages</template>
   </Database>
   <div class="project" v-if="props.page">
-    <Heading headingNumber="3">About</Heading>
+    <Heading headingNumber="3" v-if="props.page.about">About</Heading>
 
-    <Text>{{ props.page.about }}</Text>
+    <Text v-if="props.page.about">{{ props.page.about }}</Text>
 
-    <Empty />
+    <Empty v-if="props.page.about" />
 
     <Heading headingNumber="3">Reasons to creating this project</Heading>
     <Text>{{ props.page.desc }}</Text>
 
-    <Empty />
+    <Empty v-if="props.page.more && props.page.more.tddLink" />
 
-    <Heading headingNumber="3" v-if="props.page.more && props.page.more.tdd"
+    <Heading headingNumber="3" v-if="props.page.more && props.page.more.tddLink"
       >TDD (Technical Design Document)</Heading
     >
 
-    <a
-      target="_blank"
-      v-if="props.page.more && props.page.more.tdd"
-      :href="props.page.more.tdd"
-      >Link to TDD</a
+    <Link
+      v-if="props.page.more && props.page.more.tddLink"
+      :href="props.page.more.tddLink"
+      emoji="📋"
+      >Link to TDD</Link
     >
 
     <Empty />
 
     <Heading headingNumber="3">Where you can access</Heading>
 
-    <Text>
-      <a target="_blank" :href="props.page.ghData.url">Link to project</a></Text
+    <Link target="_blank" :href="props.page.ghData.url" emoji="🧑‍🦯‍➡️"
+      >Link to project</Link
     >
   </div>
 </template>
@@ -44,6 +44,7 @@ import Database from "@/components/Database.vue";
 import Text from "@/components/Text.vue";
 import Heading from "@/components/Heading.vue";
 import Empty from "@/components/Empty.vue";
+import Link from "@/components/Link.vue";
 
 const props = defineProps(["page", "hideDatabase"]);
 </script>

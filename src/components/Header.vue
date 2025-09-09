@@ -30,7 +30,7 @@
           @click="storeActiveSettings(FONT_STYLE_PROVIDE_NAME, font.id)"
           :class="{
             'header-menu__font-wrapper--active':
-              activeSettings.fontStyle === font.id,
+              getGlobalProperties.fontStyle === font.id,
           }"
         >
           <span class="header-menu__ag">Ag</span>
@@ -69,6 +69,7 @@ import Breadcrumb from "@/components/Breadcrumb.vue";
 import Toggle from "./Toggle.vue";
 import useToggle from "@/hooks/useToggle";
 import Modal from "./Modal.vue";
+import { getGlobalProperties, setGlobalProperty } from "@/global";
 
 const store = useStore();
 
@@ -79,9 +80,6 @@ const HEADER_MENU_PROVIDE_NAME = "headerMenu";
 
 const activePage = computed<Page>(() => store.getters.getActivePage);
 const fontsOptions = computed(() => store.getters.getFontsOptions);
-const activeSettings = computed<Settings>(
-  () => store.getters.getActiveSettings
-);
 const settings = computed<PagesSettings>(() => store.getters.getSettings);
 const icons = computed(() => store.getters.getIcons);
 
@@ -111,21 +109,27 @@ const {
   provideName: HEADER_MENU_PROVIDE_NAME,
 });
 
-function storeActiveSettings(provideName: string, value: boolean | string) {
-  store.commit("storeActiveSettings", {
-    ...activeSettings.value,
-    [provideName]: value,
-  });
+function storeActiveSettings<K extends keyof Settings>(
+  provideName: K,
+  value: Settings[K]
+) {
+  console.log(provideName);
+  console.log(value);
+  setGlobalProperty(provideName, value);
+
   store.commit("storeSettings", {
     key: activePage.value.id,
-    settings: activeSettings.value,
+    settings: {
+      ...getGlobalProperties.value,
+      [provideName]: value,
+    },
   });
 }
 
 onBeforeMount(() => {
   if (activePage && activePage.value && activePage.value.id) {
     const actSetts = settings.value[activePage.value.id];
-    store.commit("storeActiveSettings", actSetts);
+    // setActiveSettings(actSetts);
 
     handleActiveFS(actSetts[FONT_SIZE_PROVIDE_NAME]);
     handleActiveFW(actSetts[FULL_WIDTH_PROVIDE_NAME]);

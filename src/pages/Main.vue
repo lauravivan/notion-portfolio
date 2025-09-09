@@ -2,9 +2,9 @@
   <main
     class="page-wrapper"
     :class="[
-      activeSettings.smallText ? 'font-size-small' : '',
-      activeSettings.fontStyle,
-      activeSettings.fullWidth ? 'page-full-width' : '',
+      getGlobalProperties.smallText ? 'font-size-small' : '',
+      getGlobalProperties.fontStyle,
+      getGlobalProperties.fullWidth ? 'page-full-width' : '',
     ]"
   >
     <div v-if="activePage.bannerPath" class="page-banner">
@@ -27,12 +27,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { getGlobalProperties } from "@/global";
 
 const store = useStore();
 const activePage = computed<Page>(() => store.getters.getActivePage);
-const activeSettings = computed<Settings>(
-  () => store.getters.getActiveSettings
-);
 </script>
 
 <style lang="scss">
