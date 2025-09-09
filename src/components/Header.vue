@@ -138,6 +138,8 @@ function loadFirstSettings() {
       setGlobalProperty("fontStyle", "font-roboto");
       setGlobalProperty("fullWidth", false);
       setGlobalProperty("smallText", false);
+      handleActiveFS(false);
+      handleActiveFW(false);
     }
   }
 }
