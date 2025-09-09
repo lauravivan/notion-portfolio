@@ -33,7 +33,7 @@ import { ref, onMounted } from "vue";
 import Icon from "@/components/Icon.vue";
 import useDisplay from "@/hooks/useDisplay";
 
-const detailsContentRef = ref(null);
+const detailsContentRef = ref();
 const props = defineProps(["iconToOpen", "iconToClose"]);
 const { toggleDisplay, setDisplayToNone } = useDisplay();
 const icon = ref(props.iconToOpen);
@@ -41,11 +41,9 @@ const icon = ref(props.iconToOpen);
 const toToggle = () => {
   toggleDisplay(detailsContentRef);
 
-  // const displayState = detailsContentRef.value
-  //   ? detailsContentRef.value.style.display
-  //   : null;
-
-  const displayState = null;
+  const displayState = detailsContentRef.value
+    ? detailsContentRef.value.style.display
+    : null;
 
   if (displayState === "block") {
     icon.value = props.iconToClose;

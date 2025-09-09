@@ -232,24 +232,33 @@ const store = createStore({
           },
         },
       },
-      // {
-      //   summary: "Countdown project",
-      //   detailsContent: {
-      //     mascot: {
-      //       link: "https://www.svgrepo.com/svg/49930/koala",
-      //       author: "SVG Repo",
-      //     },
-      //   },
-      // },
-      // {
-      //   summary: "TrendTide project",
-      //   detailsContent: {
-      //     mascot: {
-      //       link: "https://www.svgrepo.com/svg/395885/black-cat",
-      //       author: "googlefonts",
-      //     },
-      //   },
-      // },
+      {
+        summary: "Countdown",
+        detailsContent: {
+          icon: {
+            link: "https://www.svgrepo.com/svg/232021/penguin",
+            author: "SVG Repo",
+          },
+        },
+      },
+      {
+        summary: "TrendTide",
+        detailsContent: {
+          icon: {
+            link: "https://www.svgrepo.com/svg/395885/black-cat",
+            author: "googlefonts",
+          },
+        },
+      },
+      {
+        summary: "GitFollow",
+        detailsContent: {
+          icon: {
+            link: "https://www.svgrepo.com/svg/506654/github",
+            author: "blivesta",
+          },
+        },
+      },
     ],
     theme: getThemeLS(),
   },

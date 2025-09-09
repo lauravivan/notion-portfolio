@@ -1,7 +1,7 @@
 interface ReferenceToggle {
   summary: string;
   detailsContent: {
-    banner: {
+    banner?: {
       link: string;
       author: string;
     };
