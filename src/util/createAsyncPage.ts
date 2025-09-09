@@ -1,4 +1,4 @@
-import { getGithubRepos } from "../../api/getGhRepos";
+import { getGithubRepos } from "@/util/getGithubRepos";
 import { getRepoLanguages } from "./getRepoLangs";
 
 export default async function createAsyncPage(

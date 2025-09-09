@@ -1,11 +1,6 @@
 export async function getGithubRepos(): Promise<ResponseOK | ResponseFail> {
   try {
-    const res = await fetch("https://api.github.com/users/lauravivan/repos", {
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
-        Accept: "application/vnd.github.v3+json",
-      },
-    });
+    const res = await fetch("https://api.github.com/users/lauravivan/repos");
 
     if (res.ok) {
       const resJSON = await res.json();
