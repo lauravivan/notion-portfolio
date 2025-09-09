@@ -5,6 +5,7 @@
     :component="Repo"
     :cardPreviewIsCover="false"
     :pages="pages"
+    v-if="pages"
   />
 </template>
 

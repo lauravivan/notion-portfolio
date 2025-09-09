@@ -112,6 +112,10 @@
     .nav-link__pagename {
     color: $text !important;
   }
+
+  .bookmark {
+    border-color: $textLighter;
+  }
 }
 
 .dark-theme {

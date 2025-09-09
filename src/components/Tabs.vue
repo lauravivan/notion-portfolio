@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import router from "@/router";
 import Icon from "@/components/Icon.vue";
-import { computed, onMounted, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -64,10 +64,18 @@ function removeTab(index: number) {
   }
 }
 
-onMounted(() => {
+function loadFirstTab() {
   if (tabs.value.length === 0 && activePage.value) {
     store.commit("storeTab", activePage.value);
   }
+}
+
+onMounted(() => {
+  window.addEventListener("load", loadFirstTab);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("load", loadFirstTab);
 });
 
 watch(route, () => {

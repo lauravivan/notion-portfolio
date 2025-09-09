@@ -312,6 +312,10 @@ body {
   color: rgb(255, 255, 255) !important;
 }
 
+.dark-theme .bookmark {
+  border-color: #a8a8a8;
+}
+
 .cat-latte {
   background-color: #e6e9ef;
   color: #4c4f69;
@@ -413,6 +417,10 @@ body {
   color: #4c4f69 !important;
 }
 
+.cat-latte .bookmark {
+  border-color: #6c6f85;
+}
+
 .cat-mocha {
   background-color: #11111b;
   color: #cdd6f4;
@@ -512,6 +520,10 @@ body {
 
 .cat-mocha .main-container-click .aside-click .nav-link__toggle-list--active .nav-link__pagename {
   color: #cdd6f4 !important;
+}
+
+.cat-mocha .bookmark {
+  border-color: #a6adc8;
 }
 
 /*# sourceMappingURL=main.css.map */
