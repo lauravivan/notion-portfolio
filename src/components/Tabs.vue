@@ -8,7 +8,7 @@
       @click.stop="updateActiveTab(index)"
       @touchstart="updateActiveTab(index)"
     >
-      {{ page.pageName }}
+      {{ page.name }}
       <button
         class="tabs__tab--close"
         @click.stop="removeTab(index)"
@@ -38,24 +38,21 @@ const store = useStore();
 const icons = computed(() => store.getters.getIcons);
 const activePage = computed(() => store.getters.getActivePage);
 const activeTab = computed<number>(() => store.getters.getActiveTab);
-const tabs = computed<TabLocalStorage[]>(() => store.getters.getTabs);
+const tabs = computed<Page[]>(() => store.getters.getTabs);
 const route = computed(() => {
   return router.currentRoute.value;
 });
 
-function updateActiveTab(index: any) {
+function updateActiveTab(index: number) {
   store.commit("storeActiveTab", index);
-  router.push(tabs.value[index].pagePath);
+  router.push(tabs.value[index].path);
 }
 
 function addTab() {
-  store.commit("storeTab", {
-    pageName: activePage.value.name,
-    pagePath: activePage.value.path,
-  });
+  store.commit("storeTab", activePage.value);
   const index = tabs.value.length - 1;
   store.commit("storeActiveTab", index);
-  store.commit("storeActivePage", tabs.value[index]);
+  store.commit("storeActivePage", activePage.value);
   router.push(activePage.value.path);
 }
 
@@ -63,21 +60,22 @@ function removeTab(index: number) {
   if (tabs.value.length > 1) {
     store.commit("removeTab", index);
     store.commit("storeActivePage", tabs.value[0]);
-    router.push(tabs.value[0].pagePath);
+    router.push(tabs.value[0].path);
   }
 }
 
 onMounted(() => {
   if (tabs.value.length === 0 && activePage.value) {
-    store.commit("storeTab", {
-      pageName: activePage.value.name,
-      pagePath: activePage.value.path,
-    });
+    store.commit("storeTab", activePage.value);
   }
 });
 
 watch(route, () => {
   document.body.style.pointerEvents = "auto";
+  store.commit("updateTabs", {
+    tabIndex: activeTab.value,
+    page: activePage.value,
+  });
 });
 </script>
 

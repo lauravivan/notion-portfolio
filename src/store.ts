@@ -26,7 +26,7 @@ type StoreState = {
   };
   settings: PagesSettings;
   activeTab: number;
-  tabs: TabLocalStorage[];
+  tabs: Page[];
   references: ReferenceToggle[];
   theme: Theme;
 };
@@ -282,9 +282,9 @@ const store = createStore({
       state.activeTab = activeTab;
       setActiveTabLS(activeTab);
     },
-    storeTab(state: StoreState, tab: TabLocalStorage) {
+    storeTab(state: StoreState, page: Page) {
       const copy = [...state.tabs];
-      copy.push(tab);
+      copy.push(page);
       state.tabs = copy;
       setTabsLS(copy);
     },
@@ -305,6 +305,15 @@ const store = createStore({
         ...state.pages,
         [payload.id]: payload.page,
       };
+    },
+    updateTabs(state: StoreState, payload: { tabIndex: number; page: Page }) {
+      const copy = [...state.tabs];
+
+      copy[payload.tabIndex] = payload.page;
+
+      state.tabs = copy;
+
+      setTabsLS(copy);
     },
   },
   getters: {

@@ -33,7 +33,7 @@ export function setActiveTabLS(activeTab: number) {
   localStorage.setItem(LOCAL_STORAGE_ACTIVE_TAB, JSON.stringify(activeTab));
 }
 
-export function getTabsLS(): TabLocalStorage[] {
+export function getTabsLS(): Page[] {
   const tabs = localStorage.getItem(LOCAL_STORAGE_TABS);
 
   if (tabs) {
@@ -43,7 +43,7 @@ export function getTabsLS(): TabLocalStorage[] {
   return [];
 }
 
-export function setTabsLS(tabs: TabLocalStorage[]) {
+export function setTabsLS(tabs: Page[]) {
   localStorage.setItem(LOCAL_STORAGE_TABS, JSON.stringify(tabs));
 }
 
