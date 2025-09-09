@@ -1,4 +1,5 @@
 import { Theme } from "@/types/theme";
+import { stringify, parse } from "flatted";
 
 const LOCAL_STORAGE_SETTINGS = "arual-portfolio-settings";
 const LOCAL_STORAGE_ACTIVE_TAB = "arual-portfolio-active-tab";
@@ -37,14 +38,14 @@ export function getTabsLS(): Page[] {
   const tabs = localStorage.getItem(LOCAL_STORAGE_TABS);
 
   if (tabs) {
-    return JSON.parse(tabs);
+    return parse(tabs);
   }
 
   return [];
 }
 
 export function setTabsLS(tabs: Page[]) {
-  localStorage.setItem(LOCAL_STORAGE_TABS, JSON.stringify(tabs));
+  localStorage.setItem(LOCAL_STORAGE_TABS, stringify(tabs));
 }
 
 export function getThemeLS(): Theme {

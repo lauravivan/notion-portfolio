@@ -25,6 +25,7 @@
     "vuex": "^4.1.0"
   },
   "dependencies": {
-    "@vueuse/core": "^13.9.0"
+    "@vueuse/core": "^13.9.0",
+    "flatted": "^3.3.3"
   }
 }

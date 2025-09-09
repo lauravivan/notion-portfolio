@@ -309,11 +309,13 @@ const store = createStore({
     updateTabs(state: StoreState, payload: { tabIndex: number; page: Page }) {
       const copy = [...state.tabs];
 
-      copy[payload.tabIndex] = payload.page;
+      if (copy[payload.tabIndex]) {
+        copy[payload.tabIndex] = payload.page;
 
-      state.tabs = copy;
+        state.tabs = copy;
 
-      setTabsLS(copy);
+        setTabsLS(copy);
+      }
     },
   },
   getters: {

@@ -127,12 +127,14 @@ function storeActiveSettings<K extends keyof Settings>(
 function loadFirstSettings() {
   if (activePage && activePage.value && activePage.value.id) {
     const actSetts = settings.value[activePage.value.id];
-    console.log(activePage.value.id);
-    setGlobalProperty("fontStyle", actSetts.fontStyle);
-    setGlobalProperty("fullWidth", actSetts.fullWidth);
-    setGlobalProperty("smallText", actSetts.smallText);
-    handleActiveFS(actSetts[FONT_SIZE_PROVIDE_NAME]);
-    handleActiveFW(actSetts[FULL_WIDTH_PROVIDE_NAME]);
+
+    if (actSetts) {
+      setGlobalProperty("fontStyle", actSetts.fontStyle);
+      setGlobalProperty("fullWidth", actSetts.fullWidth);
+      setGlobalProperty("smallText", actSetts.smallText);
+      handleActiveFS(actSetts[FONT_SIZE_PROVIDE_NAME]);
+      handleActiveFW(actSetts[FULL_WIDTH_PROVIDE_NAME]);
+    }
   }
 }
 
