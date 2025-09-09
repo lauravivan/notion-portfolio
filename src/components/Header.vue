@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import Icon from "@/components/Icon.vue";
-import { computed, onMounted } from "vue";
+import { computed, watch } from "vue";
 import { useStore } from "vuex";
 import useModal from "@/hooks/useModal";
 import Breadcrumb from "@/components/Breadcrumb.vue";
@@ -113,8 +113,6 @@ function storeActiveSettings<K extends keyof Settings>(
   provideName: K,
   value: Settings[K]
 ) {
-  console.log(provideName);
-  console.log(value);
   setGlobalProperty(provideName, value);
 
   store.commit("storeSettings", {
@@ -126,7 +124,7 @@ function storeActiveSettings<K extends keyof Settings>(
   });
 }
 
-onMounted(() => {
+watch(activePage, () => {
   if (activePage && activePage.value && activePage.value.id) {
     const actSetts = settings.value[activePage.value.id];
     setGlobalProperty("fontStyle", actSetts.fontStyle);

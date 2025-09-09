@@ -5,7 +5,7 @@ import Project from "@/pages/Project.vue";
 import Reference from "@/pages/Reference.vue";
 import Projects from "@/pages/Projects.vue";
 import About from "@/pages/About.vue";
-// import Repo from "@/pages/Repo.vue";
+import Repo from "@/pages/Repo.vue";
 import Main from "@/pages/Main.vue";
 import NotFound from "@/pages/NotFound.vue";
 import store from "@/store";
@@ -151,32 +151,38 @@ const router = createRouter({
             next("/not-found");
           },
         },
-        // {
-        //   path: "/github/:id",
-        //   component: Repo,
-        //   name: "repo",
-        //   props: function (to) {
-        //     const id = to.params.id;
-        //     const pages = computed(() => store.getters.getPages);
+        {
+          path: "/github/:id",
+          component: Repo,
+          name: "repo",
+          props: function (to) {
+            const id = to.params.id;
 
-        //     // to.meta.params = {
-        //     //   page: pages.value.github.pages[id],
-        //     // };
+            const repo = pages.value.github.pages.find(
+              (repo: any) => repo.id === id
+            );
 
-        //     return to.meta.params;
-        //   },
-        //   beforeEnter: (to, _from) => {
-        //     const id = to.params.id;
-        //     const pages = computed(() => store.getters.getPages);
+            to.meta.params = {
+              page: repo,
+            };
 
-        //     // if (pages.value.github.pages[id]) {
-        //     //   storeActivePage(pages.value.github.pages[id]);
-        //     //   next();
-        //     // } else {
-        //     //   next("/not-found");
-        //     // }
-        //   },
-        // },
+            return to.meta.params;
+          },
+          beforeEnter: (to, _from, next) => {
+            const id = to.params.id;
+
+            const repo = pages.value.github.pages.find(
+              (repo: any) => repo.id === id
+            );
+
+            if (repo) {
+              storeActivePage(repo);
+              next();
+            }
+
+            next("/not-found");
+          },
+        },
         {
           path: "certificates",
           component: Certificates,
