@@ -22,5 +22,6 @@ const mediaItems = [
   "Github: @lauravivan",
   "Devto: @vivanlaura",
   "X: @arualvivan",
+  "Lattes: http://lattes.cnpq.br/5593790214023154",
 ];
 </script>
