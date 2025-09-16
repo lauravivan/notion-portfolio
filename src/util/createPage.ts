@@ -51,7 +51,7 @@ export default function createPage(
         desc: "I was searching for an app to take track of the countdown of important events and despite I found a really good one, I needed to register more than it was possible. I thought it would be a good idea for resuming React.js studies and create something for my personal use that I was actually needing.",
         ghData: {
           languages: ["TypeScript", "JavaScript", "SCSS", "CSS", "HTML"],
-          url: "https://datecountdown.vercel.app/",
+          url: "https://countdown.arualvivan.com/",
         },
       },
       {
@@ -79,7 +79,7 @@ export default function createPage(
         desc: "For a while I wanted a fast way of searching for profiles that don't follow me on github, so I wouldn't waste my time looking for each one",
         ghData: {
           languages: ["TypeScript", "JavaScript", "SCSS", "HTML"],
-          url: "https://check-gh-followers.vercel.app/",
+          url: "https://gitfollow.arualvivan.com/",
         },
       },
     ];
