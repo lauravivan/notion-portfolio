@@ -82,6 +82,23 @@ export default function createPage(
           url: "https://gitfollow.arualvivan.com/",
         },
       },
+      {
+        bannerPath: "/banners/projects/ourpetstore.webp",
+        iconPath: `/icons/projects/ourpetstore-${
+          ["light-theme", "cat-latte"].includes(theme!) ? "black" : "white"
+        }.png`,
+        id: "ourpetstore",
+        name: "OurPetStore",
+        path: "/projects/ourpetstore",
+        parentPage: page,
+        desc: "This was my final project of the Web Dev 101 class of 2021 in college.",
+        about:
+          "This was my first experience building a project as big (not just one static interface). It was one of the factors to build me in Web Development. This project have a special place in my ❤️",
+        ghData: {
+          languages: ["HTML", "CSS", "JavaScript"],
+          url: "https://lauravivan.github.io/our-pet-store/trabalho-final/",
+        },
+      },
     ];
   }
 
