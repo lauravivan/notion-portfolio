@@ -9,7 +9,11 @@
       "
     >
       <template #summaryContent>
-        <router-link class="nav-link__link" :to="props.page.path">
+        <router-link
+          class="nav-link__link"
+          :to="props.page.path"
+          @click="updateTabs(props.page)"
+        >
           <div>
             <div style="max-width: 1.1rem">
               <img
@@ -40,6 +44,8 @@ import { computed } from "vue";
 import ToggleList from "@/components/ToggleList.vue";
 import NestedLink from "@/components/NestedLink.vue";
 import { useStore } from "vuex";
+import { getGlobalProperties, setGlobalProperty } from "@/global";
+import { setTabsLS } from "@/util/localStorage";
 
 const store = useStore();
 const props = defineProps(["page"]);
@@ -53,6 +59,14 @@ const activePageId = computed(() => {
     return "";
   }
 });
+
+function updateTabs(page: Page) {
+  const tabs = [...getGlobalProperties.value.tabs];
+  const activeTab = getGlobalProperties.value.activeTab;
+  tabs[activeTab] = page;
+  setGlobalProperty("tabs", tabs);
+  setTabsLS(tabs);
+}
 </script>
 
 <style lang="scss">

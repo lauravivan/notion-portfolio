@@ -1,10 +1,10 @@
 <template>
   <div class="tabs">
     <div
-      v-for="[index, page] in tabs.entries()"
+      v-for="[index, page] in getGlobalProperties.tabs.entries()"
       class="tabs__tab"
       :key="index"
-      :class="activeTab == index ? 'tabs__tab--active' : ''"
+      :class="getGlobalProperties.activeTab == index ? 'tabs__tab--active' : ''"
       @click.stop="updateActiveTab(index)"
       @touchstart="updateActiveTab(index)"
     >
@@ -21,7 +21,7 @@
       class="tabs__add"
       @click.stop="addTab()"
       @touchstart="addTab()"
-      v-if="tabs.length < 10"
+      v-if="getGlobalProperties.tabs.length < 10"
     >
       <Icon :icon="icons.add" />
     </button>
@@ -31,42 +31,51 @@
 <script setup lang="ts">
 import router from "@/router";
 import Icon from "@/components/Icon.vue";
-import { computed, onBeforeUnmount, onMounted, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted } from "vue";
 import { useStore } from "vuex";
+import { getGlobalProperties, setGlobalProperty } from "@/global";
+import { setActiveTabLS, setTabsLS } from "@/util/localStorage";
 
 const store = useStore();
 const icons = computed(() => store.getters.getIcons);
 const activePage = computed(() => store.getters.getActivePage);
-const activeTab = computed<number>(() => store.getters.getActiveTab);
-const tabs = computed<Page[]>(() => store.getters.getTabs);
-const route = computed(() => {
-  return router.currentRoute.value;
-});
 
 function updateActiveTab(index: number) {
-  store.commit("storeActiveTab", index);
-  router.push(tabs.value[index].path);
+  const tabs = [...getGlobalProperties.value.tabs];
+  setGlobalProperty("activeTab", index);
+  router.push(tabs[index].path);
 }
 
 function addTab() {
-  store.commit("storeTab", activePage.value);
-  const index = tabs.value.length - 1;
-  store.commit("storeActiveTab", index);
+  const tabs = [...getGlobalProperties.value.tabs];
+  tabs.push(activePage.value);
+  setGlobalProperty("tabs", tabs);
+  setTabsLS(tabs);
+  const index = tabs.length - 1;
+  setGlobalProperty("activeTab", index);
+  setActiveTabLS(index);
   store.commit("storeActivePage", activePage.value);
   router.push(activePage.value.path);
 }
 
 function removeTab(index: number) {
-  if (tabs.value.length > 1) {
-    store.commit("removeTab", index);
-    store.commit("storeActivePage", tabs.value[0]);
-    router.push(tabs.value[0].path);
+  const tabs = [...getGlobalProperties.value.tabs];
+  if (tabs.length > 1) {
+    tabs.splice(index, 1);
+    setGlobalProperty("tabs", tabs);
+    setGlobalProperty("activeTab", 0);
+    setActiveTabLS(0);
+    setTabsLS(tabs);
+    store.commit("storeActivePage", tabs[0]);
+    router.push(tabs[0].path);
   }
 }
 
 function loadFirstTab() {
-  if (tabs.value.length === 0 && activePage.value) {
-    store.commit("storeTab", activePage.value);
+  const tabs = [...getGlobalProperties.value.tabs];
+  if (tabs.length === 0 && activePage.value) {
+    setGlobalProperty("tabs", [activePage.value]);
+    setTabsLS([activePage.value]);
   }
 }
 
@@ -76,14 +85,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener("load", loadFirstTab);
-});
-
-watch(route, () => {
-  document.body.style.pointerEvents = "auto";
-  store.commit("updateTabs", {
-    tabIndex: activeTab.value,
-    page: activePage.value,
-  });
 });
 </script>
 

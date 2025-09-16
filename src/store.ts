@@ -5,9 +5,7 @@ import {
   getSettingsLS,
   getTabsLS,
   getThemeLS,
-  setActiveTabLS,
   setSettingsLS,
-  setTabsLS,
   setThemeLS,
 } from "./util/localStorage";
 import { Theme } from "./types/theme";
@@ -25,8 +23,6 @@ type StoreState = {
     [x: string]: string;
   };
   settings: PagesSettings;
-  activeTab: number;
-  tabs: Page[];
   references: ReferenceToggle[];
   theme: Theme;
 };
@@ -125,8 +121,6 @@ const store = createStore({
       arrowLink: "eva:diagonal-arrow-right-up-fill",
     },
     settings: getSettingsLS(),
-    activeTab: getActiveTabLS(),
-    tabs: getTabsLS(),
     references: [
       {
         summary: "About page",
@@ -278,24 +272,6 @@ const store = createStore({
     storeActivePage(state: StoreState, activePage: Page) {
       state.activePage = activePage;
     },
-    storeActiveTab(state: StoreState, activeTab: number) {
-      state.activeTab = activeTab;
-      setActiveTabLS(activeTab);
-    },
-    storeTab(state: StoreState, page: Page) {
-      const copy = [...state.tabs];
-      copy.push(page);
-      state.tabs = copy;
-      setTabsLS(copy);
-    },
-    removeTab(state: StoreState, index: number) {
-      const copy = [...state.tabs];
-      copy.splice(index, 1);
-
-      state.tabs = copy;
-      state.activeTab = 0;
-      setTabsLS(copy);
-    },
     storeTheme(state: StoreState, theme: Theme) {
       state.theme = theme;
       setThemeLS(theme);
@@ -305,17 +281,6 @@ const store = createStore({
         ...state.pages,
         [payload.id]: payload.page,
       };
-    },
-    updateTabs(state: StoreState, payload: { tabIndex: number; page: Page }) {
-      const copy = [...state.tabs];
-
-      if (copy[payload.tabIndex]) {
-        copy[payload.tabIndex] = payload.page;
-
-        state.tabs = copy;
-
-        setTabsLS(copy);
-      }
     },
   },
   getters: {
@@ -329,8 +294,6 @@ const store = createStore({
     getPageWidthOptions: (state) => state.pageWidthOptions,
     getIcons: (state) => state.icons,
     getSettings: (state) => state.settings,
-    getActiveTab: (state) => state.activeTab,
-    getTabs: (state) => state.tabs,
     getReferences: (state) => state.references,
     getTheme: (state) => state.theme,
   },
