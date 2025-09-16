@@ -109,9 +109,9 @@ const {
   provideName: HEADER_MENU_PROVIDE_NAME,
 });
 
-function storeActiveSettings<K extends keyof Settings>(
+function storeActiveSettings<K extends keyof Global>(
   provideName: K,
-  value: Settings[K]
+  value: Global[K]
 ) {
   setGlobalProperty(provideName, value);
 

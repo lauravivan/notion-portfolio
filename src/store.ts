@@ -1,9 +1,7 @@
 import { createStore } from "vuex";
 import createPage from "./util/createPage";
 import {
-  getActiveTabLS,
   getSettingsLS,
-  getTabsLS,
   getThemeLS,
   setSettingsLS,
   setThemeLS,
