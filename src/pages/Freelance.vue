@@ -63,7 +63,6 @@ import Empty from "@/components/Empty.vue";
     <Bookmark
       title="Saúde 4.0 - Risk Classification in UBS"
       subtitle="A web system for public health clinics (UBS), focusing on automating risk classification."
-      link="https://estudosarquivados.pt/"
     />
     <Empty />
     <Text
