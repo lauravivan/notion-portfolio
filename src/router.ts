@@ -15,6 +15,8 @@ import Publications from "@/pages/Publications.vue";
 import { computed } from "vue";
 import createAsyncPage from "./util/createAsyncPage";
 import createPage from "./util/createPage";
+import Freelance from "./pages/Freelance.vue";
+import Articles from "./pages/Articles.vue";
 
 function storeActivePage(page: Page) {
   store.commit("storeActivePage", page);
@@ -207,6 +209,24 @@ const router = createRouter({
           name: "publications",
           beforeEnter: (_to, _from, next) => {
             storeActivePage(pages.value.publications);
+            next();
+          },
+        },
+        {
+          path: "freelance",
+          component: Freelance,
+          name: "freelance",
+          beforeEnter: (_to, _from, next) => {
+            storeActivePage(pages.value.freelance);
+            next();
+          },
+        },
+        {
+          path: "articles",
+          component: Articles,
+          name: "articles",
+          beforeEnter: (_to, _from, next) => {
+            storeActivePage(pages.value.articles);
             next();
           },
         },

@@ -31,7 +31,12 @@
             <li class="nav-list__nav-item">
               <div class="nav-list__nav-item--category">Favorites</div>
               <NestedLink
-                :pages="[pages.about, pages.contact, pages.projects]"
+                :pages="[
+                  pages.about,
+                  pages.contact,
+                  pages.projects,
+                  pages.freelance,
+                ]"
               />
             </li>
             <li class="nav-list__nav-item">
@@ -42,6 +47,7 @@
                   pages.certificates,
                   pages.honors,
                   pages.publications,
+                  pages.articles,
                   pages.reference,
                 ]"
               />

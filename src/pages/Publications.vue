@@ -13,7 +13,7 @@ import Link from "@/components/Link.vue";
       Explorando tendências de carreiras de estudantes de sistemas de informação
       do IFSC-Câmpus Caçador através da linguagem de programação</Heading
     >
-    <p>CNMAC. Jan 20, 2025</p>
+    <Text>CNMAC. Jan 20, 2025</Text>
     <Empty />
 
     <Text
@@ -28,7 +28,7 @@ import Link from "@/components/Link.vue";
 
     <Heading heading-number="3">
 Interdisciplinaridade na Ciência: Relato de Experiência sobre o Trabalho em Conjunto na Área da Saúde e da Computação</Heading>
-<p>Editora Udesc. May 26, 2022</p>
+<Text>Editora Udesc. May 26, 2022</Text>
 
 <Empty/>
 

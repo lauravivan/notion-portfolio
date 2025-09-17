@@ -105,6 +105,7 @@ function updateTabs(page: Page) {
   &__link {
     all: unset;
     display: block;
+    padding: 4px 0;
 
     > div {
       @include mixin.flex-layout($flex-direction: row, $column-gap: 0.4rem);

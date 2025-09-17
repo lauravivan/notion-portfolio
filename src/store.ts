@@ -54,6 +54,11 @@ const store = createStore({
         name: "My publications",
       }),
       reference: createPage({ id: "reference", name: "Reference" }),
+      freelance: createPage({
+        id: "freelance",
+        name: "Freelance and scholarships",
+      }),
+      articles: createPage({ id: "articles", name: "My articles" }),
     },
     activePage: null,
     projectAuthor: `Laura Vivan's Portfolio`,
@@ -248,6 +253,32 @@ const store = createStore({
           icon: {
             link: "https://www.svgrepo.com/svg/506654/github",
             author: "blivesta",
+          },
+        },
+      },
+      {
+        summary: "Freelance and scholarships page",
+        detailsContent: {
+          icon: {
+            link: "https://www.flaticon.com/stickers-pack/coffee-shop-348",
+            author: "paulalee",
+          },
+          banner: {
+            author: "Yu Kato",
+            link: "https://unsplash.com/photos/boats-on-body-of-water-824OwkP7sgk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+          },
+        },
+      },
+      {
+        summary: "Articles page",
+        detailsContent: {
+          icon: {
+            link: "https://www.flaticon.com/stickers-pack/coffee-shop-348",
+            author: "paulalee",
+          },
+          banner: {
+            author: "Sorasak",
+            link: "https://unsplash.com/photos/two-women-in-purple-and-pink-kimono-standing-on-street-_UIN-pFfJ7c?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
           },
         },
       },
