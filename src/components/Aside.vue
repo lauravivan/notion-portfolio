@@ -44,6 +44,7 @@
               <NestedLink
                 :pages="[
                   pages.github,
+                  pages.courses,
                   pages.certificates,
                   pages.honors,
                   pages.publications,

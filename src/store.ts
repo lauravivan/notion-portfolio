@@ -59,6 +59,7 @@ const store = createStore({
         name: "Freelance and scholarships",
       }),
       articles: createPage({ id: "articles", name: "My articles" }),
+      courses: createPage({ id: "courses", name: "Courses I took" }),
     },
     activePage: null,
     projectAuthor: `Laura Vivan's Portfolio`,
@@ -279,6 +280,19 @@ const store = createStore({
           banner: {
             author: "Sorasak",
             link: "https://unsplash.com/photos/two-women-in-purple-and-pink-kimono-standing-on-street-_UIN-pFfJ7c?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+          },
+        },
+      },
+      {
+        summary: "Courses page",
+        detailsContent: {
+          icon: {
+            link: "https://www.flaticon.com/stickers-pack/coffee-shop-348",
+            author: "paulalee",
+          },
+          banner: {
+            author: "Zhaoli JIN",
+            link: "https://unsplash.com/photos/beige-and-black-lamp-on-green-tree-during-nighttime-e4I2ktXz5cA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
           },
         },
       },

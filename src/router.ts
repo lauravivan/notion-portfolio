@@ -17,6 +17,7 @@ import createAsyncPage from "./util/createAsyncPage";
 import createPage from "./util/createPage";
 import Freelance from "./pages/Freelance.vue";
 import Articles from "./pages/Articles.vue";
+import Courses from "./pages/Courses.vue";
 
 function storeActivePage(page: Page) {
   store.commit("storeActivePage", page);
@@ -227,6 +228,15 @@ const router = createRouter({
           name: "articles",
           beforeEnter: (_to, _from, next) => {
             storeActivePage(pages.value.articles);
+            next();
+          },
+        },
+        {
+          path: "courses",
+          component: Courses,
+          name: "courses",
+          beforeEnter: (_to, _from, next) => {
+            storeActivePage(pages.value.courses);
             next();
           },
         },
