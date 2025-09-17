@@ -13,8 +13,19 @@
 
     <Empty v-if="props.page.about" />
 
-    <Heading headingNumber="3">Reasons to creating this project</Heading>
-    <Text>{{ props.page.desc }}</Text>
+    <Heading headingNumber="3" v-if="props.page.why"
+      >Reasons to creating this project</Heading
+    >
+    <Text>{{ props.page.why }}</Text>
+
+    <Empty v-if="props.page.why" />
+
+    <Heading headingNumber="3" v-if="props.page.considerations"
+      >Considerations</Heading
+    >
+    <Text>{{ props.page.considerations }}</Text>
+
+    <Empty v-if="props.page.considerations" />
 
     <Empty v-if="props.page.more && props.page.more.tddLink" />
 
@@ -29,7 +40,7 @@
       >Link to TDD</Link
     >
 
-    <Empty />
+    <Empty v-if="props.page.more && props.page.more.tddLink" />
 
     <Heading headingNumber="3">Where you can access</Heading>
 
