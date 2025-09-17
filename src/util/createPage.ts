@@ -117,7 +117,7 @@ export default function createPage(
         parentPage: page,
         why: "I'm a person that saves a lot of links, and despite I can do it saving as a bookmark in my favorite browser, this tends to cause me a lot of cognitive load even though I have a slight way of organizing them there. As I needed a way of separating them by category, being able to search for it, and have a very strong visual feedback, I decided to create my own space for that.",
         considerations:
-          "For now this is a static and not updated page, with some thinks to workout. I aim to expand and to become a web system.",
+          "For now this is a static and not updated page, with some things to workout. I aim to expand and to become a web system.",
         about:
           "A place to reunite all of your liked/important/interesting links in one place only (in a categorized way)",
         ghData: {
