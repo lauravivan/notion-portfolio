@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Divider from "@/components/Divider.vue";
 import Empty from "@/components/Empty.vue";
-import Heading from "@/components/Heading.vue";
 import Text from "@/components/Text.vue";
 import Link from "@/components/Link.vue"
 import Column from "@/components/Column.vue"

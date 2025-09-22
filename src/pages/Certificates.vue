@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Bookmark from "@/components/Bookmark.vue";
 import Column from "@/components/Column.vue";
 import Text from "@/components/Text.vue";
 import Link from "@/components/Link.vue";
