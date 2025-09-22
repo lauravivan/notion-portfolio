@@ -14,16 +14,22 @@ const theme = computed(() => store.getters.getTheme);
     <Column number-of-columns="2">
       <template #column-1>
         <div class="certificates__img-wrapper">
-          <img :src="['light-theme', 'cat-latte'].includes(theme) ? '/codecon-dark.webp' : '/codecon-light.webp'" />
+          <img
+            :src="
+              ['light-theme', 'cat-latte'].includes(theme)
+                ? '/codecon-dark.webp'
+                : '/codecon-light.webp'
+            "
+          />
         </div>
       </template>
       <template #column-2>
         <Text>Meetup Codecon Ladies</Text>
-        <br></br>
+        <br />
         <Text class="highlight">Codecon</Text>
-        <br></br>
+        <br />
         <Text>Credential ID 28332382.05162310.5.8.87727823659275368</Text>
-        <br></br>
+        <br />
         <Link
           emoji="🐈"
           href="https://eventos.codecon.dev/documentos/imprimir?i=28332382.05162310.5.8.87727823659275368&cc=A6530560-1A59-43F5-B1E8-4AD739668620"
@@ -39,21 +45,22 @@ const theme = computed(() => store.getters.getTheme);
         </div>
       </template>
       <template #column-2>
-        <Text>Projeto: Interface Inclusiva - Maximizando Usabilidade e Acessibilidade para Todos</Text>
-        <br></br>
+        <Text
+          >Projeto: Interface Inclusiva - Maximizando Usabilidade e
+          Acessibilidade para Todos</Text
+        >
+        <br />
         <Text class="highlight">IFSC</Text>
-        <br></br>
+        <br />
         <Text>Credential ID 4ff92b43f6</Text>
-        <br></br>
-        <Link
-          emoji="🐈"
-          href="https://sigaa.ifsc.edu.br/sigaa/documentos"
+        <br />
+        <Link emoji="🐈" href="https://sigaa.ifsc.edu.br/sigaa/documentos"
           >Certificate</Link
         >
       </template>
     </Column>
 
-     <Column number-of-columns="2">
+    <Column number-of-columns="2">
       <template #column-1>
         <div class="certificates__img-wrapper">
           <img src="/ifsc.webp" />
@@ -61,20 +68,18 @@ const theme = computed(() => store.getters.getTheme);
       </template>
       <template #column-2>
         <Text>INCENTIVANDO O EMPREENDEDORISMO EM CAÇADOR/SC - 4A EDIÇÃO</Text>
-        <br></br>
+        <br />
         <Text class="highlight">IFSC</Text>
-        <br></br>
+        <br />
         <Text>Credential ID fdfd518c28</Text>
-        <br></br>
-        <Link
-          emoji="🐈"
-          href="https://sigaa.ifsc.edu.br/sigaa/documentos"
+        <br />
+        <Link emoji="🐈" href="https://sigaa.ifsc.edu.br/sigaa/documentos"
           >Certificate</Link
         >
       </template>
     </Column>
 
-      <Column number-of-columns="2">
+    <Column number-of-columns="2">
       <template #column-1>
         <div class="certificates__img-wrapper">
           <img src="/ifpr.png" />
@@ -82,14 +87,12 @@ const theme = computed(() => store.getters.getTheme);
       </template>
       <template #column-2>
         <Text>Padrões e Arquitetura de Software</Text>
-        <br></br>
+        <br />
         <Text class="highlight">PADIÊ IFPR</Text>
-        <br></br>
+        <br />
         <Text>Credential ID 4059858.2256071.6.5.368969556437146</Text>
-        <br></br>
-        <Link
-          emoji="🐈"
-          href="https://www.even3.com.br//documentos"
+        <br />
+        <Link emoji="🐈" href="https://www.even3.com.br//documentos"
           >Certificate</Link
         >
       </template>
@@ -110,6 +113,11 @@ const theme = computed(() => store.getters.getTheme);
     width: 110px;
     flex: 1;
 
+    @media (max-width: var.$screen-xs) {
+      height: 80px;
+      width: 80px;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -124,7 +132,11 @@ const theme = computed(() => store.getters.getTheme);
 
     &__column:nth-child(2) {
       flex: none;
-    } 
+    }
+
+    @media (max-width: var.$screen-xs) {
+      flex-direction: row;
+    }
   }
 }
 </style>

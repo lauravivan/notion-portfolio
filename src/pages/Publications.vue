@@ -17,20 +17,36 @@ import Link from "@/components/Link.vue";
     <Empty />
 
     <Text
-      >This research aimed to analyze the career preferences and trends of students in the Information Systems program at IFSC – Caçador Campus, using a qualitative approach and statistical analysis in Python. We explored the most and least preferred professional areas and assessed students' satisfaction levels with their career choices. The goal was to provide insights into career perspectives and support more informed decision-making in the field of Information Technology.</Text
+      >This research aimed to analyze the career preferences and trends of
+      students in the Information Systems program at IFSC – Caçador Campus,
+      using a qualitative approach and statistical analysis in Python. We
+      explored the most and least preferred professional areas and assessed
+      students' satisfaction levels with their career choices. The goal was to
+      provide insights into career perspectives and support more informed
+      decision-making in the field of Information Technology.</Text
     >
 
-    <br></br>
+    <br />
 
-    <Link href="https://proceedings.sbmac.org.br/sbmac/article/view/4826" emoji="🎓">Access publication</Link>
+    <Link
+      href="https://proceedings.sbmac.org.br/sbmac/article/view/4826"
+      emoji="🎓"
+      >Access publication</Link
+    >
 
-    <Empty/>
+    <Empty />
 
     <Heading heading-number="3">
-Interdisciplinaridade na Ciência: Relato de Experiência sobre o Trabalho em Conjunto na Área da Saúde e da Computação</Heading>
-<Text>Editora Udesc. May 26, 2022</Text>
+      Interdisciplinaridade na Ciência: Relato de Experiência sobre o Trabalho
+      em Conjunto na Área da Saúde e da Computação</Heading
+    >
+    <Text>Editora Udesc. May 26, 2022</Text>
 
-<br></br>
-<Link href="https://sistemabu.udesc.br/pergamumweb/vinculos/00009f/00009f95.pdf" emoji="🎓">Access publication</Link>
+    <br />
+    <Link
+      href="https://sistemabu.udesc.br/pergamumweb/vinculos/00009f/00009f95.pdf"
+      emoji="🎓"
+      >Access publication</Link
+    >
   </div>
 </template>
