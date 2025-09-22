@@ -50,26 +50,74 @@
       <Heading :headingNumber="3">Technologies</Heading>
 
       <Text
-        >What I’ve been studying and improving (checked), but also things I want
-        start having contact with and to dive deep (not checked)</Text
+        >What I had/have contact with will be checked, things that I want start
+        having contact with and to dive deep will be not checked</Text
       >
 
       <Empty />
 
-      <Column numberOfColumns="3">
+      <Column numberOfColumns="5">
         <template #column-1>
-          <Text class="highlight">Building interfaces</Text>
-          <ToDoList :items="toDoInterfaces" />
+          <Text class="highlight">Programming Languages</Text>
+          <ToDoList :items="programmingLanguages.languages" />
+          <Empty />
+          <Text class="highlight">Frontend frameworks/libs</Text>
+          <ToDoList :items="frontend.frameworks" />
+          <Empty />
+          <Text class="highlight">Frontend styling</Text>
+          <ToDoList :items="frontend.style" />
+          <Empty />
+          <Text class="highlight">Frontend prototyping</Text>
+          <ToDoList :items="frontend.prototyping" />
+          <Empty />
+          <Text class="highlight">Frontend bundling & dev tools</Text>
+          <ToDoList :items="frontend.bundling" />
+          <Empty />
         </template>
         <template #column-2>
-          <Text class="highlight">Building logic and data</Text>
-          <ToDoList :items="toDoLogic" />
+          <Text class="highlight">Backend frameworks & runtime</Text>
+          <ToDoList :items="backend.frameworks" />
+          <Empty />
+          <Text class="highlight">Building APIs</Text>
+          <ToDoList :items="backend.apis" />
+          <Empty />
+          <Text class="highlight">Authentication</Text>
+          <ToDoList :items="backend.auth" />
+          <Empty />
+          <Text class="highlight">Documentation</Text>
+          <ToDoList :items="backend.doc" />
+          <Empty />
+          <Text class="highlight">CLI tools</Text>
+          <ToDoList :items="backend.cli" />
+          <Empty />
         </template>
         <template #column-3>
+          <Text class="highlight">Database Systems</Text>
+          <ToDoList :items="database.systems" />
+          <Empty />
+          <Text class="highlight">ORMs/ODMs</Text>
+          <ToDoList :items="database.mapping" />
+          <Empty />
+          <Text class="highlight">Query languages</Text>
+          <ToDoList :items="database.languages" />
+        </template>
+        <template #column-4>
           <Text class="highlight">Testing</Text>
-          <ToDoList :items="toDoTesting" />
-          <Text class="highlight">Other tools</Text>
-          <ToDoList :items="toDoOthers" />
+          <ToDoList :items="testing.tools" />
+          <Empty />
+          <Text class="highlight">Devops containers</Text>
+          <ToDoList :items="devops.containers" />
+          <Empty />
+          <Text class="highlight">Devops CI/CD</Text>
+          <ToDoList :items="devops.cicd" />
+          <Empty />
+        </template>
+        <template #column-5>
+          <Text class="highlight">Cloud - plataforms</Text>
+          <ToDoList :items="cloud.plataforms" />
+          <Empty />
+          <Text class="highlight">Cloud - services</Text>
+          <ToDoList :items="cloud.services" />
         </template>
       </Column>
     </div>
@@ -100,94 +148,326 @@ const projectTopics = [
 
 const goalsTopics = [
   "Improve even further the necessary habilities to create great web applications",
-  "Web development (full-stack)",
+  "Web development (full-stack) mid-level",
 ];
 
-const toDoInterfaces = [
-  {
-    isChecked: true,
-    item: "React.js",
-  },
-  {
-    isChecked: true,
-    item: "Vue.js",
-  },
-  {
-    isChecked: true,
-    item: "SCSS",
-  },
-  {
-    isChecked: true,
-    item: "TailwindCSS",
-  },
-  {
-    isChecked: true,
-    item: "Next.js",
-  },
-];
+type Tech = {
+  [x: string]: {
+    isChecked: boolean;
+    name: string;
+  }[];
+};
 
-const toDoLogic = [
-  {
-    isChecked: true,
-    item: "Express.js",
-  },
-  {
-    isChecked: true,
-    item: "Node.js",
-  },
-  {
-    isChecked: true,
-    item: "JavaScript",
-  },
-  {
-    isChecked: true,
-    item: "TypeScript",
-  },
-  {
-    isChecked: false,
-    item: "GraphQL",
-  },
-  {
-    isChecked: true,
-    item: "PostgreSQL",
-  },
-  {
-    isChecked: false,
-    item: "Prisma",
-  },
-];
+const programmingLanguages: Tech = {
+  languages: [
+    {
+      isChecked: true,
+      name: "JavaScript",
+    },
+    {
+      isChecked: true,
+      name: "TypeScript",
+    },
+    {
+      isChecked: true,
+      name: "Java",
+    },
+    {
+      isChecked: true,
+      name: "Python",
+    },
+  ],
+};
 
-const toDoTesting = [
-  {
-    isChecked: true,
-    item: "Vitest",
-  },
-  {
-    isChecked: true,
-    item: "Jest",
-  },
-];
+const database: Tech = {
+  systems: [
+    {
+      isChecked: true,
+      name: "PostgreSQL",
+    },
+    {
+      isChecked: true,
+      name: "MongoDB",
+    },
+    {
+      isChecked: true,
+      name: "MySQL",
+    },
+    {
+      isChecked: true,
+      name: "HeidiSQL/MariaDB",
+    },
+    {
+      isChecked: true,
+      name: "SQLite",
+    },
+  ],
+  mapping: [
+    {
+      isChecked: true,
+      name: "TypeORM",
+    },
+    {
+      isChecked: true,
+      name: "Mongoose",
+    },
+    {
+      isChecked: true,
+      name: "Prisma",
+    },
+    {
+      isChecked: true,
+      name: "Sequelize",
+    },
+  ],
+  languages: [
+    {
+      isChecked: true,
+      name: "SQL",
+    },
+  ],
+};
 
-const toDoOthers = [
-  {
-    isChecked: true,
-    item: "Git",
-  },
-  {
-    isChecked: true,
-    item: "Github",
-  },
-  {
-    isChecked: false,
-    item: "Docker",
-  },
-  {
-    isChecked: false,
-    item: "AWS",
-  },
-  {
-    isChecked: true,
-    item: "Google Cloud",
-  },
-];
+const frontend: Tech = {
+  frameworks: [
+    {
+      isChecked: true,
+      name: "React.js",
+    },
+    {
+      isChecked: true,
+      name: "Vue.js",
+    },
+    {
+      isChecked: true,
+      name: "Next.js",
+    },
+    {
+      isChecked: true,
+      name: "TanStack Query",
+    },
+    {
+      isChecked: true,
+      name: "React Hook Form",
+    },
+    {
+      isChecked: true,
+      name: "React Router",
+    },
+    {
+      isChecked: true,
+      name: "Vuex",
+    },
+    {
+      isChecked: true,
+      name: "Vue Router",
+    },
+  ],
+  style: [
+    {
+      isChecked: true,
+      name: "SASS",
+    },
+    {
+      isChecked: true,
+      name: "TailwindCSS",
+    },
+    {
+      isChecked: true,
+      name: "Bootstrap",
+    },
+    {
+      isChecked: true,
+      name: "Styled Components",
+    },
+  ],
+  prototyping: [
+    {
+      isChecked: true,
+      name: "Figma",
+    },
+  ],
+  bundling: [
+    {
+      isChecked: true,
+      name: "Vite",
+    },
+    {
+      isChecked: true,
+      name: "Webpack",
+    },
+    {
+      isChecked: true,
+      name: "ESLint",
+    },
+    {
+      isChecked: true,
+      name: "Prettier",
+    },
+    {
+      isChecked: true,
+      name: "Browser Dev Tools",
+    },
+  ],
+};
+
+const backend: Tech = {
+  frameworks: [
+    {
+      isChecked: true,
+      name: "Express.js",
+    },
+    {
+      isChecked: true,
+      name: "Node.js",
+    },
+    {
+      isChecked: true,
+      name: "Nest.js",
+    },
+  ],
+  apis: [
+    {
+      isChecked: true,
+      name: "REST",
+    },
+    {
+      isChecked: false,
+      name: "GraphQL",
+    },
+    {
+      isChecked: false,
+      name: "WebSockets",
+    },
+  ],
+  auth: [
+    {
+      isChecked: true,
+      name: "OAuth",
+    },
+    {
+      isChecked: true,
+      name: "JWT",
+    },
+    {
+      isChecked: true,
+      name: "NextAuth.js",
+    },
+  ],
+  doc: [
+    {
+      isChecked: false,
+      name: "Swagger",
+    },
+    {
+      isChecked: true,
+      name: "Postman",
+    },
+    {
+      isChecked: true,
+      name: "Insomnia",
+    },
+    {
+      isChecked: true,
+      name: "Yaak",
+    },
+  ],
+  cli: [
+    {
+      isChecked: true,
+      name: "Git",
+    },
+    {
+      isChecked: false,
+      name: "Sed",
+    },
+    {
+      isChecked: true,
+      name: "Curl",
+    },
+    {
+      isChecked: false,
+      name: "Find",
+    },
+    {
+      isChecked: false,
+      name: "Grep",
+    },
+    {
+      isChecked: false,
+      name: "Fzf",
+    },
+    {
+      isChecked: false,
+      name: "Jq",
+    },
+  ],
+};
+
+const devops: Tech = {
+  containers: [
+    {
+      isChecked: true,
+      name: "Docker",
+    },
+    {
+      isChecked: false,
+      name: "Kubernetes",
+    },
+  ],
+  cicd: [
+    {
+      isChecked: false,
+      name: "GitHub Actions",
+    },
+  ],
+};
+
+const testing: Tech = {
+  tools: [
+    {
+      isChecked: true,
+      name: "Vitest",
+    },
+    {
+      isChecked: true,
+      name: "Jest",
+    },
+    {
+      isChecked: true,
+      name: "Selenium",
+    },
+    {
+      isChecked: true,
+      name: "Testcontainers",
+    },
+  ],
+};
+
+const cloud: Tech = {
+  plataforms: [
+    {
+      isChecked: false,
+      name: "AWS (Amazon Web Services)",
+    },
+    {
+      isChecked: false,
+      name: "Azure",
+    },
+    {
+      isChecked: true,
+      name: "Google Cloud Platform (GCP)",
+    },
+  ],
+  services: [
+    {
+      isChecked: true,
+      name: "Cloud Functions",
+    },
+    {
+      isChecked: true,
+      name: "Firebase",
+    },
+  ],
+};
 </script>
