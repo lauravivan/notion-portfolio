@@ -1,19 +1,38 @@
 <script setup lang="ts">
+import Divider from "@/components/Divider.vue";
 import Empty from "@/components/Empty.vue";
 import Heading from "@/components/Heading.vue";
 import Text from "@/components/Text.vue";
+import Link from "@/components/Link.vue"
+import Column from "@/components/Column.vue"
 </script>
 
 <template>
   <div class="courses">
     <Empty />
 
-    <Heading heading-number="2">
-      Desenvolvimento Front-End do Zero ao Pro</Heading
-    >
-    <Text>EBAC - Marcelo Cavalcanti</Text>
-    <br></br>
-    <Text>2021 - 2023</Text>
+    <Column number-of-columns="2">
+      <template #column-1>
+        <div class="courses__img-wrapper">
+          <img src="/ebac.png" />
+        </div>
+      </template>
+      <template #column-2>
+        <Text>Desenvolvimento Front-End do Zero ao Pro</Text>
+        <br></br>
+        <Text class="highlight">EBAC - Marcelo Cavalcanti</Text>
+        <br></br>
+        <Text>Credential ID 11956-70519-75448-83098</Text>
+        <br></br>
+        <Text>2021 - 2023</Text>
+        <br></br>
+        <Link
+          emoji="🐈"
+          href="https://static.lms.ebaconline.com.br/certs/115b328c-e890-4879-a789-622e2b59f84d.pdf"
+          >Certificate</Link
+        >
+      </template>
+    </Column>
 
     <Empty/>
 
@@ -31,12 +50,32 @@ import Text from "@/components/Text.vue";
 
     <Empty />
 
-    <Heading heading-number="2">
-      JavaScript Unit Testing - The Practical Guide</Heading
-    >
-    <Text>Udemy - Maximilian Schwarzmüller</Text>
-    <br></br>
-    <Text>2024</Text>
+    <Divider/>
+
+     <Empty />
+
+         <Column number-of-columns="2">
+      <template #column-1>
+        <div class="courses__img-wrapper">
+          <img src="/udemy.png" />
+        </div>
+      </template>
+      <template #column-2>
+        <Text>JavaScript Unit Testing - The Practical Guide</Text>
+        <br></br>
+        <Text class="highlight">Udemy - Maximilian Schwarzmüller</Text>
+        <br></br>
+        <Text>Credential ID UC-3efc1286-ed24-496e-8939-a95f8c35e4cb</Text>
+        <br></br>
+        <Text>2024</Text>
+        <br></br>
+        <Link
+          emoji="🐈"
+          href="https://www.udemy.com/certificate/UC-3efc1286-ed24-496e-8939-a95f8c35e4cb/"
+          >Certificate</Link
+        >
+      </template>
+    </Column>
 
     <Empty/>
 
@@ -52,14 +91,32 @@ import Text from "@/components/Text.vue";
 
     <Text> I was very excited about the way Max teaches and I was wanting to have a background with testing automation. </Text>
 
-    <Empty />
+      <Empty />
 
-    <Heading heading-number="2">
-      PYTHON 3 - MUNDOS 1, 2, 3</Heading
-    >
-    <Text>Curso em vídeo - Gustavo Guanabara</Text>
-    <br></br>
-    <Text>2022</Text>
+    <Divider/>
+
+     <Empty />
+
+    <Column number-of-columns="2">
+      <template #column-1>
+        <div class="courses__img-wrapper">
+          <img src="/curso-em-video.webp" />
+        </div>
+      </template>
+      <template #column-2>
+        <Text>PYTHON 3 - MUNDOS 1, 2, 3</Text>
+        <br></br>
+        <Text class="highlight">Curso em vídeo - Gustavo Guanabara</Text>
+        <br></br>
+        <Text>Credential ID UC-3efc1286-ed24-496e-8939-a95f8c35e4cb</Text>
+        <br></br>
+        <Text>2022</Text>
+        <br></br>
+         <Link emoji="🐈" href="https://www.cursoemvideo.com/validacao-de-certificado/">Certificate Mundo 1 - ID 4986E-66E2-5</Link>
+        <Link emoji="🐈" href="https://www.cursoemvideo.com/validacao-de-certificado/">Certificate Mundo 2 - ID 4986E-67AC-2</Link>
+        <Link emoji="🐈" href="https://www.cursoemvideo.com/validacao-de-certificado/">Certificate Mundo 3 - ID 4986E-685A-7</Link>
+      </template>
+    </Column>
 
     <Empty/>
 
@@ -76,3 +133,29 @@ import Text from "@/components/Text.vue";
     <Text> I was asked to learn about Python and Django enviroment when I first entered in a scholarship in College. So, I dove deep into Python for a month before starting it. At the time, as I was alreading watching some videos from professor Guanabara, It was my first choice.</Text>
   </div>
 </template>
+
+<style lang="scss">
+.courses {
+  &__img-wrapper {
+    height: 130px;
+    width: 130px;
+    flex: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .columns {
+    &__column:first-of-type {
+      display: flex;
+      flex: none;
+    }
+
+    &__column:nth-child(2) {
+      flex: none;
+    } 
+  }
+}
+</style>
