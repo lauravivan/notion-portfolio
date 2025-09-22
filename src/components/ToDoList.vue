@@ -7,7 +7,7 @@
         v-model="item.isChecked"
       />
       <Text :style="item.isChecked ? { textDecoration: 'line-through' } : ''">
-        {{ item.item }}
+        {{ item.name }}
       </Text>
     </li>
   </ul>

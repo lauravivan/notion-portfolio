@@ -6,7 +6,6 @@ import Reference from "@/pages/Reference.vue";
 import Projects from "@/pages/Projects.vue";
 import About from "@/pages/About.vue";
 import Repo from "@/pages/Repo.vue";
-import Main from "@/pages/Main.vue";
 import NotFound from "@/pages/NotFound.vue";
 import store from "@/store";
 import Certificates from "@/pages/Certificates.vue";
@@ -18,6 +17,7 @@ import createPage from "./util/createPage";
 import Freelance from "./pages/Freelance.vue";
 import Articles from "./pages/Articles.vue";
 import Courses from "./pages/Courses.vue";
+import Main from "./templates/Main.vue";
 
 function storeActivePage(page: Page) {
   store.commit("storeActivePage", page);

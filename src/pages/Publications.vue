@@ -30,8 +30,6 @@ import Link from "@/components/Link.vue";
 Interdisciplinaridade na Ciência: Relato de Experiência sobre o Trabalho em Conjunto na Área da Saúde e da Computação</Heading>
 <Text>Editora Udesc. May 26, 2022</Text>
 
-<Empty/>
-
 <br></br>
 <Link href="https://sistemabu.udesc.br/pergamumweb/vinculos/00009f/00009f95.pdf" emoji="🎓">Access publication</Link>
   </div>

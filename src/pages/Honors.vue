@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Divider from "@/components/Divider.vue";
 import Empty from "@/components/Empty.vue";
 import Heading from "@/components/Heading.vue";
 import Text from "@/components/Text.vue";
@@ -17,6 +18,13 @@ import Text from "@/components/Text.vue";
       class.</Text
     >
     <Empty />
+    <div class="honors-and-awards__img-wrapper">
+      <img src="/certificate-student.webp" />
+    </div>
+    <Empty />
+
+    <Divider />
+    <Empty />
 
     <Heading heading-number="3"
       >2nd place in the 1st Big Data & Data Analytics Datathon (2025/1)</Heading
@@ -28,9 +36,51 @@ import Text from "@/components/Text.vue";
       >The theme of the competition was Sentiment Analysis, and it lasted for
       two weeks.
     </Text>
+    <Empty />
+    <div class="honors-and-awards__img-wrapper">
+      <img src="/certificate-datathon.webp" />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 @use "@/assets/scss/main";
+@use "@/assets/scss/_var.scss" as var;
+
+.honors-and-awards {
+  &__img-wrapper {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.page-full-width .honors-and-awards {
+  &__img-wrapper {
+    justify-content: start;
+
+    img {
+      width: 50%;
+    }
+  }
+}
+
+.page-full-width .honors-and-awards,
+.honors-and-awards {
+  @media (max-width: var.$screen-xs) {
+    &__img-wrapper {
+      display: flex;
+      justify-content: center;
+      max-width: 100%;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
 </style>
