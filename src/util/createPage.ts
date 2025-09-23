@@ -125,6 +125,21 @@ export default function createPage(
           url: "https://my-reference.vercel.app/",
         },
       },
+      {
+        bannerPath: "",
+        iconPath: ``,
+        id: "vstudy",
+        name: "VisualStudy",
+        path: "/projects/vstudy",
+        parentPage: page,
+        why: "I consider myself a person that works better with visual return, so it's easier for me to better understand when it's visually explained. The idea came in mind in a Node.js course, when I needed to understand better asynchronism",
+        about:
+          "A website that visually demonstrates how certain concepts work.",
+        ghData: {
+          languages: ["JavaScript", "CSS", "HTML"],
+          url: "https://lauravivan.github.io/visual-study/",
+        },
+      },
     ];
   }
 
