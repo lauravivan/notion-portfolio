@@ -113,9 +113,8 @@ const theme = computed(() => store.getters.getTheme);
     width: 110px;
     flex: 1;
 
-    @media (max-width: var.$screen-xs) {
-      height: 80px;
-      width: 80px;
+    @media (max-width: var.$screen-small) {
+      flex: none;
     }
 
     img {
@@ -132,10 +131,6 @@ const theme = computed(() => store.getters.getTheme);
 
     &__column:nth-child(2) {
       flex: none;
-    }
-
-    @media (max-width: var.$screen-xs) {
-      flex-direction: row;
     }
   }
 }
