@@ -122,7 +122,7 @@ import Column from "@/components/Column.vue";
         <br />
         <Text>Credential ID UC-3efc1286-ed24-496e-8939-a95f8c35e4cb</Text>
         <br />
-        <Text>2022</Text>
+        <Text>2021</Text>
         <br />
         <Link
           emoji="🐈"

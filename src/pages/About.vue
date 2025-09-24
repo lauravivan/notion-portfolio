@@ -136,6 +136,7 @@ import Heading from "@/components/Heading.vue";
 import Link from "@/components/Link.vue";
 
 const educationTopics = [
+  "I made a year of Computer Science at Universidade Regional de Blumenau (FURB) before migrating to IS in another city. In my first year having contact with the 'technology world' I discovered a taste for logic, programming and databases. My first high level programming language was Java and continued after I moved on from institution.",
   "Information Systems graduate at Instituto Federal de Santa Catarina (IFSC).",
   "Front-End Development at EBAC.",
 ];
