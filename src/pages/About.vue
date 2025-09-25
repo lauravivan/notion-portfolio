@@ -30,13 +30,13 @@
       <Heading :heading-number="3">Resume/CV</Heading>
 
       <Link
-        href="https://docs.google.com/document/d/1w3eLRmpymz1To_HhLCTJwxN6rGJkIVul/edit?usp=sharing&ouid=108696305998739507094&rtpof=true&sd=true"
+        href="https://www.canva.com/design/DAG0AypumF4/YPozcTGXLmAUqdARQbOApg/edit?utm_content=DAG0AypumF4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
         emoji="👋"
         >Access my resume in Portuguese</Link
       >
 
       <Link
-        href="https://docs.google.com/document/d/1yqNpJSqdXObu6z8VZTXEOrWOxcmIJJnC/edit?usp=sharing&ouid=108696305998739507094&rtpof=true&sd=true"
+        href="https://www.canva.com/design/DAG0A26TDnU/YHmnPBU-YM5Pl497cu4AAw/edit?utm_content=DAG0A26TDnU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
         emoji="👋"
         >Access my resume in English</Link
       >
