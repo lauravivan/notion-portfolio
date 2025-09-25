@@ -38,7 +38,7 @@ export default function createPage(
         parentPage: page,
         ghData: {
           languages: ["TypeScript", "JavaScript", "SCSS"],
-          url: "https://acessiweb.arualvivan.com",
+          url: "https://acessiweb.vercel.app",
         },
       },
       {
