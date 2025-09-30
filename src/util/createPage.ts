@@ -100,44 +100,12 @@ export default function createPage(
         parentPage: page,
         why: "This was my final project of the Web Dev 101 class of 2021 in college.",
         considerations:
-          "This was my first experience building a project as big (not just one static interface). It was one of the factors to build me in Web Development. This project have a special place in my ❤️",
+          "This was my first experience building a web project of my own. It was one of the factors to build me in Web Development. This project have a special place in my ❤️",
         about:
           "A type of ecommerce for dogs and cats build entire with HTML, CSS and Vanilla JavaScript. It simulates a fullstack project but is full static",
         ghData: {
           languages: ["HTML", "CSS", "JavaScript"],
           url: "https://lauravivan.github.io/our-pet-store/trabalho-final/",
-        },
-      },
-      {
-        bannerPath: "",
-        iconPath: ``,
-        id: "lynkr",
-        name: "Lynkr",
-        path: "/projects/lynkr",
-        parentPage: page,
-        why: "I'm a person that saves a lot of links, and despite I can do it saving as a bookmark in my favorite browser, this tends to cause me a lot of cognitive load even though I have a slight way of organizing them there. As I needed a way of separating them by category, being able to search for it, and have a very strong visual feedback, I decided to create my own space for that.",
-        considerations:
-          "For now this is a static and not updated page, with some things to workout. I aim to expand and to become a web system.",
-        about:
-          "A place to reunite all of your liked/important/interesting links in one place only (in a categorized way)",
-        ghData: {
-          languages: ["TypeScript", "SCSS", "JavaScript", "HTML"],
-          url: "https://my-reference.vercel.app/",
-        },
-      },
-      {
-        bannerPath: "",
-        iconPath: ``,
-        id: "vstudy",
-        name: "VisualStudy",
-        path: "/projects/vstudy",
-        parentPage: page,
-        why: "I consider myself a person that works better with visual return, so it's easier for me to better understand when it's visually explained. The idea came in mind in a Node.js course, when I needed to understand better asynchronism",
-        about:
-          "A website that visually demonstrates how certain concepts work.",
-        ghData: {
-          languages: ["JavaScript", "CSS", "HTML"],
-          url: "https://lauravivan.github.io/visual-study/",
         },
       },
     ];
