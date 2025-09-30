@@ -318,10 +318,13 @@ watch(navClasses, (currentClass) => {
         }
       }
 
+      &__nav-item:nth-child(3) {
+        min-height: 140px;
+      }
+
       &__nav-item:nth-child(3),
       &__nav-item:nth-child(4) {
-        margin: 10px 0.7rem;
-        min-height: 150px;
+        margin: 5px 0.7rem;
         height: auto;
         overflow-y: auto;
         overflow-x: hidden;
