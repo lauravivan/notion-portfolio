@@ -6,6 +6,7 @@ import BulletList from "@/components/BulletList.vue";
 import Link from "@/components/Link.vue";
 import Callout from "@/components/Callout.vue";
 import Image from "@/components/Image.vue";
+import Divider from "@/components/Divider.vue";
 </script>
 
 <template>
@@ -45,6 +46,11 @@ import Image from "@/components/Image.vue";
     />
     <Empty />
     <Text>Time I spend in this project: Sep 2024 - Sep 2025</Text>
+
+    <Empty />
+
+    <Divider />
+
     <Empty />
     <Heading heading-number="2">Saúde 4.0 - Risk Classification in UBS</Heading>
     <Callout
@@ -67,6 +73,11 @@ import Image from "@/components/Image.vue";
     />
     <Empty />
     <Text>Time I spend in this project: Jun 2021 - Aug 2022</Text>
+
+    <Empty />
+
+    <Divider />
+
     <Empty />
     <Heading heading-number="2"
       >Social Entrepreneurship Initiative, Vila Usina, Caçador-SC</Heading
@@ -105,6 +116,11 @@ import Image from "@/components/Image.vue";
       >Vila Hortaliça Book</Link
     >
     <Image src="/vila-usina.webp" />
+
+    <Empty />
+
+    <Divider />
+
     <Empty />
     <Heading heading-number="2">Teaching Assistant</Heading>
     <Text class="highlight">Aug 2021 - Dec 2021</Text>
@@ -117,6 +133,11 @@ import Image from "@/components/Image.vue";
         'I provided one-on-one tutoring, with the support of a Libras (Brazilian Sign Language) interpreter, using Scratch to teach basic programming concepts.',
       ]"
     />
+
+    <Empty />
+
+    <Divider />
+
     <Empty />
     <Heading heading-number="2"
       >Women in Information Systems Meeting – Conexão SI</Heading
