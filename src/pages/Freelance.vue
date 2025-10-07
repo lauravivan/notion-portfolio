@@ -122,13 +122,3 @@ import Callout from "@/components/Callout.vue";
     <Text>Time I spend in this project: Jun 2021 - Aug 2022</Text>
   </div>
 </template>
-
-<style lang="scss">
-@use "@/assets/scss/_var.scss" as var;
-
-.certificates {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-}
-</style>

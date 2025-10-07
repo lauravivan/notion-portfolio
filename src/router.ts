@@ -8,7 +8,7 @@ import About from "@/pages/About.vue";
 import Repo from "@/pages/Repo.vue";
 import NotFound from "@/pages/NotFound.vue";
 import store from "@/store";
-import Certificates from "@/pages/Certificates.vue";
+import Certifications from "@/pages/Certifications.vue";
 import Honors from "@/pages/Honors.vue";
 import Publications from "@/pages/Publications.vue";
 import { computed } from "vue";
@@ -18,6 +18,7 @@ import Freelance from "./pages/Freelance.vue";
 import Articles from "./pages/Articles.vue";
 import Courses from "./pages/Courses.vue";
 import Main from "./templates/Main.vue";
+import Events from "./pages/Events.vue";
 
 function storeActivePage(page: Page) {
   store.commit("storeActivePage", page);
@@ -187,11 +188,11 @@ const router = createRouter({
           },
         },
         {
-          path: "certificates",
-          component: Certificates,
-          name: "certificates",
+          path: "certifications",
+          component: Certifications,
+          name: "certifications",
           beforeEnter: (_to, _from, next) => {
-            storeActivePage(pages.value.certificates);
+            storeActivePage(pages.value.certifications);
             next();
           },
         },
@@ -237,6 +238,15 @@ const router = createRouter({
           name: "courses",
           beforeEnter: (_to, _from, next) => {
             storeActivePage(pages.value.courses);
+            next();
+          },
+        },
+        {
+          path: "events",
+          component: Events,
+          name: "events",
+          beforeEnter: (_to, _from, next) => {
+            storeActivePage(pages.value.events);
             next();
           },
         },

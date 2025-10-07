@@ -2,25 +2,24 @@
 import Divider from "@/components/Divider.vue";
 import Empty from "@/components/Empty.vue";
 import Heading from "@/components/Heading.vue";
+import Image from "@/components/Image.vue";
 import Text from "@/components/Text.vue";
 </script>
 
 <template>
   <div class="honors-and-awards">
     <Empty />
-    <Heading heading-number="3">Top-performing student</Heading>
+    <Heading heading-number="3"> Outstanding Student</Heading>
     <p>Programa Meninas Digitais</p>
     <Empty />
     <Text
       >Award from the Digital Girls Program and the Brazilian Computer Society,
       certifying the completion of a Bachelor's degree in Information Systems at
-      IFSC – Caçador, as the top-performing student of the 2025/1 graduating
+      IFSC – Caçador, as the Outstanding Student of the 2025/1 graduating
       class.</Text
     >
     <Empty />
-    <div class="honors-and-awards__img-wrapper">
-      <img src="/certificate-student.webp" />
-    </div>
+    <Image src="/certificate-student.webp" />
     <Empty />
 
     <Divider />
@@ -37,50 +36,6 @@ import Text from "@/components/Text.vue";
       two weeks.
     </Text>
     <Empty />
-    <div class="honors-and-awards__img-wrapper">
-      <img src="/certificate-datathon.webp" />
-    </div>
+    <Image src="/certificate-datathon.webp" />
   </div>
 </template>
-
-<style lang="scss">
-@use "@/assets/scss/main";
-@use "@/assets/scss/_var.scss" as var;
-
-.honors-and-awards {
-  &__img-wrapper {
-    display: flex;
-    justify-content: center;
-    max-width: 100%;
-
-    img {
-      width: 100%;
-    }
-  }
-}
-
-.page-full-width .honors-and-awards {
-  &__img-wrapper {
-    justify-content: start;
-
-    img {
-      width: 50%;
-    }
-  }
-}
-
-.page-full-width .honors-and-awards,
-.honors-and-awards {
-  @media (max-width: var.$screen-xs) {
-    &__img-wrapper {
-      display: flex;
-      justify-content: center;
-      max-width: 100%;
-
-      img {
-        width: 100%;
-      }
-    }
-  }
-}
-</style>

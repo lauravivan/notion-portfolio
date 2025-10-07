@@ -36,6 +36,7 @@
                   pages.contact,
                   pages.projects,
                   pages.freelance,
+                  pages.events,
                 ]"
               />
             </li>
@@ -45,7 +46,7 @@
                 :pages="[
                   pages.github,
                   pages.courses,
-                  pages.certificates,
+                  pages.certifications,
                   pages.honors,
                   pages.publications,
                   pages.articles,

@@ -28,7 +28,7 @@ import Column from "@/components/Column.vue";
         <Link
           emoji="🐈"
           href="https://static.lms.ebaconline.com.br/certs/115b328c-e890-4879-a789-622e2b59f84d.pdf"
-          >Certificate</Link
+          >Certificate of Completion</Link
         >
       </template>
     </Column>
@@ -78,7 +78,7 @@ import Column from "@/components/Column.vue";
         <Link
           emoji="🐈"
           href="https://www.udemy.com/certificate/UC-3efc1286-ed24-496e-8939-a95f8c35e4cb/"
-          >Certificate</Link
+          >Certificate of Completion</Link
         >
       </template>
     </Column>
@@ -127,17 +127,17 @@ import Column from "@/components/Column.vue";
         <Link
           emoji="🐈"
           href="https://www.cursoemvideo.com/validacao-de-certificado/"
-          >Certificate Mundo 1 - ID 4986E-66E2-5</Link
+          >Certificate of Completion Mundo 1 - ID 4986E-66E2-5</Link
         >
         <Link
           emoji="🐈"
           href="https://www.cursoemvideo.com/validacao-de-certificado/"
-          >Certificate Mundo 2 - ID 4986E-67AC-2</Link
+          >Certificate of Completion Mundo 2 - ID 4986E-67AC-2</Link
         >
         <Link
           emoji="🐈"
           href="https://www.cursoemvideo.com/validacao-de-certificado/"
-          >Certificate Mundo 3 - ID 4986E-685A-7</Link
+          >Certificate of Completion Mundo 3 - ID 4986E-685A-7</Link
         >
       </template>
     </Column>

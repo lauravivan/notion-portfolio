@@ -40,9 +40,9 @@ const store = createStore({
         id: "github",
         name: "My github repos",
       }),
-      certificates: createPage({
-        id: "certificates",
-        name: "Certificates",
+      certifications: createPage({
+        id: "certifications",
+        name: "Certifications",
       }),
       contact: createPage({ id: "contact", name: "Contact (me)" }),
       honors: createPage({
@@ -60,6 +60,7 @@ const store = createStore({
       }),
       articles: createPage({ id: "articles", name: "My articles" }),
       courses: createPage({ id: "courses", name: "Courses I took" }),
+      events: createPage({ id: "events", name: "Community & Events" }),
     },
     activePage: null,
     projectAuthor: `Laura Vivan's Portfolio`,
@@ -192,7 +193,7 @@ const store = createStore({
         },
       },
       {
-        summary: "Certificates page",
+        summary: "Certifications page",
         detailsContent: {
           banner: {
             link: "https://unsplash.com/photos/silhouette-of-man-near-outside-qwPSnBvdhtI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
@@ -284,6 +285,19 @@ const store = createStore({
           banner: {
             author: "Zhaoli JIN",
             link: "https://unsplash.com/photos/beige-and-black-lamp-on-green-tree-during-nighttime-e4I2ktXz5cA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+          },
+        },
+      },
+      {
+        summary: "Community & Events page",
+        detailsContent: {
+          icon: {
+            link: "https://www.flaticon.com/stickers-pack/coffee-shop-348",
+            author: "paulalee",
+          },
+          banner: {
+            author: "Agathe",
+            link: "https://unsplash.com/photos/person-riding-bike-on-street-2cdvYh6ULCs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
           },
         },
       },
