@@ -4,11 +4,15 @@ import Heading from "@/components/Heading.vue";
 import Empty from "@/components/Empty.vue";
 import BulletList from "@/components/BulletList.vue";
 import Link from "@/components/Link.vue";
+import Callout from "@/components/Callout.vue";
 </script>
 
 <template>
   <div class="freelance">
     <Heading heading-number="2">AcessiWeb</Heading>
+    <Callout
+      >Full-Stack Developer in a University-Funded Extension Program</Callout
+    >
     <Text
       >Development of an accessible and intuitive digital platform that
       centralizes and organizes web accessibility guidelines, aiming to make
@@ -40,6 +44,7 @@ import Link from "@/components/Link.vue";
     <Text>Time I spend in this project: Sep 2024 - Sep 2025</Text>
     <Empty />
     <Heading heading-number="2">Estudos Arquivados</Heading>
+    <Callout>Contract Full-Stack Developer</Callout>
     <Text
       >Development of a platform to filter content from arquivo.pt, focusing on
       the education of students in Portugal. Utilized an LLM to generate context
@@ -69,6 +74,7 @@ import Link from "@/components/Link.vue";
     <Text>Time I spend in this project: Feb 2025 - May 2025</Text>
     <Empty />
     <Heading heading-number="2">Lyva</Heading>
+    <Callout>Contract Full-Stack Developer</Callout>
     <Text
       >A web-based system for splitting payments between partners. This solution
       allows companies to use the platform to manage partners, services, and
@@ -95,6 +101,9 @@ import Link from "@/components/Link.vue";
     <Text>Time I spend in this project: Oct/Nov 2024 - May 2025</Text>
     <Empty />
     <Heading heading-number="2">Saúde 4.0 - Risk Classification in UBS</Heading>
+    <Callout
+      >Full-Stack Developer in a University-Funded Extension Program</Callout
+    >
     <Text
       >A web system for public health clinics (UBS), focusing on automating risk
       classification.</Text
