@@ -23,25 +23,6 @@ export default function createPage(
   if (id === "projects") {
     page.pages = [
       {
-        bannerPath: "/banners/projects/acessiweb.webp",
-        iconPath: "/icons/projects/acessiweb-purple.png",
-        id: "acessiweb",
-        name: "AcessiWeb",
-        path: "/projects/acessiweb",
-        why: "In 2024 I was invited to participate in another College project, and after that this project was extended to what it would become my Bachelor's thesis.",
-        about:
-          "This project intends to help developers and enthusiasts to build more acessible web systems. Here you can have access to acessibility guidelines in an easy way, buy filtering for deficiences and keywords. These guidelines have a simpler language, making it easier to understand. Also, you can add them to your registered projects, serving as a requirements organizer.",
-        more: {
-          tddLink:
-            "https://kind-parent-217.notion.site/TDD-1b1fcc794298803a9903faa23e46a487?pvs=74",
-        },
-        parentPage: page,
-        ghData: {
-          languages: ["TypeScript", "JavaScript", "SCSS"],
-          url: "https://acessiweb.vercel.app",
-        },
-      },
-      {
         bannerPath: "/banners/projects/countdown.webp",
         iconPath: "/icons/projects/countdown.png",
         id: "countdown",
@@ -68,25 +49,6 @@ export default function createPage(
         ghData: {
           languages: ["JavaScript"],
           url: "https://trendtide.arualvivan.com/",
-        },
-      },
-      {
-        bannerPath: "/banners/projects/gitfollow.webp",
-        iconPath: `/icons/projects/gitfollow-${
-          ["light-theme", "cat-latte"].includes(theme!) ? "black" : "white"
-        }.png`,
-        id: "gitfollow",
-        name: "GitFollow",
-        path: "/projects/gitfollow",
-        parentPage: page,
-        why: "For a while I wanted a fast way of searching for profiles that don't follow me on github, so I wouldn't waste my time looking for each one.",
-        considerations:
-          "I intend to expand to use also twitter and maybe instagram",
-        about:
-          "A place where you can search for profiles that you follow but don't follow you back, in different social medias.",
-        ghData: {
-          languages: ["TypeScript", "JavaScript", "SCSS", "HTML"],
-          url: "https://gitfollow.arualvivan.com/",
         },
       },
       {
