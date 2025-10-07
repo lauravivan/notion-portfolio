@@ -9,17 +9,33 @@
       <Column numberOfColumns="3">
         <template #column-1>
           <Callout>Education...</Callout>
-          <BulletList :items="educationTopics" />
+          <BulletList
+            :items="[
+              `I made a year of Computer Science at Universidade Regional de Blumenau (FURB) before migrating to IS in another city. In my first year having contact with the 'technology world' I discovered a taste for logic, programming and databases. My first high level programming language was Java and continued after I moved on from institution.`,
+              'Information Systems graduate at Instituto Federal de Santa Catarina (IFSC).',
+            ]"
+          />
         </template>
 
         <template #column-2>
           <Callout>Projects...</Callout>
-          <BulletList :items="projectTopics" />
+          <BulletList
+            :items="[
+              'I was a scholarship holder for an extension project at college where we developed a web system for risk classification using Django Framework.',
+              'I was also a scholarship holder in a project to develop an acessible system to reunite acessibility guidelines helping developers and interested people to build more acessible plataforms.',
+              'As a freelancer I helped to build a plataform to be used by Portuguese students in filtering content on arquivo.pt API. This project also uses LLM to help creating context and keywords to help with more assertive research.',
+            ]"
+          />
         </template>
 
         <template #column-3>
           <Callout>Goals...</Callout>
-          <BulletList :items="goalsTopics" />
+          <BulletList
+            :items="[
+              'Improve even further the necessary habilities to create great web applications',
+              'Web development (full-stack) mid-level',
+            ]"
+          />
         </template>
       </Column>
 
@@ -134,23 +150,6 @@ import ToDoList from "@/components/ToDoList.vue";
 import Empty from "@/components/Empty.vue";
 import Heading from "@/components/Heading.vue";
 import Link from "@/components/Link.vue";
-
-const educationTopics = [
-  "I made a year of Computer Science at Universidade Regional de Blumenau (FURB) before migrating to IS in another city. In my first year having contact with the 'technology world' I discovered a taste for logic, programming and databases. My first high level programming language was Java and continued after I moved on from institution.",
-  "Information Systems graduate at Instituto Federal de Santa Catarina (IFSC).",
-  "Front-End Development at EBAC.",
-];
-
-const projectTopics = [
-  "I was a scholarship holder for an extension project at college where we developed a web system for risk classification using Django Framework.",
-  "I was also a scholarship holder in a project to develop an acessible system to reunite acessibility guidelines helping developers and interested people to build more acessible plataforms.",
-  "As a freelancer I helped to build a plataform to be used by Portuguese students in filtering content on arquivo.pt API. This project also uses LLM to help creating context and keywords to help with more assertive research.",
-];
-
-const goalsTopics = [
-  "Improve even further the necessary habilities to create great web applications",
-  "Web development (full-stack) mid-level",
-];
 
 type Tech = {
   [x: string]: {
