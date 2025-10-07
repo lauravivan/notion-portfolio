@@ -9,39 +9,6 @@ import Callout from "@/components/Callout.vue";
 
 <template>
   <div class="freelance">
-    <Heading heading-number="2">AcessiWeb</Heading>
-    <Callout
-      >Full-Stack Developer in a University-Funded Extension Program</Callout
-    >
-    <Text
-      >Development of an accessible and intuitive digital platform that
-      centralizes and organizes web accessibility guidelines, aiming to make
-      them easier to access, understand, and apply by developers and other
-      interested parties, through clearly defined steps.</Text
-    >
-    <Link emoji="👩‍🦯‍➡️" href="https://acessiweb.vercel.app/"
-      >Access the system</Link
-    >
-    <Link
-      emoji="👩‍🦯‍➡️"
-      href="https://kind-parent-217.notion.site/TDD-Acessiweb-1b1fcc794298803a9903faa23e46a487"
-      >Access the technical specifications document</Link
-    >
-    <Empty />
-    <BulletList
-      :items="[
-        'Collected and analyzed functional and non-functional requirements, mapping the main accessibility guidelines to be implemented',
-        'Created UML diagrams, including Use Case, Class, and Entity-Relationship (ER) diagrams',
-        'Prototyped interfaces using Figma',
-        'Created a TDD (Technical Design Document) outlining API endpoints, pagination, accessibility, error handling, authentication, security, parameters, and other specifications',
-        'Developed a REST API using Nest.js, TypeScript, and PostgreSQL',
-        'Implemented security measures using bcrypt and crypto (Node.js) to ensure data integrity',
-        'Built user interfaces with Next.js, TypeScript, and SASS',
-        'Performed Unit and Integration Testing on the API using Jest and Test Containers',
-      ]"
-    />
-    <Empty />
-    <Text>Time I spend in this project: Sep 2024 - Sep 2025</Text>
     <Empty />
     <Heading heading-number="2">Estudos Arquivados</Heading>
     <Callout>Contract Full-Stack Developer</Callout>
@@ -99,26 +66,5 @@ import Callout from "@/components/Callout.vue";
     />
     <Empty />
     <Text>Time I spend in this project: Oct/Nov 2024 - May 2025</Text>
-    <Empty />
-    <Heading heading-number="2">Saúde 4.0 - Risk Classification in UBS</Heading>
-    <Callout
-      >Full-Stack Developer in a University-Funded Extension Program</Callout
-    >
-    <Text
-      >A web system for public health clinics (UBS), focusing on automating risk
-      classification.</Text
-    >
-    <Empty />
-    <BulletList
-      :items="[
-        'Designed data models for managing patients, healthcare professionals, and essential Risk Classification records, as well as general aspects of a Basic Health Unit (UBS)',
-        'Developed class-based views for data handling, integrating HTML, Django, and Bootstrap forms',
-        'Implemented Ajax functions to enable client-side data manipulation',
-        'Created a query system using models to automate Risk Classification',
-        'Used Git and GitHub for version control (commits and pull requests)',
-      ]"
-    />
-    <Empty />
-    <Text>Time I spend in this project: Jun 2021 - Aug 2022</Text>
   </div>
 </template>

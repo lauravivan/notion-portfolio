@@ -35,6 +35,7 @@
                   pages.about,
                   pages.contact,
                   pages.projects,
+                  pages.college,
                   pages.freelance,
                   pages.events,
                 ]"

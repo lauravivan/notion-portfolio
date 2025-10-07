@@ -27,20 +27,5 @@ import Link from "@/components/Link.vue";
     >
     <Empty />
     <Image src="/meetup-codecon.webp" />
-    <Empty />
-    <Heading heading-number="2"
-      >Women in Information Systems Meeting – Conexão SI (IFSC)</Heading
-    >
-    <Callout
-      >Conexão SI is an initiative aimed at supporting women studying
-      Information Systems at the Caçador Campus, fostering connections and
-      encouraging female participation in technology.</Callout
-    >
-    <Empty />
-    <Heading heading-number="3">#1 Meeting</Heading>
-    <Image src="/conexao-si.webp" />
-    <Empty />
-    <Heading heading-number="3">#2 Meeting</Heading>
-    <Image src="/conexao-si-2.webp" />
   </div>
 </template>

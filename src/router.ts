@@ -19,6 +19,7 @@ import Articles from "./pages/Articles.vue";
 import Courses from "./pages/Courses.vue";
 import Main from "./templates/Main.vue";
 import Events from "./pages/Events.vue";
+import College from "./pages/College.vue";
 
 function storeActivePage(page: Page) {
   store.commit("storeActivePage", page);
@@ -247,6 +248,15 @@ const router = createRouter({
           name: "events",
           beforeEnter: (_to, _from, next) => {
             storeActivePage(pages.value.events);
+            next();
+          },
+        },
+        {
+          path: "college",
+          component: College,
+          name: "college",
+          beforeEnter: (_to, _from, next) => {
+            storeActivePage(pages.value.college);
             next();
           },
         },

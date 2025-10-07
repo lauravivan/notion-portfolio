@@ -56,11 +56,15 @@ const store = createStore({
       reference: createPage({ id: "reference", name: "Reference" }),
       freelance: createPage({
         id: "freelance",
-        name: "Freelance and scholarships",
+        name: "Freelance",
       }),
       articles: createPage({ id: "articles", name: "My articles" }),
       courses: createPage({ id: "courses", name: "Courses I took" }),
       events: createPage({ id: "events", name: "Community & Events" }),
+      college: createPage({
+        id: "college",
+        name: "Academic and Community Involvement",
+      }),
     },
     activePage: null,
     projectAuthor: `Laura Vivan's Portfolio`,
@@ -250,7 +254,7 @@ const store = createStore({
         },
       },
       {
-        summary: "Freelance and scholarships page",
+        summary: "Freelance page",
         detailsContent: {
           icon: {
             link: "https://www.flaticon.com/stickers-pack/coffee-shop-348",
@@ -298,6 +302,19 @@ const store = createStore({
           banner: {
             author: "Agathe",
             link: "https://unsplash.com/photos/person-riding-bike-on-street-2cdvYh6ULCs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+          },
+        },
+      },
+      {
+        summary: "Academic and Community Involvement page",
+        detailsContent: {
+          icon: {
+            link: "https://www.flaticon.com/stickers-pack/coffee-shop-348",
+            author: "paulalee",
+          },
+          banner: {
+            author: "Guus Baggermans",
+            link: "https://unsplash.com/photos/woman-standing-walking-beside-red-building-oWsy_TQAScI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
           },
         },
       },
