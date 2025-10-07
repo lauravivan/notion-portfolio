@@ -249,15 +249,6 @@ const store = createStore({
         },
       },
       {
-        summary: "GitFollow",
-        detailsContent: {
-          icon: {
-            link: "https://www.svgrepo.com/svg/506654/github",
-            author: "blivesta",
-          },
-        },
-      },
-      {
         summary: "Freelance and scholarships page",
         detailsContent: {
           icon: {
