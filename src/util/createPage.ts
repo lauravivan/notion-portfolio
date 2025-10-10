@@ -44,6 +44,7 @@ export default function createPage(
         name: "TrendTide",
         path: "/projects/trendtide",
         parentPage: page,
+        considerations: "It's a work in progress",
         why: "I was asked ('kind of a technical test') to build a Full-stack project using React.js, Express.js and other tools, so I've decided to build something that a could use a complete CRUD and to fullfill my desire to create a social media with my style, that it was something I wanted for a while.",
         about: "A type of social media",
         ghData: {
@@ -68,6 +69,22 @@ export default function createPage(
         ghData: {
           languages: ["HTML", "CSS", "JavaScript"],
           url: "https://lauravivan.github.io/our-pet-store/trabalho-final/",
+        },
+      },
+      {
+        bannerPath: "",
+        iconPath: ``,
+        id: "visualstudy",
+        name: "VisualStudy",
+        path: "/projects/visualstudy",
+        parentPage: page,
+        why: "I always faced myself as a visual type of person when I'm dealing with more abstract ideas.",
+        considerations: "It's a work in progress",
+        about:
+          "A website where you can see the explanation of some concepts/subjects visually.",
+        ghData: {
+          languages: ["HTML", "CSS", "JavaScript"],
+          url: "https://lauravivan.github.io/visual-study/",
         },
       },
     ];
