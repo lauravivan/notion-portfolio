@@ -71,22 +71,6 @@ export default function createPage(
           url: "https://lauravivan.github.io/our-pet-store/trabalho-final/",
         },
       },
-      {
-        bannerPath: "",
-        iconPath: ``,
-        id: "visualstudy",
-        name: "VisualStudy",
-        path: "/projects/visualstudy",
-        parentPage: page,
-        why: "I always faced myself as a visual type of person when I'm dealing with more abstract ideas.",
-        considerations: "It's a work in progress",
-        about:
-          "A website where you can see the explanation of some concepts/subjects visually.",
-        ghData: {
-          languages: ["HTML", "CSS", "JavaScript"],
-          url: "https://lauravivan.github.io/visual-study/",
-        },
-      },
     ];
   }
 
