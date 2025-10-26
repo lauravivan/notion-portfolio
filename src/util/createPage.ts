@@ -38,21 +38,6 @@ export default function createPage(
         },
       },
       {
-        bannerPath: "/banners/projects/trendtide.webp",
-        iconPath: "/icons/projects/trendtide.png",
-        id: "trendtide",
-        name: "TrendTide",
-        path: "/projects/trendtide",
-        parentPage: page,
-        considerations: "It's a work in progress",
-        why: "I was asked ('kind of a technical test') to build a Full-stack project using React.js, Express.js and other tools, so I've decided to build something that a could use a complete CRUD and to fullfill my desire to create a social media with my style, that it was something I wanted for a while.",
-        about: "A type of social media",
-        ghData: {
-          languages: ["JavaScript"],
-          url: "https://trendtide.arualvivan.com/",
-        },
-      },
-      {
         bannerPath: "/banners/projects/ourpetstore.webp",
         iconPath: `/icons/projects/ourpetstore-${
           ["light-theme", "cat-latte"].includes(theme!) ? "black" : "white"

@@ -245,15 +245,6 @@ const store = createStore({
         },
       },
       {
-        summary: "TrendTide",
-        detailsContent: {
-          icon: {
-            link: "https://www.svgrepo.com/svg/395885/black-cat",
-            author: "googlefonts",
-          },
-        },
-      },
-      {
         summary: "Freelance page",
         detailsContent: {
           icon: {
