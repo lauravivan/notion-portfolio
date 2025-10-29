@@ -1,4 +1,4 @@
-import { Theme } from "@/core/@types/theme";
+import { Theme } from "@/core/util";
 import { LOCAL_STORAGE_THEME } from "./constants";
 
 const setTheme = (theme: Theme) => {

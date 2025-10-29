@@ -1,8 +1,6 @@
 import { createStore } from "vuex";
 import {
   getSettings as getSettingsLS,
-  setSettings as setSettingsLS,
-  setTheme as setThemeLS,
   getTheme as getThemeLS
 } from "@/core/util/local-storage";
 import { Page } from "@/core/@types/page";
