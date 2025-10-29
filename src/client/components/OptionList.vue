@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { Icon } from "@/client/components";
 import { ref } from "vue";
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { Icon } from "@/client/components";
+import { Icons } from "@/core/util";
 
-const store = useStore();
-const icons = computed(() => store.getters.getIcons);
 const props = defineProps(["items", "optionSelected"]);
 const optionSelected = ref(props.optionSelected);
 const emit = defineEmits(["toSelect"]);
@@ -31,7 +28,7 @@ const toSelect = (item: number) => {
             optionSelected == index ? 'option__active' : 'option__not-active'
           "
         >
-          <!-- <Icon :icon="icons.check" class="option__icon" /> -->
+          <Icon :icon="Icons.check" class="option__icon" />
         </div>
       </li>
     </ul>

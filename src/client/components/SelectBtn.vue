@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { OptionList, Icon, Modal } from "@/client/components";
+import { OptionList, Modal, Icon } from "@/client/components";
 import { ref } from "vue";
 import { useModal } from "@/core/hooks";
-import { computed } from "vue";
-import { useStore } from "vuex";
-
-const store = useStore();
-const icons = computed(() => store.getters.getIcons);
+import { Icons } from "@/core/util";
 
 const props = defineProps(["options", "menuProvideName", "optionSelected"]);
 
@@ -28,7 +24,7 @@ function optionClicked(option: string) {
   <div>
     <div class="select-btn" @click="showModal">
       <button>{{ props.options[optionSelected].name }}</button>
-      <!-- <Icon :icon="icons.arrowDown" /> -->
+      <Icon :icon="Icons.arrowDown" />
     </div>
 
     <Modal

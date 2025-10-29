@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+import { Icons } from "@/core/util";
 
-const props = defineProps(["icon"]);
+defineProps<{
+  icon: Icons;
+}>();
 </script>
 
 <template>
-  <div class="icon" v-if="props.icon">
-    <Icon :icon="props.icon" />
+  <div class="icon" v-if="icon">
+    <Icon :icon="icon" />
   </div>
 </template>
 

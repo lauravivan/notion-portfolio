@@ -5,6 +5,7 @@ import { useModal, useToggle } from "@/core/hooks";
 import { Breadcrumb, Toggle, Modal, Icon } from "@/client/components";
 import { getGlobalProperties, setGlobalProperty } from "@/core/global";
 import { Page } from "@/core/@types/page";
+import { Icons } from "@/core/util";
 
 const store = useStore();
 
@@ -16,7 +17,6 @@ const HEADER_MENU_PROVIDE_NAME = "headerMenu";
 const activePage = computed<Page>(() => store.getters.getActivePage);
 const fontsOptions = computed(() => store.getters.getFontsOptions);
 const settings = computed<PagesSettings>(() => store.getters.getSettings);
-const icons = computed(() => store.getters.getIcons);
 
 const {
   active: activeFS,
@@ -103,7 +103,7 @@ watch(activePage, () => {
         id="header-btn"
         @click="showMenuModal"
       >
-        <!-- <Icon :icon="icons.dotsHoriz" /> -->
+        <Icon :icon="Icons.moreHorizontal" />
       </div>
     </div>
   </header>

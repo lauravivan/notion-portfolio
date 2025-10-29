@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, inject, Ref } from "vue";
+import { ref, computed, inject, Ref, watch } from "vue";
 import { useModal } from "@/core/hooks";
 import { useStore } from "vuex";
-import { isTouchDevice } from "@/core/util";
 import NestedLink from "./NestedLink.vue";
+import metadata from "@/client/metadata";
+import { Modal, Divider, SelectBtn, Icon } from "@/client/components";
+import { Theme, Icons, isTouchDevice } from "@/core/util";
 import {
   ASIDE_MAIN_CONTAINER,
   ASIDE_MAIN_CONTENT,
-} from "@/core/util/constants";
-import metadata from "@/client/metadata";
-import { Modal, Divider, SelectBtn } from "@/client/components";
-import { Theme } from "@/core/util";
+} from "@/core/hooks/useAside";
 
 const store = useStore();
 const themes = computed(() => store.getters.getThemesOptions);
@@ -21,6 +20,7 @@ const THEME_OPTIONS_PROVIDE = "themesMenu";
 const navDefault = ref(true);
 const navHover = ref(false);
 const navClick = ref(false);
+const navBtnIcon = ref(Icons.sandwich);
 const asideDefault = ref(true);
 const mainContainerDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTAINER);
 const mainContentDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTENT);
@@ -90,15 +90,15 @@ function toggleNavHover(toShow = false) {
   }
 }
 
-// watch(navClasses, (currentClass) => {
-//   if (currentClass["nav-hover"]) {
-//     navBtnIcon.value = icons.value.doubleArrowRight;
-//   } else if (currentClass["nav-default"]) {
-//     navBtnIcon.value = icons.value.sandwich;
-//   } else if (currentClass["nav-click"]) {
-//     navBtnIcon.value = icons.value.doubleArrowLeft;
-//   }
-// });
+watch(navClasses, (currentClass) => {
+  if (currentClass["nav-hover"]) {
+    navBtnIcon.value = Icons.doubleArrowRight;
+  } else if (currentClass["nav-default"]) {
+    navBtnIcon.value = Icons.sandwich;
+  } else if (currentClass["nav-click"]) {
+    navBtnIcon.value = Icons.doubleArrowLeft;
+  }
+});
 </script>
 
 <template>
@@ -113,7 +113,7 @@ function toggleNavHover(toShow = false) {
           @mouseenter="toggleNavHover(true)"
           @touchstart="toggleNavState"
         >
-          <!-- <Icon :icon="navBtnIcon" /> -->
+          <Icon :icon="navBtnIcon" />
         </div>
         <div class="nav-list-wrapper">
           <ul class="nav-list">
@@ -123,11 +123,11 @@ function toggleNavHover(toShow = false) {
             </li>
             <li class="nav-list__nav-item">
               <div role="button" @click="showSearchModal">
-                <!-- <Icon :icon="icons.search" /> -->
+                <Icon :icon="Icons.search" />
                 <span>Search</span>
               </div>
               <div role="button" id="settings-btn" @click="showSettingsModal">
-                <!-- <Icon :icon="icons.settings" /> -->
+                <Icon :icon="Icons.settings" />
                 <span>Settings</span>
               </div>
             </li>

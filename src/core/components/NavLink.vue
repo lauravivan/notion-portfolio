@@ -6,11 +6,11 @@ import { useStore } from "vuex";
 import { getGlobalProperties, setGlobalProperty } from "@/core/global";
 import { setTabs as setTabsLS } from "@/core/util/local-storage";
 import { Page } from "@/core/@types/page";
+import { Icons } from "@/core/util";
 
 const store = useStore();
 const props = defineProps(["page"]);
 const activePage = computed(() => store.getters.getActivePage);
-const icons = computed(() => store.getters.getIcons);
 
 const activePageId = computed(() => {
   if (activePage.value) {
@@ -33,6 +33,8 @@ function updateTabs(page: Page) {
   <div class="nav-link">
     <ToggleList
       class="nav-link__toggle-list"
+      :iconToOpen="Icons.arrowRight"
+      :iconToClose="Icons.arrowDown"
       :class="
         activePageId == props.page.id ? 'nav-link__toggle-list--active' : ''
       "

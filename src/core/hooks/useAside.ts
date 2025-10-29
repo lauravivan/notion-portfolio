@@ -1,8 +1,7 @@
-import {
-  ASIDE_MAIN_CONTAINER,
-  ASIDE_MAIN_CONTENT,
-} from "@/core/util/constants";
 import { computed, provide, ref } from "vue";
+
+export const ASIDE_MAIN_CONTAINER = "mainContainerDefault";
+export const ASIDE_MAIN_CONTENT = "mainContentDefault";
 
 export default function useAside() {
   const mainContainerDefault = ref(true);
@@ -28,5 +27,7 @@ export default function useAside() {
   return {
     mainContainerClasses,
     mainContentClasses,
+    ASIDE_MAIN_CONTAINER,
+    ASIDE_MAIN_CONTENT
   };
 }

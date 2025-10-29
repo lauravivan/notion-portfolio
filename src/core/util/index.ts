@@ -1,2 +1,3 @@
 export { default as isTouchDevice } from "./isTouchDevice";
-export { Theme } from "./theme";
+export { default as Theme } from "./theme";
+export { default as Icons } from "./icons";

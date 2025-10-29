@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import { Icon } from "@/client/components";
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { Icons } from "@/core/util";
 
 const props = defineProps(["href", "emoji"]);
-const store = useStore();
-
-const icons = computed(() => store.getters.getIcons);
 </script>
 
 <template>
   <a class="link" target="_blank" :href="props.href">
     <div>
-      {{ props.emoji }} <Icon class="link__arrow" :icon="icons.arrowLink" />
+      {{ props.emoji }} <Icon class="link__arrow" :icon="Icons.arrowLink" />
     </div>
     <span><slot></slot></span>
   </a>

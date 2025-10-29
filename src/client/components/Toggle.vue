@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const props = defineProps(["active", "toToggle", "toggleRef"]);
+</script>
+
 <template>
   <div class="toggle" @click="props.toToggle">
     <slot></slot>
@@ -11,10 +15,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const props = defineProps(["active", "toToggle", "toggleRef"]);
-</script>
 
 <style lang="scss">
 @use "@/core/assets/scss/main";

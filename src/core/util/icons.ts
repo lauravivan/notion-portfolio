@@ -1,0 +1,28 @@
+enum Icons {
+  sandwich = "eva:menu-outline",
+  doubleArrowRight = "eva:arrowhead-right-outline",
+  doubleArrowLeft = "eva:arrowhead-left-outline",
+  settings = "eva:settings-fill",
+  gridView = "eva:grid-outline",
+  moreHorizontal = "eva:more-horizontal-outline",
+  arrowDown = "eva:arrow-ios-downward-outline",
+  arrowRight = "eva:arrow-ios-forward-outline",
+  arrowDownFilled = "eva:caret-down",
+  arrowRightFilled = "eva:caret-forward",
+  check = "eva:checkmark-outline",
+  circle = "eva:ellipse",
+  forkCode = "eva:git-network-outline",
+  star = "eva:star-outline",
+  eye = "eva:eye-outline",
+  code = "eva:code-slash-outline",
+  link = "eva:link-outline",
+  add = "eva:plus-outline",
+  expand = "eva:expand-outline",
+  clock = "eva:time-outline",
+  list = "eva:list-outline",
+  close = "eva:close-outline",
+  search = "eva:search-outline",
+  arrowLink = "eva:diagonal-arrow-right-up-fill",
+}
+
+export default Icons;

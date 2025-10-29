@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { Icon } from "@/client/components";
 import { useDisplay } from "@/core/hooks";
+import { Icon } from "@/client/components";
 
 const detailsContentRef = ref();
 const props = defineProps(["iconToOpen", "iconToClose"]);
@@ -33,7 +33,7 @@ onMounted(() => {
       <thead>
         <tr class="details__summary">
           <th class="details__summary--icon">
-            <!-- <Icon :icon="icon" @click.prevent.stop="toToggle" /> -->
+            <Icon :icon="icon" @click.prevent.stop="toToggle" />
           </th>
           <th class="details__summary--content">
             <slot name="summaryContent" ref="summaryContentRef" />

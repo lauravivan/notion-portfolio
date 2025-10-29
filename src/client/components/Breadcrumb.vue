@@ -32,7 +32,7 @@ const breadcrumbs = computed(() => {
     >
       <router-link class="breadcrumb__page" :to="page.path">
         <div>
-          <img :src="page.iconPath" style="max-width: 1.1rem; height: auto" />
+          <img :src="page.icon.path" style="max-width: 1.1rem; height: auto" />
           <div>{{ page.title }}</div>
         </div>
       </router-link>

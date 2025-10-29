@@ -8,9 +8,9 @@ import {
   setActiveTab as setActiveTabLS,
   setTabs as setTabsLS,
 } from "@/core/util/local-storage";
+import { Icons } from "@/core/util";
 
 const store = useStore();
-const icons = computed(() => store.getters.getIcons);
 const activePage = computed(() => store.getters.getActivePage);
 
 function updateActiveTab(index: number) {
@@ -77,7 +77,7 @@ onBeforeUnmount(() => {
         @click.stop="removeTab(index)"
         @touchstart="removeTab(index)"
       >
-        <!-- <Icon :icon="icons.close" /> -->
+        <Icon :icon="Icons.close" />
       </button>
     </div>
     <button
@@ -86,7 +86,7 @@ onBeforeUnmount(() => {
       @touchstart="addTab()"
       v-if="getGlobalProperties.tabs.length < 10"
     >
-      <!-- <Icon :icon="icons.add" /> -->
+      <Icon :icon="Icons.add" />
     </button>
   </div>
 </template>

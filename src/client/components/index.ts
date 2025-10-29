@@ -8,3 +8,7 @@ export { default as Text } from "./Text.vue";
 export { default as Link } from "./Link.vue";
 export { default as Breadcrumb } from "./Breadcrumb.vue";
 export { default as Toggle } from "./Toggle.vue";
+export { default as Image } from "./Image.vue";
+export { default as Empty } from "./Empty.vue";
+export { default as MultiSelect } from "./MultiSelect.vue";
+export { default as MainModalView } from "./MainModalView.vue";
