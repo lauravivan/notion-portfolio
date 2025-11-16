@@ -1,0 +1,161 @@
+@use "var";
+
+@mixin defineTheme(
+  $text,
+  $textLighter,
+  $bg,
+  $bgAsideClick,
+  $bgAsideHover,
+  $bgHover,
+  $bgTabs,
+  $activeColor,
+  $link
+) {
+  background-color: $bg;
+  color: $text;
+
+  li,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  div,
+  button,
+  table,
+  td,
+  tr,
+  th,
+  .gallery__card-footer-icon.icon {
+    color: $text !important;
+  }
+
+  .main-container-click .aside-click span,
+  .main-container-click .aside-click div,
+  .main-container-click .aside-click li {
+    color: $textLighter !important;
+  }
+
+  .main-container-click .aside-click {
+    background-color: $bgAsideClick !important;
+    box-shadow: $bgHover 0px 0px 3px -1px inset !important;
+  }
+
+  .tabs {
+    background-color: $bgTabs !important;
+  }
+
+  .header,
+  .tabs__tab--active,
+  .tabs__tab--active:hover {
+    background-color: $bg !important;
+  }
+
+  .modal,
+  .modal-static,
+  .modal-dynamic,
+  .footer,
+  .gallery__card-footer,
+  .nav-hover .nav-list,
+  .toggle-btn.unchecked,
+  .header-menu .menu,
+  .callout {
+    background-color: $bgAsideHover !important;
+  }
+
+  .multi-select > div {
+    color: var.$dark !important;
+  }
+
+  .hover-default:hover,
+  .button:hover,
+  .tabs__tab:hover,
+  .nav-link__toggle-list--active .details > .details__summary {
+    background-color: $bgHover !important;
+  }
+
+  .menu,
+  .webkit::-webkit-scrollbar-track,
+  .tabs__add:hover {
+    background-color: $bg !important;
+  }
+
+  .tabs__tab {
+    border-right-color: $bgHover !important;
+  }
+
+  .header-menu__font-wrapper--active .header-menu__ag {
+    color: $activeColor !important;
+  }
+
+  .toggle-btn.checked {
+    background-color: $activeColor !important;
+  }
+
+  .webkit::-webkit-scrollbar-thumb {
+    background-color: $text;
+  }
+
+  :-webkit-any-link {
+    color: $text;
+
+    &:hover {
+      color: $link !important;
+    }
+  }
+
+  .main-container-click
+    .aside-click
+    .nav-link__toggle-list--active
+    .nav-link__pagename {
+    color: $text !important;
+  }
+
+  .bookmark {
+    border-color: $textLighter;
+  }
+}
+
+.dark-theme {
+  @include defineTheme(
+    var.$white,
+    #a8a8a8,
+    var.$dark,
+    var.$dark-lighter,
+    var.$black,
+    var.$gray-3,
+    var.$gray-1,
+    var.$active,
+    var.$gray
+  );
+}
+
+.cat-latte {
+  @include defineTheme(
+    var.$latte-text,
+    var.$latte-subtext0,
+    var.$latte-mantle,
+    var.$latte-base,
+    var.$latte-surface0,
+    var.$latte-surface1,
+    var.$latte-surface0,
+    var.$latte-sky,
+    var.$latte-overlay2
+  );
+}
+
+.cat-mocha {
+  @include defineTheme(
+    var.$mocha-text,
+    var.$mocha-subtext0,
+    var.$mocha-crust,
+    var.$mocha-base,
+    var.$mocha-mantle,
+    var.$mocha-surface1,
+    var.$mocha-base,
+    var.$mocha-sapphire,
+    var.$mocha-subtext0
+  );
+}
