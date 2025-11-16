@@ -1,18 +1,8 @@
 # notion-portfolio
 
-🐋A work in progress
-
 ## Description
 
-This is a portfolio project, so basically is inteended to showcase my web development projects. It's Notion-inspired theme and built using Vue.js3.
-
-## Preview
-
-<div align="center">
-  
-  ![Banner with images of the project](./public/banner.gif)
-  
-</div>
+Notion Portfolio was born based on Nitin Ranganath‘s VsCode Portfolio idea. You can create dynamic pages based on your needs, with a pallet of Notion components available. 
 
 ## Features
 
@@ -32,10 +22,9 @@ This is a portfolio project, so basically is inteended to showcase my web develo
     - [x] Small text
   - Page width
     - [x] Full width
-    - [x] Centralized (for large screens)
+    - [x] Centralized
 - [x] Tabs for navigation (as in Notion Desktop)
 - [ ] Search
-- [x] Responsiveness
 
 ## Tools
 

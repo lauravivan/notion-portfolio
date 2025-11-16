@@ -1,31 +1,36 @@
 {
-  "name": "portfolio",
-  "homepage": "arualvivan.com",
-  "version": "0.0.0",
-  "private": true,
+  "name": "notion-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.es.js",
+  "module": "./dist/index.es.js",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "watch-sass": "sass src/assets/scss/main.scss:src/assets/css/main.css --watch"
+    "sass": "sass src/assets/scss/main.scss:src/assets/css/main.css",
+    "watch-sass": "sass @core/assets/scss/main.scss:@core/assets/css/main.css --watch"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@iconify/vue": "^5.0.0",
-    "@types/node": "^24.3.1",
+    "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.8.1",
     "mitt": "^3.0.1",
-    "sass": "^1.91.0",
-    "typescript": "^5.9.2",
-    "vite": "^7.1.4",
-    "vite-plugin-pages": "^0.33.1",
-    "vue": "^3.5.20",
-    "vue-router": "^4.5.1",
-    "vue-tsc": "^3.0.6",
-    "vuex": "^4.1.0"
+    "sass": "^1.94.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vite-plugin-dts": "^4.5.4",
+    "vue-tsc": "^3.1.4"
   },
   "dependencies": {
-    "@vueuse/core": "^13.9.0",
-    "flatted": "^3.3.3"
+    "@vueuse/core": "^14.0.0",
+    "flatted": "^3.3.3",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.24",
+    "vue-router": "^4.6.3"
   }
 }
