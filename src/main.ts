@@ -1,4 +1,4 @@
-import "../core/assets/css/main.css";
+import "@core/assets/css/main.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import { createPinia } from "pinia";
@@ -8,7 +8,7 @@ import {
   type NavigationGuardNext,
   type RouteLocationNormalized,
 } from "vue-router";
-import { MainLayout, NotFoundPage, useStore } from "../core/index.ts";
+import { MainLayout, NotFoundPage, useStore } from "@core/index.ts";
 import metadata from "./metadata";
 
 const app = createApp(App);

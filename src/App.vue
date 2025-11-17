@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Aside, Header, useStore } from "../core/index.ts";
+import { Aside, Header, useStore } from "@core/index.ts";
 import { onMounted, watch } from "vue";
-import { useAside } from "../core/hooks";
+import { useAside } from "@core/hooks";
 import { useRoute } from "vue-router";
 import metadata from "./metadata";
 

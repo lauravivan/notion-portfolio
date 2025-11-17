@@ -45,12 +45,11 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "vuex", "unplugin-vue-router"],
+      external: ["vue", "vue-router"],
       output: {
         globals: {
           vue: "Vue",
           "vue-router": "VueRouter",
-          vuex: "Vuex",
         },
       },
     },
