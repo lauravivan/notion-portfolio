@@ -39,7 +39,7 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     lib: {
-      entry: path.resolve(__dirname, "../index.ts"),
+      entry: path.resolve(__dirname, "src/main.ts"),
       name: "notion-portfolio",
       fileName: (format) => `index.${format}.js`,
       formats: ["es"],

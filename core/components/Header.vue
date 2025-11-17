@@ -8,7 +8,7 @@ import { Fonts } from "@core/util/settings";
 
 const store = useStore();
 
-const FONT_STYLE_PROVIDE_NAME = "fontStyle";
+// const FONT_STYLE_PROVIDE_NAME = "fontStyle";
 const FULL_WIDTH_PROVIDE_NAME = "fullWidth";
 const FONT_SIZE_PROVIDE_NAME = "smallText";
 const HEADER_MENU_PROVIDE_NAME = "headerMenu";
@@ -17,7 +17,7 @@ const {
   active: activeFS,
   toToggle: toToggleFS,
   toggleRef: toggleRefFS,
-  handleActive: handleActiveFS,
+  // handleActive: handleActiveFS,
 } = useToggle({
   provideName: FONT_SIZE_PROVIDE_NAME,
 });
@@ -26,7 +26,7 @@ const {
   active: activeFW,
   toToggle: toToggleFW,
   toggleRef: toggleRefFW,
-  handleActive: handleActiveFW,
+  // handleActive: handleActiveFW,
 } = useToggle({
   provideName: FULL_WIDTH_PROVIDE_NAME,
 });
@@ -39,20 +39,20 @@ const {
   provideName: HEADER_MENU_PROVIDE_NAME,
 });
 
-function storeActiveSettings<K extends keyof Global>(
-  provideName: K,
-  value: Global[K]
-) {
+// function storeActiveSettings<K extends keyof Global>(
+//   // provideName: K,
+//   // value: Global[K]
+// ) {
   
-  // setGlobalProperty(provideName, value);
-  // store.commit("storeSettings", {
-  //   key: activePage.value.id,
-  //   settings: {
-  //     ...getGlobalProperties.value,
-  //     [provideName]: value,
-  //   },
-  // });
-}
+//   // setGlobalProperty(provideName, value);
+//   // store.commit("storeSettings", {
+//   //   key: activePage.value.id,
+//   //   settings: {
+//   //     ...getGlobalProperties.value,
+//   //     [provideName]: value,
+//   //   },
+//   // });
+// }
 
 function loadFirstSettings() {
   // if (activePage && activePage.value && activePage.value.id) {
@@ -115,7 +115,6 @@ onBeforeUnmount(() => {
         <div
           v-for="[key, value] in Object.entries(Fonts)"
           class="header-menu__font-wrapper"
-          @click="storeActiveSettings(FONT_STYLE_PROVIDE_NAME, key)"
           :class="{
             'header-menu__font-wrapper--active':
               store.getSettings.settings?.fontStyle === key,
@@ -133,7 +132,6 @@ onBeforeUnmount(() => {
         :active="activeFS"
         :toToggle="toToggleFS"
         :toggleRef="toggleRefFS"
-        @click="storeActiveSettings(FONT_SIZE_PROVIDE_NAME, activeFS)"
         >Small Text</Toggle
       >
       <Toggle
@@ -141,7 +139,6 @@ onBeforeUnmount(() => {
         :active="activeFW"
         :toToggle="toToggleFW"
         :toggleRef="toggleRefFW"
-        @click="storeActiveSettings(FULL_WIDTH_PROVIDE_NAME, activeFW)"
         >Full width</Toggle
       >
     </div>

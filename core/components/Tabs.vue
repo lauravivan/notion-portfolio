@@ -1,47 +1,47 @@
 <script setup lang="ts">
-import { Icon } from "../@client/components";
-import { computed, onBeforeUnmount, onMounted } from "vue";
+// import { Icon } from "../@client/components";
+import {  onBeforeUnmount, onMounted } from "vue";
 // import { getGlobalProperties, setGlobalProperty } from "../global";
-import {
-  setActiveTab as setActiveTabLS,
-  setTabs as setTabsLS,
-} from "../util/local-storage";
-import { Icons } from "../util";
+// import {
+//   setActiveTab as setActiveTabLS,
+//   setTabs as setTabsLS,
+// } from "../util/local-storage";
+// import { Icons } from "../util";
 
 // const activePage = computed(() => store.getters.getActivePage);
 
 const props = defineProps(["route"])
 
-function updateActiveTab(index: number) {
-  // const tabs = [...getGlobalProperties.value.tabs];
-  // setGlobalProperty("activeTab", index);
-  // props.route.push(tabs[index].path);
-}
+// function updateActiveTab(index: number) {
+//   // const tabs = [...getGlobalProperties.value.tabs];
+//   // setGlobalProperty("activeTab", index);
+//   // props.route.push(tabs[index].path);
+// }
 
-function addTab() {
-  // const tabs = [...getGlobalProperties.value.tabs];
-  // // tabs.push(activePage.value);
-  // setGlobalProperty("tabs", tabs);
-  // setTabsLS(tabs);
-  // const index = tabs.length - 1;
-  // setGlobalProperty("activeTab", index);
-  // setActiveTabLS(index);
-  // store.commit("storeActivePage", activePage.value);
-  // props.route.push(activePage.value.path);
-}
+// function addTab() {
+//   // const tabs = [...getGlobalProperties.value.tabs];
+//   // // tabs.push(activePage.value);
+//   // setGlobalProperty("tabs", tabs);
+//   // setTabsLS(tabs);
+//   // const index = tabs.length - 1;
+//   // setGlobalProperty("activeTab", index);
+//   // setActiveTabLS(index);
+//   // store.commit("storeActivePage", activePage.value);
+//   // props.route.push(activePage.value.path);
+// }
 
-function removeTab(index: number) {
-  // const tabs = [...getGlobalProperties.value.tabs];
-  // if (tabs.length > 1) {
-  //   tabs.splice(index, 1);
-  //   // setGlobalProperty("tabs", tabs);
-  //   // setGlobalProperty("activeTab", 0);
-  //   setActiveTabLS(0);
-  //   setTabsLS(tabs);
-  //   // store.commit("storeActivePage", tabs[0]);
-  //   // router.push(tabs[0].path);
-  // }
-}
+// function removeTab(index: number) {
+//   // const tabs = [...getGlobalProperties.value.tabs];
+//   // if (tabs.length > 1) {
+//   //   tabs.splice(index, 1);
+//   //   // setGlobalProperty("tabs", tabs);
+//   //   // setGlobalProperty("activeTab", 0);
+//   //   setActiveTabLS(0);
+//   //   setTabsLS(tabs);
+//   //   // store.commit("storeActivePage", tabs[0]);
+//   //   // router.push(tabs[0].path);
+//   // }
+// }
 
 function loadFirstTab() {
   // const tabs = [...getGlobalProperties.value.tabs];
