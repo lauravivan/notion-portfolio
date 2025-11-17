@@ -1,4 +1,3 @@
-// export { default as store } from "./store";
 export { default as Aside } from "./components/Aside.vue";
 export { default as Header } from "./components/Header.vue";
 export { default as Loader } from "./components/Loader.vue";

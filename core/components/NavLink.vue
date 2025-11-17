@@ -9,13 +9,13 @@ const store = useStore();
 
 const props = defineProps(["page"]);
 
-function updateTabs(page: PageInfo) {
-  // const tabs = [...getGlobalProperties.value.tabs];
-  // const activeTab = getGlobalProperties.value.activeTab;
-  // tabs[activeTab] = page;
-  // setGlobalProperty("tabs", tabs);
-  // setTabsLS(tabs);
-}
+// function updateTabs(page: PageInfo) {
+//   // const tabs = [...getGlobalProperties.value.tabs];
+//   // const activeTab = getGlobalProperties.value.activeTab;
+//   // tabs[activeTab] = page;
+//   // setGlobalProperty("tabs", tabs);
+//   // setTabsLS(tabs);
+// }
 </script>
 
 <template>
@@ -32,7 +32,6 @@ function updateTabs(page: PageInfo) {
         <router-link
           class="nav-link__link"
           :to="props.page.path"
-          @click="updateTabs(props.page)"
         >
           <div>
             <div style="max-width: 1.1rem">

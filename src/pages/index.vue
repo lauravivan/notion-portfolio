@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Text, Callout } from "../../core/index.ts";
+import { Text, Callout } from "@core/index.ts";
 </script>
 
 <template>

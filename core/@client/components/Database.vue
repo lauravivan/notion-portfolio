@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { Empty, Icon, MultiSelect } from ".";
-import { useStore } from "vuex";
+// import { useStore } from "vuex";
 import { Icons } from "../../util";
 
-const store = useStore();
+// const store = useStore();
 
-const activePage = computed(() => store.getters.getActivePage);
+// const activePage = computed(() => store.getters.getActivePage);
 
 const props = defineProps(["page", "multiSelectItems"]);
-const page = ref(null);
+// const page = ref(null);
 
 onMounted(() => {
-  if (props.page) {
-    page.value = props.page;
-  } else {
-    page.value = activePage.value;
-  }
+  // if (props.page) {
+  //   page.value = props.page;
+  // } else {
+  //   page.value = activePage.value;
+  // }
 });
 </script>
 
@@ -55,11 +55,7 @@ onMounted(() => {
   <Empty />
 </template>
 
-<style lang="scss">
-@use "@core/assets/scss/main";
-@use "@core/assets/scss/_mixin.scss" as mixin;
-@use "@core/assets/scss/_var" as var;
-
+<style scoped lang="scss">
 .database {
   margin-top: 7px;
 
@@ -68,12 +64,12 @@ onMounted(() => {
   }
 
   &__property {
-    @include mixin.flex-layout($flex-direction: row, $column-gap: 5px);
+    @include flex-layout($flex-direction: row, $column-gap: 5px);
     align-items: center;
     width: 160px !important;
     flex-wrap: wrap;
 
-    @media (max-width: var.$screen-xs) {
+    @media (max-width: $screen-xs) {
       min-width: 100px;
       width: auto !important;
     }

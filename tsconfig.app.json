@@ -22,10 +22,6 @@
   },
   "include": [
     "core",
-    "core/**/*",
-    "vuex.d.ts",
-    "core/pages/not-found.vue",
-    "src/App.vue"
   ],
   "exclude": ["node_modules", "dist", "bin", "../template"]
 }

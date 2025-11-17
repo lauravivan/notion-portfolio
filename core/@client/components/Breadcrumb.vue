@@ -25,7 +25,7 @@ const breadcrumbs = computed(() => {
 <template>
   <div class="breadcrumb">
     <div class="breadcrumb__crumb" v-for="(_, index) in breadcrumbs">
-      <router-link class="breadcrumb__page">
+      <router-link to="/" class="breadcrumb__page">
         <div>
           <img style="max-width: 1.1rem; height: auto" />
           <!-- <div>{{ page.title }}</div> -->

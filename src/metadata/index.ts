@@ -1,6 +1,5 @@
-// import defaultIcons from "@/@core/assets/img/default-icons";
 import PageExample from "../pages/index.vue";
-import createPage from "../../core/util/createPage";
+import createPage from "@core/util/createPage";
 
 interface IMetadata {
   user: {
