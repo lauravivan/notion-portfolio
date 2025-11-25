@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, inject, type Ref, watch } from "vue";
 import { useModal } from "../hooks";
-// import NestedLink from "./NestedLink.vue";
+import NestedLink from "./NestedLink.vue";
 // import metadata from "../@client/metadata";
 import { Modal, Divider, SelectBtn, Icon } from "../@client/components";
 import { Theme, Icons, isTouchDevice } from "../util";
@@ -291,7 +291,7 @@ watch(navClasses, (currentClass) => {
       }
 
       &__nav-item:nth-child(3) {
-        min-height: 140px;
+        max-height: 140px;
       }
 
       &__nav-item:nth-child(3),
