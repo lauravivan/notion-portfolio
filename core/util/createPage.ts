@@ -104,7 +104,7 @@ const createPage = ({
       link: iconLink,
     },
     title,
-    path: "/" + `${id}`,
+    path: isHomepage ? "/" : "/" + `${id}`,
     parentPage,
     pages,
     isHomepage,

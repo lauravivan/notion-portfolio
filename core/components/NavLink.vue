@@ -58,7 +58,7 @@ const props = defineProps(["page"]);
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nav-link {
   margin-bottom: 1px;
 
