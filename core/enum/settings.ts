@@ -5,10 +5,12 @@ enum FontFamily {
 }
 
 enum FontSize {
+  "font-size-default" = "font-size-default",
   "font-size-small" = "font-size-small"
 }
 
 enum PageSize {
+  "page-default-width" = "page-default-width",
   "page-full-width" = "page-full-width"
 }
 

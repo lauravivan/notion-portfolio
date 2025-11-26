@@ -1,37 +1,13 @@
-import { Theme } from "@core/enum";
+import { FontFamily, FontSize, PageSize, Theme } from "@core/enum";
 import {
   getActiveTab,
   getSettings,
   getTabs,
   getTheme,
+  setSettings,
   setTheme,
 } from "@core/util/local-storage";
 import { defineStore } from "pinia";
-
-// export const globalProperties = reactive<Global>({
-//   fontStyle: "font-roboto",
-//   smallText: false,
-//   fullWidth: false,
-//   tabs: getTabsLS(),
-//   activeTab: getActiveTabLS(),
-// });
-
-// export function setGlobalProperty<K extends keyof Global>(
-//   property: K,
-//   propertyValue: Global[K]
-// ) {
-//   globalProperties[property] = propertyValue;
-// }
-
-// export const getGlobalProperties = computed(() => {
-//   return {
-//     fontStyle: globalProperties.fontStyle,
-//     smallText: globalProperties.smallText,
-//     fullWidth: globalProperties.fullWidth,
-//     tabs: globalProperties.tabs,
-//     activeTab: globalProperties.activeTab,
-//   };
-// });
 
 const useStore = defineStore("global", {
   state: () => ({
@@ -48,7 +24,42 @@ const useStore = defineStore("global", {
     storeTheme(theme: keyof typeof Theme) {
       this.theme = theme;
       setTheme(theme);
-    }
+    },
+    storeSettings({
+      fontFamily,
+      fontSize,
+      pageSize,
+    }: {
+      fontFamily?: keyof typeof FontFamily;
+      fontSize?: keyof typeof FontSize;
+      pageSize?: keyof typeof PageSize;
+    }) {
+      let stts = this.settings;
+
+      if (fontFamily) {
+        stts = {
+          ...stts,
+          fontFamily,
+        };
+      }
+
+      if (fontSize) {
+        stts = {
+          ...stts,
+          fontSize,
+        };
+      }
+
+      if (pageSize) {
+        stts = {
+          ...stts,
+          pageSize,
+        };
+      }
+
+      this.settings = stts;
+      setSettings(stts);
+    },
   },
   getters: {
     getActivePage: (state) => state.activePage,

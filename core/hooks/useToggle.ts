@@ -13,14 +13,9 @@ export default function useToggle({ provideName }: { provideName: string }) {
     }
   }
 
-  function handleActive(newActive: boolean) {
-    active.value = newActive;
-  }
-
   return {
     toToggle,
     active,
     toggleRef,
-    handleActive,
   };
 }

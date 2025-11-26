@@ -10,9 +10,9 @@ const store = useStore();
   <main
     class="page-wrapper"
     :class="[
-      store.getSettings.smallText ? 'font-size-small' : '',
-      store.getSettings.fontStyle,
-      store.getSettings.fullWidth ? 'page-full-width' : '',
+      store.getSettings.fontSize,
+      store.getSettings.fontFamily,
+      store.getSettings.pageSize,
     ]"
   >
     <div v-if="activePage.banner.path" class="page-banner">
