@@ -1,4 +1,4 @@
-import type { Theme } from "@core/util";
+import { Theme } from "@core/enum";
 import {
   getActiveTab,
   getSettings,

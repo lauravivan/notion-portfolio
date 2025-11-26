@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Modal, Icon } from ".";
-import { Icons } from "../../util";
+import { Icons } from "@core/enum";
 
 const props = defineProps([
   "component",

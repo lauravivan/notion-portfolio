@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted } from "vue";
 import { useModal, useToggle } from "../hooks";
-import { Breadcrumb, Toggle, Modal, Icon } from "../@client/components";
-import { Icons } from "../util";
-import useStore from "@core/store";
-import { Fonts } from "@core/util/settings";
+import { Breadcrumb, Toggle, Modal } from "../@client/components";
+// import useStore from "@core/store";
+// import { FontFamily, FontSize, Icons, PageSize } from "@core/enum";
 
-const store = useStore();
+// const store = useStore();
 
 // const FONT_STYLE_PROVIDE_NAME = "fontStyle";
 const FULL_WIDTH_PROVIDE_NAME = "fullWidth";
@@ -43,7 +42,7 @@ const {
 //   // provideName: K,
 //   // value: Global[K]
 // ) {
-  
+
 //   // setGlobalProperty(provideName, value);
 //   // store.commit("storeSettings", {
 //   //   key: activePage.value.id,
@@ -97,7 +96,7 @@ onBeforeUnmount(() => {
         id="header-btn"
         @click="showMenuModal"
       >
-        <Icon :icon="Icons.moreHorizontal" />
+        <!-- <Icon :icon="Icons.moreHorizontal" /> -->
       </div>
     </div>
   </header>
@@ -112,7 +111,7 @@ onBeforeUnmount(() => {
     <div class="header-menu__style">
       <span>Style</span>
       <div class="header-menu__fonts">
-        <div
+        <!-- <div
           v-for="[key, value] in Object.entries(Fonts)"
           class="header-menu__font-wrapper"
           :class="{
@@ -122,7 +121,7 @@ onBeforeUnmount(() => {
         >
           <span class="header-menu__ag">Ag</span>
           <span class="header-menu__font-name">{{ value }}</span>
-        </div>
+        </div> -->
       </div>
     </div>
 

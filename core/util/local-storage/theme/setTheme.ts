@@ -1,4 +1,4 @@
-import { Theme } from "@core/util";
+import { Theme } from "@core/enum";
 import { LOCAL_STORAGE_THEME } from "./constants";
 
 const setTheme = (theme: keyof typeof Theme) => {

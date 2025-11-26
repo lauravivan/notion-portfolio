@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from ".";
-import { Icons } from "../../util";
+import { Icons } from "@core/enum";
 
 const props = defineProps(["href", "emoji"]);
 </script>

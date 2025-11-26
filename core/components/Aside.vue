@@ -4,9 +4,10 @@ import { useModal } from "../hooks";
 import NestedLink from "./NestedLink.vue";
 // import metadata from "../@client/metadata";
 import { Modal, Divider, SelectBtn, Icon } from "../@client/components";
-import { Theme, Icons, isTouchDevice } from "../util";
+import { isTouchDevice } from "../util";
 import { ASIDE_MAIN_CONTAINER, ASIDE_MAIN_CONTENT } from "../hooks/useAside";
 import useStore from "@core/store";
+import { Icons, Theme } from "@core/enum";
 
 const store = useStore();
 const SETTINGS_MODAL_PROVIDE = "settingsModal";

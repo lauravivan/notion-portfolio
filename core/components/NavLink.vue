@@ -2,7 +2,7 @@
 import { ToggleList } from "../@client/components";
 import NestedLink from "./NestedLink.vue";
 // import { setTabs as setTabsLS } from "../util/local-storage";
-import { Icons } from "../util";
+import { Icons } from "@core/enum";
 import useStore from "@core/store";
 
 const store = useStore();
