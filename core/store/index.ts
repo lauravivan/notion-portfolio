@@ -45,7 +45,7 @@ const useStore = defineStore("global", {
     storeActivePage(activePage: PageInfo) {
       this.activePage = activePage;
     },
-    storeTheme(theme: Theme) {
+    storeTheme(theme: keyof typeof Theme) {
       this.theme = theme;
       setTheme(theme);
     }
