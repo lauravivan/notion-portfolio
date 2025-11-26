@@ -9,8 +9,6 @@ import { ASIDE_MAIN_CONTAINER, ASIDE_MAIN_CONTENT } from "../hooks/useAside";
 import useStore from "@core/store";
 
 const store = useStore();
-// const themes = computed(() => store.getters.getThemesOptions);
-// const theme = computed<Theme>(() => store.getters.getTheme);
 const SETTINGS_MODAL_PROVIDE = "settingsModal";
 const SEARCH_MODAL_PROVIDE = "searchModal";
 const THEME_OPTIONS_PROVIDE = "themesMenu";
@@ -21,8 +19,6 @@ const navBtnIcon = ref(Icons.sandwich);
 const asideDefault = ref(true);
 const mainContainerDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTAINER);
 const mainContentDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTENT);
-
-// const optionSelected = Theme[`${theme.value}`];
 
 const props = defineProps(["metadata"]);
 
@@ -53,7 +49,7 @@ const {
   addModalListener: addSearchModalListener,
 } = useModal({ provideName: SEARCH_MODAL_PROVIDE });
 
-function toggleTheme(theme: Theme) {
+function toggleTheme(theme: keyof typeof Theme) {
   store.storeTheme(theme);
 }
 
@@ -132,9 +128,7 @@ watch(navClasses, (currentClass) => {
             </li>
             <li class="nav-list__nav-item">
               <div class="nav-list__nav-item--category">Favorites</div>
-              <NestedLink
-                :pages="props.metadata.favorites"
-              />
+              <NestedLink :pages="props.metadata.favorites" />
             </li>
             <li class="nav-list__nav-item">
               <div class="nav-list__nav-item--category">Private</div>
@@ -173,9 +167,9 @@ watch(navClasses, (currentClass) => {
           </div>
           <div>
             <SelectBtn
-              :options="Theme"
+              :options="Object.entries(Theme)"
               :menuProvideName="THEME_OPTIONS_PROVIDE"
-              :optionSelected="''"
+              :optionSelected="Theme[`${store.getTheme}`]"
               @toSelect="toggleTheme"
             />
           </div>

@@ -4,7 +4,11 @@ import { ref } from "vue";
 import { useModal } from "../../hooks";
 import { Icons } from "../../util";
 
-const props = defineProps(["options", "menuProvideName", "optionSelected"]);
+const props = defineProps<{
+  options: [string, string][];
+  menuProvideName: string;
+  optionSelected: string;
+}>();
 
 const optionSelected = ref(props.optionSelected);
 const emit = defineEmits(["toSelect"]);
@@ -23,7 +27,7 @@ function optionClicked(option: string) {
 <template>
   <div>
     <div class="select-btn" @click="showModal">
-      <!-- <button>{{ props.options[optionSelected].name }}</button> -->
+      <button>{{ props.optionSelected }}</button>
       <Icon :icon="Icons.arrowDown" />
     </div>
 
@@ -36,7 +40,7 @@ function optionClicked(option: string) {
     >
       <div class="theme-options">
         <OptionList
-          :items="props.options"
+          :options="props.options"
           @toSelect="optionClicked"
           :optionSelected="optionSelected"
         ></OptionList>

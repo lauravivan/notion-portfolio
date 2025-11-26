@@ -3,13 +3,16 @@ import { ref } from "vue";
 import { Icon } from ".";
 import { Icons } from "../../util";
 
-const props = defineProps(["items", "optionSelected"]);
+const props = defineProps<{
+  options: [string, string][];
+  optionSelected: string;
+}>();
 const optionSelected = ref(props.optionSelected);
 const emit = defineEmits(["toSelect"]);
 
-const toSelect = (item: number) => {
-  optionSelected.value = item;
-  emit("toSelect", item);
+const toSelect = (option: string) => {
+  optionSelected.value = option;
+  emit("toSelect", option);
 };
 </script>
 
@@ -18,14 +21,14 @@ const toSelect = (item: number) => {
     <ul class="option__list">
       <li
         class="option__item"
-        v-for="(item, index) of props.items"
-        :key="item"
-        @click="toSelect(index)"
+        v-for="op of props.options"
+        :key="op[0]"
+        @click="toSelect(op[0])"
       >
-        <div>{{ item.name }}</div>
+        <div>{{ op[1] }}</div>
         <div
           :class="
-            optionSelected == index ? 'option__active' : 'option__not-active'
+            op[0] == props.optionSelected ? 'option__active' : 'option__not-active'
           "
         >
           <Icon :icon="Icons.check" class="option__icon" />
