@@ -1,34 +1,40 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted } from "vue";
-import { useModal, useToggle } from "../hooks";
-import { Breadcrumb, Toggle, Modal, Icon } from "../@client/components";
-import { Icons } from "../util";
+import { useModal, useToggle } from "@core/hooks";
+import { Breadcrumb, Toggle, Modal, Icon } from "@core/@client/components";
 import useStore from "@core/store";
-import { Fonts } from "@core/util/settings";
+import { FontFamily, Icons } from "@core/enum";
+import { onBeforeUnmount, onMounted, watch } from "vue";
+import { setDynamicPageInfo } from "@core/util/local-storage";
 
 const store = useStore();
 
-// const FONT_STYLE_PROVIDE_NAME = "fontStyle";
-const FULL_WIDTH_PROVIDE_NAME = "fullWidth";
-const FONT_SIZE_PROVIDE_NAME = "smallText";
+const FULL_WIDTH_PROVIDE_NAME = "pageSize";
+const FONT_SIZE_PROVIDE_NAME = "fontSize";
 const HEADER_MENU_PROVIDE_NAME = "headerMenu";
 
+const fontFamilyEntries = Object.entries(FontFamily) as [
+  keyof typeof FontFamily,
+  string
+][];
+
 const {
-  active: activeFS,
-  toToggle: toToggleFS,
-  toggleRef: toggleRefFS,
-  // handleActive: handleActiveFS,
+  active: activeFontSize,
+  toToggle: toToggleFontSize,
+  toggleRef: toggleRefFontSize,
 } = useToggle({
   provideName: FONT_SIZE_PROVIDE_NAME,
+  isActive:
+    store.getDynamicCurrentPageInfo?.settings.fontSize === "font-size-small",
 });
 
 const {
-  active: activeFW,
-  toToggle: toToggleFW,
-  toggleRef: toggleRefFW,
-  // handleActive: handleActiveFW,
+  active: activePageSize,
+  toToggle: toTogglePageSize,
+  toggleRef: toggleRefPageSize,
 } = useToggle({
   provideName: FULL_WIDTH_PROVIDE_NAME,
+  isActive:
+    store.getDynamicCurrentPageInfo?.settings.pageSize === "page-full-width",
 });
 
 const {
@@ -39,51 +45,30 @@ const {
   provideName: HEADER_MENU_PROVIDE_NAME,
 });
 
-// function storeActiveSettings<K extends keyof Global>(
-//   // provideName: K,
-//   // value: Global[K]
-// ) {
-  
-//   // setGlobalProperty(provideName, value);
-//   // store.commit("storeSettings", {
-//   //   key: activePage.value.id,
-//   //   settings: {
-//   //     ...getGlobalProperties.value,
-//   //     [provideName]: value,
-//   //   },
-//   // });
-// }
+watch(activePageSize, (newPageSize) => {
+  store.storeDynamicPageInfo({
+    pageSize: newPageSize ? "page-full-width" : "page-default-width",
+  });
+});
 
-function loadFirstSettings() {
-  // if (activePage && activePage.value && activePage.value.id) {
-  //   const actSetts = settings.value[activePage.value.id];
-  //   if (actSetts) {
-  //     setGlobalProperty("fontStyle", actSetts.fontStyle);
-  //     setGlobalProperty("fullWidth", actSetts.fullWidth);
-  //     setGlobalProperty("smallText", actSetts.smallText);
-  //     handleActiveFS(actSetts[FONT_SIZE_PROVIDE_NAME]);
-  //     handleActiveFW(actSetts[FULL_WIDTH_PROVIDE_NAME]);
-  //   } else {
-  //     setGlobalProperty("fontStyle", "font-roboto");
-  //     setGlobalProperty("fullWidth", false);
-  //     setGlobalProperty("smallText", false);
-  //     handleActiveFS(false);
-  //     handleActiveFW(false);
-  //   }
-  // }
+watch(activeFontSize, (newFontSize) => {
+  store.storeDynamicPageInfo({
+    fontSize: newFontSize ? "font-size-small" : "font-size-default",
+  });
+});
+
+
+function saveDynamicInfo() {
+  setDynamicPageInfo(store.getDynamicPageInfo);
 }
 
 onMounted(() => {
-  window.addEventListener("load", loadFirstSettings);
+  window.addEventListener("beforeunload", saveDynamicInfo);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("load", loadFirstSettings);
+  window.removeEventListener("beforeunload", saveDynamicInfo);
 });
-
-// watch(activePage, () => {
-//   loadFirstSettings();
-// });
 </script>
 
 <template>
@@ -113,11 +98,15 @@ onBeforeUnmount(() => {
       <span>Style</span>
       <div class="header-menu__fonts">
         <div
-          v-for="[key, value] in Object.entries(Fonts)"
+          v-for="[key, value] in fontFamilyEntries"
+          :key="key"
           class="header-menu__font-wrapper"
+          @click="store.storeDynamicPageInfo({ fontFamily: key })"
           :class="{
             'header-menu__font-wrapper--active':
-              store.getSettings.settings?.fontStyle === key,
+              (!store.getDynamicCurrentPageInfo?.settings.fontFamily &&
+                key === 'font-roboto') ||
+              store.getDynamicCurrentPageInfo?.settings.fontFamily === key,
           }"
         >
           <span class="header-menu__ag">Ag</span>
@@ -129,16 +118,16 @@ onBeforeUnmount(() => {
     <div class="header-menu__size-and-width">
       <Toggle
         :provideName="FONT_SIZE_PROVIDE_NAME"
-        :active="activeFS"
-        :toToggle="toToggleFS"
-        :toggleRef="toggleRefFS"
+        :active="activeFontSize"
+        :toToggle="toToggleFontSize"
+        :toggleRef="toggleRefFontSize"
         >Small Text</Toggle
       >
       <Toggle
         :provideName="FULL_WIDTH_PROVIDE_NAME"
-        :active="activeFW"
-        :toToggle="toToggleFW"
-        :toggleRef="toggleRefFW"
+        :active="activePageSize"
+        :toToggle="toTogglePageSize"
+        :toggleRef="toggleRefPageSize"
         >Full width</Toggle
       >
     </div>

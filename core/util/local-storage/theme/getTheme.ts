@@ -1,5 +1,5 @@
-import { LOCAL_STORAGE_THEME } from "./constants";
-import { Theme } from "@core/util";
+import { Theme } from "@core/enum";
+import { LOCAL_STORAGE_THEME } from "../constants";
 
 const getTheme = (): keyof typeof Theme => {
   const theme = localStorage.getItem(LOCAL_STORAGE_THEME);

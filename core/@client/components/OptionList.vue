@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Icon } from ".";
-import { Icons } from "../../util";
+import { Icons } from "@core/enum";
 
 const props = defineProps<{
   options: [string, string][];

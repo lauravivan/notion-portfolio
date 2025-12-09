@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import { ToggleList } from "../@client/components";
 import NestedLink from "./NestedLink.vue";
-// import { setTabs as setTabsLS } from "../util/local-storage";
-import { Icons } from "../util";
+import { Icons } from "@core/enum";
 import useStore from "@core/store";
 
 const store = useStore();
-
 const props = defineProps(["page"]);
 
-// function updateTabs(page: PageInfo) {
-//   // const tabs = [...getGlobalProperties.value.tabs];
-//   // const activeTab = getGlobalProperties.value.activeTab;
-//   // tabs[activeTab] = page;
-//   // setGlobalProperty("tabs", tabs);
-//   // setTabsLS(tabs);
-// }
+function updateTabs(page: PageInfo) {
+  const tabs = [...store.tabs];
+  const activeTab = store.activeTab;
+  tabs[activeTab] = {
+    pageId: page.id,
+    pageName: page.title,
+    pagePath: page.path
+  };
+  store.storeTabs(tabs);
+}
 </script>
 
 <template>
@@ -25,13 +26,14 @@ const props = defineProps(["page"]);
       :iconToOpen="Icons.arrowRight"
       :iconToClose="Icons.arrowDown"
       :class="
-        store.getActivePage.id == props.page.id ? 'nav-link__toggle-list--active' : ''
+        store.activePage.id == props.page.id ? 'nav-link__toggle-list--active' : ''
       "
     >
       <template #summaryContent>
         <router-link
           class="nav-link__link"
           :to="props.page.path"
+          @click="updateTabs(props.page)"
         >
           <div>
             <div style="max-width: 1.1rem">
@@ -58,7 +60,7 @@ const props = defineProps(["page"]);
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nav-link {
   margin-bottom: 1px;
 

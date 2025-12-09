@@ -2,7 +2,7 @@
 import { OptionList, Modal, Icon } from ".";
 import { ref } from "vue";
 import { useModal } from "../../hooks";
-import { Icons } from "../../util";
+import { Icons } from "@core/enum";
 
 const props = defineProps<{
   options: [string, string][];

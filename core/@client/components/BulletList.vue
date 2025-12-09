@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Text, Icon } from ".";
-import { Icons } from "../../util";
+import { Icons } from "@core/enum";
 
 const props = defineProps(["items"]);
 </script>

@@ -1,18 +1,32 @@
 <script setup lang="ts">
 import useStore from "@core/store";
+import { setTheme } from "@core/util/local-storage";
+import { onBeforeUnmount, onMounted } from "vue";
 
 const { activePage } = defineProps<{ activePage: PageInfo }>();
 
 const store = useStore();
+
+function saveTheme() {
+  setTheme(store.getTheme);
+}
+
+onMounted(() => {
+  window.addEventListener("beforeunload", saveTheme);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("beforeunload", saveTheme);
+});
 </script>
 
 <template>
   <main
     class="page-wrapper"
     :class="[
-      store.getSettings.smallText ? 'font-size-small' : '',
-      store.getSettings.fontStyle,
-      store.getSettings.fullWidth ? 'page-full-width' : '',
+      store.getDynamicCurrentPageInfo?.settings.fontSize,
+      store.getDynamicCurrentPageInfo?.settings.fontFamily,
+      store.getDynamicCurrentPageInfo?.settings.pageSize,
     ]"
   >
     <div v-if="activePage.banner.path" class="page-banner">

@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 import { Empty, Icon, MultiSelect } from ".";
 // import { useStore } from "vuex";
-import { Icons } from "../../util";
+import { Icons } from "@core/enum";
 
 // const store = useStore();
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { Icons } from "../../util";
+import { Icons } from "@core/enum";
 
 defineProps<{
   icon: Icons;

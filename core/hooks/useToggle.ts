@@ -1,7 +1,7 @@
 import { inject, type Ref, ref } from "vue";
 
-export default function useToggle({ provideName }: { provideName: string }) {
-  const active = ref(false);
+export default function useToggle({ provideName, isActive }: { provideName: string, isActive: boolean }) {
+  const active = ref(isActive);
 
   const toggleRef = inject<Ref<boolean> | undefined>(provideName);
 
@@ -13,14 +13,9 @@ export default function useToggle({ provideName }: { provideName: string }) {
     }
   }
 
-  function handleActive(newActive: boolean) {
-    active.value = newActive;
-  }
-
   return {
     toToggle,
     active,
     toggleRef,
-    handleActive,
   };
 }

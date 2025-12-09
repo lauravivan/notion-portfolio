@@ -1,22 +1,28 @@
 <script setup lang="ts">
-import { ref, computed, inject, type Ref, watch } from "vue";
+import { ref, computed, inject, type Ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { useModal } from "../hooks";
 import NestedLink from "./NestedLink.vue";
-// import metadata from "../@client/metadata";
 import { Modal, Divider, SelectBtn, Icon } from "../@client/components";
-import { Theme, Icons, isTouchDevice } from "../util";
-import { ASIDE_MAIN_CONTAINER, ASIDE_MAIN_CONTENT } from "../hooks/useAside";
+import { isTouchDevice } from "../util";
 import useStore from "@core/store";
+import { Icons, Theme } from "@core/enum";
+import setAsideOpen from "@core/util/local-storage/aside/setAsideOpen";
+import getAsideOpen from "@core/util/local-storage/aside/getAsideOpen";
+import {
+  ASIDE_MAIN_CONTAINER,
+  ASIDE_MAIN_CONTENT,
+} from "@core/constants/aside";
 
 const store = useStore();
+const isAsideOpen = getAsideOpen();
 const SETTINGS_MODAL_PROVIDE = "settingsModal";
 const SEARCH_MODAL_PROVIDE = "searchModal";
 const THEME_OPTIONS_PROVIDE = "themesMenu";
-const navDefault = ref(true);
+const navDefault = ref(!isAsideOpen);
 const navHover = ref(false);
-const navClick = ref(false);
-const navBtnIcon = ref(Icons.sandwich);
-const asideDefault = ref(true);
+const navClick = ref(isAsideOpen);
+const navBtnIcon = ref(isAsideOpen ? Icons.doubleArrowLeft : Icons.sandwich);
+const asideDefault = ref(!isAsideOpen);
 const mainContainerDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTAINER);
 const mainContentDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTENT);
 
@@ -68,6 +74,7 @@ function toggleNavState() {
   if (navClick.value) {
     navDefault.value = true;
     navClick.value = false;
+    store.storeIsAsideOpen(false);
 
     if (!isTouchDevice()) {
       navHover.value = true;
@@ -76,6 +83,7 @@ function toggleNavState() {
     navDefault.value = false;
     navHover.value = false;
     navClick.value = true;
+    store.storeIsAsideOpen(true);
   }
 }
 
@@ -93,6 +101,18 @@ watch(navClasses, (currentClass) => {
   } else if (currentClass["nav-click"]) {
     navBtnIcon.value = Icons.doubleArrowLeft;
   }
+});
+
+function saveAsideOpen() {
+  setAsideOpen(store.isAsideOpen);
+}
+
+onMounted(() => {
+  window.addEventListener("beforeunload", saveAsideOpen);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("beforeunload", saveAsideOpen);
 });
 </script>
 
