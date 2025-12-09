@@ -1,76 +1,84 @@
 <script setup lang="ts">
-// import { Icon } from "../@client/components";
-import {  onBeforeUnmount, onMounted } from "vue";
-// import { getGlobalProperties, setGlobalProperty } from "../global";
-// import {
-//   setActiveTab as setActiveTabLS,
-//   setTabs as setTabsLS,
-// } from "../util/local-storage";
-// import { Icons } from "../util";
+import { Icon } from "../@client/components";
+import { onBeforeUnmount, onMounted } from "vue";
+import useStore from "@core/store";
+import { Icons } from "@core/enum";
+import { setActiveTab, setTabs } from "@core/util/local-storage";
 
-// const activePage = computed(() => store.getters.getActivePage);
+const props = defineProps(["router"]);
+const store = useStore();
 
-const props = defineProps(["route"])
+function updateActiveTab(index: number) {
+  store.storeActiveTab(index);
+  if (store.tabs[index]) props.router.push(store.tabs[index].pagePath);
+}
 
-// function updateActiveTab(index: number) {
-//   // const tabs = [...getGlobalProperties.value.tabs];
-//   // setGlobalProperty("activeTab", index);
-//   // props.route.push(tabs[index].path);
-// }
+function addTab() {
+  const tabs = store.getTabs;
+  const activePage = store.getActivePage;
+  tabs.push({
+    pageId: activePage.id,
+    pageName: activePage.title,
+    pagePath: activePage.path,
+  });
+  store.storeTabs(tabs);
+  const index = tabs.length - 1;
+  store.storeActiveTab(index);
+  store.storeActivePage(activePage);
+  props.router.push(activePage.path);
+}
 
-// function addTab() {
-//   // const tabs = [...getGlobalProperties.value.tabs];
-//   // // tabs.push(activePage.value);
-//   // setGlobalProperty("tabs", tabs);
-//   // setTabsLS(tabs);
-//   // const index = tabs.length - 1;
-//   // setGlobalProperty("activeTab", index);
-//   // setActiveTabLS(index);
-//   // store.commit("storeActivePage", activePage.value);
-//   // props.route.push(activePage.value.path);
-// }
-
-// function removeTab(index: number) {
-//   // const tabs = [...getGlobalProperties.value.tabs];
-//   // if (tabs.length > 1) {
-//   //   tabs.splice(index, 1);
-//   //   // setGlobalProperty("tabs", tabs);
-//   //   // setGlobalProperty("activeTab", 0);
-//   //   setActiveTabLS(0);
-//   //   setTabsLS(tabs);
-//   //   // store.commit("storeActivePage", tabs[0]);
-//   //   // router.push(tabs[0].path);
-//   // }
-// }
+function removeTab(index: number) {
+  const tabs = store.getTabs;
+  if (tabs.length > 0) {
+    tabs.splice(index, 1);
+    store.storeTabs(tabs);
+    store.storeActiveTab(0);
+    if (tabs[0]) props.router.push(tabs[0].pagePath);
+  }
+}
 
 function loadFirstTab() {
-  // const tabs = [...getGlobalProperties.value.tabs];
-  // if (tabs.length === 0 && activePage.value) {
-  //   setGlobalProperty("tabs", [activePage.value]);
-  //   setTabsLS([activePage.value]);
-  // }
+  const tabs = store.getTabs;
+  const activePage = store.activePage;
+
+  if (tabs.length === 0 && activePage)
+    store.storeTabs([
+      {
+        pageId: activePage.id,
+        pageName: activePage.title,
+        pagePath: activePage.path,
+      },
+    ]);
+}
+
+function saveTabs() {
+  setTabs(store.tabs);
+  setActiveTab(store.activeTab);
 }
 
 onMounted(() => {
   window.addEventListener("load", loadFirstTab);
+  window.addEventListener("beforeunload", saveTabs);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("load", loadFirstTab);
+  window.addEventListener("beforeunload", saveTabs);
 });
 </script>
 
 <template>
   <div class="tabs">
-    <!-- <div
-      v-for="[index, page] in getGlobalProperties.tabs.entries()"
+    <div
+      v-for="[index, page] in store.tabs.entries()"
       class="tabs__tab"
       :key="index"
-      :class="getGlobalProperties.activeTab == index ? 'tabs__tab--active' : ''"
+      :class="store.activeTab == index ? 'tabs__tab--active' : ''"
       @click.stop="updateActiveTab(index)"
       @touchstart="updateActiveTab(index)"
     >
-      {{ page.name }}
+      {{ page.pageName }}
       <button
         class="tabs__tab--close"
         @click.stop="removeTab(index)"
@@ -83,29 +91,25 @@ onBeforeUnmount(() => {
       class="tabs__add"
       @click.stop="addTab()"
       @touchstart="addTab()"
-      v-if="getGlobalProperties.tabs.length < 10"
+      v-if="store.tabs.length < 10"
     >
       <Icon :icon="Icons.add" />
-    </button> -->
+    </button>
   </div>
 </template>
-<!-- 
-<style lang="scss">
-@use "@core/assets/scss/main";
-@use "@core/assets/scss/_var" as var;
-@use "@core/assets/scss/_mixin.scss" as mixin;
 
+<style lang="scss">
 .app .tabs {
   display: flex;
-  background-color: var.$gray-4;
+  background-color: $gray-4;
   top: 0;
-  height: var.$TABS_HEIGHT;
+  height: $TABS_HEIGHT;
   z-index: 10000;
 
-  @media (max-width: var.$screen-small) {
+  @media (max-width: $screen-small) {
     top: auto;
     bottom: 0;
-    background-color: var.$gray;
+    background-color: $gray;
     overflow-x: auto;
 
     &::-webkit-scrollbar,
@@ -136,23 +140,23 @@ onBeforeUnmount(() => {
     width: 200px;
     white-space: nowrap;
     overflow: hidden;
-    font-size: calc(var.$fs-small - 1px);
-    border-right: 1px solid var.$black-1;
-    color: var.$black-6;
+    font-size: calc($fs-small - 1px);
+    border-right: 1px solid $black-1;
+    color: $black-6;
 
-    @media (max-width: var.$screen-small) {
+    @media (max-width: $screen-small) {
       min-width: 150px;
     }
 
     &:hover {
-      background-color: var.$gray-6;
+      background-color: $gray-6;
     }
 
     &--active {
-      background-color: var.$white;
+      background-color: $white;
 
       &:hover {
-        background-color: var.$white;
+        background-color: $white;
       }
     }
 
@@ -168,7 +172,7 @@ onBeforeUnmount(() => {
   }
 
   &__add {
-    @include mixin.spacing($mt: auto, $mb: auto, $ml: 7px);
+    @include spacing($mt: auto, $mb: auto, $ml: 7px);
   }
 
   &__add,
@@ -176,4 +180,4 @@ onBeforeUnmount(() => {
     @extend .button;
   }
 }
-</style> -->
+</style>

@@ -3,7 +3,8 @@ import { useModal, useToggle } from "@core/hooks";
 import { Breadcrumb, Toggle, Modal, Icon } from "@core/@client/components";
 import useStore from "@core/store";
 import { FontFamily, Icons } from "@core/enum";
-import { watch } from "vue";
+import { onBeforeUnmount, onMounted, watch } from "vue";
+import { setDynamicPageInfo } from "@core/util/local-storage";
 
 const store = useStore();
 
@@ -22,6 +23,8 @@ const {
   toggleRef: toggleRefFontSize,
 } = useToggle({
   provideName: FONT_SIZE_PROVIDE_NAME,
+  isActive:
+    store.getDynamicCurrentPageInfo?.settings.fontSize === "font-size-small",
 });
 
 const {
@@ -30,6 +33,8 @@ const {
   toggleRef: toggleRefPageSize,
 } = useToggle({
   provideName: FULL_WIDTH_PROVIDE_NAME,
+  isActive:
+    store.getDynamicCurrentPageInfo?.settings.pageSize === "page-full-width",
 });
 
 const {
@@ -41,15 +46,28 @@ const {
 });
 
 watch(activePageSize, (newPageSize) => {
-  store.storeSettings({
+  store.storeDynamicPageInfo({
     pageSize: newPageSize ? "page-full-width" : "page-default-width",
   });
 });
 
 watch(activeFontSize, (newFontSize) => {
-  store.storeSettings({
+  store.storeDynamicPageInfo({
     fontSize: newFontSize ? "font-size-small" : "font-size-default",
   });
+});
+
+
+function saveDynamicInfo() {
+  setDynamicPageInfo(store.getDynamicPageInfo);
+}
+
+onMounted(() => {
+  window.addEventListener("beforeunload", saveDynamicInfo);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("beforeunload", saveDynamicInfo);
 });
 </script>
 
@@ -83,10 +101,12 @@ watch(activeFontSize, (newFontSize) => {
           v-for="[key, value] in fontFamilyEntries"
           :key="key"
           class="header-menu__font-wrapper"
-          @click="store.storeSettings({ fontFamily: key })"
+          @click="store.storeDynamicPageInfo({ fontFamily: key })"
           :class="{
             'header-menu__font-wrapper--active':
-              store.getSettings.fontFamily === key,
+              (!store.getDynamicCurrentPageInfo?.settings.fontFamily &&
+                key === 'font-roboto') ||
+              store.getDynamicCurrentPageInfo?.settings.fontFamily === key,
           }"
         >
           <span class="header-menu__ag">Ag</span>

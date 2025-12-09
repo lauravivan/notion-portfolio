@@ -1,5 +1,6 @@
 export { default as Aside } from "./components/Aside.vue";
 export { default as Header } from "./components/Header.vue";
+export { default as Tabs } from "./components/Tabs.vue";
 export { default as Loader } from "./components/Loader.vue";
 export { default as NavLink } from "./components/NavLink.vue";
 export { default as NestedLink } from "./components/NestedLink.vue";

@@ -2,11 +2,11 @@
 import { Icon } from ".";
 import { Icons } from "@core/enum";
 
-const props = defineProps(["href", "emoji"]);
+const props = defineProps<{ href: string; emoji: string; target: string }>();
 </script>
 
 <template>
-  <a class="link" target="_blank" :href="props.href">
+  <a class="link" :target="props.target ? props.target : '_blank'" :href="props.href">
     <div>
       {{ props.emoji }} <Icon class="link__arrow" :icon="Icons.arrowLink" />
     </div>

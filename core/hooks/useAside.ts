@@ -1,11 +1,14 @@
+import {
+  ASIDE_MAIN_CONTAINER,
+  ASIDE_MAIN_CONTENT,
+} from "@core/constants/aside";
+import { getAsideOpen } from "@core/util/local-storage";
 import { computed, provide, ref } from "vue";
 
-export const ASIDE_MAIN_CONTAINER = "mainContainerDefault";
-export const ASIDE_MAIN_CONTENT = "mainContentDefault";
-
 export default function useAside() {
-  const mainContainerDefault = ref(true);
-  const mainContentDefault = ref(true);
+  const isAsideOpen = getAsideOpen();
+  const mainContainerDefault = ref(!isAsideOpen);
+  const mainContentDefault = ref(!isAsideOpen);
 
   provide(ASIDE_MAIN_CONTAINER, mainContainerDefault);
   provide(ASIDE_MAIN_CONTENT, mainContentDefault);
@@ -28,6 +31,6 @@ export default function useAside() {
     mainContainerClasses,
     mainContentClasses,
     ASIDE_MAIN_CONTAINER,
-    ASIDE_MAIN_CONTENT
+    ASIDE_MAIN_CONTENT,
   };
 }

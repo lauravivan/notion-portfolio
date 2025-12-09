@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Aside, Header, useStore } from "@core/index.ts";
+import { Aside, Header, useStore, Tabs } from "@core/index.ts";
 import { onMounted, watch } from "vue";
 import { useAside } from "@core/hooks";
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import metadata from "./metadata";
 
-const route = useRoute();
+const router = useRouter();
 const { mainContainerClasses, mainContentClasses } = useAside();
 const store = useStore();
 
@@ -23,9 +23,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="route.name === 'NotFound'">
-    <router-view v-slot="{ Component, route }">
-      <component :is="Component" :previousRoute="route.meta.previousRoute" />
+  <div v-if="router.currentRoute.name === 'NotFound'">
+    <router-view v-slot="{ Component }">
+      <component :is="Component" :previousRoute="router.currentRoute.value.meta.previousRoute" />
     </router-view>
   </div>
   <div v-else class="app">
@@ -33,7 +33,7 @@ onMounted(() => {
       <Aside :metadata="metadata" />
 
       <div :class="mainContentClasses">
-        <Tabs :route="route" />
+        <Tabs :router="router" />
 
         <Header />
 

@@ -1,13 +1,10 @@
 import { parse } from "flatted";
-import { LOCAL_STORAGE_TABS } from "./constants";
+import { LOCAL_STORAGE_TABS } from "../constants";
+import type { Tabs } from "../types";
 
-const getTabs = (): PageInfo[] => {
+const getTabs = (): Tabs => {
   const tabs = localStorage.getItem(LOCAL_STORAGE_TABS);
-  const tabsParsed = tabs ? parse(tabs) : [];
-  return Array.isArray(tabsParsed) &&
-    tabsParsed.every((tab) => "id" in tab && tab.id)
-    ? tabsParsed
-    : [];
+  return tabs ? parse(tabs) : [];
 };
 
 export default getTabs;
