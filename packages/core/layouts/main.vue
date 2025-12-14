@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { PageInfo } from "@core/@types";
 import useStore from "@core/store";
 import { setTheme } from "@core/util/local-storage";
 import { onBeforeUnmount, onMounted } from "vue";
 
 const { activePage } = defineProps<{ activePage: PageInfo }>();
 
-const store = useStore();
+const store = useStore;
 
 function saveTheme() {
   setTheme(store.getTheme);

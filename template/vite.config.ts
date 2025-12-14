@@ -4,9 +4,9 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [vue()],
-  // resolve: {
-  //   alias: {
-  //     "@": resolve(__dirname, "src"),
-  //   },
-  // },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src")
+    },
+  },
 });

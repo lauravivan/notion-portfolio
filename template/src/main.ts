@@ -1,13 +1,56 @@
-// import { createApp } from "vue";
-// import "notion-portfolio/dist/notion-portfolio.css";
-// // import router from "./router";
-// import App from "./App.vue";
+import { createApp } from "vue";
+import "@lauravivan/notion-portfolio/dist/notion-portfolio.css";
+import {
+  createRouter,
+  createWebHistory,
+  type NavigationGuardNext,
+  type RouteLocationNormalized,
+} from "vue-router";
+import {
+  MainLayout,
+  NotFoundPage,
+  useStore,
+  piniaInstance
+} from "@lauravivan/notion-portfolio";
+import App from "@/App.vue";
+import metadata from "@/metadata";
 
-// const app = createApp(App);
+const app = createApp(App);
 
-// // // Object.entries(globalProperties).forEach(([key, value]) => {
-// // //   app.config.globalProperties[key] = value;
-// // // });
+const mainChildren = metadata.pages.map((page) => ({
+  path: page.isHomepage ? "/" : `/${page.id}`,
+  component: page.component,
+  name: `${page.id}`,
+  beforeEnter: (
+    _to: RouteLocationNormalized,
+    _from: RouteLocationNormalized,
+    next: NavigationGuardNext
+  ) => {
+    const store = useStore;
+    store.storeActivePage(page);
+    next();
+  },
+}));
 
-// // app.use(router);
-// app.mount("#app");
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/:pathMatch(.*)",
+      component: NotFoundPage,
+      name: "NotFound",
+      beforeEnter: (to, from, next) => {
+        to.meta.previousRoute = from.path;
+        next();
+      },
+    },
+    {
+      path: "/",
+      component: MainLayout,
+      children: mainChildren,
+    },
+  ],
+});
+
+app.use(router).use(piniaInstance);
+app.mount("#app");

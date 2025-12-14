@@ -2,7 +2,7 @@
 import { computed } from "vue";
 // import { useStore } from "vuex";
 
-// const store = useStore();
+// const store = useStore;
 // const activePage = computed<PageInfo>(() => store.getters.getActivePage);
 
 const breadcrumbs = computed(() => {

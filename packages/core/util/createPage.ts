@@ -1,4 +1,19 @@
-import { type DefineComponent } from "vue";
+import { type Component } from "vue";
+import type { PageInfo } from "..";
+
+interface Page {
+  id: string;
+  title: string;
+  parentPage?: PageInfo;
+  pages?: PageInfo[];
+  isHomepage?: boolean;
+  iconPath: string;
+  iconAuthor?: string;
+  iconLink?: string;
+  bannerAuthor: string;
+  bannerLink: string;
+  component: Component<any>;
+}
 
 const createPage = ({
   id = "",
@@ -12,19 +27,7 @@ const createPage = ({
   iconPath,
   iconAuthor,
   iconLink,
-}: {
-  id: string;
-  title: string;
-  parentPage?: PageInfo;
-  pages?: PageInfo[];
-  isHomepage: boolean;
-  iconPath: string;
-  iconAuthor?: string;
-  iconLink?: string;
-  bannerAuthor: string;
-  bannerLink: string;
-  component: DefineComponent<{}, {}, any>;
-}) => {
+}: Page) => {
   const page: PageInfo = {
     id,
     banner: {

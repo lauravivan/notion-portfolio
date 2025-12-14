@@ -17,11 +17,12 @@
     "outDir": "dist",
 
     "paths": {
-      "@core/*": ["./core/*"]
+      "@/*": ["./src/*"],
+      "@core/*": ["./packages/core/*"]
     }
   },
   "include": [
-    "core",
+    "packages/core", "src"
   ],
-  "exclude": ["node_modules", "dist", "bin", "../template"]
+  "exclude": ["node_modules", "dist", "bin", "template"]
 }

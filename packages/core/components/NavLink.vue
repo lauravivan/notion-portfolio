@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { PageInfo } from "@core/@types";
 import { ToggleList } from "../@client/components";
 import NestedLink from "./NestedLink.vue";
 import { Icons } from "@core/enum";
 import useStore from "@core/store";
 
-const store = useStore();
+const store = useStore;
 const props = defineProps(["page"]);
 
 function updateTabs(page: PageInfo) {
@@ -13,7 +14,7 @@ function updateTabs(page: PageInfo) {
   tabs[activeTab] = {
     pageId: page.id,
     pageName: page.title,
-    pagePath: page.path
+    pagePath: page.path,
   };
   store.storeTabs(tabs);
 }
@@ -26,7 +27,9 @@ function updateTabs(page: PageInfo) {
       :iconToOpen="Icons.arrowRight"
       :iconToClose="Icons.arrowDown"
       :class="
-        store.activePage.id == props.page.id ? 'nav-link__toggle-list--active' : ''
+        store.activePage.id == props.page.id
+          ? 'nav-link__toggle-list--active'
+          : ''
       "
     >
       <template #summaryContent>

@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { Aside, Header, useStore, Tabs } from "@core/index.ts";
+import { Aside, Header, useStore, Tabs, useAside } from "@lauravivan/notion-portfolio";
 import { onMounted, watch } from "vue";
-import { useAside } from "@core/hooks";
 import { useRouter } from "vue-router";
-import metadata from "./metadata";
+import metadata from "@/metadata";
 
 const router = useRouter();
-const { mainContainerClasses, mainContentClasses } = useAside();
 const store = useStore;
 
 const theme = store.getTheme;
+const { mainContainerClasses, mainContentClasses } = useAside();
 
 watch(
   () => store.theme,
@@ -44,11 +43,7 @@ onMounted(() => {
         <Header />
 
         <router-view v-slot="{ Component }">
-          <component
-            :is="Component"
-            :activePage="store.getActivePage"
-            :useStore="useStore"
-          />
+          <component :is="Component" :activePage="store.getActivePage" />
         </router-view>
 
         <footer class="footer">by Notion Portfolio (^.^)</footer>

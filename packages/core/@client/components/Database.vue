@@ -4,7 +4,7 @@ import { Empty, Icon, MultiSelect } from ".";
 // import { useStore } from "vuex";
 import { Icons } from "@core/enum";
 
-// const store = useStore();
+// const store = useStore;
 
 // const activePage = computed(() => store.getters.getActivePage);
 

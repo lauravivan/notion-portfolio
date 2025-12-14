@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { PageInfo } from "@core/@types";
 import NavLink from "./NavLink.vue";
 
 const props = defineProps(["pages"]);
