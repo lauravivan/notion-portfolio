@@ -6,7 +6,7 @@ import { Icons } from "@core/enum";
 import { setActiveTab, setTabs } from "@core/util/local-storage";
 
 const props = defineProps(["router"]);
-const store = useStore();
+const store = useStore;
 
 function updateActiveTab(index: number) {
   store.storeActiveTab(index);

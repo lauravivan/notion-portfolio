@@ -1,9 +1,9 @@
-interface PageInfo {
+export interface PageInfo {
   id: string;
   path: string;
   title: string;
-  pages?: Page[];
-  parentPage?: Page;
+  pages?: PageInfo[];
+  parentPage?: PageInfo;
   isHomepage?: boolean;
   component: DefineComponent<{}, {}, any>;
   banner: {

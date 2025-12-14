@@ -15,12 +15,9 @@ export default defineConfig({
   ],
 
   resolve: {
-    alias: [
-      {
-        find: "@core",
-        replacement: path.resolve(__dirname, "core"),
-      },
-    ],
+    alias: {
+      "@core": path.resolve(__dirname, "packages/core"),
+    },
   },
 
   css: {
@@ -39,7 +36,7 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     lib: {
-      entry: path.resolve(__dirname, "src/main.ts"),
+      entry: path.resolve(__dirname, "packages/core/index.ts"),
       name: "notion-portfolio",
       fileName: (format) => `index.${format}.js`,
       formats: ["es"],

@@ -6,7 +6,7 @@ import { FontFamily, Icons } from "@core/enum";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import { setDynamicPageInfo } from "@core/util/local-storage";
 
-const store = useStore();
+const store = useStore;
 
 const FULL_WIDTH_PROVIDE_NAME = "pageSize";
 const FONT_SIZE_PROVIDE_NAME = "fontSize";
@@ -56,7 +56,6 @@ watch(activeFontSize, (newFontSize) => {
     fontSize: newFontSize ? "font-size-small" : "font-size-default",
   });
 });
-
 
 function saveDynamicInfo() {
   setDynamicPageInfo(store.getDynamicPageInfo);

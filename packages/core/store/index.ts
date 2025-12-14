@@ -1,3 +1,4 @@
+import type { PageInfo } from "@core/@types";
 import { FontFamily, FontSize, PageSize, Theme } from "@core/enum";
 import {
   getActiveTab,
@@ -8,6 +9,7 @@ import {
 import getDynamicPageInfo from "@core/util/local-storage/dynamic-page-info/getDynamicPageInfo";
 import type { DynamicPageInfo, Tabs } from "@core/util/local-storage/types";
 import { defineStore } from "pinia";
+import piniaInstance from "./instance";
 
 interface State {
   dynamicPageInfo: DynamicPageInfo;
@@ -117,6 +119,6 @@ const useStore = defineStore("global", {
     getActivePage: (state) => state.activePage,
     getIsAsideOpen: (state) => state.isAsideOpen,
   },
-});
+})(piniaInstance);
 
 export default useStore;

@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { MainModalView, Icon } from ".";
 import { useModal } from "../../hooks";
 import { Icons } from "@core/enum";
+import type { PageInfo } from "@core/@types";
 
 const isClicked = ref(false);
 const pageModal = ref<PageInfo>();

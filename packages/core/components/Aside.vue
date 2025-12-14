@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, inject, type Ref, watch, onMounted, onBeforeUnmount } from "vue";
+import {
+  ref,
+  computed,
+  inject,
+  type Ref,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
 import { useModal } from "../hooks";
 import NestedLink from "./NestedLink.vue";
 import { Modal, Divider, SelectBtn, Icon } from "../@client/components";
@@ -13,7 +21,7 @@ import {
   ASIDE_MAIN_CONTENT,
 } from "@core/constants/aside";
 
-const store = useStore();
+const store = useStore;
 const isAsideOpen = getAsideOpen();
 const SETTINGS_MODAL_PROVIDE = "settingsModal";
 const SEARCH_MODAL_PROVIDE = "searchModal";
