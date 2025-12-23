@@ -5,6 +5,9 @@
   "main": "./dist/index.es.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "create-notion-portfolio": "./bin/cli.js"
   },
