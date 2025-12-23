@@ -1,6 +1,6 @@
 {
   "name": "@lauravivan/notion-portfolio",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A Notion-based portfolio",
   "type": "module",
   "main": "./dist/index.es.js",
