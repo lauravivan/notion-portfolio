@@ -15,22 +15,20 @@ export default defineConfig({
   ],
 
   resolve: {
-    alias: [
-      {
-        find: "@core",
-        replacement: path.resolve(__dirname, "core"),
-      },
-    ],
+    alias: {
+      "@core": path.resolve(__dirname, "packages/core"),
+    },
   },
 
   css: {
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @use "@core/assets/scss/_base.scss" as *;
-          @use "@core/assets/scss/_var.scss" as *;
-          @use "@core/assets/scss/_mixin.scss" as *;
-        `,
+                  @use "@core/assets/scss/main";
+                  @use "@core/assets/scss/_base.scss" as *;
+                  @use "@core/assets/scss/_var.scss" as *;
+                  @use "@core/assets/scss/_mixin.scss" as *;
+                `,
       },
     },
   },
@@ -39,7 +37,7 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     lib: {
-      entry: path.resolve(__dirname, "src/main.ts"),
+      entry: path.resolve(__dirname, "packages/core/index.ts"),
       name: "notion-portfolio",
       fileName: (format) => `index.${format}.js`,
       formats: ["es"],

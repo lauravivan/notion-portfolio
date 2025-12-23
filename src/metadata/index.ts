@@ -1,15 +1,7 @@
+import type { IMetadata } from "@core/index";
 import PageExample from "../pages/index.vue";
 import PageExample2 from "../pages/page-example-2.vue";
 import createPage from "@core/util/createPage";
-
-interface IMetadata {
-  user: {
-    author: string;
-    socialMedia: string;
-  };
-  pages: PageInfo[];
-  favorites: PageInfo[];
-}
 
 const metadata: IMetadata = {
   user: {

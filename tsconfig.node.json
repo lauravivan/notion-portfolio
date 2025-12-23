@@ -20,8 +20,8 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
+    "noUncheckedSideEffectImports": true
   },
   "include": ["vite.config.ts"],
-  "exclude": ["bin", "node_modules"]
+  "exclude": ["bin", "node_modules", "template", "dist"]
 }

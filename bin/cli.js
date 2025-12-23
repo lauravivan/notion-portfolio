@@ -1,34 +1,42 @@
-// #!/usr/bin/env node
-// import fs from 'fs';
-// import path from 'path';
-// import { fileURLToPath } from 'url';
-// import { execSync } from 'child_process';
+#!/usr/bin/env node
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { execSync } from "child_process";
+import chalk from 'chalk'
+import 'dotenv/config'
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// const args = process.argv.slice(2);
-// const command = args[0];
-// const projectName = args[1] || 'meu-portfolio';
+const projectName = process.argv[2] || "my-portfolio";
 
-// if (command === 'create-app') {
-//   const templateDir = path.resolve(__dirname, '../template');
-//   const targetDir = path.resolve(process.cwd(), projectName);
+const templateDir = path.resolve(__dirname, "../template");
+const targetDir = path.resolve(process.cwd(), projectName);
 
-//   if (fs.existsSync(targetDir)) {
-//     console.error(`❌ A pasta "${projectName}" já existe.`);
-//     process.exit(1);
-//   }
+const env = process.env.NODE_ENV;
 
-//   fs.cpSync(templateDir, targetDir, { recursive: true });
-//   console.log(`✅ Projeto criado em ./${projectName}`);
+if (fs.existsSync(targetDir)) {
+  console.error(`❌ Folder "${projectName}" already exists.`);
+  process.exit(1);
+}
 
-//   console.log('📦 Instalando dependências...');
-//   execSync('npm install', { cwd: targetDir, stdio: 'inherit' });
+fs.cpSync(templateDir, targetDir, { recursive: true });
+console.log(chalk.bgWhite(`✅ Project created in ./${projectName}`));
 
-//   console.log('🚀 Pronto! Use os comandos abaixo:');
-//   console.log(`\n  cd ${projectName}`);
-//   console.log('  npm run dev\n');
-// } else {
-//   console.log('Uso: notion-portfolio create-app [nome-do-projeto]');
-// }
+console.log(chalk.bgWhite("📦 Installing dependencies..."));
+execSync(`npm install`, {
+  cwd: targetDir,
+  stdio: "inherit",
+});
+
+const installer = `npm ${env === 'development' ? 'link' : 'install'} @lauravivan/notion-portfolio`;
+
+execSync(installer, {
+  cwd: targetDir,
+  stdio: "inherit",
+});
+
+console.log(chalk.yellow("🚀 All ready! Run commands below:"));
+console.log(chalk.yellow(`\n  cd ${projectName}`));
+console.log(chalk.yellow("  npm run dev\n"));
