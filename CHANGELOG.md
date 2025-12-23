@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/lauravivan/notion-portfolio/compare/v1.0.2...v1.0.3) (2025-12-23)
+
+
+### Bug Fixes
+
+* include gitignore file in template ([0c81110](https://github.com/lauravivan/notion-portfolio/commit/0c8111040644531eeee58fa8ecde9d1016661cd0))
+
 ## [1.0.2](https://github.com/lauravivan/notion-portfolio/compare/v1.0.1...v1.0.2) (2025-12-23)
 
 
