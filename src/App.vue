@@ -11,48 +11,53 @@ const store = useStore;
 
 const theme = store.getTheme;
 
+function handleNavigate(path: string) {
+    router.push(path);
+}
+
 watch(
-  () => store.theme,
-  (newTheme) => {
-    document.body.className = "";
-    document.body.classList.add(newTheme);
-  }
+    () => store.theme,
+    (newTheme) => {
+        document.body.className = "";
+        document.body.classList.add(newTheme);
+    }
 );
 
 onMounted(() => {
-  document.body.className = "";
-  document.body.classList.add(theme);
+    document.body.className = "";
+    document.body.classList.add(theme);
+    store.storeCreated();
 });
 </script>
 
 <template>
-  <div v-if="router.currentRoute.value.name === 'NotFound'">
-    <router-view v-slot="{ Component }">
-      <component
-        :is="Component"
-        :previousRoute="router.currentRoute.value.meta.previousRoute"
-      />
-    </router-view>
-  </div>
-  <div v-else class="app">
-    <div :class="mainContainerClasses">
-      <Aside :metadata="metadata" />
-
-      <div :class="mainContentClasses">
-        <Tabs :router="router" />
-
-        <Header />
-
+    <div v-if="router.currentRoute.value.name === 'NotFound'">
         <router-view v-slot="{ Component }">
-          <component
-            :is="Component"
-            :activePage="store.getActivePage"
-            :useStore="useStore"
-          />
+            <component
+                :is="Component"
+                :previousRoute="router.currentRoute.value.meta.previousRoute"
+            />
         </router-view>
-
-        <footer class="footer">by Notion Portfolio (^.^)</footer>
-      </div>
     </div>
-  </div>
+    <div v-else class="app">
+        <div :class="mainContainerClasses">
+            <Aside :metadata="metadata" />
+
+            <div :class="mainContentClasses">
+                <Tabs @navigate="handleNavigate" />
+
+                <Header />
+
+                <router-view v-slot="{ Component }">
+                    <component
+                        :is="Component"
+                        :activePage="store.getActivePage"
+                        :useStore="useStore"
+                    />
+                </router-view>
+
+                <footer class="footer">by Notion Portfolio (^.^)</footer>
+            </div>
+        </div>
+    </div>
 </template>

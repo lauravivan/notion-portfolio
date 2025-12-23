@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps(["src"]);
+const props = defineProps<{ src: string }>();
 </script>
 
 <template>
@@ -9,9 +9,6 @@ const props = defineProps(["src"]);
 </template>
 
 <style lang="scss">
-@use "@core/assets/scss/main";
-@use "@core/assets/scss/_var.scss" as var;
-
 .img-wrapper {
   display: flex;
   justify-content: center;
@@ -34,7 +31,7 @@ const props = defineProps(["src"]);
 
 .page-full-width .img-wrapper,
 .img-wrapper {
-  @media (max-width: var.$screen-xs) {
+  @media (max-width: $screen-xs) {
     display: flex;
     justify-content: center;
     max-width: 100%;

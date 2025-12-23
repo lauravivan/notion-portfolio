@@ -5,7 +5,7 @@ export interface PageInfo {
   pages?: PageInfo[];
   parentPage?: PageInfo;
   isHomepage?: boolean;
-  component: DefineComponent<{}, {}, any>;
+  component: DefineComponent;
   banner: {
     path: string; //local image path
     author: string;
@@ -16,4 +16,5 @@ export interface PageInfo {
     author?: string;
     link?: string;
   };
+  tags?: string[];
 }

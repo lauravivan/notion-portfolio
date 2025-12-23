@@ -7,7 +7,7 @@ export default function useModal({ provideName }: { provideName: string }) {
   provide(provideName, modalRef);
 
   function hideModal() {
-    if (modalRef && modalRef.value) {
+    if (modalRef.value && modalRef.value) {
       modalRef.value.style.display = "none";
       modalRef.value.style.pointerEvents = "";
       body.style.pointerEvents = "auto";
@@ -19,7 +19,7 @@ export default function useModal({ provideName }: { provideName: string }) {
 
   function showModal() {
     setTimeout(() => {
-      if (modalRef && modalRef.value) {
+      if (modalRef.value && modalRef.value) {
         modalRef.value.style.display = "block";
         body.style.pointerEvents = "none";
 
@@ -31,7 +31,7 @@ export default function useModal({ provideName }: { provideName: string }) {
   }
 
   function handleGlobalClick(e: PointerEvent | TouchEvent) {
-    if (modalRef && modalRef.value) {
+    if (modalRef.value && modalRef.value) {
       const res = Array.from(modalRef.value.querySelectorAll("*")).some(
         (child) => child === e.target
       );

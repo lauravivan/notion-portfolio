@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { inject, onMounted } from "vue";
+import { inject, onMounted, type Ref } from "vue";
 
-const props = defineProps([
-  "hideModal",
-  "addModalListener",
-  "modalStyles",
-  "provideName",
-  "isStatic",
-]);
+const props = defineProps<{
+  hideModal: () => void;
+  addModalListener: () => void;
+  provideName: string;
+  isStatic?: boolean;
+  modalStyles?: {};
+}>();
 
-const modalRef = inject(props.provideName);
+const modalRef = inject<Ref<HTMLDivElement>>(props.provideName);
+
+defineExpose({
+  ref: modalRef,
+});
 
 onMounted(() => {
   props.hideModal();
@@ -30,10 +34,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@use "@core/assets/scss/main";
-@use "@core/assets/scss/_mixin.scss" as mixin;
-@use "@core/assets/scss/_var" as var;
-
 dialog {
   all: unset;
 }
@@ -44,16 +44,16 @@ dialog {
   left: 0;
   right: 0;
   bottom: 0;
-  @include mixin.sizing(100%, 100%);
-  background-color: var.$black-5;
+  @include sizing(100%, 100%);
+  background-color: $black-5;
   z-index: 999;
 }
 
 .modal-static {
   z-index: 2000;
-  box-shadow: var.$box-shadow-1;
+  box-shadow: $box-shadow-1;
   border-radius: 5px;
-  background-color: var.$white;
+  background-color: $white;
   animation: fadeIn 1s;
   transition: width 0.3s;
   user-select: none;
@@ -73,8 +73,8 @@ dialog {
   z-index: 2500;
   min-width: 200px;
   padding: 6px;
-  box-shadow: var.$box-shadow-3;
-  background-color: var.$white;
+  box-shadow: $box-shadow-3;
+  background-color: $white;
   border-radius: 6px;
   outline: none;
   animation: fadeIn 0.4s ease-in-out;

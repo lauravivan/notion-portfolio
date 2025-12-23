@@ -32,5 +32,7 @@ export default function useAside() {
     mainContentClasses,
     ASIDE_MAIN_CONTAINER,
     ASIDE_MAIN_CONTENT,
+    mainContainerDefault,
+    mainContentDefault,
   };
 }

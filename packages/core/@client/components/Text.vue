@@ -4,7 +4,7 @@
   </span>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .text {
   line-height: 1.5;
   margin: $DEFAULT_SPACING 0;

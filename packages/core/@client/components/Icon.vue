@@ -14,11 +14,8 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@use "@core/assets/scss/main";
-@use "@core/assets/scss/_var" as var;
-
 .icon {
-  color: var.$black-3;
+  color: $black-3;
   font-size: 20px;
   display: flex;
   align-items: center;

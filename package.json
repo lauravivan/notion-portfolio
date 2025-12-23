@@ -1,6 +1,6 @@
 {
   "name": "@lauravivan/notion-portfolio",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "main": "./dist/index.es.js",
   "module": "./dist/index.es.js",
@@ -15,32 +15,64 @@
     "preview": "vite preview",
     "sass": "sass src/assets/scss/main.scss:src/assets/css/main.css",
     "watch-sass": "sass @core/assets/scss/main.scss:@core/assets/css/main.css --watch",
-    "test:cli": "node ./bin/cli.js"
+    "test:cli": "node ./bin/cli.js",
+    "format": "npx prettier --write .",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "prepare": "husky",
+    "lint:css": "stylelint '**/*.css'",
+    "lint:css:fix": "stylelint '**/*.css' --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lauravivan/notion-portfolio.git"
   },
   "files": [
     "dist",
     "bin"
   ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@eslint/json": "^0.14.0",
     "@iconify/vue": "^5.0.0",
-    "@types/node": "^24.10.1",
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@types/node": "^25.0.3",
+    "@vitejs/plugin-vue": "^6.0.3",
     "@vue/tsconfig": "^0.8.1",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.6.2",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "lint-staged": "^16.2.7",
     "mitt": "^3.0.1",
-    "sass": "^1.94.0",
+    "prettier": "3.7.4",
+    "sass": "^1.97.1",
+    "semantic-release": "^25.0.2",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard": "^39.0.1",
     "typescript": "^5.9.3",
-    "vite": "^7.2.2",
+    "typescript-eslint": "^8.50.1",
+    "vite": "^7.3.0",
     "vite-plugin-dts": "^4.5.4",
-    "vue-tsc": "^3.1.4"
+    "vue-eslint-parser": "^10.2.0",
+    "vue-tsc": "^3.2.1"
   },
   "dependencies": {
-    "@vueuse/core": "^14.0.0",
+    "@vueuse/core": "^14.1.0",
     "chalk": "^5.6.2",
     "dotenv": "^17.2.3",
     "flatted": "^3.3.3",
-    "inquirer": "^13.0.2",
     "pinia": "^3.0.4",
-    "vue": "^3.5.24",
-    "vue-router": "^4.6.3"
+    "vue": "^3.5.26",
+    "vue-router": "^4.6.4"
   }
 }
