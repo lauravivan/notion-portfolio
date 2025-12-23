@@ -21,8 +21,6 @@
       "@core/*": ["./packages/core/*"]
     }
   },
-  "include": [
-    "packages/core", "src"
-  ],
+  "include": ["packages/core", "src"],
   "exclude": ["node_modules", "dist", "bin", "template"]
 }

@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { Modal, Icon } from ".";
+import { Modal } from ".";
+import Icon from "@core/@client/components/Icon.vue";
+import type { PageInfo } from "@core/@types";
 import { Icons } from "@core/enum";
+import type { Component } from "vue";
 
-const props = defineProps([
-  "component",
-  "provideName",
-  "page",
-  "hideModal",
-  "addModalListener",
-]);
+const props = defineProps<{
+  hideModal: () => void;
+  addModalListener: () => void;
+  provideName: string;
+  page: PageInfo;
+  component: Component;
+}>();
 </script>
 
 <template>
@@ -25,7 +28,7 @@ const props = defineProps([
       </router-link>
       <main class="page-wrapper">
         <div
-          v-if="props.page.bannerPath"
+          v-if="props.page.banner.path"
           class="page-banner"
           :style="{
             height: 'max-content',
@@ -33,16 +36,16 @@ const props = defineProps([
             'margin-top': '20px !important',
           }"
         >
-          <img :src="props.page.bannerPath" />
+          <img :src="props.page.banner.path" />
         </div>
         <div
           class="page-content"
-          :class="props.page.bannerPath ? 'page-content--banner' : ''"
-          :style="props.page.bannerPath ? { top: '150px' } : ''"
+          :class="props.page.banner.path ? 'page-content--banner' : ''"
+          :style="props.page.banner.path ? { top: '150px' } : ''"
         >
           <div class="page-title">
-            <img :src="props.page.iconPath" />
-            <span>{{ props.page.name }}</span>
+            <img :src="props.page.icon.path" />
+            <span>{{ props.page.title }}</span>
           </div>
           <component :is="props.component" :page="props.page" />
           <div style="width: auto; height: 100px"></div>
@@ -53,9 +56,6 @@ const props = defineProps([
 </template>
 
 <style lang="scss">
-@use "@core/assets/scss/main";
-@use "@core/assets/scss/_var" as var;
-
 .page-modal {
   .modal,
   .page-wrapper {
@@ -80,7 +80,7 @@ const props = defineProps([
       padding-right: 15% !important;
       transform: translate(-50%, 0%);
 
-      @media (max-width: var.$screen-xs) {
+      @media (max-width: $screen-xs) {
         left: 0%;
         padding-left: 50% !important;
       }

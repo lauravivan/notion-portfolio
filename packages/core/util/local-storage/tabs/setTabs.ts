@@ -1,8 +1,8 @@
 import { LOCAL_STORAGE_TABS } from "../constants";
 import { stringify } from "flatted";
-import type { Tabs } from "../types";
+import type { Tab } from "../types";
 
-const setTabs = (tabs: Tabs) => {
+const setTabs = (tabs: Tab[]) => {
   localStorage.setItem(LOCAL_STORAGE_TABS, stringify(tabs));
 };
 

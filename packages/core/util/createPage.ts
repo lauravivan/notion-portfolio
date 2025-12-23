@@ -12,7 +12,8 @@ interface Page {
   iconLink?: string;
   bannerAuthor: string;
   bannerLink: string;
-  component: Component<any>;
+  component: Component;
+  tags?: string[];
 }
 
 const createPage = ({
@@ -27,6 +28,7 @@ const createPage = ({
   iconPath,
   iconAuthor,
   iconLink,
+  tags,
 }: Page) => {
   const page: PageInfo = {
     id,
@@ -46,6 +48,7 @@ const createPage = ({
     pages,
     isHomepage,
     component,
+    tags,
   };
 
   return page;

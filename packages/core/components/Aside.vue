@@ -9,10 +9,12 @@ import {
   onBeforeUnmount,
 } from "vue";
 import { useModal } from "../hooks";
-import NestedLink from "./NestedLink.vue";
-import { Modal, Divider, SelectBtn, Icon } from "../@client/components";
+import NestedLink from "./NavLink/NestedLink.vue";
+import { Modal, Divider } from "../@client/components";
+import SelectBtn from "./SelectList/SelectBtn.vue";
 import { isTouchDevice } from "../util";
-import useStore from "@core/store";
+import Icon from "@core/@client/components/Icon.vue";
+import { useStore } from "@core/store";
 import { Icons, Theme } from "@core/enum";
 import setAsideOpen from "@core/util/local-storage/aside/setAsideOpen";
 import getAsideOpen from "@core/util/local-storage/aside/getAsideOpen";
@@ -20,6 +22,7 @@ import {
   ASIDE_MAIN_CONTAINER,
   ASIDE_MAIN_CONTENT,
 } from "@core/constants/aside";
+import type { IMetadata } from "@core/@types";
 
 const store = useStore;
 const isAsideOpen = getAsideOpen();
@@ -34,7 +37,7 @@ const asideDefault = ref(!isAsideOpen);
 const mainContainerDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTAINER);
 const mainContentDefault = inject<Ref<boolean>>(ASIDE_MAIN_CONTENT);
 
-const props = defineProps(["metadata"]);
+const props = defineProps<{ metadata: IMetadata }>();
 
 const asideClasses = computed(() => {
   return {
@@ -77,9 +80,9 @@ function togglePageState(isDefault = true) {
 }
 
 function toggleNavState() {
-  navClick.value ? togglePageState() : togglePageState(false);
-
   if (navClick.value) {
+    togglePageState();
+
     navDefault.value = true;
     navClick.value = false;
     store.storeIsAsideOpen(false);
@@ -88,6 +91,8 @@ function toggleNavState() {
       navHover.value = true;
     }
   } else {
+    togglePageState(false);
+
     navDefault.value = false;
     navHover.value = false;
     navClick.value = true;
@@ -97,7 +102,13 @@ function toggleNavState() {
 
 function toggleNavHover(toShow = false) {
   if (asideDefault.value) {
-    isTouchDevice() ? (navHover.value = false) : (navHover.value = toShow);
+    const touchDevice = isTouchDevice();
+
+    if (touchDevice) {
+      navHover.value = false;
+    } else {
+      navHover.value = toShow;
+    }
   }
 }
 

@@ -1,16 +1,36 @@
 <script setup lang="ts">
 import type { PageInfo } from "@core/@types";
-import useStore from "@core/store";
+import { useStore } from "@core/store";
 import { setTheme } from "@core/util/local-storage";
 import { onBeforeUnmount, onMounted } from "vue";
+import { Icons } from "@core/enum";
+import formatDate from "@core/util/formatDate";
 
 const { activePage } = defineProps<{ activePage: PageInfo }>();
 
 const store = useStore;
 
+//purple, blue, yellow, brown, green, orange and gray
+const colors = [
+  "cdb4db",
+  "bde0fe",
+  "ffd275",
+  "ba9378",
+  "d0f0c0",
+  "fec89a",
+  "ccc5b9",
+];
+
+function getColor() {
+  const randomNumber = Math.floor(Math.random() * 6);
+  return "#" + colors[randomNumber];
+}
+
 function saveTheme() {
   setTheme(store.getTheme);
 }
+
+const pageDate = formatDate(store.getDynamicPageInfo[activePage.id]?.created);
 
 onMounted(() => {
   window.addEventListener("beforeunload", saveTheme);
@@ -42,6 +62,43 @@ onBeforeUnmount(() => {
         <img :src="activePage.icon.path" />
         <span>{{ activePage.title }}</span>
       </div>
+      <table class="database" v-if="activePage.parentPage">
+        <thead>
+          <tr>
+            <th></th>
+            <th width="100%"></th>
+          </tr>
+          <tr>
+            <td class="database__property">
+              <Icon :icon="Icons.clock" />
+              <span>Created</span>
+            </td>
+            <td class="database__property--val">
+              <span v-if="pageDate">{{ pageDate }}</span>
+              <span v-else>Empty</span>
+            </td>
+          </tr>
+          <tr v-if="activePage.tags && activePage.tags.length > 0">
+            <td class="database__property">
+              <Icon :icon="Icons.list" />
+              <span>Tags</span>
+            </td>
+
+            <td class="database__property--val">
+              <div class="multi-select">
+                <div
+                  v-for="item in activePage.tags"
+                  :key="item"
+                  :style="{ 'background-color': getColor() }"
+                >
+                  {{ item }}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </thead>
+      </table>
+      <Empty />
       <router-view></router-view>
       <div style="width: auto; height: 200px"></div>
     </div>
@@ -119,6 +176,42 @@ onBeforeUnmount(() => {
 
 .font-roboto-serif {
   font-family: $serif;
+}
+
+.database {
+  margin-top: 7px;
+
+  td {
+    @extend .hover-default;
+  }
+
+  &__property {
+    @include flex-layout($flex-direction: row, $column-gap: 5px);
+    align-items: center;
+    width: 160px !important;
+    flex-wrap: wrap;
+
+    @media (max-width: $screen-xs) {
+      min-width: 100px;
+      width: auto !important;
+    }
+
+    &--val {
+      vertical-align: middle;
+    }
+  }
+}
+
+.multi-select {
+  @include flex-layout($flex-direction: row, $row-gap: 5px, $column-gap: 5px);
+  align-items: center;
+  flex-wrap: wrap;
+
+  div {
+    padding: 0.3rem 0.5rem;
+    width: max-content;
+    border-radius: 2px;
+  }
 }
 
 /*configs*/

@@ -1,10 +1,7 @@
 export interface DynamicPageInfo {
   [pageId: string]: {
-    settings: {
-      fontFamily: "font-roboto" | "font-roboto-serif" | "font-roboto-mono";
-      fontSize: "font-size-default" | "font-size-small";
-      pageSize: "page-default-width" | "page-full-width";
-    };
+    settings: Settings;
+    created: Date | null;
   };
 }
 
@@ -14,4 +11,8 @@ interface Tab {
   pageName: string;
 }
 
-export interface Tabs extends Array<Tab> {}
+export interface Settings {
+  fontFamily: "font-roboto" | "font-roboto-serif" | "font-roboto-mono";
+  fontSize: "font-size-default" | "font-size-small";
+  pageSize: "page-default-width" | "page-full-width";
+}

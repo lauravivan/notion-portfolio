@@ -15,10 +15,11 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @use "@core/assets/scss/_base.scss" as *;
-          @use "@core/assets/scss/_var.scss" as *;
-          @use "@core/assets/scss/_mixin.scss" as *;
-        `,
+                  @use "@core/assets/scss/main";
+                  @use "@core/assets/scss/_base.scss" as *;
+                  @use "@core/assets/scss/_var.scss" as *;
+                  @use "@core/assets/scss/_mixin.scss" as *;
+                `,
       },
     },
   },

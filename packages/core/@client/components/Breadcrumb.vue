@@ -1,22 +1,21 @@
 <script setup lang="ts">
+import { useStore } from "@core/store";
 import { computed } from "vue";
-// import { useStore } from "vuex";
 
-// const store = useStore;
-// const activePage = computed<PageInfo>(() => store.getters.getActivePage);
+const store = useStore;
 
 const breadcrumbs = computed(() => {
-  // if (activePage.value) {
-  //   const breadcrumbs = [] as PageInfo[];
-  //   let newActivePage = activePage.value;
+  if (store.activePage) {
+    const breadcrumbs = [store.activePage];
+    let newActivePage = store.activePage;
 
-  //   while (newActivePage.parentPage) {
-  //     breadcrumbs.unshift(newActivePage);
-  //     newActivePage = newActivePage.parentPage;
-  //   }
+    while (newActivePage.parentPage) {
+      breadcrumbs.unshift(newActivePage);
+      newActivePage = newActivePage.parentPage;
+    }
 
-  //   return breadcrumbs;
-  // }
+    return breadcrumbs;
+  }
 
   return [];
 });
@@ -24,11 +23,15 @@ const breadcrumbs = computed(() => {
 
 <template>
   <div class="breadcrumb">
-    <div class="breadcrumb__crumb" v-for="(_, index) in breadcrumbs">
+    <div
+      class="breadcrumb__crumb"
+      v-for="(page, index) in breadcrumbs"
+      :key="page.id"
+    >
       <router-link to="/" class="breadcrumb__page">
         <div>
           <img style="max-width: 1.1rem; height: auto" />
-          <!-- <div>{{ page.title }}</div> -->
+          <div>{{ page.title }}</div>
         </div>
       </router-link>
       <div v-if="index !== breadcrumbs.length - 1">/</div>
@@ -38,15 +41,12 @@ const breadcrumbs = computed(() => {
 </template>
 
 <style lang="scss">
-@use "@core/assets/scss/main";
-@use "@core/assets/scss/_mixin.scss" as mixin;
-
 .breadcrumb {
-  @include mixin.flex-layout($flex-direction: row);
+  @include flex-layout($flex-direction: row);
   align-items: center;
 
   &__crumb {
-    @include mixin.flex-layout($flex-direction: row);
+    @include flex-layout($flex-direction: row);
     align-items: center;
   }
 
@@ -54,7 +54,7 @@ const breadcrumbs = computed(() => {
     all: unset;
 
     > div {
-      @include mixin.flex-layout($flex-direction: row, $column-gap: 0.4rem);
+      @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
       align-items: center;
       @extend .hover-default;
     }

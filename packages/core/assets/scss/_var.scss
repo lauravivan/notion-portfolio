@@ -101,13 +101,17 @@ $fw-800: 800;
 $fw-900: 900;
 
 /*box shadow*/
-$box-shadow-1: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px,
-  rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+$box-shadow-1:
+  rgba(15, 15, 15, 0.05) 0px 0px 0px 1px,
+  rgba(15, 15, 15, 0.1) 0px 3px 6px,
+  rgba(15, 15, 15, 0.2) 0px 9px 24px;
 
 $box-shadow-2: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
 
-$box-shadow-3: rgba(15, 15, 15, 0.05) 0px 0px 0px 0px,
-  rgba(15, 15, 15, 0.1) 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 0px 6px;
+$box-shadow-3:
+  rgba(15, 15, 15, 0.05) 0px 0px 0px 0px,
+  rgba(15, 15, 15, 0.1) 0px 0px 1px,
+  rgba(15, 15, 15, 0.2) 0px 0px 6px;
 
 /* font size dinamic */
 $fs-xs: 0.74rem;

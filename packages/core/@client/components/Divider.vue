@@ -4,15 +4,12 @@
   </div>
 </template>
 
-<style scoped lang="scss">
-@use "@core/assets/scss/main.scss";
-@use "@core/assets/scss/_var" as var;
-
+<style lang="scss">
 .divider-wrapper {
-  margin: var.$DEFAULT_SPACING 0;
+  margin: $DEFAULT_SPACING 0;
 }
 
 .divider {
-  border-bottom: 1px solid var.$gray;
+  border-bottom: 1px solid $gray;
 }
 </style>

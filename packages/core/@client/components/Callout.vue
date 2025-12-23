@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .callout {
   margin: 10px 0;
   border-radius: 5px;

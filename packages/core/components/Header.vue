@@ -1,38 +1,31 @@
 <script setup lang="ts">
 import { useModal, useToggle } from "@core/hooks";
-import { Breadcrumb, Toggle, Modal, Icon } from "@core/@client/components";
-import useStore from "@core/store";
+import { Breadcrumb, Modal } from "@core/@client/components";
+import { useStore } from "@core/store";
+import Toggle from "@core/components/Toggle/Toggle.vue";
 import { FontFamily, Icons } from "@core/enum";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import { setDynamicPageInfo } from "@core/util/local-storage";
 
 const store = useStore;
 
-const FULL_WIDTH_PROVIDE_NAME = "pageSize";
+const PAGE_SIZE_PROVIDE_NAME = "pageSize";
 const FONT_SIZE_PROVIDE_NAME = "fontSize";
 const HEADER_MENU_PROVIDE_NAME = "headerMenu";
 
 const fontFamilyEntries = Object.entries(FontFamily) as [
   keyof typeof FontFamily,
-  string
+  string,
 ][];
 
-const {
-  active: activeFontSize,
-  toToggle: toToggleFontSize,
-  toggleRef: toggleRefFontSize,
-} = useToggle({
+const { active: activeFontSize, toToggle: toToggleFontSize } = useToggle({
   provideName: FONT_SIZE_PROVIDE_NAME,
   isActive:
     store.getDynamicCurrentPageInfo?.settings.fontSize === "font-size-small",
 });
 
-const {
-  active: activePageSize,
-  toToggle: toTogglePageSize,
-  toggleRef: toggleRefPageSize,
-} = useToggle({
-  provideName: FULL_WIDTH_PROVIDE_NAME,
+const { active: activePageSize, toToggle: toTogglePageSize } = useToggle({
+  provideName: PAGE_SIZE_PROVIDE_NAME,
   isActive:
     store.getDynamicCurrentPageInfo?.settings.pageSize === "page-full-width",
 });
@@ -119,21 +112,19 @@ onBeforeUnmount(() => {
         :provideName="FONT_SIZE_PROVIDE_NAME"
         :active="activeFontSize"
         :toToggle="toToggleFontSize"
-        :toggleRef="toggleRefFontSize"
         >Small Text</Toggle
       >
       <Toggle
-        :provideName="FULL_WIDTH_PROVIDE_NAME"
+        :provideName="PAGE_SIZE_PROVIDE_NAME"
         :active="activePageSize"
         :toToggle="toTogglePageSize"
-        :toggleRef="toggleRefPageSize"
         >Full width</Toggle
       >
     </div>
   </Modal>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .app .header {
   background-color: $white;
   height: $HEADER_HEIGHT;

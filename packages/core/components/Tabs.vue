@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { Icon } from "../@client/components";
+import Icon from "@core/@client/components/Icon.vue";
 import { onBeforeUnmount, onMounted } from "vue";
-import useStore from "@core/store";
+import { useStore } from "@core/store";
 import { Icons } from "@core/enum";
 import { setActiveTab, setTabs } from "@core/util/local-storage";
 
-const props = defineProps(["router"]);
 const store = useStore;
+
+const emit = defineEmits<{
+  navigate: [path: string];
+}>();
 
 function updateActiveTab(index: number) {
   store.storeActiveTab(index);
-  if (store.tabs[index]) props.router.push(store.tabs[index].pagePath);
+  if (store.tabs[index]) emit("navigate", store.tabs[index].pagePath);
 }
 
 function addTab() {
@@ -25,7 +28,7 @@ function addTab() {
   const index = tabs.length - 1;
   store.storeActiveTab(index);
   store.storeActivePage(activePage);
-  props.router.push(activePage.path);
+  emit("navigate", activePage.path);
 }
 
 function removeTab(index: number) {
@@ -34,7 +37,7 @@ function removeTab(index: number) {
     tabs.splice(index, 1);
     store.storeTabs(tabs);
     store.storeActiveTab(0);
-    if (tabs[0]) props.router.push(tabs[0].pagePath);
+    if (tabs[0]) emit("navigate", tabs[0].pagePath);
   }
 }
 

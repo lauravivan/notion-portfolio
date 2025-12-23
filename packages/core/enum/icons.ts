@@ -10,7 +10,7 @@ enum Icons {
   arrowDownFilled = "eva:caret-down",
   arrowRightFilled = "eva:caret-forward",
   check = "eva:checkmark-outline",
-  circle = "eva:ellipse",
+  circle = "famicons:ellipse",
   forkCode = "eva:git-network-outline",
   star = "eva:star-outline",
   eye = "eva:eye-outline",
