@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/lauravivan/notion-portfolio/compare/v1.0.0...v1.0.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* force version bump ([dfd5469](https://github.com/lauravivan/notion-portfolio/commit/dfd5469c8b4c37a0c7ba12d7249df6d2093244f4))
+
 # 1.0.0 (2025-12-23)
 
 
