@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/lauravivan/notion-portfolio/compare/v1.0.1...v1.0.2) (2025-12-23)
+
+
+### Bug Fixes
+
+* add build step before release and delete my portfolio folder ([8d42ad1](https://github.com/lauravivan/notion-portfolio/commit/8d42ad19681f0b1baef5971cb554fc341128e016))
+
 ## [1.0.1](https://github.com/lauravivan/notion-portfolio/compare/v1.0.0...v1.0.1) (2025-12-23)
 
 
