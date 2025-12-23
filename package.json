@@ -1,6 +1,7 @@
 {
   "name": "@lauravivan/notion-portfolio",
   "version": "1.0.0",
+  "description": "A Notion-based portfolio",
   "type": "module",
   "main": "./dist/index.es.js",
   "module": "./dist/index.es.js",
@@ -8,6 +9,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "notion",
+    "portfolio",
+    "cms"
+  ],
+  "author": "Laura Vivan",
   "bin": {
     "create-notion-portfolio": "bin/cli.js"
   },
@@ -30,10 +37,19 @@
     "type": "git",
     "url": "git+https://github.com/lauravivan/notion-portfolio.git"
   },
+  "bugs": {
+    "url": "https://github.com/lauravivan/notion-portfolio/issues"
+  },
+  "homepage": "https://github.com/lauravivan/notion-portfolio#readme",
   "files": [
     "dist",
-    "bin"
+    "bin",
+    "README.md",
+    "License"
   ],
+  "engines": {
+    "node": ">=14"
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue}": [
       "eslint --fix",
