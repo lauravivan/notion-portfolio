@@ -1,3 +1,18 @@
+## [1.0.5](https://github.com/lauravivan/notion-portfolio/compare/v1.0.4...v1.0.5) (2025-12-24)
+
+
+### Bug Fixes
+
+* add build step before release and delete my portfolio folder ([3318d2c](https://github.com/lauravivan/notion-portfolio/commit/3318d2c291787acf9ec5dc308ca53689c778fa3d))
+* add gh token env ([7fb0b1c](https://github.com/lauravivan/notion-portfolio/commit/7fb0b1c41808422b288ede885989383afad5510f))
+* adjust banner and icon height, add link to icon and fix page info type ([9905552](https://github.com/lauravivan/notion-portfolio/commit/9905552f134c00c69fc133a4065d283cb68a8e57))
+* force version bump ([e66eb59](https://github.com/lauravivan/notion-portfolio/commit/e66eb59d7ddfa066136a1931291bd84b25514256))
+* force version bump ([4e47ab1](https://github.com/lauravivan/notion-portfolio/commit/4e47ab1825133bd5586f2e512733a64c12015a7c))
+* include gitignore file in template ([b970f22](https://github.com/lauravivan/notion-portfolio/commit/b970f225749ddba2c104121e38559783e0b057da))
+* show menu header icon, add icons folder, fix tab z index ([2c72531](https://github.com/lauravivan/notion-portfolio/commit/2c72531fd603d5362cd88cdebe72e7569a224222))
+* update node version ([70a2f43](https://github.com/lauravivan/notion-portfolio/commit/70a2f439fbadf3a13587da0d82d05df0f65fe2f4))
+* update node version ([c1308db](https://github.com/lauravivan/notion-portfolio/commit/c1308db690ccb48457f870b5d23127b5f1afb00b))
+
 ## [1.0.4](https://github.com/lauravivan/notion-portfolio/compare/v1.0.3...v1.0.4) (2025-12-24)
 
 
