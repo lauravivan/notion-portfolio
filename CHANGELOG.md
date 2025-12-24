@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/lauravivan/notion-portfolio/compare/v1.0.3...v1.0.4) (2025-12-24)
+
+
+### Bug Fixes
+
+* show menu header icon, add icons folder, fix tab z index ([6056db0](https://github.com/lauravivan/notion-portfolio/commit/6056db00784d2579e0a87ae9e6a8b8403d03a7dd))
+
 ## [1.0.3](https://github.com/lauravivan/notion-portfolio/compare/v1.0.2...v1.0.3) (2025-12-23)
 
 
