@@ -6,6 +6,7 @@ import Toggle from "@core/components/Toggle/Toggle.vue";
 import { FontFamily, Icons } from "@core/enum";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import { setDynamicPageInfo } from "@core/util/local-storage";
+import Icon from "@core/@client/components/Icon.vue";
 
 const store = useStore;
 

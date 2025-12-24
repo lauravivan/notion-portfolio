@@ -7,7 +7,6 @@ interface Page {
   parentPage?: PageInfo;
   pages?: PageInfo[];
   isHomepage?: boolean;
-  iconPath: string;
   iconAuthor?: string;
   iconLink?: string;
   bannerAuthor: string;
@@ -25,7 +24,6 @@ const createPage = ({
   component,
   bannerAuthor,
   bannerLink,
-  iconPath,
   iconAuthor,
   iconLink,
   tags,
@@ -38,7 +36,7 @@ const createPage = ({
       link: bannerLink,
     },
     icon: {
-      path: `${iconPath}`,
+      path: `/icons/${id}.png`,
       author: iconAuthor,
       link: iconLink,
     },
