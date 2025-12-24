@@ -9,10 +9,12 @@ interface Page {
   isHomepage?: boolean;
   iconAuthor?: string;
   iconLink?: string;
-  bannerAuthor: string;
-  bannerLink: string;
+  bannerAuthor?: string;
+  bannerLink?: string;
   component: Component;
   tags?: string[];
+  hasIcon?: boolean;
+  hasBanner?: boolean;
 }
 
 const createPage = ({
@@ -27,19 +29,11 @@ const createPage = ({
   iconAuthor,
   iconLink,
   tags,
+  hasIcon = true,
+  hasBanner = true,
 }: Page) => {
   const page: PageInfo = {
     id,
-    banner: {
-      path: `/banners/${id}.webp`,
-      author: bannerAuthor,
-      link: bannerLink,
-    },
-    icon: {
-      path: `/icons/${id}.png`,
-      author: iconAuthor,
-      link: iconLink,
-    },
     title,
     path: isHomepage ? "/" : "/" + `${id}`,
     parentPage,
@@ -48,6 +42,22 @@ const createPage = ({
     component,
     tags,
   };
+
+  if (hasBanner) {
+    page.banner = {
+      path: `/banners/${id}.webp`,
+      author: bannerAuthor,
+      link: bannerLink,
+    };
+  }
+
+  if (hasIcon) {
+    page.icon = {
+      path: `/icons/${id}.png`,
+      author: iconAuthor,
+      link: iconLink,
+    };
+  }
 
   return page;
 };

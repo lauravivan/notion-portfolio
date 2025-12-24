@@ -50,7 +50,7 @@ onBeforeUnmount(() => {
       store.getDynamicCurrentPageInfo?.settings.pageSize,
     ]"
   >
-    <div v-if="activePage.banner.path" class="page-banner">
+    <div v-if="activePage.banner" class="page-banner">
       <img :src="activePage.banner.path" />
       <a :href="activePage.banner.link" target="_blank">{{
         activePage.banner.author
@@ -58,10 +58,20 @@ onBeforeUnmount(() => {
     </div>
     <div
       class="page-content"
-      :class="activePage.banner.path ? 'page-content--banner' : ''"
+      :class="{
+        'page-content--banner': activePage.banner?.path,
+        'page-content--icon': activePage.icon,
+      }"
     >
       <div class="page-title">
-        <img :src="activePage.icon.path" />
+        <div class="page-title__img-wrapper">
+          <img v-if="activePage.icon" :src="activePage.icon.path" /><a
+            v-if="activePage.icon?.link && activePage.icon?.author"
+            target="_blank"
+            :href="activePage.icon.link"
+            >{{ activePage.icon.author }}</a
+          >
+        </div>
         <span>{{ activePage.title }}</span>
       </div>
       <table class="database" v-if="activePage.parentPage">
@@ -147,7 +157,7 @@ onBeforeUnmount(() => {
   .page-content {
     @include grid-layout();
     position: absolute;
-    top: 140px;
+    top: 70px;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 1;
@@ -156,6 +166,18 @@ onBeforeUnmount(() => {
     .page-title {
       @include flex-layout($row-gap: 40px);
       margin-bottom: 20px;
+
+      &__img-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: max-content;
+
+        a {
+          cursor: pointer;
+          font-size: 11px;
+          align-self: flex-end;
+        }
+      }
 
       img {
         max-width: 5.8rem;
@@ -168,6 +190,10 @@ onBeforeUnmount(() => {
     }
 
     &--banner {
+      top: 230px;
+    }
+
+    &--icon {
       top: 160px;
     }
   }

@@ -39,7 +39,7 @@ function updateTabs(page: PageInfo) {
           @click="updateTabs(props.page)"
         >
           <div>
-            <div style="max-width: 1.1rem">
+            <div style="max-width: 1.1rem" v-if="props.page.icon">
               <img
                 :src="props.page.icon.path"
                 style="width: 100%; height: auto"

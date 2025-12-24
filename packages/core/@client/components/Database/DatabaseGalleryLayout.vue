@@ -68,11 +68,15 @@ function showPageModal(page: PageInfo) {
             :hideDatabase="true"
           />
           <div v-else class="gallery__card-content--banner">
-            <img :src="page.banner.path" />
+            <img v-if="page.banner" :src="page.banner.path" />
           </div>
         </div>
         <div class="gallery__card-footer">
-          <img class="gallery__page-icon" :src="page.icon.path" />
+          <img
+            class="gallery__page-icon"
+            v-if="page.icon"
+            :src="page.icon.path"
+          />
           <div>{{ page.title }}</div>
         </div>
       </div>

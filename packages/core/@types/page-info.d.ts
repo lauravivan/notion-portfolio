@@ -5,13 +5,13 @@ export interface PageInfo {
   pages?: PageInfo[];
   parentPage?: PageInfo;
   isHomepage?: boolean;
-  component: DefineComponent;
-  banner: {
+  component: Component;
+  banner?: {
     path: string; //local image path
-    author: string;
-    link: string; // link to access image in cloud
+    author?: string;
+    link?: string; // link to access image in cloud
   };
-  icon: {
+  icon?: {
     path: string;
     author?: string;
     link?: string;

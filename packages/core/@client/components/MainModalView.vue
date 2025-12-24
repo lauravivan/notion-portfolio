@@ -28,7 +28,7 @@ const props = defineProps<{
       </router-link>
       <main class="page-wrapper">
         <div
-          v-if="props.page.banner.path"
+          v-if="props.page.banner"
           class="page-banner"
           :style="{
             height: 'max-content',
@@ -40,11 +40,11 @@ const props = defineProps<{
         </div>
         <div
           class="page-content"
-          :class="props.page.banner.path ? 'page-content--banner' : ''"
-          :style="props.page.banner.path ? { top: '150px' } : ''"
+          :class="props.page.banner ? 'page-content--banner' : ''"
+          :style="props.page.banner ? { top: '150px' } : ''"
         >
           <div class="page-title">
-            <img :src="props.page.icon.path" />
+            <img v-if="props.page.icon" :src="props.page.icon.path" />
             <span>{{ props.page.title }}</span>
           </div>
           <component :is="props.component" :page="props.page" />
