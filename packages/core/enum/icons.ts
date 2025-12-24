@@ -4,7 +4,7 @@ enum Icons {
   doubleArrowLeft = "eva:arrowhead-left-outline",
   settings = "eva:settings-fill",
   gridView = "eva:grid-outline",
-  moreHorizontal = "eva:more-horizontal-outline",
+  moreHorizontal = "eva:more-horizontal-fill",
   arrowDown = "eva:arrow-ios-downward-outline",
   arrowRight = "eva:arrow-ios-forward-outline",
   arrowDownFilled = "eva:caret-down",

@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
       @click.stop="updateActiveTab(index)"
       @touchstart="updateActiveTab(index)"
     >
-      {{ page.pageName }}
+      <span>{{ page.pageName }}</span>
       <button
         class="tabs__tab--close"
         @click.stop="removeTab(index)"
@@ -107,7 +107,7 @@ onBeforeUnmount(() => {
   background-color: $gray-4;
   top: 0;
   height: $TABS_HEIGHT;
-  z-index: 10000;
+  z-index: 888;
 
   @media (max-width: $screen-small) {
     top: auto;
@@ -141,11 +141,15 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: space-between;
     width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
     font-size: calc($fs-small - 1px);
     border-right: 1px solid $black-1;
     color: $black-6;
+
+    span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
 
     @media (max-width: $screen-small) {
       min-width: 150px;

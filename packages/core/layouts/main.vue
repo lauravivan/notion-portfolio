@@ -52,7 +52,9 @@ onBeforeUnmount(() => {
   >
     <div v-if="activePage.banner.path" class="page-banner">
       <img :src="activePage.banner.path" />
-      <a :href="activePage.banner.link">{{ activePage.banner.author }}</a>
+      <a :href="activePage.banner.link" target="_blank">{{
+        activePage.banner.author
+      }}</a>
     </div>
     <div
       class="page-content"
@@ -132,6 +134,7 @@ onBeforeUnmount(() => {
       margin-bottom: 20px;
       padding: 10px;
       border-radius: 10%;
+      cursor: pointer;
     }
 
     img {
