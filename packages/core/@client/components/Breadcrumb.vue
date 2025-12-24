@@ -28,9 +28,13 @@ const breadcrumbs = computed(() => {
       v-for="(page, index) in breadcrumbs"
       :key="page.id"
     >
-      <router-link to="/" class="breadcrumb__page">
+      <router-link :to="page.path" class="breadcrumb__page">
         <div>
-          <img style="max-width: 1.1rem; height: auto" />
+          <img
+            v-if="page.icon"
+            style="max-width: 1.1rem; height: auto"
+            :src="page.icon.path"
+          />
           <div>{{ page.title }}</div>
         </div>
       </router-link>

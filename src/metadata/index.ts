@@ -17,14 +17,15 @@ const metadata: IMetadata = {
       bannerLink:
         "https://unsplash.com/photos/restaurant-with-people-dining-in-jfZfdQtcH6k?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
       component: PageExample,
+      iconAuthor: "Paula Lee",
+      iconLink: "https://www.flaticon.com/free-sticker/drink_7465398?related_id=7465398"
     }),
     createPage({
       id: "page-example-2",
       title: "Hello 2",
-      bannerAuthor: "Danis Lou",
-      bannerLink:
-        "https://unsplash.com/photos/restaurant-with-people-dining-in-jfZfdQtcH6k?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
       component: PageExample2,
+      hasBanner: false,
+      hasIcon: false
     }),
   ],
   favorites: [],
