@@ -2,7 +2,7 @@
 import Icon from "@core/@client/components/Icon.vue";
 import { Icons } from "@core/enum";
 
-const props = defineProps<{ href: string; emoji: string; target: string }>();
+const props = defineProps<{ href: string; emoji: string; target?: string }>();
 </script>
 
 <template>

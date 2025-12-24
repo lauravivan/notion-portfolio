@@ -8,7 +8,7 @@ import {
   type NavigationGuardNext,
   type RouteLocationNormalized,
 } from "vue-router";
-import { MainLayout, NotFoundPage, useStore } from "@core/index.ts";
+import { MainLayout, NotFoundPage, useStore, type PageInfo } from "@core/index.ts";
 import metadata from "./metadata";
 
 const app = createApp(App);
@@ -18,7 +18,7 @@ app.use(pinia);
 
 const store = useStore;
 
-const mainChildren = metadata.pages.map((page) => ({
+const mainChildren = metadata.pages.map((page: PageInfo) => ({
   path: page.isHomepage ? "/" : `/${page.id}`,
   component: page.component,
   name: `${page.id}`,
