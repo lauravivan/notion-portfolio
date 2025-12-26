@@ -104,6 +104,13 @@ function updateTabs(page: PageInfo) {
       align-items: center;
     }
   }
+
+  &__pagename {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 160px;
+  }
 }
 
 .nav-link__toggle-list {

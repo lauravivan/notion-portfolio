@@ -166,12 +166,14 @@ onBeforeUnmount(() => {
               </div>
             </li>
             <li class="nav-list__nav-item">
-              <div class="nav-list__nav-item--category">Favorites</div>
-              <NestedLink :pages="props.metadata.favorites" />
-            </li>
-            <li class="nav-list__nav-item">
-              <div class="nav-list__nav-item--category">Private</div>
-              <NestedLink :pages="props.metadata.pages" />
+              <div>
+                <div class="nav-list__nav-item--category">Favorites</div>
+                <NestedLink :pages="props.metadata.favorites" />
+              </div>
+              <div>
+                <div class="nav-list__nav-item--category">Private</div>
+                <NestedLink :pages="props.metadata.pages" />
+              </div>
             </li>
           </ul>
         </div>
@@ -228,14 +230,6 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss">
-.nav-wrapper,
-.nav-default,
-.nav-hover,
-.nav-click,
-.nav-list-wrapper {
-  height: 100%;
-}
-
 .nav-wrapper {
   color: $black-6;
   user-select: none;
@@ -252,6 +246,7 @@ onBeforeUnmount(() => {
   .nav-hover {
     @include flex-layout($row-gap: 2rem);
     border-radius: 3px;
+    width: 250px;
 
     .nav-list {
       box-shadow: $box-shadow-1;
@@ -324,13 +319,12 @@ onBeforeUnmount(() => {
       }
 
       &__nav-item:nth-child(3) {
-        max-height: 140px;
-      }
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
 
-      &__nav-item:nth-child(3),
-      &__nav-item:nth-child(4) {
-        margin: 5px 0.7rem;
-        height: auto;
+        height: max-content;
+        margin: 0 0.2rem 0.7rem 0.7rem;
         overflow-y: auto;
         overflow-x: hidden;
       }

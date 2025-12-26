@@ -9,7 +9,9 @@
   $bgHover,
   $bgTabs,
   $activeColor,
-  $link
+  $link,
+  $thumbColor,
+  $trackColor
 ) {
   background-color: $bg;
   color: $text;
@@ -77,7 +79,6 @@
   }
 
   .menu,
-  .webkit::-webkit-scrollbar-track,
   .tabs__add:hover {
     background-color: $bg !important;
   }
@@ -94,8 +95,12 @@
     background-color: $activeColor !important;
   }
 
-  .webkit::-webkit-scrollbar-thumb {
-    background-color: $text;
+  ::-webkit-scrollbar-track {
+    background-color: $trackColor !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $thumbColor !important;
   }
 
   :-webkit-any-link {
@@ -128,7 +133,9 @@
     var.$gray-3,
     var.$gray-1,
     var.$active,
-    var.$gray
+    var.$gray,
+    var.$gray-2,
+    var.$gray-3
   );
 }
 
@@ -142,7 +149,9 @@
     var.$latte-surface1,
     var.$latte-surface0,
     var.$latte-sky,
-    var.$latte-overlay2
+    var.$latte-overlay2,
+    var.$latte-surface0,
+    var.$latte-mantle
   );
 }
 
@@ -156,6 +165,8 @@
     var.$mocha-surface1,
     var.$mocha-base,
     var.$mocha-sapphire,
-    var.$mocha-subtext0
+    var.$mocha-subtext0,
+    var.$mocha-surface1,
+    var.$mocha-surface0
   );
 }
