@@ -239,6 +239,12 @@ body :-webkit-any-link:hover {
   text-decoration: underline;
 }
 
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 /* colors default */
 /*dark theme default*/
 /*colors catppuccin latte*/
@@ -377,6 +383,12 @@ body :-webkit-any-link:hover {
 .highlight {
   font-weight: 900;
   text-decoration: underline;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .app .main-content-default,

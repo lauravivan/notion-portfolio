@@ -146,9 +146,7 @@ onBeforeUnmount(() => {
     color: $black-6;
 
     span {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+      @extend .ellipsis;
     }
 
     @media (max-width: $screen-small) {

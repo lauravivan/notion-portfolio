@@ -327,6 +327,10 @@ onBeforeUnmount(() => {
         margin: 0 0.2rem 0.7rem 0.7rem;
         overflow-y: auto;
         overflow-x: hidden;
+
+        .nested-link {
+          width: 215px;
+        }
       }
 
       &__nav-item--category {

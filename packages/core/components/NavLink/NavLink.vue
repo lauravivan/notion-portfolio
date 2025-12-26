@@ -106,9 +106,7 @@ function updateTabs(page: PageInfo) {
   }
 
   &__pagename {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    @extend .ellipsis;
     width: 160px;
   }
 }

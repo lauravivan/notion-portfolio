@@ -6,12 +6,18 @@ const store = useStore;
 
 const breadcrumbs = computed(() => {
   if (store.activePage) {
-    const breadcrumbs = [store.activePage];
+    const breadcrumbs = [];
     let newActivePage = store.activePage;
 
-    while (newActivePage.parentPage) {
+    if (newActivePage.parentPage) {
       breadcrumbs.unshift(newActivePage);
-      newActivePage = newActivePage.parentPage;
+
+      while (newActivePage.parentPage) {
+        newActivePage = newActivePage.parentPage;
+        breadcrumbs.unshift(newActivePage);
+      }
+    } else {
+      breadcrumbs.push(newActivePage);
     }
 
     return breadcrumbs;
@@ -35,11 +41,10 @@ const breadcrumbs = computed(() => {
             style="max-width: 1.1rem; height: auto"
             :src="page.icon.path"
           />
-          <div>{{ page.title }}</div>
+          <span :title="page.title">{{ page.title }}</span>
         </div>
       </router-link>
       <div v-if="index !== breadcrumbs.length - 1">/</div>
-      <div v-if="breadcrumbs.length > 2" class="breadcrumb__dots">...</div>
     </div>
   </div>
 </template>
@@ -58,9 +63,17 @@ const breadcrumbs = computed(() => {
     all: unset;
 
     > div {
-      @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
+      display: flex;
+      column-gap: 0.4rem;
       align-items: center;
+
       @extend .hover-default;
+
+      span {
+        width: auto;
+        max-width: 7rem;
+        @extend .ellipsis;
+      }
     }
   }
 }
