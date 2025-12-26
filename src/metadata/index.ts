@@ -8,8 +8,8 @@ const metadata: IMetadata = {
     author: `My Portfolio`,
     socialMedia: "@user",
   },
-  pages: [
-    createPage({
+  pages: {
+    "page-example": createPage({
       id: "page-example",
       title: "Hello 😊",
       isHomepage: true,
@@ -18,19 +18,56 @@ const metadata: IMetadata = {
         "https://unsplash.com/photos/restaurant-with-people-dining-in-jfZfdQtcH6k?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
       component: PageExample,
       iconAuthor: "Paula Lee",
-      iconLink: "https://www.flaticon.com/free-sticker/drink_7465398?related_id=7465398"
+      iconLink:
+        "https://www.flaticon.com/free-sticker/drink_7465398?related_id=7465398",
+      pages: ["page-example-8"],
     }),
-    createPage({
-      id: "page-example-2",
+    "page-example-8": createPage({
+      id: "page-example-8",
       title: "Hello 2",
       component: PageExample2,
       hasBanner: false,
-      hasIcon: false
+      hasIcon: false,
+      parentPage: 'page-example'
     }),
-  ],
-  favorites: [],
+    "page-example-9": createPage({
+      id: "page-example-9",
+      title: "Hello 2",
+      component: PageExample2,
+      hasBanner: false,
+      hasIcon: false,
+    }),
+    "page-example-10": createPage({
+      id: "page-example-10",
+      title: "Hello 2",
+      component: PageExample2,
+      hasBanner: false,
+      hasIcon: false,
+    }),
+    "page-example-11": createPage({
+      id: "page-example-11",
+      title: "Hello 2",
+      component: PageExample2,
+      hasBanner: false,
+      hasIcon: false,
+    }),
+    "page-example-12": createPage({
+      id: "page-example-12",
+      title: "Hello 2",
+      component: PageExample2,
+      hasBanner: false,
+      hasIcon: false,
+    }),
+    "page-example-13": createPage({
+      id: "page-example-13",
+      title:
+        "Hello 2 dsfasdfsadfdsafsdfasfasdfsadfasfsafsdfsfsafdasfassdfasdfsadfsdfdsfsdfsdfsdfsfsdfdsfdsfdsfssdfsdfsdfsdfsdfdfsfs",
+      component: PageExample2,
+      hasBanner: false,
+      hasIcon: false,
+    }),
+  },
+  favorites: ["page-example", 'page-example-8', 'page-example-8', 'page-example-8', 'page-example-8', 'page-example-8'],
 };
-
-metadata.favorites.push(metadata.pages[0]);
 
 export default metadata;

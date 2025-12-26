@@ -168,11 +168,27 @@ onBeforeUnmount(() => {
             <li class="nav-list__nav-item">
               <div>
                 <div class="nav-list__nav-item--category">Favorites</div>
-                <NestedLink :pages="props.metadata.favorites" />
+                <NestedLink
+                  :ids="
+                    props.metadata.favorites.filter((id) =>
+                      Object.entries(props.metadata.pages).filter(
+                        ([key, _]) => key === id
+                      )
+                    )
+                  "
+                  :metadata="props.metadata"
+                />
               </div>
               <div>
                 <div class="nav-list__nav-item--category">Private</div>
-                <NestedLink :pages="props.metadata.pages" />
+                <NestedLink
+                  :ids="
+                    Object.entries(props.metadata.pages)
+                      .filter(([_, value]) => !value.parentPage)
+                      .map(([key]) => key)
+                  "
+                  :metadata="props.metadata"
+                />
               </div>
             </li>
           </ul>

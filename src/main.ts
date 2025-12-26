@@ -18,7 +18,7 @@ app.use(pinia);
 
 const store = useStore;
 
-const mainChildren = metadata.pages.map((page: PageInfo) => ({
+const mainChildren = Object.values(metadata.pages).map((page: PageInfo) => ({
   path: page.isHomepage ? "/" : `/${page.id}`,
   component: page.component,
   name: `${page.id}`,

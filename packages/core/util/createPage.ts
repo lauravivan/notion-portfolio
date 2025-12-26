@@ -4,8 +4,8 @@ import type { PageInfo } from "..";
 interface Page {
   id: string;
   title: string;
-  parentPage?: PageInfo;
-  pages?: PageInfo[];
+  parentPage?: string;
+  pages?: string[];
   isHomepage?: boolean;
   iconAuthor?: string;
   iconLink?: string;

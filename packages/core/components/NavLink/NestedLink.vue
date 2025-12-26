@@ -1,31 +1,39 @@
 <script setup lang="ts">
-import type { PageInfo } from "@core/@types";
+import type { IMetadata } from "@core/@types";
 import NavLink from "./NavLink.vue";
 
-const props = defineProps<{ pages: PageInfo[] }>();
+const props = defineProps<{ ids: string[]; metadata: IMetadata }>();
 
-function getSubPages(pages: PageInfo[]) {
-  function search(pages: PageInfo[]) {
-    for (let page of pages) {
-      if (page.pages && Object.keys(page.pages).length > 0) {
+function getSubPages(ids: string[]) {
+  function search(ids: string[]) {
+    for (let id of ids) {
+      const page = props.metadata.pages[id];
+      if (page && page.pages && Object.keys(page.pages).length > 0) {
         search(page.pages);
       }
     }
 
-    return pages;
+    return ids;
   }
-  return search(pages);
+  return search(ids);
 }
 </script>
 
 <template>
   <div class="nested-link">
-    <NavLink v-for="page in props.pages" :key="page.id" :page="page">
-      <template v-if="page.pages"
+    <NavLink
+      v-for="id in props.ids"
+      :key="id"
+      :page="props.metadata.pages[id]"
+      :metadata="props.metadata"
+    >
+      <template
+        v-if="props.metadata.pages[id] && props.metadata.pages[id].pages"
         ><NavLink
-          :page="subPage"
-          v-for="subPage in getSubPages(page.pages)"
-          :key="subPage.id"
+          :page="props.metadata.pages[subPageId]"
+          v-for="subPageId in getSubPages(props.metadata.pages[id].pages)"
+          :key="subPageId"
+          :metadata="props.metadata"
         ></NavLink
       ></template>
     </NavLink>

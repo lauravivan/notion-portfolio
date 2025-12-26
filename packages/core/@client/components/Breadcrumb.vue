@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import type { IMetadata } from "@core/@types";
 import { useStore } from "@core/store";
 import { computed } from "vue";
+
+const props = defineProps<{ metadata: IMetadata }>();
 
 const store = useStore;
 
@@ -12,8 +15,10 @@ const breadcrumbs = computed(() => {
     if (newActivePage.parentPage) {
       breadcrumbs.unshift(newActivePage);
 
-      while (newActivePage.parentPage) {
-        newActivePage = newActivePage.parentPage;
+      const parentPage = props.metadata.pages[newActivePage.parentPage];
+
+      while (parentPage) {
+        newActivePage = parentPage;
         breadcrumbs.unshift(newActivePage);
       }
     } else {

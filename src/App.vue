@@ -46,7 +46,7 @@ onMounted(() => {
             <div :class="mainContentClasses">
                 <Tabs @navigate="handleNavigate" />
 
-                <Header />
+                <Header :metadata="metadata" />
 
                 <router-view v-slot="{ Component }">
                     <component

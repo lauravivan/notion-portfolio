@@ -7,6 +7,9 @@ import { FontFamily, Icons } from "@core/enum";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import { setDynamicPageInfo } from "@core/util/local-storage";
 import Icon from "@core/@client/components/Icon.vue";
+import type { IMetadata } from "@core/@types";
+
+const props = defineProps<{ metadata: IMetadata }>();
 
 const store = useStore;
 
@@ -67,7 +70,7 @@ onBeforeUnmount(() => {
 <template>
   <header class="header">
     <div class="header__content">
-      <Breadcrumb />
+      <Breadcrumb :metadata="props.metadata" />
       <div></div>
       <div
         class="header__btn"

@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import type { PageInfo } from "@core/@types";
+import type { IMetadata, PageInfo } from "@core/@types";
 import ToggleList from "../Toggle/ToggleList.vue";
 import NestedLink from "./NestedLink.vue";
 import { Icons } from "@core/enum";
 import { useStore } from "@core/store";
 
 const store = useStore;
-const props = defineProps<{ page: PageInfo }>();
+const props = defineProps<{
+  page: PageInfo | undefined;
+  metadata: IMetadata;
+}>();
 
 function updateTabs(page: PageInfo) {
   const tabs = [...store.tabs];
@@ -21,7 +24,7 @@ function updateTabs(page: PageInfo) {
 </script>
 
 <template>
-  <div class="nav-link">
+  <div class="nav-link" v-if="props.page">
     <ToggleList
       class="nav-link__toggle-list"
       :iconToOpen="Icons.arrowRight"
@@ -45,9 +48,9 @@ function updateTabs(page: PageInfo) {
                 style="width: 100%; height: auto"
               />
             </div>
-            <div class="nav-link__pagename">
+            <span class="nav-link__pagename">
               {{ props.page.title }}
-            </div>
+            </span>
           </div>
         </router-link>
       </template>
@@ -55,7 +58,10 @@ function updateTabs(page: PageInfo) {
         <div
           v-if="props.page.pages && Object.keys(props.page.pages).length > 0"
         >
-          <NestedLink :pages="props.page.pages" />
+          <NestedLink
+            :ids="props.page ? props.page.pages : ['']"
+            :metadata="props.metadata"
+          />
         </div>
         <div v-else>
           <div class="details__item">No pages inside</div>
@@ -66,6 +72,17 @@ function updateTabs(page: PageInfo) {
 </template>
 
 <style lang="scss">
+.nav-link,
+.nav-link__toggle-list,
+.details,
+.details thead,
+.details__summary,
+.details__content,
+.details__summary--content,
+.nav-link__link {
+  width: 100%;
+}
+
 .nav-link {
   margin-bottom: 1px;
 
@@ -74,11 +91,10 @@ function updateTabs(page: PageInfo) {
 
     .details {
       &__summary {
-        @extend .hover-default;
-
         &--icon {
           border-top-left-radius: 3px;
           border-bottom-left-radius: 3px;
+
           > div {
             font-size: $fs-medium;
             color: $black-3;
@@ -88,7 +104,6 @@ function updateTabs(page: PageInfo) {
         &--content {
           border-top-right-radius: 3px;
           border-bottom-right-radius: 3px;
-          width: 100%;
         }
       }
     }
@@ -107,7 +122,7 @@ function updateTabs(page: PageInfo) {
 
   &__pagename {
     @extend .ellipsis;
-    width: 160px;
+    max-width: 160px;
   }
 }
 

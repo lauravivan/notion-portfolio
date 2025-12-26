@@ -70,7 +70,11 @@ th {
 }
 
 .details {
+  width: calc(215px - 20px);
+
   &__summary {
+    @extend .hover-default;
+
     &--icon {
       padding: 4px;
 
