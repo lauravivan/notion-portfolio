@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IMetadata, PageInfo } from "@core/@types";
-import ToggleList from "../Toggle/ToggleList.vue";
+import ToggleList from "@core/@client/components/ToggleList.vue";
 import NestedLink from "./NestedLink.vue";
 import { Icons } from "@core/enum";
 import { useStore } from "@core/store";
@@ -30,7 +30,7 @@ function updateTabs(page: PageInfo) {
       :iconToOpen="Icons.arrowRight"
       :iconToClose="Icons.arrowDown"
       :class="
-        store.activePage.id == props.page.id
+        store.getActivePage.id === props.page.id
           ? 'nav-link__toggle-list--active'
           : ''
       "
@@ -55,34 +55,18 @@ function updateTabs(page: PageInfo) {
         </router-link>
       </template>
       <template #detailsContent>
-        <div
+        <NestedLink
           v-if="props.page.pages && Object.keys(props.page.pages).length > 0"
-        >
-          <NestedLink
-            :ids="props.page ? props.page.pages : ['']"
-            :metadata="props.metadata"
-          />
-        </div>
-        <div v-else>
-          <div class="details__item">No pages inside</div>
-        </div>
+          :ids="props.page.pages"
+          :metadata="props.metadata"
+        />
+        <div v-else class="details__item">No pages inside</div>
       </template>
     </ToggleList>
   </div>
 </template>
 
 <style lang="scss">
-.nav-link,
-.nav-link__toggle-list,
-.details,
-.details thead,
-.details__summary,
-.details__content,
-.details__summary--content,
-.nav-link__link {
-  width: 100%;
-}
-
 .nav-link {
   margin-bottom: 1px;
 
@@ -90,6 +74,9 @@ function updateTabs(page: PageInfo) {
     margin: 0;
 
     .details {
+      width: $NESTED_LINK_SIZE !important;
+      max-width: $NESTED_LINK_SIZE !important;
+
       &__summary {
         &--icon {
           border-top-left-radius: 3px;
@@ -128,7 +115,7 @@ function updateTabs(page: PageInfo) {
 
 .nav-link__toggle-list {
   &--active {
-    .details > .details__summary {
+    .details .details__summary {
       background-color: $black-1 !important;
     }
 

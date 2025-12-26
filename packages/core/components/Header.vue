@@ -2,7 +2,7 @@
 import { useModal, useToggle } from "@core/hooks";
 import { Breadcrumb, Modal } from "@core/@client/components";
 import { useStore } from "@core/store";
-import Toggle from "@core/components/Toggle/Toggle.vue";
+import ToggleBtn from "@core/components/ToggleBtn.vue";
 import { FontFamily, Icons } from "@core/enum";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import { setDynamicPageInfo } from "@core/util/local-storage";
@@ -112,17 +112,17 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="header-menu__size-and-width">
-      <Toggle
+      <ToggleBtn
         :provideName="FONT_SIZE_PROVIDE_NAME"
         :active="activeFontSize"
         :toToggle="toToggleFontSize"
-        >Small Text</Toggle
+        >Small Text</ToggleBtn
       >
-      <Toggle
+      <ToggleBtn
         :provideName="PAGE_SIZE_PROVIDE_NAME"
         :active="activePageSize"
         :toToggle="toTogglePageSize"
-        >Full width</Toggle
+        >Full width</ToggleBtn
       >
     </div>
   </Modal>

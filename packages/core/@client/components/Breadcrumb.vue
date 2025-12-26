@@ -13,13 +13,18 @@ const breadcrumbs = computed(() => {
     let newActivePage = store.activePage;
 
     if (newActivePage.parentPage) {
+      let parentPage = props.metadata.pages[newActivePage.parentPage];
       breadcrumbs.unshift(newActivePage);
-
-      const parentPage = props.metadata.pages[newActivePage.parentPage];
 
       while (parentPage) {
         newActivePage = parentPage;
         breadcrumbs.unshift(newActivePage);
+
+        if (newActivePage.parentPage) {
+          parentPage = props.metadata.pages[newActivePage.parentPage];
+        } else {
+          parentPage = undefined;
+        }
       }
     } else {
       breadcrumbs.push(newActivePage);

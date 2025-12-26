@@ -28,7 +28,8 @@ const metadata: IMetadata = {
       component: PageExample2,
       hasBanner: false,
       hasIcon: false,
-      parentPage: 'page-example'
+      parentPage: "page-example",
+      pages: ["page-example-9"]
     }),
     "page-example-9": createPage({
       id: "page-example-9",
@@ -36,27 +37,7 @@ const metadata: IMetadata = {
       component: PageExample2,
       hasBanner: false,
       hasIcon: false,
-    }),
-    "page-example-10": createPage({
-      id: "page-example-10",
-      title: "Hello 2",
-      component: PageExample2,
-      hasBanner: false,
-      hasIcon: false,
-    }),
-    "page-example-11": createPage({
-      id: "page-example-11",
-      title: "Hello 2",
-      component: PageExample2,
-      hasBanner: false,
-      hasIcon: false,
-    }),
-    "page-example-12": createPage({
-      id: "page-example-12",
-      title: "Hello 2",
-      component: PageExample2,
-      hasBanner: false,
-      hasIcon: false,
+      parentPage: "page-example-8",
     }),
     "page-example-13": createPage({
       id: "page-example-13",
@@ -67,7 +48,7 @@ const metadata: IMetadata = {
       hasIcon: false,
     }),
   },
-  favorites: ["page-example", 'page-example-8', 'page-example-8', 'page-example-8', 'page-example-8', 'page-example-8'],
+  favorites: ["page-example", "page-example-8"],
 };
 
 export default metadata;

@@ -21,12 +21,13 @@ const store = useStore;
 const mainChildren = Object.values(metadata.pages).map((page: PageInfo) => ({
   path: page.isHomepage ? "/" : `/${page.id}`,
   component: page.component,
-  name: `${page.id}`,
+  name: page.id,
   beforeEnter: (
     _to: RouteLocationNormalized,
     _from: RouteLocationNormalized,
     next: NavigationGuardNext
   ) => {
+    console.log(page)
     store.storeActivePage(page);
     next();
   },

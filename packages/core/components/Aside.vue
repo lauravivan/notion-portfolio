@@ -9,7 +9,7 @@ import {
   onBeforeUnmount,
 } from "vue";
 import { useModal } from "../hooks";
-import NestedLink from "./NavLink/NestedLink.vue";
+import NestedLink from "./NestedLink.vue";
 import { Modal, Divider } from "../@client/components";
 import SelectBtn from "./SelectList/SelectBtn.vue";
 import { isTouchDevice } from "../util";
@@ -170,10 +170,10 @@ onBeforeUnmount(() => {
                 <div class="nav-list__nav-item--category">Favorites</div>
                 <NestedLink
                   :ids="
-                    props.metadata.favorites.filter((id) =>
-                      Object.entries(props.metadata.pages).filter(
-                        ([key, _]) => key === id
-                      )
+                    props.metadata.favorites.filter(
+                      (id) =>
+                        props.metadata.pages[id] &&
+                        !props.metadata.pages[id].parentPage
                     )
                   "
                   :metadata="props.metadata"
@@ -340,12 +340,15 @@ onBeforeUnmount(() => {
         row-gap: 30px;
 
         height: max-content;
+        width: $NESTED_LINK_SIZE;
+
         margin: 0 0.2rem 0.7rem 0.7rem;
+
         overflow-y: auto;
         overflow-x: hidden;
 
         .nested-link {
-          width: 215px;
+          width: $NESTED_LINK_SIZE;
         }
       }
 
