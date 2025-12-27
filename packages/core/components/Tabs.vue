@@ -33,26 +33,12 @@ function addTab() {
 
 function removeTab(index: number) {
   const tabs = store.getTabs;
-  if (tabs.length > 0) {
+  if (tabs.length > 1) {
     tabs.splice(index, 1);
     store.storeTabs(tabs);
     store.storeActiveTab(0);
     if (tabs[0]) emit("navigate", tabs[0].pagePath);
   }
-}
-
-function loadFirstTab() {
-  const tabs = store.getTabs;
-  const activePage = store.activePage;
-
-  if (tabs.length === 0 && activePage)
-    store.storeTabs([
-      {
-        pageId: activePage.id,
-        pageName: activePage.title,
-        pagePath: activePage.path,
-      },
-    ]);
 }
 
 function saveTabs() {
@@ -61,12 +47,16 @@ function saveTabs() {
 }
 
 onMounted(() => {
-  window.addEventListener("load", loadFirstTab);
+  window.addEventListener("load", () =>
+    store.storeUpdateTabs(store.activePage)
+  );
   window.addEventListener("beforeunload", saveTabs);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("load", loadFirstTab);
+  window.removeEventListener("load", () =>
+    store.storeUpdateTabs(store.activePage)
+  );
   window.addEventListener("beforeunload", saveTabs);
 });
 </script>

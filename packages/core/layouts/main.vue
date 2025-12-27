@@ -2,13 +2,14 @@
 import type { PageInfo } from "@core/@types";
 import { useStore } from "@core/store";
 import { setTheme } from "@core/util/local-storage";
-import { onBeforeUnmount, onMounted } from "vue";
+import { onBeforeUnmount, onMounted, watch } from "vue";
 import { Icons } from "@core/enum";
 import formatDate from "@core/util/formatDate";
 
 const { activePage } = defineProps<{ activePage: PageInfo }>();
 
 const store = useStore;
+const theme = store.getTheme;
 
 //purple, blue, yellow, brown, green, orange and gray
 const colors = [
@@ -27,13 +28,24 @@ function getColor() {
 }
 
 function saveTheme() {
-  setTheme(store.getTheme);
+  setTheme(theme);
 }
 
 const pageDate = formatDate(store.getDynamicPageInfo[activePage.id]?.created);
 
+watch(
+  () => store.theme,
+  (newTheme) => {
+    document.body.className = "";
+    document.body.classList.add(newTheme);
+  }
+);
+
 onMounted(() => {
   window.addEventListener("beforeunload", saveTheme);
+  document.body.className = "";
+  document.body.classList.add(theme);
+  store.storeCreated();
 });
 
 onBeforeUnmount(() => {

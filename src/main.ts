@@ -27,7 +27,6 @@ const mainChildren = Object.values(metadata.pages).map((page: PageInfo) => ({
     _from: RouteLocationNormalized,
     next: NavigationGuardNext
   ) => {
-    console.log(page)
     store.storeActivePage(page);
     next();
   },

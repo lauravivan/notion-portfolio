@@ -111,6 +111,22 @@ const useStore = defineStore("global", {
     storeIsAsideOpen(isAsideOpen: boolean) {
       this.isAsideOpen = isAsideOpen;
     },
+    storeUpdateTabs(page: PageInfo) {
+      const tabs = [...this.tabs];
+
+      const tabActivePage = {
+        pageId: page.id,
+        pageName: page.title,
+        pagePath: page.path,
+      };
+
+      if (tabs.length === 0) {
+        this.storeTabs([tabActivePage]);
+      } else {
+        tabs[this.activeTab] = tabActivePage;
+        this.storeTabs(tabs);
+      }
+    },
   },
   getters: {
     getDynamicPageInfo: (state) => state.dynamicPageInfo,

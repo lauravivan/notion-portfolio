@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import type { IMetadata } from "@core/@types";
+import type { IMetadata, PageInfo } from "@core/@types";
 import { useStore } from "@core/store";
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 
 const props = defineProps<{ metadata: IMetadata }>();
 
 const store = useStore;
+const router = useRouter();
 
 const breadcrumbs = computed(() => {
   if (store.activePage) {
@@ -35,6 +37,11 @@ const breadcrumbs = computed(() => {
 
   return [];
 });
+
+const handleCrumb = (page: PageInfo) => {
+  store.storeUpdateTabs(page);
+  router.push(page.path);
+};
 </script>
 
 <template>
@@ -44,7 +51,7 @@ const breadcrumbs = computed(() => {
       v-for="(page, index) in breadcrumbs"
       :key="page.id"
     >
-      <router-link :to="page.path" class="breadcrumb__page">
+      <button class="breadcrumb__page" @click="handleCrumb(page)">
         <div>
           <img
             v-if="page.icon"
@@ -53,7 +60,7 @@ const breadcrumbs = computed(() => {
           />
           <span :title="page.title">{{ page.title }}</span>
         </div>
-      </router-link>
+      </button>
       <div v-if="index !== breadcrumbs.length - 1">/</div>
     </div>
   </div>
