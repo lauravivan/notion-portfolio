@@ -70,6 +70,7 @@ function optionClicked(option: string) {
     font-size: $fs-small;
     padding: 0;
     cursor: pointer;
+    color: $black-6;
   }
 }
 

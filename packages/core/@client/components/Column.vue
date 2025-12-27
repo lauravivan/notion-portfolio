@@ -25,9 +25,12 @@ const props = defineProps<{ numberOfColumns: number }>();
 <style lang="scss">
 .columns {
   display: flex;
-  column-gap: 40px;
+  column-gap: 20px;
 
   &__column {
+    display: flex;
+    flex-direction: column;
+    row-gap: $DEFAULT_SPACING;
     flex: 1;
   }
 

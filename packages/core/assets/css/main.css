@@ -193,7 +193,7 @@ body ::-webkit-scrollbar-thumb {
 }
 
 body ::selection {
-  background-color: rgba(237, 236, 233, 0.2);
+  background-color: rgba(237, 236, 233, 0.4);
 }
 
 body :-webkit-any-link {
@@ -339,7 +339,7 @@ body ::-webkit-scrollbar-thumb {
 }
 
 body ::selection {
-  background-color: rgba(237, 236, 233, 0.2);
+  background-color: rgba(237, 236, 233, 0.4);
 }
 
 body :-webkit-any-link {
@@ -587,6 +587,10 @@ body :-webkit-any-link:hover {
   color: rgb(237, 236, 233) !important;
 }
 
+.dark-theme ::selection {
+  background-color: rgba(237, 236, 233, 0.3) !important;
+}
+
 .dark-theme .main-container-click .aside-click .nav-link__toggle-list--active .nav-link__pagename {
   color: rgb(255, 255, 255) !important;
 }
@@ -695,6 +699,10 @@ body :-webkit-any-link:hover {
   color: #7c7f93 !important;
 }
 
+.cat-latte ::selection {
+  background-color: #bcc0cc !important;
+}
+
 .cat-latte .main-container-click .aside-click .nav-link__toggle-list--active .nav-link__pagename {
   color: #4c4f69 !important;
 }
@@ -801,6 +809,10 @@ body :-webkit-any-link:hover {
 
 .cat-mocha :-webkit-any-link:hover {
   color: #a6adc8 !important;
+}
+
+.cat-mocha ::selection {
+  background-color: #45475a !important;
 }
 
 .cat-mocha .main-container-click .aside-click .nav-link__toggle-list--active .nav-link__pagename {

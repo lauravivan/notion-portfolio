@@ -65,7 +65,6 @@ th {
 
 .toggle-list {
   width: 100%;
-  margin: $DEFAULT_SPACING 0;
 }
 
 .details {
@@ -93,10 +92,6 @@ th {
 
   &__content {
     margin: 5px 0;
-  }
-
-  &__item {
-    margin: $DEFAULT_SPACING 0;
   }
 }
 </style>

@@ -111,6 +111,10 @@
     }
   }
 
+  ::selection {
+    background-color: $bgHover !important;
+  }
+
   .main-container-click
     .aside-click
     .nav-link__toggle-list--active

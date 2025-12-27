@@ -9,7 +9,6 @@ import Icon from "@core/@client/components/Icon.vue";
 const { activePage } = defineProps<{ activePage: PageInfo }>();
 
 const store = useStore;
-const theme = store.getTheme;
 
 //purple, blue, yellow, brown, green, orange and gray
 const colors = [
@@ -28,11 +27,11 @@ function getColor() {
 }
 
 function saveTheme() {
-  setTheme(theme);
+  setTheme(store.getTheme);
 }
 
 watch(
-  () => store.getTheme,
+  () => store.theme,
   (newTheme) => {
     document.body.className = "";
     document.body.classList.add(newTheme);
@@ -47,7 +46,7 @@ onMounted(() => {
   window.addEventListener("beforeunload", saveTheme);
   window.addEventListener("beforeunload", saveDynamicInfo);
   document.body.className = "";
-  document.body.classList.add(theme);
+  document.body.classList.add(store.getTheme);
 });
 
 onBeforeUnmount(() => {
@@ -154,15 +153,24 @@ onBeforeUnmount(() => {
     position: relative;
 
     a {
+      display: block;
       position: absolute;
-      background-color: #fff;
+      background-color: $gray;
+      color: $black;
       bottom: 0;
       right: 0;
       margin-right: 20px;
-      margin-bottom: 20px;
-      padding: 10px;
-      border-radius: 10%;
+      margin-bottom: 15px;
+      padding: 8px;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 0.9rem;
+      z-index: 50;
+
+      &:hover {
+        color: $black-8;
+        background-color: $gray-9;
+      }
     }
 
     img {
@@ -180,6 +188,7 @@ onBeforeUnmount(() => {
     transform: translate(-50%, 0%);
     z-index: 1;
     width: 50%;
+    row-gap: $DEFAULT_SPACING;
 
     .page-title {
       @include flex-layout($row-gap: 40px);
@@ -269,7 +278,7 @@ onBeforeUnmount(() => {
   .font-size-small {
     p,
     span,
-    div {
+    div:not(:has(h1, h2, h3, h4)) {
       font-size: $fs-small;
     }
 
@@ -278,35 +287,11 @@ onBeforeUnmount(() => {
         font-size: $fs-large + 0.7rem;
       }
     }
-
-    .h1 {
-      font-size: $fs-large + 0.6rem;
-    }
-
-    .h2 {
-      font-size: $fs-large + 0.4rem;
-    }
-
-    .h3 {
-      font-size: $fs-large + 0.2rem;
-    }
-
-    .h4 {
-      font-size: $fs-large;
-    }
-
-    .h5 {
-      font-size: $fs-large - 0.2rem;
-    }
-
-    .h6 {
-      font-size: $fs-large - 0.4rem;
-    }
   }
 
   .page-full-width {
     .page-content {
-      padding: 0 100px;
+      padding: 0 50px;
       width: 100%;
     }
   }
