@@ -192,7 +192,6 @@ onBeforeUnmount(() => {
 
     .page-title {
       @include flex-layout($row-gap: 40px);
-      margin-bottom: 20px;
 
       &__img-wrapper {
         display: flex;
@@ -239,20 +238,17 @@ onBeforeUnmount(() => {
 
   &__properties {
     display: flex;
+    column-gap: 10px;
   }
 
   &__property {
     display: flex;
+    width: max-content !important;
+    min-width: 100px;
     column-gap: 5px;
     align-items: center;
-    width: 160px !important;
     flex-wrap: wrap;
     @extend .hover-default;
-
-    @media (max-width: $screen-xs) {
-      min-width: 100px;
-      width: auto !important;
-    }
 
     &--val {
       vertical-align: middle;

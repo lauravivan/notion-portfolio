@@ -24,42 +24,27 @@ const metadata: IMetadata = {
         path: "/icons/page-example.png",
         link: "https://www.flaticon.com/free-sticker/drink_7465398?related_id=7465398",
       },
-      pages: ["page-example-8"],
+      pages: ["page-example-2"],
     },
-    "page-example-8": {
-      id: "page-example-8",
-      path: "/page-example-8",
-      title: "Hello 2",
+    "page-example-2": {
+      id: "page-example-2",
+      path: "/page-example-2",
+      title: "Second Page",
       component: PageExample2,
       parentPage: "page-example",
-      pages: ["page-example-9"],
       databaseInfo: {
         Created: {
           icon: "clock",
           value: "December 2025",
         },
         Languages: {
-          icon: 'code',
-          value: ["Vue.js", "Next.js"]
-        }
+          icon: "code",
+          value: ["JavaScript", "TypeScript"],
+        },
       },
     },
-    "page-example-9": {
-      id: "page-example-9",
-      path: "/page-example-9",
-      title: "Hello 2",
-      component: PageExample2,
-      parentPage: "page-example-8",
-    },
-    "page-example-13": {
-      id: "page-example-13",
-      path: "/page-example-13",
-      title:
-        "Hello 2 dsfasdfsadfdsafsdfasfasdfsadfasfsafsdfsfsafdasfassdfasdfsadfsdfdsfsdfsdfsdfsfsdfdsfdsfdsfssdfsdfsdfsdfsdfdfsfs",
-      component: PageExample2,
-    },
   },
-  favorites: ["page-example", "page-example-8"],
+  favorites: ["page-example"],
 };
 
 export default metadata;

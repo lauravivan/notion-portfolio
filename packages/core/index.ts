@@ -20,6 +20,7 @@ export {
   ToDoList,
   TextHighlight,
   Link,
+  Columns,
 } from "./@client/components";
 export { isTouchDevice } from "./util";
 export { MainLayout } from "./layouts";
