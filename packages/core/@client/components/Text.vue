@@ -1,12 +1,11 @@
 <template>
-  <span class="text">
+  <p class="text">
     <slot></slot>
-  </span>
+  </p>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .text {
   line-height: 1.5;
-  margin: $DEFAULT_SPACING 0;
 }
 </style>

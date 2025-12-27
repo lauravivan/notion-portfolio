@@ -91,25 +91,27 @@ const useStore = defineStore("global", {
         this.dynamicPageInfo = pageInfo;
       }
     },
-    storeCreated() {
-      const dp = this.dynamicPageInfo;
-
-      Object.entries(dp).forEach((d) => {
-        const dCopy = { ...d };
-
-        if (!d[1].created) {
-          dCopy[1].created = new Date();
-          return dCopy;
-        }
-
-        return dCopy;
-      });
-    },
     storeActivePage(activePage: PageInfo) {
       this.activePage = activePage;
     },
     storeIsAsideOpen(isAsideOpen: boolean) {
       this.isAsideOpen = isAsideOpen;
+    },
+    storeUpdateTabs(page: PageInfo) {
+      const tabs = [...this.tabs];
+
+      const tabActivePage = {
+        pageId: page.id,
+        pageName: page.title,
+        pagePath: page.path,
+      };
+
+      if (tabs.length === 0) {
+        this.storeTabs([tabActivePage]);
+      } else {
+        tabs[this.activeTab] = tabActivePage;
+        this.storeTabs(tabs);
+      }
     },
   },
   getters: {

@@ -65,7 +65,6 @@ dialog {
   transform: translate(-50%, -50%);
   padding: 2rem 1.9rem;
   overflow-y: auto;
-  @extend .webkit;
 }
 
 .modal-dynamic {

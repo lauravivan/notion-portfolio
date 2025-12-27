@@ -3,11 +3,6 @@
 @use "./mixin";
 
 .app {
-  .aside-click,
-  .aside-default {
-    @extend .webkit;
-  }
-
   .main-content-default,
   .main-content-click,
   .aside-default,

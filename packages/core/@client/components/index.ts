@@ -6,10 +6,11 @@ export { default as Image } from "./Image.vue";
 export { default as Empty } from "./Empty.vue";
 export { default as MainModalView } from "./MainModalView.vue";
 export { default as Callout } from "./Callout.vue";
-export { default as Column } from "./Column.vue";
 export { default as Heading } from "./Heading.vue";
 export { default as Loader } from "./Loader.vue";
+export { default as TextHighlight } from "./TextHighlight.vue";
 
 export { BulletItem, BulletList, ToDoItem, ToDoList } from "./List";
 export { Database } from "./Database";
-export { Bookmark, LinkMention } from "./Link";
+export { Bookmark, LinkMention, Link } from "./Link";
+export { Column, Columns } from "./Column";

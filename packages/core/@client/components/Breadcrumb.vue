@@ -1,17 +1,35 @@
 <script setup lang="ts">
+import type { IMetadata, PageInfo } from "@core/@types";
 import { useStore } from "@core/store";
 import { computed } from "vue";
+import { useRouter } from "vue-router";
+
+const props = defineProps<{ metadata: IMetadata }>();
 
 const store = useStore;
+const router = useRouter();
 
 const breadcrumbs = computed(() => {
   if (store.activePage) {
-    const breadcrumbs = [store.activePage];
+    const breadcrumbs = [];
     let newActivePage = store.activePage;
 
-    while (newActivePage.parentPage) {
+    if (newActivePage.parentPage) {
+      let parentPage = props.metadata.pages[newActivePage.parentPage];
       breadcrumbs.unshift(newActivePage);
-      newActivePage = newActivePage.parentPage;
+
+      while (parentPage) {
+        newActivePage = parentPage;
+        breadcrumbs.unshift(newActivePage);
+
+        if (newActivePage.parentPage) {
+          parentPage = props.metadata.pages[newActivePage.parentPage];
+        } else {
+          parentPage = undefined;
+        }
+      }
+    } else {
+      breadcrumbs.push(newActivePage);
     }
 
     return breadcrumbs;
@@ -19,6 +37,11 @@ const breadcrumbs = computed(() => {
 
   return [];
 });
+
+const handleCrumb = (page: PageInfo) => {
+  store.storeUpdateTabs(page);
+  router.push(page.path);
+};
 </script>
 
 <template>
@@ -28,18 +51,17 @@ const breadcrumbs = computed(() => {
       v-for="(page, index) in breadcrumbs"
       :key="page.id"
     >
-      <router-link :to="page.path" class="breadcrumb__page">
+      <button class="breadcrumb__page" @click="handleCrumb(page)">
         <div>
           <img
             v-if="page.icon"
             style="max-width: 1.1rem; height: auto"
             :src="page.icon.path"
           />
-          <div>{{ page.title }}</div>
+          <span :title="page.title">{{ page.title }}</span>
         </div>
-      </router-link>
+      </button>
       <div v-if="index !== breadcrumbs.length - 1">/</div>
-      <div v-if="breadcrumbs.length > 2" class="breadcrumb__dots">...</div>
     </div>
   </div>
 </template>
@@ -58,9 +80,17 @@ const breadcrumbs = computed(() => {
     all: unset;
 
     > div {
-      @include flex-layout($flex-direction: row, $column-gap: 0.4rem);
+      display: flex;
+      column-gap: 0.4rem;
       align-items: center;
+
       @extend .hover-default;
+
+      span {
+        width: auto;
+        max-width: 7rem;
+        @extend .ellipsis;
+      }
     }
   }
 }

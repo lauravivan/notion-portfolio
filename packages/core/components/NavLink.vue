@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import type { PageInfo } from "@core/@types";
-import ToggleList from "../Toggle/ToggleList.vue";
+import type { IMetadata, PageInfo } from "@core/@types";
+import ToggleList from "@core/@client/components/ToggleList.vue";
 import NestedLink from "./NestedLink.vue";
 import { Icons } from "@core/enum";
 import { useStore } from "@core/store";
 
 const store = useStore;
-const props = defineProps<{ page: PageInfo }>();
+const props = defineProps<{
+  page: PageInfo | undefined;
+  metadata: IMetadata;
+}>();
 
 function updateTabs(page: PageInfo) {
   const tabs = [...store.tabs];
@@ -21,13 +24,13 @@ function updateTabs(page: PageInfo) {
 </script>
 
 <template>
-  <div class="nav-link">
+  <div class="nav-link" v-if="props.page">
     <ToggleList
       class="nav-link__toggle-list"
       :iconToOpen="Icons.arrowRight"
       :iconToClose="Icons.arrowDown"
       :class="
-        store.activePage.id == props.page.id
+        store.getActivePage.id === props.page.id
           ? 'nav-link__toggle-list--active'
           : ''
       "
@@ -45,21 +48,19 @@ function updateTabs(page: PageInfo) {
                 style="width: 100%; height: auto"
               />
             </div>
-            <div class="nav-link__pagename">
+            <span class="nav-link__pagename">
               {{ props.page.title }}
-            </div>
+            </span>
           </div>
         </router-link>
       </template>
       <template #detailsContent>
-        <div
+        <NestedLink
           v-if="props.page.pages && Object.keys(props.page.pages).length > 0"
-        >
-          <NestedLink :pages="props.page.pages" />
-        </div>
-        <div v-else>
-          <div class="details__item">No pages inside</div>
-        </div>
+          :ids="props.page.pages"
+          :metadata="props.metadata"
+        />
+        <div v-else class="details__item">No pages inside</div>
       </template>
     </ToggleList>
   </div>
@@ -73,12 +74,14 @@ function updateTabs(page: PageInfo) {
     margin: 0;
 
     .details {
-      &__summary {
-        @extend .hover-default;
+      width: $NESTED_LINK_SIZE !important;
+      max-width: $NESTED_LINK_SIZE !important;
 
+      &__summary {
         &--icon {
           border-top-left-radius: 3px;
           border-bottom-left-radius: 3px;
+
           > div {
             font-size: $fs-medium;
             color: $black-3;
@@ -88,7 +91,6 @@ function updateTabs(page: PageInfo) {
         &--content {
           border-top-right-radius: 3px;
           border-bottom-right-radius: 3px;
-          width: 100%;
         }
       }
     }
@@ -104,11 +106,16 @@ function updateTabs(page: PageInfo) {
       align-items: center;
     }
   }
+
+  &__pagename {
+    @extend .ellipsis;
+    max-width: 160px;
+  }
 }
 
 .nav-link__toggle-list {
   &--active {
-    .details > .details__summary {
+    .details .details__summary {
       background-color: $black-1 !important;
     }
 

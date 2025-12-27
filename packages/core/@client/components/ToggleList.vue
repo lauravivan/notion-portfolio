@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useDisplay } from "../../hooks";
+import { useDisplay } from "@core/hooks";
 import Icon from "@core/@client/components/Icon.vue";
 import { Icons } from "@core/enum";
 
@@ -47,9 +47,7 @@ onMounted(() => {
           <td></td>
           <td>
             <div class="details__content" ref="detailsContentRef">
-              <ul>
-                <slot name="detailsContent"></slot>
-              </ul>
+              <slot name="detailsContent"></slot>
             </div>
           </td>
         </tr>
@@ -66,12 +64,17 @@ th {
 }
 
 .toggle-list {
-  margin: $DEFAULT_SPACING 0;
+  width: 100%;
 }
 
 .details {
+  width: 100%;
+
   &__summary {
+    @extend .hover-default;
+
     &--icon {
+      width: 10%;
       padding: 4px;
 
       > div {
@@ -82,16 +85,13 @@ th {
     }
 
     &--content {
+      width: 90%;
       vertical-align: middle;
     }
   }
 
   &__content {
     margin: 5px 0;
-  }
-
-  &__item {
-    margin: $DEFAULT_SPACING 0;
   }
 }
 </style>

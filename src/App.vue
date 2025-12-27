@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Aside, Header, useStore, Tabs } from "@core/index.ts";
-import { onMounted, watch } from "vue";
 import { useAside } from "@core/hooks";
 import { useRouter } from "vue-router";
 import metadata from "./metadata";
@@ -9,25 +8,9 @@ const router = useRouter();
 const { mainContainerClasses, mainContentClasses } = useAside();
 const store = useStore;
 
-const theme = store.getTheme;
-
 function handleNavigate(path: string) {
     router.push(path);
 }
-
-watch(
-    () => store.theme,
-    (newTheme) => {
-        document.body.className = "";
-        document.body.classList.add(newTheme);
-    }
-);
-
-onMounted(() => {
-    document.body.className = "";
-    document.body.classList.add(theme);
-    store.storeCreated();
-});
 </script>
 
 <template>
@@ -46,7 +29,7 @@ onMounted(() => {
             <div :class="mainContentClasses">
                 <Tabs @navigate="handleNavigate" />
 
-                <Header />
+                <Header :metadata="metadata" />
 
                 <router-view v-slot="{ Component }">
                     <component

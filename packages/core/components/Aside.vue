@@ -9,7 +9,7 @@ import {
   onBeforeUnmount,
 } from "vue";
 import { useModal } from "../hooks";
-import NestedLink from "./NavLink/NestedLink.vue";
+import NestedLink from "./NestedLink.vue";
 import { Modal, Divider } from "../@client/components";
 import SelectBtn from "./SelectList/SelectBtn.vue";
 import { isTouchDevice } from "../util";
@@ -166,12 +166,30 @@ onBeforeUnmount(() => {
               </div>
             </li>
             <li class="nav-list__nav-item">
-              <div class="nav-list__nav-item--category">Favorites</div>
-              <NestedLink :pages="props.metadata.favorites" />
-            </li>
-            <li class="nav-list__nav-item">
-              <div class="nav-list__nav-item--category">Private</div>
-              <NestedLink :pages="props.metadata.pages" />
+              <div>
+                <div class="nav-list__nav-item--category">Favorites</div>
+                <NestedLink
+                  :ids="
+                    props.metadata.favorites.filter(
+                      (id) =>
+                        props.metadata.pages[id] &&
+                        !props.metadata.pages[id].parentPage
+                    )
+                  "
+                  :metadata="props.metadata"
+                />
+              </div>
+              <div>
+                <div class="nav-list__nav-item--category">Private</div>
+                <NestedLink
+                  :ids="
+                    Object.entries(props.metadata.pages)
+                      .filter(([_, value]) => !value.parentPage)
+                      .map(([key]) => key)
+                  "
+                  :metadata="props.metadata"
+                />
+              </div>
             </li>
           </ul>
         </div>
@@ -228,14 +246,6 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss">
-.nav-wrapper,
-.nav-default,
-.nav-hover,
-.nav-click,
-.nav-list-wrapper {
-  height: 100%;
-}
-
 .nav-wrapper {
   color: $black-6;
   user-select: none;
@@ -252,6 +262,7 @@ onBeforeUnmount(() => {
   .nav-hover {
     @include flex-layout($row-gap: 2rem);
     border-radius: 3px;
+    width: 250px;
 
     .nav-list {
       box-shadow: $box-shadow-1;
@@ -324,15 +335,21 @@ onBeforeUnmount(() => {
       }
 
       &__nav-item:nth-child(3) {
-        max-height: 140px;
-      }
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
 
-      &__nav-item:nth-child(3),
-      &__nav-item:nth-child(4) {
-        margin: 5px 0.7rem;
-        height: auto;
+        height: max-content;
+        width: $NESTED_LINK_SIZE;
+
+        margin: 0 0.2rem 0.7rem 0.7rem;
+
         overflow-y: auto;
         overflow-x: hidden;
+
+        .nested-link {
+          width: $NESTED_LINK_SIZE;
+        }
       }
 
       &__nav-item--category {

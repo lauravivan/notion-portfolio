@@ -2,11 +2,13 @@
 import { useModal, useToggle } from "@core/hooks";
 import { Breadcrumb, Modal } from "@core/@client/components";
 import { useStore } from "@core/store";
-import Toggle from "@core/components/Toggle/Toggle.vue";
+import ToggleBtn from "@core/components/ToggleBtn.vue";
 import { FontFamily, Icons } from "@core/enum";
-import { onBeforeUnmount, onMounted, watch } from "vue";
-import { setDynamicPageInfo } from "@core/util/local-storage";
+import { watch } from "vue";
 import Icon from "@core/@client/components/Icon.vue";
+import type { IMetadata } from "@core/@types";
+
+const props = defineProps<{ metadata: IMetadata }>();
 
 const store = useStore;
 
@@ -50,24 +52,12 @@ watch(activeFontSize, (newFontSize) => {
     fontSize: newFontSize ? "font-size-small" : "font-size-default",
   });
 });
-
-function saveDynamicInfo() {
-  setDynamicPageInfo(store.getDynamicPageInfo);
-}
-
-onMounted(() => {
-  window.addEventListener("beforeunload", saveDynamicInfo);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener("beforeunload", saveDynamicInfo);
-});
 </script>
 
 <template>
   <header class="header">
     <div class="header__content">
-      <Breadcrumb />
+      <Breadcrumb :metadata="props.metadata" />
       <div></div>
       <div
         class="header__btn"
@@ -109,17 +99,17 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="header-menu__size-and-width">
-      <Toggle
+      <ToggleBtn
         :provideName="FONT_SIZE_PROVIDE_NAME"
         :active="activeFontSize"
         :toToggle="toToggleFontSize"
-        >Small Text</Toggle
+        >Small Text</ToggleBtn
       >
-      <Toggle
+      <ToggleBtn
         :provideName="PAGE_SIZE_PROVIDE_NAME"
         :active="activePageSize"
         :toToggle="toTogglePageSize"
-        >Full width</Toggle
+        >Full width</ToggleBtn
       >
     </div>
   </Modal>

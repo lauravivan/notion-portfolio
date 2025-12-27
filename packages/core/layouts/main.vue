@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { PageInfo } from "@core/@types";
 import { useStore } from "@core/store";
-import { setTheme } from "@core/util/local-storage";
-import { onBeforeUnmount, onMounted } from "vue";
+import { setDynamicPageInfo, setTheme } from "@core/util/local-storage";
+import { onBeforeUnmount, onMounted, watch } from "vue";
 import { Icons } from "@core/enum";
-import formatDate from "@core/util/formatDate";
+import Icon from "@core/@client/components/Icon.vue";
 
 const { activePage } = defineProps<{ activePage: PageInfo }>();
 
@@ -30,14 +30,28 @@ function saveTheme() {
   setTheme(store.getTheme);
 }
 
-const pageDate = formatDate(store.getDynamicPageInfo[activePage.id]?.created);
+watch(
+  () => store.theme,
+  (newTheme) => {
+    document.body.className = "";
+    document.body.classList.add(newTheme);
+  }
+);
+
+function saveDynamicInfo() {
+  setDynamicPageInfo(store.getDynamicPageInfo);
+}
 
 onMounted(() => {
   window.addEventListener("beforeunload", saveTheme);
+  window.addEventListener("beforeunload", saveDynamicInfo);
+  document.body.className = "";
+  document.body.classList.add(store.getTheme);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("beforeunload", saveTheme);
+  window.removeEventListener("beforeunload", saveDynamicInfo);
 });
 </script>
 
@@ -74,38 +88,41 @@ onBeforeUnmount(() => {
         </div>
         <span>{{ activePage.title }}</span>
       </div>
-      <table class="database" v-if="activePage.parentPage">
+      <table
+        class="database"
+        v-if="activePage.parentPage && activePage.databaseInfo"
+      >
         <thead>
           <tr>
             <th></th>
             <th width="100%"></th>
           </tr>
-          <tr>
+          <tr
+            v-for="[key, value] in Object.entries(activePage.databaseInfo)"
+            class="database__properties"
+            :key="key"
+          >
             <td class="database__property">
-              <Icon :icon="Icons.clock" />
-              <span>Created</span>
+              <Icon v-if="value.icon" :icon="Icons[value.icon]" />
+              <span>{{ key }}</span>
             </td>
-            <td class="database__property--val">
-              <span v-if="pageDate">{{ pageDate }}</span>
-              <span v-else>Empty</span>
-            </td>
-          </tr>
-          <tr v-if="activePage.tags && activePage.tags.length > 0">
-            <td class="database__property">
-              <Icon :icon="Icons.list" />
-              <span>Tags</span>
-            </td>
-
-            <td class="database__property--val">
-              <div class="multi-select">
+            <td class="database__property database__property--val">
+              <span v-if="value.value && typeof value.value === 'string'">{{
+                value.value
+              }}</span>
+              <div
+                v-else-if="Array.isArray(value.value) && value.value.length > 0"
+                class="multi-select"
+              >
                 <div
-                  v-for="item in activePage.tags"
+                  v-for="item in value.value"
                   :key="item"
                   :style="{ 'background-color': getColor() }"
                 >
                   {{ item }}
                 </div>
               </div>
+              <span v-else>Empty</span>
             </td>
           </tr>
         </thead>
@@ -136,15 +153,24 @@ onBeforeUnmount(() => {
     position: relative;
 
     a {
+      display: block;
       position: absolute;
-      background-color: #fff;
+      background-color: $gray;
+      color: $black;
       bottom: 0;
       right: 0;
       margin-right: 20px;
-      margin-bottom: 20px;
-      padding: 10px;
-      border-radius: 10%;
+      margin-bottom: 15px;
+      padding: 8px;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 0.9rem;
+      z-index: 50;
+
+      &:hover {
+        color: $black-8;
+        background-color: $gray-9;
+      }
     }
 
     img {
@@ -162,10 +188,10 @@ onBeforeUnmount(() => {
     transform: translate(-50%, 0%);
     z-index: 1;
     width: 50%;
+    row-gap: $DEFAULT_SPACING;
 
     .page-title {
       @include flex-layout($row-gap: 40px);
-      margin-bottom: 20px;
 
       &__img-wrapper {
         display: flex;
@@ -208,22 +234,21 @@ onBeforeUnmount(() => {
 }
 
 .database {
-  margin-top: 7px;
+  margin-bottom: 20px;
 
-  td {
-    @extend .hover-default;
+  &__properties {
+    display: flex;
+    column-gap: 10px;
   }
 
   &__property {
-    @include flex-layout($flex-direction: row, $column-gap: 5px);
+    display: flex;
+    width: max-content !important;
+    min-width: 100px;
+    column-gap: 5px;
     align-items: center;
-    width: 160px !important;
     flex-wrap: wrap;
-
-    @media (max-width: $screen-xs) {
-      min-width: 100px;
-      width: auto !important;
-    }
+    @extend .hover-default;
 
     &--val {
       vertical-align: middle;
@@ -232,7 +257,8 @@ onBeforeUnmount(() => {
 }
 
 .multi-select {
-  @include flex-layout($flex-direction: row, $row-gap: 5px, $column-gap: 5px);
+  display: flex;
+  gap: 5px;
   align-items: center;
   flex-wrap: wrap;
 
@@ -248,7 +274,7 @@ onBeforeUnmount(() => {
   .font-size-small {
     p,
     span,
-    div {
+    div:not(:has(h1, h2, h3, h4)) {
       font-size: $fs-small;
     }
 
@@ -257,35 +283,11 @@ onBeforeUnmount(() => {
         font-size: $fs-large + 0.7rem;
       }
     }
-
-    .h1 {
-      font-size: $fs-large + 0.6rem;
-    }
-
-    .h2 {
-      font-size: $fs-large + 0.4rem;
-    }
-
-    .h3 {
-      font-size: $fs-large + 0.2rem;
-    }
-
-    .h4 {
-      font-size: $fs-large;
-    }
-
-    .h5 {
-      font-size: $fs-large - 0.2rem;
-    }
-
-    .h6 {
-      font-size: $fs-large - 0.4rem;
-    }
   }
 
   .page-full-width {
     .page-content {
-      padding: 0 100px;
+      padding: 0 50px;
       width: 100%;
     }
   }

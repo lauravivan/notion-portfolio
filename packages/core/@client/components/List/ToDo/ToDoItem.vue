@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
 
-const props = defineProps<{ isChecked: boolean }>();
+const props = defineProps<{ isChecked?: boolean }>();
 
 const emit = defineEmits<{
   "update:isChecked": [value: boolean];
@@ -21,8 +21,6 @@ const value = useVModel(props, "isChecked", emit);
 
 <style lang="scss">
 .todo-item {
-  margin: $DEFAULT_SPACING 0;
-
   &__checkbox {
     pointer-events: none;
   }

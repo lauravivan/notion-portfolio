@@ -1,36 +1,50 @@
 import type { IMetadata } from "@core/index";
 import PageExample from "../pages/index.vue";
 import PageExample2 from "../pages/page-example-2.vue";
-import createPage from "@core/util/createPage";
 
 const metadata: IMetadata = {
   user: {
     author: `My Portfolio`,
     socialMedia: "@user",
   },
-  pages: [
-    createPage({
+  pages: {
+    "page-example": {
       id: "page-example",
+      path: "/",
       title: "Hello 😊",
       isHomepage: true,
-      bannerAuthor: "Danis Lou",
-      bannerLink:
-        "https://unsplash.com/photos/restaurant-with-people-dining-in-jfZfdQtcH6k?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+      banner: {
+        link: "https://unsplash.com/photos/restaurant-with-people-dining-in-jfZfdQtcH6k?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+        author: "Danis Lou",
+        path: "/banners/page-example.webp",
+      },
       component: PageExample,
-      iconAuthor: "Paula Lee",
-      iconLink: "https://www.flaticon.com/free-sticker/drink_7465398?related_id=7465398"
-    }),
-    createPage({
+      icon: {
+        author: "Paula Lee",
+        path: "/icons/page-example.png",
+        link: "https://www.flaticon.com/free-sticker/drink_7465398?related_id=7465398",
+      },
+      pages: ["page-example-2"],
+    },
+    "page-example-2": {
       id: "page-example-2",
-      title: "Hello 2",
+      path: "/page-example-2",
+      title: "Second Page",
       component: PageExample2,
-      hasBanner: false,
-      hasIcon: false
-    }),
-  ],
-  favorites: [],
+      parentPage: "page-example",
+      databaseInfo: {
+        Created: {
+          icon: "clock",
+          value: "December 2025",
+        },
+        Languages: {
+          icon: "code",
+          value: ["JavaScript", "TypeScript"],
+        },
+      },
+    },
+  },
+  favorites: ["page-example"],
 };
-
-metadata.favorites.push(metadata.pages[0]);
 
 export default metadata;
