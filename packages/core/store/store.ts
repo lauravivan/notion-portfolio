@@ -91,20 +91,6 @@ const useStore = defineStore("global", {
         this.dynamicPageInfo = pageInfo;
       }
     },
-    storeCreated() {
-      const dp = this.dynamicPageInfo;
-
-      Object.entries(dp).forEach((d) => {
-        const dCopy = { ...d };
-
-        if (!d[1].created) {
-          dCopy[1].created = new Date();
-          return dCopy;
-        }
-
-        return dCopy;
-      });
-    },
     storeActivePage(activePage: PageInfo) {
       this.activePage = activePage;
     },

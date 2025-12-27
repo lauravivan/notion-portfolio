@@ -19,7 +19,7 @@ export {
   ToDoItem,
   ToDoList,
 } from "./@client/components";
-export { createPage, isTouchDevice } from "./util";
+export { isTouchDevice } from "./util";
 export { MainLayout } from "./layouts";
 export { NotFoundPage } from "./pages";
 export { useStore, piniaInstance } from "./store";

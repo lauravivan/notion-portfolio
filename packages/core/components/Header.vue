@@ -4,8 +4,7 @@ import { Breadcrumb, Modal } from "@core/@client/components";
 import { useStore } from "@core/store";
 import ToggleBtn from "@core/components/ToggleBtn.vue";
 import { FontFamily, Icons } from "@core/enum";
-import { onBeforeUnmount, onMounted, watch } from "vue";
-import { setDynamicPageInfo } from "@core/util/local-storage";
+import { watch } from "vue";
 import Icon from "@core/@client/components/Icon.vue";
 import type { IMetadata } from "@core/@types";
 
@@ -52,18 +51,6 @@ watch(activeFontSize, (newFontSize) => {
   store.storeDynamicPageInfo({
     fontSize: newFontSize ? "font-size-small" : "font-size-default",
   });
-});
-
-function saveDynamicInfo() {
-  setDynamicPageInfo(store.getDynamicPageInfo);
-}
-
-onMounted(() => {
-  window.addEventListener("beforeunload", saveDynamicInfo);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener("beforeunload", saveDynamicInfo);
 });
 </script>
 

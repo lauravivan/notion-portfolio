@@ -16,7 +16,12 @@ export interface PageInfo {
     author?: string;
     link?: string;
   };
-  tags?: string[];
+  databaseInfo?: {
+    [key: string]: {
+      icon: "clock" | "check" | "code";
+      value: string | string[];
+    };
+  };
 }
 
 export interface PagesInfo {

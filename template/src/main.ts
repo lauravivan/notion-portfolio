@@ -11,17 +11,17 @@ import {
   NotFoundPage,
   useStore,
   piniaInstance,
-  type PageInfo
+  type PageInfo,
 } from "@lauravivan/notion-portfolio";
 import App from "@/App.vue";
 import metadata from "@/metadata";
 
 const app = createApp(App);
 
-const mainChildren = metadata.pages.map((page: PageInfo) => ({
+const mainChildren = Object.values(metadata.pages).map((page: PageInfo) => ({
   path: page.isHomepage ? "/" : `/${page.id}`,
   component: page.component,
-  name: `${page.id}`,
+  name: page.id,
   beforeEnter: (
     _to: RouteLocationNormalized,
     _from: RouteLocationNormalized,

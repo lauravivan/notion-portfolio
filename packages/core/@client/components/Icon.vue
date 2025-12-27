@@ -2,14 +2,14 @@
 import { Icon } from "@iconify/vue";
 import { Icons } from "@core/enum";
 
-defineProps<{
+const props = defineProps<{
   icon: Icons;
 }>();
 </script>
 
 <template>
-  <div class="icon" v-if="icon">
-    <Icon :icon="icon" />
+  <div class="icon" v-if="props.icon">
+    <Icon :icon="props.icon" />
   </div>
 </template>
 

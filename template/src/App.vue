@@ -6,29 +6,16 @@ import {
     Tabs,
     useAside,
 } from "@lauravivan/notion-portfolio";
-import { onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import metadata from "@/metadata";
 
 const router = useRouter();
+const { mainContainerClasses, mainContentClasses } = useAside();
 const store = useStore;
 
-const theme = store.getTheme;
-const { mainContainerClasses, mainContentClasses } = useAside();
-
-watch(
-    () => store.theme,
-    (newTheme) => {
-        document.body.className = "";
-        document.body.classList.add(newTheme);
-    }
-);
-
-onMounted(() => {
-    document.body.className = "";
-    document.body.classList.add(theme);
-    store.storeCreated();
-});
+function handleNavigate(path: string) {
+    router.push(path);
+}
 </script>
 
 <template>
@@ -45,14 +32,15 @@ onMounted(() => {
             <Aside :metadata="metadata" />
 
             <div :class="mainContentClasses">
-                <Tabs :router="router" />
+                <Tabs @navigate="handleNavigate" />
 
-                <Header />
+                <Header :metadata="metadata" />
 
                 <router-view v-slot="{ Component }">
                     <component
                         :is="Component"
                         :activePage="store.getActivePage"
+                        :useStore="useStore"
                     />
                 </router-view>
 
