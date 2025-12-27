@@ -1,3 +1,23 @@
+# [1.1.0](https://github.com/lauravivan/notion-portfolio/compare/v1.0.5...v1.1.0) (2025-12-27)
+
+
+### Bug Fixes
+
+* aside nested links disposition and scrollbar themes ([6c68490](https://github.com/lauravivan/notion-portfolio/commit/6c684904e9adb212db43be40f6e25fa5af5f61d7))
+* bg color on tab hover - theme ([bd7fbcf](https://github.com/lauravivan/notion-portfolio/commit/bd7fbcf94a718667b49e0bada1e22081e5bd9454))
+* breadcrumb nested pages ([941909e](https://github.com/lauravivan/notion-portfolio/commit/941909e524d0a673048bf5c0663540e3828043f4))
+* breadcrumb parent page and nav nested links style ([a54e564](https://github.com/lauravivan/notion-portfolio/commit/a54e564dfd50cd206e349040a04f4207b1fed240))
+* database properties logic and styling ([1f412ac](https://github.com/lauravivan/notion-portfolio/commit/1f412ac3a7066a337f0c11a5423f32abc2cdacf1))
+* little style adjustments, add global icon ([f05266a](https://github.com/lauravivan/notion-portfolio/commit/f05266a6dba55a1e5b8e248f1b073acc011a25a2))
+* page and metadata structure, aside nested pages behavior (parent and children) ([1a1ca78](https://github.com/lauravivan/notion-portfolio/commit/1a1ca78a32db43f7649244ba57be0e0df1619ae7))
+* tabs sync in page update and fixed tab when 1 ([521763c](https://github.com/lauravivan/notion-portfolio/commit/521763cdee2cc1dd3a300b2c156ff81e3466339f))
+
+
+### Features
+
+* add component for default link and text highlight ([db38e04](https://github.com/lauravivan/notion-portfolio/commit/db38e04a87707a47c66dcd919e9ed66349d18884))
+* add resizible columns ([f631e82](https://github.com/lauravivan/notion-portfolio/commit/f631e8200e2bef2ecd3cf4b2b3bb3aa07020f167))
+
 ## [1.0.5](https://github.com/lauravivan/notion-portfolio/compare/v1.0.4...v1.0.5) (2025-12-24)
 
 
