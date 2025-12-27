@@ -234,11 +234,6 @@ body :-webkit-any-link:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.highlight {
-  font-weight: 900;
-  text-decoration: underline;
-}
-
 .ellipsis {
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -378,11 +373,6 @@ body :-webkit-any-link:hover {
 .button:hover {
   border-radius: 10%;
   background-color: rgba(0, 0, 0, 0.1);
-}
-
-.highlight {
-  font-weight: 900;
-  text-decoration: underline;
 }
 
 .ellipsis {

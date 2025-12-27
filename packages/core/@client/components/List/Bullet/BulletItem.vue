@@ -17,13 +17,21 @@ import { Icons } from "@core/enum";
   align-items: center;
   column-gap: 10px;
 
+  width: 100%;
+
   &__icon {
     font-size: $fs-xs;
     color: $black-7;
   }
 
   &__item {
+    display: flex;
+    column-gap: 5px;
+
     margin: 0;
+
+    flex: 1;
+    width: 100%;
   }
 }
 </style>

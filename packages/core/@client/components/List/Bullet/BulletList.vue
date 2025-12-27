@@ -16,3 +16,9 @@ const props = defineProps<{ items?: string[] }>();
     <template v-else><slot /></template>
   </ul>
 </template>
+
+<style lang="scss">
+.bullet-list {
+  width: 100%;
+}
+</style>
