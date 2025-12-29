@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/lauravivan/notion-portfolio/compare/v1.1.2...v1.1.3) (2025-12-29)
+
+
+### Bug Fixes
+
+* settings sync, images on template and other issues ([ad8c6f6](https://github.com/lauravivan/notion-portfolio/commit/ad8c6f64b38c94645752fbaba8b55dbd3ecdf1f5))
+
 ## [1.1.2](https://github.com/lauravivan/notion-portfolio/compare/v1.1.1...v1.1.2) (2025-12-29)
 
 
