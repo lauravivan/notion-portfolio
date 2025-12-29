@@ -7,7 +7,11 @@ import {
   getAsideOpen,
 } from "@core/util/local-storage";
 import getDynamicPageInfo from "@core/util/local-storage/dynamic-page-info/getDynamicPageInfo";
-import type { DynamicPageInfo, Tab } from "@core/util/local-storage/types";
+import type {
+  DynamicPageInfo,
+  Settings,
+  Tab,
+} from "@core/util/local-storage/types";
 import { defineStore } from "pinia";
 import piniaInstance from "./instance";
 
@@ -19,6 +23,13 @@ interface State {
   activePage: PageInfo;
   isAsideOpen: boolean;
 }
+
+type CurrentDynPageInfo =
+  | {
+      pageId: string;
+      settings: Settings;
+    }
+  | undefined;
 
 const useStore = defineStore("global", {
   state: (): State => ({
@@ -49,46 +60,46 @@ const useStore = defineStore("global", {
       pageSize?: keyof typeof PageSize;
     }) {
       const currentPageId = this.activePage.id;
-      let stts = this.getDynamicCurrentPageInfo?.settings || {
-        fontFamily: "font-roboto",
-        fontSize: "font-size-default",
-        pageSize: "page-default-width",
-      };
+      const dynInfo = this.getDynamicCurrentPageInfo;
 
-      if (fontFamily) {
-        stts = {
-          ...stts,
-          fontFamily,
-        };
-      }
+      if (dynInfo) {
+        let stts = dynInfo.settings;
 
-      if (fontSize) {
-        stts = {
-          ...stts,
-          fontSize,
-        };
-      }
-
-      if (pageSize) {
-        stts = {
-          ...stts,
-          pageSize,
-        };
-      }
-
-      if (currentPageId) {
-        let pageInfo = {};
-
-        if (this.dynamicPageInfo) {
-          pageInfo = {
-            ...this.dynamicPageInfo,
-            [`${currentPageId}`]: {
-              settings: stts,
-            },
+        if (fontFamily) {
+          stts = {
+            ...stts,
+            fontFamily,
           };
         }
 
-        this.dynamicPageInfo = pageInfo;
+        if (fontSize) {
+          stts = {
+            ...stts,
+            fontSize,
+          };
+        }
+
+        if (pageSize) {
+          stts = {
+            ...stts,
+            pageSize,
+          };
+        }
+
+        if (currentPageId) {
+          let pageInfo = {};
+
+          if (this.dynamicPageInfo) {
+            pageInfo = {
+              ...this.dynamicPageInfo,
+              [`${currentPageId}`]: {
+                settings: stts,
+              },
+            };
+          }
+
+          this.dynamicPageInfo = pageInfo;
+        }
       }
     },
     storeActivePage(activePage: PageInfo) {
@@ -119,23 +130,19 @@ const useStore = defineStore("global", {
     getTheme: (state) => state.theme,
     getTabs: (state) => state.tabs,
     getActiveTab: (state) => state.activeTab,
-    getDynamicCurrentPageInfo: (state) => {
+    getDynamicCurrentPageInfo: (state): CurrentDynPageInfo => {
       const page = state.tabs[state.activeTab];
       if (!page?.pageId) return;
 
-      const dynInfo = state.dynamicPageInfo[`${page.pageId}`];
+      const dynInfo = state.dynamicPageInfo[page.pageId] || {
+        settings: {
+          fontFamily: "font-roboto",
+          fontSize: "font-size-default",
+          pageSize: "page-default-width",
+        },
+      };
 
-      return dynInfo
-        ? { [`${page.pageId}`]: dynInfo }
-        : {
-            [page.pageId]: {
-              settings: {
-                fontFamily: "font-roboto",
-                fontSize: "font-size-default",
-                pageSize: "page-default-width",
-              },
-            },
-          };
+      return { pageId: page.pageId, ...dynInfo };
     },
     getActivePage: (state) => state.activePage,
     getIsAsideOpen: (state) => state.isAsideOpen,

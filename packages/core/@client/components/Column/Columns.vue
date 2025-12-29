@@ -73,10 +73,10 @@ onMounted(() => {
 .columns {
   display: grid;
   column-gap: 20px;
+  row-gap: $DEFAULT_SPACING;
 
-  @media (max-width: $screen-xs) {
-    grid-template-columns: 1fr;
-    row-gap: $DEFAULT_SPACING;
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr !important;
   }
 }
 </style>

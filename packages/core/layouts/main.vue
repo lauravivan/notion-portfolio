@@ -5,6 +5,7 @@ import { setDynamicPageInfo, setTheme } from "@core/util/local-storage";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import DatabaseInfo from "@core/components/DatabaseInfo.vue";
 import { Banner, Content, Title, Wrapper } from "@core/components/Content";
+import { Empty } from "@core/@client/components";
 
 const { activePage } = defineProps<{ activePage: PageInfo }>();
 

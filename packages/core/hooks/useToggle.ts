@@ -1,4 +1,4 @@
-import { inject, type Ref, ref } from "vue";
+import { provide, ref } from "vue";
 
 export default function useToggle({
   provideName,
@@ -9,12 +9,14 @@ export default function useToggle({
 }) {
   const active = ref(isActive);
 
-  const toggleRef = inject<Ref<boolean>>(provideName, ref(false));
+  const toggleRef = ref<boolean>(false);
+
+  provide(provideName, toggleRef);
 
   function toToggle() {
     active.value = !active.value;
 
-    if (toggleRef && toggleRef.value) {
+    if (toggleRef.value && toggleRef.value) {
       toggleRef.value = active.value;
     }
   }

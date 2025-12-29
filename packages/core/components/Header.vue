@@ -6,16 +6,8 @@ import Icon from "@core/@client/components/Icon.vue";
 import type { IMetadata } from "@core/@types";
 import Settings from "./Settings.vue";
 import { useStore } from "@core/store";
-import { computed } from "vue";
-import { storeToRefs } from "pinia";
 
 const store = useStore;
-
-const { getDynamicCurrentPageInfo } = storeToRefs(store);
-
-const activePage = computed(() => getDynamicCurrentPageInfo.value || "");
-
-const pageId = Object.keys(activePage.value)[0] || "";
 
 const props = defineProps<{ metadata: IMetadata }>();
 
@@ -47,7 +39,11 @@ const { showModal, hideModal, addModalListener } = useModal({
     :hideSettingsModal="hideModal"
     :menuProvider="HEADER_PROVIDE_NAME"
     :modalStyles="{ top: '77px', right: '10px' }"
-    :pageId="pageId"
+    :pageId="
+      store.getDynamicCurrentPageInfo
+        ? store.getDynamicCurrentPageInfo.pageId
+        : 'not-found'
+    "
   />
 </template>
 

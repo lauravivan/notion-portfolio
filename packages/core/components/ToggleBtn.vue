@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, type Ref } from "vue";
+import { inject } from "vue";
 
 const props = defineProps<{
   active: boolean;
@@ -7,7 +7,7 @@ const props = defineProps<{
   provideName: string;
 }>();
 
-const toggleRef = inject<Ref<HTMLDivElement>>(props.provideName);
+const toggleRef = inject(props.provideName);
 
 defineExpose({
   ref: toggleRef,

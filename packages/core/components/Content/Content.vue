@@ -33,16 +33,14 @@ const { page } = defineProps<{ page: PageInfo }>();
   }
 }
 
-@media (min-width: $screen-small) {
-  .page-full-width .page-content {
-    padding: 0 50px;
-    width: 100%;
-  }
+.page-full-width .page-content {
+  padding: 0 50px !important;
+  width: 100% !important;
 }
 
 @media (max-width: $screen-xs) {
   .page-wrapper .page-content {
-    width: 100%;
+    width: 100% !important;
     padding: 0 20px !important;
   }
 }

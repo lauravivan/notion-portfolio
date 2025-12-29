@@ -49,6 +49,7 @@ const handleCrumb = (page: PageInfo) => {
       :key="page.id"
     >
       <router-link
+        v-if="page.path"
         class="breadcrumb__page"
         :to="page.path"
         @click="handleCrumb(page)"
