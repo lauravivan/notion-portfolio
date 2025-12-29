@@ -86,8 +86,8 @@ function showPageModal(page: PageInfo) {
     provideName="pageModal"
     :component="props.component"
     :page="pageModal"
-    :hideModal="hideModal"
-    :addModalListener="addModalListener"
+    :hideMainModal="hideModal"
+    :addMainModalListener="addModalListener"
     v-if="isClicked && pageModal"
   />
 </template>

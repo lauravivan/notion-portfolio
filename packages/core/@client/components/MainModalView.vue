@@ -6,8 +6,8 @@ import { Icons } from "@core/enum";
 import type { Component } from "vue";
 
 const props = defineProps<{
-  hideModal: () => void;
-  addModalListener: () => void;
+  hideMainModal: () => void;
+  addMainModalListener: () => void;
   provideName: string;
   page: PageInfo;
   component: Component;
@@ -20,8 +20,8 @@ const props = defineProps<{
       class="page-modal"
       :provideName="props.provideName"
       :isStatic="true"
-      :hideModal="props.hideModal"
-      :addModalListener="props.addModalListener"
+      :hideModal="props.hideMainModal"
+      :addModalListener="props.addMainModalListener"
     >
       <router-link :to="props.page.path">
         <Icon class="page-modal__expand" :icon="Icons.expand" />
