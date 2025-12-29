@@ -17,7 +17,7 @@ const props = defineProps(["previousRoute"]);
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .not-found {
   position: relative;
   @include sizing(100%, 100vh);

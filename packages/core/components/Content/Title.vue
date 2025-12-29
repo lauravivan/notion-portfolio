@@ -18,7 +18,7 @@ const { page } = defineProps<{ page: PageInfo }>();
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .page-title {
   display: flex;
   flex-direction: column;

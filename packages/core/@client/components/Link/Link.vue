@@ -6,7 +6,7 @@ const props = defineProps<{ href: string }>();
   <a class="link" target="_blank" :href="props.href"><slot /></a>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .link {
   all: unset;
 

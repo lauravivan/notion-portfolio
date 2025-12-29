@@ -17,7 +17,7 @@ const { page } = defineProps<{ page: PageInfo }>();
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .page-content {
   @include grid-layout();
   position: absolute;
