@@ -2,7 +2,7 @@
 import { FontFamily } from "@core/enum";
 import { useToggle } from "@core/hooks";
 import { useStore } from "@core/store";
-import { computed, watch } from "vue";
+import { watch } from "vue";
 import Modal from "./Modal/Modal.vue";
 import ToggleBtn from "./ToggleBtn.vue";
 import { storeToRefs } from "pinia";
@@ -27,16 +27,18 @@ const fontFamilyEntries = Object.entries(FontFamily) as [
   string,
 ][];
 
-const dynInfo = computed(() => getDynamicPageInfo.value[props.pageId]);
-
 const { active: activeFontSize, toToggle: toToggleFontSize } = useToggle({
   provideName: FONT_SIZE_PROVIDE_NAME,
-  isActive: dynInfo.value?.settings.fontSize === "font-size-small",
+  isActive:
+    getDynamicPageInfo.value[props.pageId]?.settings.fontSize ===
+    "font-size-small",
 });
 
 const { active: activePageSize, toToggle: toTogglePageSize } = useToggle({
   provideName: PAGE_SIZE_PROVIDE_NAME,
-  isActive: dynInfo.value?.settings.pageSize === "page-full-width",
+  isActive:
+    getDynamicPageInfo.value[props.pageId]?.settings.pageSize ===
+    "page-full-width",
 });
 
 watch(activePageSize, (newPageSize) => {
@@ -70,8 +72,10 @@ watch(activeFontSize, (newFontSize) => {
           @click="store.storeDynamicPageInfo({ fontFamily: key })"
           :class="{
             'modal-settings__font-wrapper--active':
-              (!dynInfo?.settings.fontFamily && key === 'font-roboto') ||
-              dynInfo?.settings.fontFamily === key,
+              (!store.getDynamicPageInfo[props.pageId]?.settings.fontFamily &&
+                key === 'font-roboto') ||
+              store.getDynamicPageInfo[props.pageId]?.settings.fontFamily ===
+                key,
           }"
         >
           <span class="modal-settings__ag">Ag</span>

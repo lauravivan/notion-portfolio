@@ -2,16 +2,16 @@
 import { useStore } from "@core/store";
 
 const store = useStore;
-const pageInfo = Object.values(store.getDynamicCurrentPageInfo!)[0];
 </script>
 
 <template>
   <main
+    v-if="store.getDynamicCurrentPageInfo"
     class="page-wrapper"
     :class="[
-      pageInfo?.settings.fontSize,
-      pageInfo?.settings.fontFamily,
-      pageInfo?.settings.pageSize,
+      store.getDynamicCurrentPageInfo?.settings.fontSize,
+      store.getDynamicCurrentPageInfo?.settings.fontFamily,
+      store.getDynamicCurrentPageInfo?.settings.pageSize,
     ]"
   >
     <slot />
