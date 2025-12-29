@@ -15,10 +15,6 @@ const props = defineProps<{ title: string; subtitle?: string; link: string }>();
 </template>
 
 <style lang="scss">
-a {
-  all: unset;
-}
-
 .bookmark {
   padding: 20px;
   border: 1px solid $black-2;

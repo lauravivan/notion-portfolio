@@ -2,12 +2,10 @@
 import type { IMetadata, PageInfo } from "@core/@types";
 import { useStore } from "@core/store";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
 
 const props = defineProps<{ metadata: IMetadata }>();
 
 const store = useStore;
-const router = useRouter();
 
 const breadcrumbs = computed(() => {
   if (store.activePage) {
@@ -40,7 +38,6 @@ const breadcrumbs = computed(() => {
 
 const handleCrumb = (page: PageInfo) => {
   store.storeUpdateTabs(page);
-  router.push(page.path);
 };
 </script>
 
@@ -51,7 +48,11 @@ const handleCrumb = (page: PageInfo) => {
       v-for="(page, index) in breadcrumbs"
       :key="page.id"
     >
-      <button class="breadcrumb__page" @click="handleCrumb(page)">
+      <router-link
+        class="breadcrumb__page"
+        :to="page.path"
+        @click="handleCrumb(page)"
+      >
         <div>
           <img
             v-if="page.icon"
@@ -60,7 +61,7 @@ const handleCrumb = (page: PageInfo) => {
           />
           <span :title="page.title">{{ page.title }}</span>
         </div>
-      </button>
+      </router-link>
       <div v-if="index !== breadcrumbs.length - 1">/</div>
     </div>
   </div>
@@ -68,11 +69,11 @@ const handleCrumb = (page: PageInfo) => {
 
 <style lang="scss">
 .breadcrumb {
-  @include flex-layout($flex-direction: row);
+  display: flex;
   align-items: center;
 
   &__crumb {
-    @include flex-layout($flex-direction: row);
+    display: flex;
     align-items: center;
   }
 

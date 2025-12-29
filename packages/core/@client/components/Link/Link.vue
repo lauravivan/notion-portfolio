@@ -3,7 +3,7 @@ const props = defineProps<{ href: string }>();
 </script>
 
 <template>
-  <a class="link" :href="props.href"><slot /></a>
+  <a class="link" target="_blank" :href="props.href"><slot /></a>
 </template>
 
 <style scoped lang="scss">

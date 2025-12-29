@@ -1,16 +1,25 @@
 <script setup lang="ts">
 import Icon from "@core/@client/components/Icon.vue";
+import type { PageInfo } from "@core/@types";
 import { Icons } from "@core/enum";
 
-const props = defineProps<{ href: string; emoji: string; target?: string }>();
+const props = defineProps<{
+  href?: string;
+  emoji: string;
+  page?: PageInfo;
+}>();
 </script>
 
 <template>
-  <a
-    class="link"
-    :target="props.target ? props.target : '_blank'"
-    :href="props.href"
-  >
+  <router-link class="link" :to="props.page.path" v-if="props.page">
+    <div>
+      <img v-if="props.page.icon" :src="props.page.icon.path" />
+      <template v-else> {{ props.emoji }}</template>
+      <Icon class="link__arrow" :icon="Icons.arrowLink" />
+    </div>
+    <span><slot></slot></span
+  ></router-link>
+  <a class="link" target="_blank" :href="props.href" v-else>
     <div>
       {{ props.emoji }}
       <Icon class="link__arrow" :icon="Icons.arrowLink" />
@@ -50,6 +59,12 @@ const props = defineProps<{ href: string; emoji: string; target?: string }>();
     left: 5px;
     z-index: 100;
     color: $dark;
+  }
+
+  img {
+    width: 20px;
+    height: auto;
+    object-fit: contain;
   }
 }
 </style>

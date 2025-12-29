@@ -221,6 +221,7 @@ body :-webkit-any-link:hover {
 }
 
 .button {
+  all: unset;
   display: flex;
   align-items: center;
   text-align: center;
@@ -362,6 +363,7 @@ body :-webkit-any-link:hover {
 }
 
 .button {
+  all: unset;
   display: flex;
   align-items: center;
   text-align: center;

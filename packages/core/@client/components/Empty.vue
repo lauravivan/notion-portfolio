@@ -4,6 +4,6 @@
 
 <style lang="scss">
 .empty {
-  height: 30px;
+  height: calc($DEFAULT_SPACING * 3);
 }
 </style>
