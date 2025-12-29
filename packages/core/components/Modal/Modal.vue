@@ -64,7 +64,9 @@ dialog {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 2rem 1.9rem;
-  overflow-y: auto;
+  overflow-y: hidden;
+  height: auto;
+  max-height: 80vh;
 }
 
 .modal-dynamic {
@@ -81,5 +83,13 @@ dialog {
   left: unset;
   transform: unset;
   width: auto;
+  height: auto;
+  max-height: fit-content;
+}
+
+@media (max-width: $screen-xs) {
+  .modal-static {
+    max-height: 70vh;
+  }
 }
 </style>
