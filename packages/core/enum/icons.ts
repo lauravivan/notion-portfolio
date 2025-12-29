@@ -17,7 +17,7 @@ enum Icons {
   code = "eva:code-outline",
   link = "eva:link-outline",
   add = "eva:plus-outline",
-  expand = "eva:expand-outline",
+  expand = "material-symbols:expand-content-rounded",
   clock = "eva:clock-fill",
   list = "eva:list-outline",
   close = "eva:close-outline",
