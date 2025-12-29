@@ -15,7 +15,7 @@ const metadata: IMetadata = {
       isHomepage: true,
       banner: {
         link: "https://unsplash.com/photos/restaurant-with-people-dining-in-jfZfdQtcH6k?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-        author: "Danis Lou",  
+        author: "Danis Lou",
         path: "/banners/page-example.webp",
       },
       component: PageExample,
