@@ -1,3 +1,13 @@
+## [1.1.1](https://github.com/lauravivan/notion-portfolio/compare/v1.1.0...v1.1.1) (2025-12-29)
+
+
+### Bug Fixes
+
+* remove component from database props and separate content logic for reuse ([d81be35](https://github.com/lauravivan/notion-portfolio/commit/d81be35ef9d7d31897084aa68b082ea65d29953f))
+* spacing and links ([eb179d9](https://github.com/lauravivan/notion-portfolio/commit/eb179d942664b4eeab526b95880ad8854f9b83d0))
+* static modal styles, separate settings modal logic to be reusable, dynamic info sync ([9d695a8](https://github.com/lauravivan/notion-portfolio/commit/9d695a87507ce4731c5b465fd7f8220dc97622ac))
+* static modal styles, separate settings modal logic to be reusable, dynamic info sync ([04aa85b](https://github.com/lauravivan/notion-portfolio/commit/04aa85b3deaf4b85402fefcfb9b3425b58843cea))
+
 # [1.1.0](https://github.com/lauravivan/notion-portfolio/compare/v1.0.5...v1.1.0) (2025-12-27)
 
 
