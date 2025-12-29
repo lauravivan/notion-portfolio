@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Modal } from "@core/@client/components";
+import Modal from "@core/components/Modal/Modal.vue";
 import OptionList from "./OptionList.vue";
 import { ref } from "vue";
 import Icon from "@core/@client/components/Icon.vue";

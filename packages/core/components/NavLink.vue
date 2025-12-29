@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IMetadata, PageInfo } from "@core/@types";
-import ToggleList from "@core/@client/components/ToggleList.vue";
+import { ToggleList } from "@core/@client/components";
 import NestedLink from "./NestedLink.vue";
 import { Icons } from "@core/enum";
 import { useStore } from "@core/store";

@@ -13,18 +13,17 @@ export {
   Image,
   LinkMention,
   Loader,
-  MainModalView,
-  Modal,
   Text,
   ToDoItem,
   ToDoList,
   TextHighlight,
   Link,
   Columns,
+  ToggleList,
 } from "./@client/components";
 export { isTouchDevice } from "./util";
 export { MainLayout } from "./layouts";
 export { NotFoundPage } from "./pages";
 export { useStore, piniaInstance } from "./store";
-export { useAside, useDisplay, useModal, useToggle } from "./hooks";
+export { useAside, useDisplay } from "./hooks";
 export type { PageInfo, IMetadata } from "./@types";

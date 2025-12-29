@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { MainModalView } from "..";
+import MainModalView from "@core/components/Modal/MainModalView.vue";
 import Icon from "@core/@client/components/Icon.vue";
 import { useModal } from "../../../hooks";
 import { Icons } from "@core/enum";
 import type { PageInfo } from "@core/@types";
-import { type Component } from "vue";
 
 const isClicked = ref(false);
 const pageModal = ref<PageInfo>();
 
 const props = defineProps<{
-  title: string;
+  title?: string;
   cardPreviewIsCover: boolean;
-  component: Component;
   pages: PageInfo[];
 }>();
 
@@ -44,9 +42,7 @@ function showPageModal(page: PageInfo) {
         </li>
       </ul>
 
-      <div>
-        <h3 class="gallery__title">{{ props.title }}</h3>
-      </div>
+      <h3 v-if="props.title" class="gallery__title">{{ props.title }}</h3>
     </div>
 
     <div class="gallery__cards-wrapper">
@@ -63,7 +59,7 @@ function showPageModal(page: PageInfo) {
           <component
             class="gallery__card-content--content"
             v-if="!props.cardPreviewIsCover"
-            :is="props.component"
+            :is="page.component"
             :page="page"
             :hideDatabase="true"
           />
@@ -84,10 +80,9 @@ function showPageModal(page: PageInfo) {
   </div>
   <MainModalView
     provideName="pageModal"
-    :component="props.component"
     :page="pageModal"
-    :hideModal="hideModal"
-    :addModalListener="addModalListener"
+    :hideMainModal="hideModal"
+    :addMainModalListener="addModalListener"
     v-if="isClicked && pageModal"
   />
 </template>

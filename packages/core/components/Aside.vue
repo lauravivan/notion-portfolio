@@ -10,7 +10,8 @@ import {
 } from "vue";
 import { useModal } from "../hooks";
 import NestedLink from "./NestedLink.vue";
-import { Modal, Divider } from "../@client/components";
+import { Divider } from "../@client/components";
+import Modal from "@core/components/Modal/Modal.vue";
 import SelectBtn from "./SelectList/SelectBtn.vue";
 import { isTouchDevice } from "../util";
 import Icon from "@core/@client/components/Icon.vue";

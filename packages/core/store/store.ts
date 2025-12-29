@@ -122,15 +122,20 @@ const useStore = defineStore("global", {
     getDynamicCurrentPageInfo: (state) => {
       const page = state.tabs[state.activeTab];
       if (!page?.pageId) return;
-      return (
-        state.dynamicPageInfo[`${page.pageId}`] || {
-          settings: {
-            fontFamily: "font-roboto",
-            fontSize: "font-size-default",
-            pageSize: "page-default-width",
-          },
-        }
-      );
+
+      const dynInfo = state.dynamicPageInfo[`${page.pageId}`];
+
+      return dynInfo
+        ? { [`${page.pageId}`]: dynInfo }
+        : {
+            [page.pageId]: {
+              settings: {
+                fontFamily: "font-roboto",
+                fontSize: "font-size-default",
+                pageSize: "page-default-width",
+              },
+            },
+          };
     },
     getActivePage: (state) => state.activePage,
     getIsAsideOpen: (state) => state.isAsideOpen,

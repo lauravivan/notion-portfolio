@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import Empty from "./Empty.vue";
+
 const props = defineProps<{ level: 1 | 2 | 3 | 4 }>();
 </script>
 
 <template>
+  <Empty />
   <h1 class="heading" v-if="props.level == 1"><slot></slot></h1>
   <h2 class="heading" v-if="props.level == 2"><slot></slot></h2>
   <h3 class="heading" v-if="props.level == 3"><slot></slot></h3>

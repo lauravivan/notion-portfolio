@@ -1,7 +1,6 @@
 export interface DynamicPageInfo {
   [pageId: string]: {
     settings: Settings;
-    created: Date | null;
   };
 }
 
