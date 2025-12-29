@@ -1,3 +1,15 @@
+## [1.1.2](https://github.com/lauravivan/notion-portfolio/compare/v1.1.1...v1.1.2) (2025-12-29)
+
+
+### Bug Fixes
+
+* remove scoped ([c0752f9](https://github.com/lauravivan/notion-portfolio/commit/c0752f91eb2f6fbf0b5817028d8c6b6536cfcae6))
+
+
+### Reverts
+
+* index page and metadata ([2de9e3f](https://github.com/lauravivan/notion-portfolio/commit/2de9e3f1295cd37f7ab00c3dcc8f7d7246da50e0))
+
 ## [1.1.1](https://github.com/lauravivan/notion-portfolio/compare/v1.1.0...v1.1.1) (2025-12-29)
 
 
