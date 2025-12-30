@@ -24,7 +24,7 @@ if (import.meta.env.DEV) {
 }
 
 const mainChildren = Object.values(metadata.pages).map((page: PageInfo) => ({
-  path: page.isHomepage ? "/" : `/${page.id}`,
+  path: page.path,
   component: page.component,
   name: page.id,
   beforeEnter: (
