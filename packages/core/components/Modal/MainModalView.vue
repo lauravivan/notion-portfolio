@@ -92,4 +92,32 @@ const handleNavigate = () => {
     @extend .button;
   }
 }
+
+@media (max-width: $screen-xs) {
+  .page-modal {
+    width: 100%;
+
+    .page-content {
+      top: 10px;
+    }
+
+    :has(.page-content--banner):has(.page-content--icon) {
+      .page-content {
+        top: 160px;
+      }
+    }
+
+    :not(:has(.page-content--icon)):has(.page-content--banner) {
+      .page-content {
+        top: 190px;
+      }
+    }
+
+    :not(:has(.page-content--banner)) {
+      .page-content {
+        top: 10px;
+      }
+    }
+  }
+}
 </style>

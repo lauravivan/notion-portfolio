@@ -14,12 +14,13 @@ import { Icons } from "@core/enum";
 <style lang="scss">
 .bullet-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   column-gap: 10px;
 
   width: 100%;
 
   &__icon {
+    margin-top: 6px;
     font-size: $fs-xs;
     color: $black-7;
   }

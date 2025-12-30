@@ -19,12 +19,11 @@ const props = defineProps<{ src: string }>();
   }
 }
 
-.page-full-width {
-  .img-wrapper {
-    justify-content: start;
-
-    img {
-      width: 50%;
+@media (min-width: $screen-medium) {
+  .page-full-width {
+    .img-wrapper {
+      justify-content: flex-start;
+      max-width: 43%;
     }
   }
 }
@@ -32,8 +31,6 @@ const props = defineProps<{ src: string }>();
 .page-full-width .img-wrapper,
 .img-wrapper {
   @media (max-width: $screen-xs) {
-    display: flex;
-    justify-content: center;
     max-width: 100%;
 
     img {
