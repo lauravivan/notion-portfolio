@@ -17,3 +17,11 @@ const props = defineProps<{ items?: { isChecked: boolean; name: string }[] }>();
     <template v-else><slot /></template>
   </ul>
 </template>
+
+<style lang="scss">
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: $DEFAULT_SPACING;
+}
+</style>

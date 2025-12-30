@@ -223,14 +223,12 @@ onBeforeUnmount(() => {
             <h3>Appearance</h3>
             <h4>Customize how Notion Portfolio looks on your device</h4>
           </div>
-          <div>
-            <SelectBtn
-              :options="Object.entries(Theme)"
-              :menuProvideName="THEME_OPTIONS_PROVIDE"
-              :optionSelected="Theme[`${store.getTheme}`]"
-              @toSelect="toggleTheme"
-            />
-          </div>
+          <SelectBtn
+            :options="Object.entries(Theme)"
+            :menuProvideName="THEME_OPTIONS_PROVIDE"
+            :optionSelected="Theme[`${store.getTheme}`]"
+            @toSelect="toggleTheme"
+          />
         </div>
       </div>
     </Modal>
@@ -364,7 +362,10 @@ onBeforeUnmount(() => {
 
 .modal {
   &__settings {
-    @include flex-layout($row-gap: 20px);
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 10px;
   }
 
   &__settings-title {
@@ -372,10 +373,10 @@ onBeforeUnmount(() => {
   }
 
   &__appearance {
-    @include flex-layout($flex-direction: row);
+    display: flex;
     justify-content: space-between;
 
-    div:nth-child(1) {
+    div:first-of-type {
       h3,
       h4 {
         word-break: break-all;
@@ -389,6 +390,23 @@ onBeforeUnmount(() => {
     h4 {
       font-size: $fs-small;
       color: $black-6;
+    }
+  }
+}
+
+@media (max-width: $screen-small) {
+  .modal {
+    &__appearance {
+      > div {
+        width: 50%;
+      }
+
+      > div:nth-child(2) {
+        > div:first-of-type {
+          width: max-content;
+          justify-self: flex-end;
+        }
+      }
     }
   }
 }

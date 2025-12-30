@@ -10,6 +10,7 @@ import {
 } from "vue-router";
 import { MainLayout, NotFoundPage, useStore, type PageInfo } from "@core/index.ts";
 import metadata from "./metadata";
+import loadTest from "./load-test";
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -17,6 +18,10 @@ const pinia = createPinia();
 app.use(pinia);
 
 const store = useStore;
+
+if (import.meta.env.DEV) {
+  loadTest();
+}
 
 const mainChildren = Object.values(metadata.pages).map((page: PageInfo) => ({
   path: page.isHomepage ? "/" : `/${page.id}`,

@@ -51,6 +51,7 @@ function showPageModal(page: PageInfo) {
         v-for="page in pages"
         :key="page.id"
         @click.stop="showPageModal(page)"
+        @touchstart.stop="showPageModal(page)"
       >
         <div
           class="gallery__card-content"

@@ -58,7 +58,9 @@ dialog {
   transition: width 0.3s;
   user-select: none;
   outline: none;
-  width: 70%;
+  min-width: 70%;
+  max-width: 80%;
+  width: auto;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -67,6 +69,12 @@ dialog {
   overflow-y: hidden;
   height: auto;
   max-height: 80vh;
+
+  @media (max-width: $screen-medium) {
+    padding: 2rem 0.5rem;
+    max-width: 90%;
+    min-width: 90%;
+  }
 }
 
 .modal-dynamic {

@@ -14,11 +14,11 @@ const props = defineProps<{
   <router-link class="link" :to="props.page.path" v-if="props.page">
     <div>
       <img v-if="props.page.icon" :src="props.page.icon.path" />
-      <template v-else> {{ props.emoji }}</template>
+      <template v-else>{{ props.emoji }}</template>
       <Icon class="link__arrow" :icon="Icons.arrowLink" />
     </div>
-    <span><slot></slot></span
-  ></router-link>
+    <span>{{ props.page.title }}</span></router-link
+  >
   <a class="link" target="_blank" :href="props.href" v-else>
     <div>
       {{ props.emoji }}
@@ -28,7 +28,7 @@ const props = defineProps<{
   </a>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .link {
   all: unset;
   display: flex;
