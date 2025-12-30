@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/lauravivan/notion-portfolio/compare/v1.1.3...v1.1.4) (2025-12-30)
+
+
+### Bug Fixes
+
+* link mention style, modal responsiveness and layout rules, add test page and fix small issues ([0343fdc](https://github.com/lauravivan/notion-portfolio/commit/0343fdcc39b8723e4966442045a8b5eb0a16fa61))
+
 ## [1.1.3](https://github.com/lauravivan/notion-portfolio/compare/v1.1.2...v1.1.3) (2025-12-29)
 
 
