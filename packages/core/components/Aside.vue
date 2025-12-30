@@ -365,6 +365,7 @@ onBeforeUnmount(() => {
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    padding: 10px;
   }
 
   &__settings-title {
