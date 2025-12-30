@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/lauravivan/notion-portfolio/compare/v1.1.4...v1.1.5) (2025-12-30)
+
+
+### Bug Fixes
+
+* use page path in routing ([d08b8fd](https://github.com/lauravivan/notion-portfolio/commit/d08b8fd1cebebb8663a743bef5218ec7b8694ba6))
+
 ## [1.1.4](https://github.com/lauravivan/notion-portfolio/compare/v1.1.3...v1.1.4) (2025-12-30)
 
 
