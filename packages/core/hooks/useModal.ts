@@ -1,8 +1,11 @@
+import { useStore } from "@core/store";
 import { provide, ref } from "vue";
 
 export default function useModal({ provideName }: { provideName: string }) {
   const body = document.body;
   const modalRef = ref<HTMLDivElement | null>(null);
+
+  const store = useStore;
 
   provide(provideName, modalRef);
 
@@ -11,6 +14,8 @@ export default function useModal({ provideName }: { provideName: string }) {
       modalRef.value.style.display = "none";
       modalRef.value.style.pointerEvents = "";
       body.style.pointerEvents = "auto";
+
+      store.storeCurrentModalPageId("");
 
       body.removeEventListener("click", handleGlobalClick);
       body.removeEventListener("touchstart", handleGlobalClick);

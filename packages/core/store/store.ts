@@ -22,6 +22,7 @@ interface State {
   activeTab: number;
   activePage: PageInfo;
   isAsideOpen: boolean;
+  currentModalPageId: string;
 }
 
 type CurrentDynPageInfo =
@@ -39,6 +40,7 @@ const useStore = defineStore("global", {
     activeTab: getActiveTab(),
     activePage: {} as PageInfo,
     isAsideOpen: getAsideOpen(),
+    currentModalPageId: "",
   }),
   actions: {
     storeTheme(theme: keyof typeof Theme) {
@@ -49,6 +51,9 @@ const useStore = defineStore("global", {
     },
     storeTabs(tabs: Tab[]) {
       this.tabs = tabs;
+    },
+    storeCurrentModalPageId(id: string) {
+      this.currentModalPageId = id;
     },
     storeDynamicPageInfo({
       fontFamily,
@@ -146,6 +151,7 @@ const useStore = defineStore("global", {
     },
     getActivePage: (state) => state.activePage,
     getIsAsideOpen: (state) => state.isAsideOpen,
+    getCurrentModalPageId: (state) => state.currentModalPageId,
   },
 })(piniaInstance);
 
