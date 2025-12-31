@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/lauravivan/notion-portfolio/compare/v1.1.5...v1.1.6) (2025-12-31)
+
+
+### Bug Fixes
+
+* add state management for current page in modal static ([a61a3f5](https://github.com/lauravivan/notion-portfolio/commit/a61a3f5bc9fa872f289ba8c9133d774ab3a707b7))
+
 ## [1.1.5](https://github.com/lauravivan/notion-portfolio/compare/v1.1.4...v1.1.5) (2025-12-30)
 
 
