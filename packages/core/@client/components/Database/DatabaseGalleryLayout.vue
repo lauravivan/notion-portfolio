@@ -5,6 +5,9 @@ import Icon from "@core/@client/components/Icon.vue";
 import { useModal } from "../../../hooks";
 import { Icons } from "@core/enum";
 import type { PageInfo } from "@core/@types";
+import { useStore } from "@core/store";
+
+const store = useStore;
 
 const isClicked = ref(false);
 const pageModal = ref<PageInfo>();
@@ -25,6 +28,11 @@ function showPageModal(page: PageInfo) {
   setTimeout(() => {
     showModal();
   }, 250);
+}
+
+function handleCard(page: PageInfo) {
+  showPageModal(page);
+  store.storeCurrentModalPageId(page.id);
 }
 </script>
 
@@ -50,8 +58,8 @@ function showPageModal(page: PageInfo) {
         class="gallery__card-wrapper"
         v-for="page in pages"
         :key="page.id"
-        @click.stop="showPageModal(page)"
-        @touchstart.stop="showPageModal(page)"
+        @click.stop="handleCard(page)"
+        @touchstart.stop="handleCard(page)"
       >
         <div
           class="gallery__card-content"
